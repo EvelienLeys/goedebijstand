@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Onze-Lieve-Vrouw van Goede Bijstand — Brussel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold:      #C9A96E;
+  --gold-lt:   #E8D5A8;
+  --gold-dk:   #8B6F3E;
+  --stone:     #2C2416;
+  --stone-mid: #4A3C28;
+  --cream:     #FAF7F2;
+  --parchment: #F2EBD9;
+  --white:     #FFFFFF;
+  --muted:     #8B7B5E;
+  --border:    #DDD0B5;
+  --shadow:    0 4px 24px rgba(44,36,22,0.13);
+  --shadow-lg: 0 12px 48px rgba(44,36,22,0.2);
+  --r:         2px;
+  --t:         0.25s ease;
+  --font-disp: 'Playfair Display', serif;
+  --font-ui:   'Jost', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: var(--font-ui); font-weight: 300; background: var(--cream); color: var(--stone); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+img { display: block; max-width: 100%; }
+a { color: var(--gold-dk); text-decoration: none; transition: color var(--t); }
+a:hover { color: var(--gold); }
+p { margin-bottom: 0.75em; }
+p:last-child { margin-bottom: 0; }
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  background: var(--stone);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background-image: url('https://www.flemishmastersinsitu.com/sites/vlaamsemeestersinsitu/files/public/media/images/2023-06/Aangepast%20Exterieur_Knop%204%201%20Icoon%20Kerkgebouw%20Goede%20Bijstand.jpg');
+  background-size: cover; background-position: center 38%;
+  opacity: 0.38;
+  animation: heroZoom 18s ease-in-out infinite alternate;
+}
+@keyframes heroZoom {
+  from { transform: scale(1); }
+  to   { transform: scale(1.06); }
+}
+.hero-vignette {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, transparent 30%, rgba(44,36,22,0.65) 100%);
+}
+.hero-top-bar {
+  position: absolute; top: 0; left: 0; right: 0;
+  display: flex; justify-content: flex-end;
+  padding: 1rem 2rem;
+  gap: 0.5rem;
+  z-index: 5;
+}
+.lang-btn {
+  background: transparent;
+  border: 1px solid rgba(201,169,110,0.4);
+  color: rgba(201,169,110,0.7);
+  font-family: var(--font-ui);
+  font-size: 0.65rem; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 0.22rem 0.6rem;
+  border-radius: 2px; cursor: pointer;
+  transition: all var(--t);
+}
+.lang-btn:hover, .lang-btn.active { background: var(--gold); border-color: var(--gold); color: var(--stone); }
+.hero-content {
+  position: relative; z-index: 2;
+  text-align: center; padding: 2rem;
+}
+.hero-ornament {
+  display: flex; align-items: center; gap: 1.2rem;
+  justify-content: center; margin-bottom: 1.6rem;
+  animation: fadeDown 1s ease 0.2s both;
+}
+.hero-ornament span { display: block; height: 1px; width: 60px; background: var(--gold); opacity: 0.6; }
+.hero-ornament em { font-family: var(--font-ui); font-style: normal; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); opacity: 0.8; }
+@keyframes fadeDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
+.hero-title {
+  font-family: var(--font-disp);
+  font-size: clamp(2.2rem, 6vw, 4.2rem);
+  font-weight: 700; color: var(--white);
+  line-height: 1.1; letter-spacing: 0.01em;
+  text-shadow: 0 2px 30px rgba(44,36,22,0.6);
+  animation: fadeUp 1s ease 0.4s both;
+}
+.hero-sub {
+  font-family: var(--font-ui); font-style: italic; font-weight: 300;
+  font-size: 1.1rem; color: var(--gold-lt);
+  margin-top: 0.7rem; letter-spacing: 0.08em;
+  text-shadow: 0 1px 10px rgba(44,36,22,0.5);
+  animation: fadeUp 1s ease 0.6s both;
+}
+.hero-date {
+  font-family: var(--font-ui); font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(232,213,168,0.7); margin-top: 0.5rem;
+  animation: fadeUp 1s ease 0.7s both;
+}
+.hero-scroll {
+  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  z-index: 3; cursor: pointer;
+  animation: fadeUp 1s ease 1.2s both;
+}
+.hero-scroll span { font-family: var(--font-ui); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+.hero-scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+@keyframes scrollPulse { 0%,100%{opacity:0.4;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(1.2)} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+
+/* ── NAV ── */
+.site-nav {
+  background: var(--stone);
+  display: flex; flex-wrap: wrap;
+  justify-content: center;
+  position: sticky; top: 0; z-index: 100;
+  border-bottom: 2px solid var(--gold-dk);
+  box-shadow: 0 4px 20px rgba(44,36,22,0.3);
+}
+.site-nav a {
+  font-family: var(--font-ui); font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(201,169,110,0.65);
+  padding: 0.9rem 1.1rem;
+  border-right: 1px solid rgba(201,169,110,0.1);
+  transition: all var(--t); cursor: pointer; white-space: nowrap;
+}
+.site-nav a:last-child { border-right: none; }
+.site-nav a:hover, .site-nav a.active { color: var(--gold); background: rgba(201,169,110,0.07); }
+.site-nav a.active { border-bottom: 2px solid var(--gold); margin-bottom: -2px; }
+
+/* ── LAYOUT ── */
+.page-wrap { max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem; }
+.two-col { display: grid; grid-template-columns: 1fr 320px; gap: 3rem; align-items: start; }
+@media(max-width:820px){ .two-col{grid-template-columns:1fr;} }
+
+/* ── SECTIONS ── */
+.section { margin-bottom: 3rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--border); animation: fadeUp 0.4s ease both; }
+.section:last-child { border-bottom: none; margin-bottom: 0; }
+.section-title {
+  font-family: var(--font-disp); font-weight: 500;
+  font-size: 1.7rem; color: var(--stone-mid);
+  margin-bottom: 1.2rem; padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: baseline; gap: 0.8rem;
+}
+.section-title::after { content:''; flex:1; height:1px; background: linear-gradient(to right, var(--gold-lt), transparent); margin-left:0.5rem; }
+.subsection { font-family: var(--font-disp); font-style: italic; font-size: 1.05rem; color: var(--gold-dk); margin: 1.5rem 0 0.5rem; }
+.ornament { text-align: center; color: var(--gold); letter-spacing: 0.6em; font-size: 0.6rem; margin: 2rem 0; opacity: 0.7; }
+
+/* ── AGENDA ── */
+.agenda-wrap { border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow); }
+.agenda-month { background: var(--stone); color: var(--gold); font-family: var(--font-ui); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.35rem 1rem; }
+.agenda-row { display: grid; grid-template-columns: 80px 1fr; border-bottom: 1px solid var(--border); background: var(--white); }
+.agenda-row:last-child { border-bottom: none; }
+.agenda-row.weekend .date-cell { background: var(--parchment); }
+.date-cell { background: var(--cream); border-right: 2px solid var(--border); padding: 0.5rem 0.7rem; display: flex; flex-direction: column; justify-content: center; }
+.date-cell .dn { font-family: var(--font-ui); font-size: 0.57rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.date-cell .dd { font-family: var(--font-disp); font-size: 1.3rem; font-weight: 400; color: var(--stone-mid); line-height: 1; }
+.date-cell .dm { font-size: 0.55rem; font-weight: 500; text-transform: uppercase; color: var(--muted); letter-spacing: 0.06em; }
+.events-cell { padding: 0.4rem 1rem; display: flex; flex-direction: column; justify-content: center; }
+.ev-row { display: flex; align-items: baseline; gap: 0.5rem; padding: 0.06rem 0; font-size: 0.86rem; color: var(--stone); }
+.ev-time { font-family: var(--font-ui); font-size: 0.7rem; font-weight: 600; color: var(--gold-dk); min-width: 40px; flex-shrink: 0; }
+.ev-dot { font-size: 0.5rem; color: var(--gold); flex-shrink: 0; }
+.agenda-empty { padding: 1.2rem; font-style: italic; color: var(--muted); font-size: 0.9rem; }
+
+/* ── CARDS ── */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.2rem; margin-top: 1.2rem; }
+.card {
+  background: var(--white); border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+  border-radius: var(--r); padding: 1.4rem 1.5rem;
+  box-shadow: var(--shadow); transition: box-shadow var(--t), transform var(--t);
+  cursor: pointer;
+}
+.card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+.card h3 { font-family: var(--font-disp); font-size: 1.05rem; font-weight: 500; color: var(--stone-mid); margin-bottom: 0.4rem; }
+.card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+.card a { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; display: inline-block; margin-top: 0.6rem; color: var(--gold-dk); }
+.card a:hover { color: var(--gold); }
+.card .card-icon { font-size: 1.8rem; margin-bottom: 0.6rem; }
+
+/* ── PARTNER LIST ── */
+.partner { background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--gold); padding: 1rem 1.4rem; border-radius: var(--r); margin-bottom: 0.8rem; box-shadow: var(--shadow); }
+.partner strong { color: var(--stone-mid); font-weight: 600; font-family: var(--font-disp); font-style: italic; }
+.partner p { font-size: 0.9rem; color: var(--muted); margin-top: 0.2rem; }
+
+/* ── PAST EVENTS ── */
+.past-item { display: flex; align-items: baseline; gap: 1rem; padding: 0.5rem 0; border-bottom: 1px solid var(--border); font-size: 0.92rem; }
+.past-item:last-child { border-bottom: none; }
+.past-item a { flex: 1; color: var(--stone-mid); }
+.past-item a:hover { color: var(--gold-dk); }
+.past-date { font-style: italic; font-size: 0.78rem; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
+
+/* ── HUREN ── */
+.huren-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 1.2rem; }
+@media(max-width:540px){ .huren-grid{grid-template-columns:1fr;} }
+.info-box { background: var(--white); border: 1px solid var(--border); border-top: 3px solid var(--stone-mid); padding: 1.2rem 1.4rem; border-radius: var(--r); box-shadow: var(--shadow); }
+.info-box h3 { font-family: var(--font-ui); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone-mid); margin-bottom: 0.6rem; }
+.info-box p { font-size: 0.9rem; color: var(--stone); }
+
+/* ── STEUNEN / BANK ── */
+.bank-block { background: var(--parchment); border: 1px solid var(--border); border-left: 5px solid var(--gold); padding: 1.3rem 1.6rem; border-radius: var(--r); margin-top: 1rem; box-shadow: var(--shadow); }
+.bank-block .bank-name { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.25rem; }
+.bank-block .iban { font-family: var(--font-disp); font-size: 1.4rem; font-weight: 500; color: var(--stone-mid); }
+.bank-block .bic { font-size: 0.85rem; color: var(--muted); margin-top: 0.2rem; }
+.qr-row { display: flex; gap: 1.5rem; margin-top: 1.5rem; flex-wrap: wrap; }
+.qr-item { text-align: center; }
+.qr-item img { width: 130px; height: 130px; object-fit: contain; border: 2px solid var(--border); border-radius: var(--r); }
+.qr-item span { display: block; font-size: 0.78rem; font-style: italic; color: var(--muted); margin-top: 0.3rem; }
+
+/* ── CONTACT ── */
+.contact-box { background: var(--parchment); border: 1px solid var(--border); border-left: 5px solid var(--stone-mid); padding: 1.4rem 1.8rem; border-radius: var(--r); box-shadow: var(--shadow); display: flex; align-items: center; gap: 1.4rem; flex-wrap: wrap; margin-top: 1rem; }
+.contact-box .icon { font-size: 2.2rem; flex-shrink: 0; }
+.contact-box .txt strong { color: var(--stone-mid); }
+.contact-box .txt p { font-size: 0.9rem; color: var(--stone); margin-bottom: 0.2rem; }
+.btn { display: inline-block; padding: 0.55rem 1.6rem; background: var(--stone-mid); color: var(--gold-lt); font-family: var(--font-ui); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; border-radius: var(--r); transition: background var(--t); border: none; cursor: pointer; }
+.btn:hover { background: var(--stone); color: var(--gold); }
+.btn-outline { background: transparent; border: 1px solid var(--gold-dk); color: var(--gold-dk); }
+.btn-outline:hover { background: var(--gold-dk); color: var(--white); }
+
+/* ── SIDEBAR ── */
+aside { font-size: 0.9rem; color: var(--stone); }
+.sidebar-img { width: 100%; height: 160px; object-fit: cover; border-radius: var(--r); border: 2px solid var(--border); margin-bottom: 1.4rem; box-shadow: var(--shadow); }
+.sidebar-box { background: var(--white); border: 1px solid var(--border); border-top: 3px solid var(--gold-dk); padding: 1.1rem 1.2rem; margin-bottom: 1.2rem; border-radius: var(--r); box-shadow: var(--shadow); }
+.sidebar-box h3 { font-family: var(--font-ui); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone-mid); margin-bottom: 0.7rem; padding-bottom: 0.45rem; border-bottom: 1px solid var(--border); }
+.sidebar-box p { font-size: 0.88rem; color: var(--stone); margin-bottom: 0.35rem; }
+.sidebar-box .addr { font-style: italic; color: var(--muted); font-size: 0.85rem; line-height: 1.55; }
+.sidebar-box .hl { font-family: var(--font-disp); font-size: 1rem; font-weight: 500; color: var(--stone-mid); }
+
+/* ── PHOTO GRID ── */
+.photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin: 1.2rem 0; }
+.photo-grid img { width: 100%; height: 210px; object-fit: cover; border-radius: var(--r); border: 2px solid var(--border); box-shadow: var(--shadow); }
+@media(max-width:480px){ .photo-grid{grid-template-columns:1fr;} }
+.church-photo { width: 100%; border-radius: var(--r); border: 2px solid var(--border); box-shadow: var(--shadow); margin-bottom: 1rem; object-fit: cover; }
+.photo-caption { font-style: italic; font-size: 0.78rem; color: var(--muted); text-align: center; margin-bottom: 1.2rem; }
+
+/* ── HISTORY TIMELINE ── */
+.timeline { position: relative; margin-top: 1.5rem; padding-left: 2rem; }
+.timeline::before { content:''; position:absolute; left:0.5rem; top:0; bottom:0; width:2px; background: linear-gradient(to bottom, var(--gold), var(--border)); }
+.tl-item { position: relative; margin-bottom: 1.6rem; }
+.tl-item::before { content:''; position:absolute; left:-1.55rem; top:0.35rem; width:10px; height:10px; background: var(--gold); border-radius: 50%; border: 2px solid var(--cream); box-shadow: 0 0 0 2px var(--gold); }
+.tl-year { font-family: var(--font-disp); font-size: 0.95rem; font-weight: 700; color: var(--gold-dk); margin-bottom: 0.2rem; }
+.tl-text { font-size: 0.91rem; color: var(--stone); line-height: 1.65; }
+
+/* ── FOOTER ── */
+.site-footer { background: var(--stone); color: rgba(201,169,110,0.55); text-align: center; padding: 2.5rem 1.5rem; border-top: 3px solid var(--gold-dk); font-size: 0.83rem; line-height: 1.8; }
+.footer-cross { display: block; font-size: 2rem; color: var(--gold); margin-bottom: 0.7rem; opacity: 0.8; }
+.site-footer a { color: var(--gold); }
+.site-footer a:hover { color: var(--gold-lt); }
+.footer-sep { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(201,169,110,0.15); font-size: 0.75rem; color: rgba(201,169,110,0.35); }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-top-bar">
+    <button class="lang-btn active" onclick="setLang('nl')" data-lang="nl">NL</button>
+    <button class="lang-btn" onclick="setLang('fr')" data-lang="fr">FR</button>
+    <button class="lang-btn" onclick="setLang('en')" data-lang="en">EN</button>
+  </div>
+  <div class="hero-content">
+    <div class="hero-ornament">
+      <span></span>
+      <em data-i18n="hero_label">1664 · Brussel</em>
+      <span></span>
+    </div>
+    <h1 class="hero-title" data-i18n="hero_title">Onze-Lieve-Vrouw<br>van Goede Bijstand</h1>
+    <p class="hero-sub" data-i18n="hero_sub">Barokke parel van Brussel</p>
+    <p class="hero-date" data-i18n="hero_date">Kolenmarkt 91 · 1000 Brussel</p>
+  </div>
+  <div class="hero-scroll" onclick="document.getElementById('nav').scrollIntoView({behavior:'smooth'})">
+    <span data-i18n="hero_scroll">Ontdekken</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- NAV -->
+<nav class="site-nav" id="nav">
+  <a onclick="go('agenda')"    data-page="agenda"    data-i18n="nav_agenda">Agenda</a>
+  <a onclick="go('geschiedenis')" data-page="geschiedenis" data-i18n="nav_gesch">Geschiedenis</a>
+  <a onclick="go('samenwerking')" data-page="samenwerking" data-i18n="nav_samen">Samenwerking</a>
+  <a onclick="go('voorbij')"   data-page="voorbij"   data-i18n="nav_voorbij">Voorbije activiteiten</a>
+  <a onclick="go('huren')"     data-page="huren"     data-i18n="nav_huren">Huren</a>
+  <a onclick="go('steunen')"   data-page="steunen"   data-i18n="nav_steunen">Steunen</a>
+  <a onclick="go('contact')"   data-page="contact"   data-i18n="nav_contact">Contact</a>
+</nav>
+
+<!-- MAIN -->
+<div class="page-wrap">
+  <div class="two-col">
+    <main id="main"></main>
+    <aside id="sidebar"></aside>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <span class="footer-cross">✦</span>
+  <p data-i18n="footer_line1">Onze-Lieve-Vrouw van Goede Bijstand</p>
+  <p>Kolenmarkt 91, 1000 Brussel</p>
+  <p><a href="mailto:2096@diomb.be">2096@diomb.be</a></p>
+  <div class="footer-sep">
+    <p>Kerkfabriek Onze-Lieve-Vrouw van Goede Bijstand · 0211.215.223 – RPR Brussel</p>
+  </div>
+</footer>
+
+<script>
+'use strict';
+
+/* ─── TRANSLATIONS ─── */
+const LANGS = {
+nl: {
+  hero_label:"1664 · Brussel",
+  hero_title:"Onze-Lieve-Vrouw\nvan Goede Bijstand",
+  hero_sub:"Barokke parel van Brussel",
+  hero_date:"Kolenmarkt 91 · 1000 Brussel",
+  hero_scroll:"Ontdekken",
+  nav_agenda:"Agenda",
+  nav_gesch:"Geschiedenis",
+  nav_samen:"Samenwerking",
+  nav_voorbij:"Voorbije activiteiten",
+  nav_huren:"Huren",
+  nav_steunen:"Steunen",
+  nav_contact:"Contact",
+  footer_line1:"Onze-Lieve-Vrouw van Goede Bijstand",
+  // agenda
+  ag_title:"Agenda",
+  ag_intro:"Overzicht van de komende vieringen en activiteiten in en rond de kerk.",
+  ag_today:"Vandaag",
+  ag_empty:"Geen activiteiten gepland in de komende weken.",
+  ag_leg_viering:"Viering",
+  ag_leg_taize:"Taizé",
+  ag_leg_night:"Bijstand by Night",
+  ag_leg_act:"Activiteit",
+  ev_sun:"Zondagsviering",
+  ev_sat:"Mis – Finis Terrae",
+  ev_taize:"Gebed in de geest van Taizé",
+  ev_night:"Bijstand by Night (18–22 u)",
+  ev_palm:"Palmzondag – Viering",
+  ev_holy_thu:"Witte Donderdag – Sedermaaltijd",
+  ev_good_fri:"Goede Vrijdag – Kruishulde",
+  ev_vigil:"Paaswake",
+  ev_easter:"Paasviering",
+  ev_drempel:"Drempelviering",
+  // gesch
+  gesch_title:"Geschiedenis van het gebouw",
+  gesch_intro:"De Onze-Lieve-Vrouw van Goede Bijstandskerk is een van de markantste barokke kerkgebouwen in het hart van Brussel.",
+  tl1_year:"1664",
+  tl1_text:"Het huidige barokke gebouw wordt voltooid. De kerk is gewijd aan Onze-Lieve-Vrouw van Goede Bijstand en staat aan de Kolenmarkt, in het hart van de Brusselse benedenstad.",
+  tl2_year:"17e–18e eeuw",
+  tl2_text:"Rijke decoratie van het interieur. Het imposante hoofdaltaar, ontworpen door Jan Pieter van Baurscheit de Oude, wordt geplaatst. De kerk wordt een belangrijk bedevaartsoord.",
+  tl3_year:"19e eeuw",
+  tl3_text:"Restauratiewerken en aanpassingen aan het neogotische tijdgeest. De kerk behoudt haar barokke ziel ondanks de veranderende modes.",
+  tl4_year:"20e–21e eeuw",
+  tl4_text:"Opname in het project 'Vlaamse Meesters in Situ': de kerk wordt erkend als drager van een unieke collectie barokke schilderijen en sculpturen. Vandaag een levendige plek voor cultuur en gemeenschap.",
+  gesch_arch_title:"Architectuur & Kunst",
+  gesch_arch:"Het interieur van de kerk is een ware schatkamer van barokke kunst. Het hoofdaltaar van Jan Pieter van Baurscheit de Oude springt onmiddellijk in het oog door zijn meesterlijk gebruik van marmer en verguldsel. De kerk herbergt ook opmerkelijke 17e-eeuwse schilderijen en houtsnijwerk.",
+  gesch_visit_title:"Bezoek",
+  gesch_open:"Elke dag: 9.00 – 17.00 u\nZondag: 10.00 – 17.00 u",
+  gesch_free:"Toegang is gratis.",
+  gesch_masters:"Ontdek de Vlaamse Meesters in Situ →",
+  gesch_maps:"Bekijk op Google Maps →",
+  // samenwerking
+  samen_title:"Samenwerking",
+  samen_intro:"De kerk is een ontmoetingsplek voor diverse gemeenschappen en culturele initiatieven.",
+  p_parochie:"Parochie Goede Bijstand",
+  p_parochie_desc:"De Nederlandstalige parochiegemeenschap die de kerk beheert en er wekelijks vieringen organiseert.",
+  p_paulus:"Paulusgemeenschappen",
+  p_paulus_desc:"Samenwerkingsverband van Nederlandstalige geloofsgemeenschappen in Brussel. De Goede Bijstand is een van de ankerpunten.",
+  p_taize:"Taizé",
+  p_taize_desc:"Elke derde zaterdag van de maand: een gebedsavond in de geest van Taizé, open voor iedereen. Contact: bep.saintandre@gmail.com",
+  p_lgbtq:"Gemeenschap LGBTQ+",
+  p_lgbtq_desc:"De kerk verwelkomt de LGBTQ+-gemeenschap en streeft naar een open en inclusieve ruimte voor iedereen.",
+  p_klank:"Week van de Klank",
+  p_klank_desc:"Jaarlijks muzikaal festival dat de kerk als akoestische parel inzet voor hedendaagse en klassieke muziekproducties.",
+  p_klank_link:"lasemaineduson.be →",
+  p_meesters:"Vlaamse Meesters in Situ",
+  p_meesters_desc:"De kerk maakt deel uit van dit prestigieuze project dat barokke kunstwerken in hun originele context ontsluiting voor het publiek.",
+  p_meesters_link:"flemishmastersinsitu.com →",
+  // voorbij
+  voorbij_title:"Voorbije activiteiten",
+  voorbij_muziek_title:"Muziekgroep",
+  voorbij_muziek_intro:"Concerten en muzikale evenementen die plaatsvonden in de Bijstandskerk.",
+  voorbij_film_title:"Films Sint-Lucas",
+  voorbij_film_intro:"Filmvertoningen in samenwerking met Sint-Lucas.",
+  // huren
+  huren_title:"Het gebouw huren",
+  huren_intro:"De Onze-Lieve-Vrouw van Goede Bijstandskerk biedt een unieke, historische setting voor uw evenement. De uitzonderlijke barokke architectuur en de centrale ligging in Brussel maken deze plek onvergetelijk.",
+  huren_cap_title:"Capaciteit & Ruimte",
+  huren_cap:"De kerk biedt ruimte voor grote evenementen. De akoestiek is uitzonderlijk geschikt voor concerten, recitals en muzikale producties.",
+  huren_gesch_title:"Geschikt voor",
+  huren_gesch:"Concerten · Recitals · Tentoonstellingen · Filmopnames · Ceremoniële evenementen · Personeelsfeesten",
+  huren_loc_title:"Ligging",
+  huren_loc:"Centraal gelegen in Brussel, vlakbij de Grote Markt en openbaar vervoer.",
+  huren_contact_title:"Aanvraag",
+  huren_contact:"Voor aanvragen en informatie over tarieven, neem contact op:",
+  huren_note:"De kerk is een actief religieus gebouw. Aanvragen worden individueel beoordeeld.",
+  // steunen
+  steunen_title:"Het gebouw steunen",
+  steunen_intro:"Met uw steun draagt u bij aan het behoud en onderhoud van dit unieke barokke erfgoed in het hart van Brussel. Elke bijdrage, groot of klein, is waardevol.",
+  steunen_bank:"Geef via overschrijving",
+  steunen_qr:"Of scan een QR-code",
+  steunen_terminal:"Of tik uw bankkaart op het betaalterminal in de kerk.",
+  steunen_q:"Voor vragen: 2096@diomb.be",
+  // contact
+  contact_title:"Contact",
+  contact_gebouw:"Gebouwbeheer",
+  contact_secretariaat:"Secretariaat",
+  contact_addr:"Bijstandsstraat 5, 1000 Brussel",
+  contact_email_label:"E-mail:",
+  contact_msg:"Stuur een e-mail →",
+  contact_maps:"Bekijk op Google Maps →",
+  contact_open_title:"Openingsuren kerk",
+  contact_open:"Elke dag: 9.00–17.00 u\nZondag: 10.00–17.00 u",
+  sb_open:"Openingsuren",
+  sb_open_body:"Elke dag: 9–17 u\nZondag: 10–17 u",
+  sb_addr:"Adres",
+  sb_trans:"Openbaar vervoer",
+  sb_trans_body:"Metro Beurs (lijnen 1 & 5) · Tram 3, 4",
+  sb_free:"Gratis toegang",
+  sb_masters:"Vlaamse Meesters in Situ",
+  sb_masters_link:"Meer info →",
+},
+fr: {
+  hero_label:"1664 · Bruxelles",
+  hero_title:"Notre-Dame\ndu Bon Secours",
+  hero_sub:"Joyau baroque de Bruxelles",
+  hero_date:"Rue du Marché au Charbon 91 · 1000 Bruxelles",
+  hero_scroll:"Découvrir",
+  nav_agenda:"Agenda",
+  nav_gesch:"Histoire",
+  nav_samen:"Partenariats",
+  nav_voorbij:"Activités passées",
+  nav_huren:"Location",
+  nav_steunen:"Soutenir",
+  nav_contact:"Contact",
+  footer_line1:"Notre-Dame du Bon Secours",
+  ag_title:"Agenda",
+  ag_intro:"Aperçu des prochaines célébrations et activités.",
+  ag_today:"Aujourd'hui",
+  ag_empty:"Aucune activité prévue dans les prochaines semaines.",
+  ag_leg_viering:"Célébration",
+  ag_leg_taize:"Taizé",
+  ag_leg_night:"Bon Secours by Night",
+  ag_leg_act:"Activité",
+  ev_sun:"Célébration dominicale",
+  ev_sat:"Messe – Finis Terrae",
+  ev_taize:"Prière dans l'esprit de Taizé",
+  ev_night:"Bon Secours by Night (18h–22h)",
+  ev_palm:"Dimanche des Rameaux",
+  ev_holy_thu:"Jeudi Saint – Repas de la Cène",
+  ev_good_fri:"Vendredi Saint – Vénération",
+  ev_vigil:"Veillée pascale",
+  ev_easter:"Célébration de Pâques",
+  ev_drempel:"Célébration du Seuil",
+  gesch_title:"Histoire du bâtiment",
+  gesch_intro:"L'église Notre-Dame du Bon Secours est l'un des édifices baroques les plus remarquables au cœur de Bruxelles.",
+  tl1_year:"1664", tl1_text:"L'édifice baroque actuel est achevé, dédié à Notre-Dame du Bon Secours, situé Rue du Marché au Charbon, au cœur de la basse-ville bruxelloise.",
+  tl2_year:"XVIIe–XVIIIe siècle", tl2_text:"Riche décoration intérieure. Le maître-autel impressionnant, conçu par Jan Pieter van Baurscheit l'Ancien, est installé. L'église devient un important lieu de pèlerinage.",
+  tl3_year:"XIXe siècle", tl3_text:"Travaux de restauration et adaptations à l'esprit néogothique. L'église conserve son âme baroque.",
+  tl4_year:"XXe–XXIe siècle", tl4_text:"Inclusion dans le projet 'Maîtres Flamands in Situ'. Aujourd'hui un lieu vivant pour la culture et la communauté.",
+  gesch_arch_title:"Architecture & Art",
+  gesch_arch:"L'intérieur est un véritable trésor d'art baroque. Le maître-autel de Jan Pieter van Baurscheit l'Ancien se distingue par son usage magistral du marbre et des dorures.",
+  gesch_visit_title:"Visite",
+  gesch_open:"Chaque jour : 9h00 – 17h00\nDimanche : 10h00 – 17h00",
+  gesch_free:"Entrée libre.",
+  gesch_masters:"Découvrir les Maîtres Flamands in Situ →",
+  gesch_maps:"Voir sur Google Maps →",
+  samen_title:"Partenariats",
+  samen_intro:"L'église est un lieu de rencontre pour diverses communautés et initiatives culturelles.",
+  p_parochie:"Paroisse Bon Secours", p_parochie_desc:"La communauté paroissiale néerlandophone qui gère l'église.",
+  p_paulus:"Communautés Paulus", p_paulus_desc:"Réseau de communautés de foi néerlandophones à Bruxelles.",
+  p_taize:"Taizé", p_taize_desc:"Chaque troisième samedi du mois : soirée de prière ouverte à tous.",
+  p_lgbtq:"Communauté LGBTQ+", p_lgbtq_desc:"L'église accueille la communauté LGBTQ+ dans un esprit d'ouverture et d'inclusion.",
+  p_klank:"La Semaine du Son", p_klank_desc:"Festival musical annuel utilisant l'église comme joyau acoustique pour des productions musicales contemporaines et classiques.",
+  p_klank_link:"lasemaineduson.be →",
+  p_meesters:"Maîtres Flamands in Situ", p_meesters_desc:"L'église fait partie de ce projet prestigieux qui met en valeur les œuvres baroques dans leur contexte original.",
+  p_meesters_link:"flemishmastersinsitu.com →",
+  voorbij_title:"Activités passées",
+  voorbij_muziek_title:"Groupe musical",
+  voorbij_muziek_intro:"Concerts et événements musicaux ayant eu lieu dans l'église.",
+  voorbij_film_title:"Films Sint-Lucas",
+  voorbij_film_intro:"Projections de films en collaboration avec Sint-Lucas.",
+  huren_title:"Louer le bâtiment",
+  huren_intro:"L'église Notre-Dame du Bon Secours offre un cadre historique unique pour votre événement.",
+  huren_cap_title:"Capacité & Espace",
+  huren_cap:"L'église offre un espace pour les grands événements. L'acoustique est exceptionnelle pour les concerts et productions musicales.",
+  huren_gesch_title:"Convient pour",
+  huren_gesch:"Concerts · Récitals · Expositions · Tournages · Cérémonies · Événements d'entreprise",
+  huren_loc_title:"Localisation",
+  huren_loc:"Situé au centre de Bruxelles, près de la Grand-Place et des transports publics.",
+  huren_contact_title:"Demande",
+  huren_contact:"Pour les demandes et informations tarifaires, contactez-nous :",
+  huren_note:"L'église est un lieu de culte actif. Les demandes sont évaluées individuellement.",
+  steunen_title:"Soutenir le bâtiment",
+  steunen_intro:"Votre soutien contribue à la préservation de ce patrimoine baroque unique au cœur de Bruxelles.",
+  steunen_bank:"Don par virement",
+  steunen_qr:"Ou scannez un code QR",
+  steunen_terminal:"Ou tapez votre carte bancaire sur le terminal de paiement dans l'église.",
+  steunen_q:"Pour questions : 2096@diomb.be",
+  contact_title:"Contact",
+  contact_gebouw:"Gestion du bâtiment",
+  contact_secretariaat:"Secrétariat",
+  contact_addr:"Bijstandsstraat 5, 1000 Bruxelles",
+  contact_email_label:"E-mail :",
+  contact_msg:"Envoyer un e-mail →",
+  contact_maps:"Voir sur Google Maps →",
+  contact_open_title:"Heures d'ouverture",
+  contact_open:"Chaque jour : 9h00–17h00\nDimanche : 10h00–17h00",
+  sb_open:"Heures d'ouverture",
+  sb_open_body:"Chaque jour : 9h–17h\nDimanche : 10h–17h",
+  sb_addr:"Adresse",
+  sb_trans:"Transports en commun",
+  sb_trans_body:"Métro Beurs (lignes 1 & 5) · Tram 3, 4",
+  sb_free:"Entrée libre",
+  sb_masters:"Maîtres Flamands in Situ",
+  sb_masters_link:"Plus d'info →",
+},
+en: {
+  hero_label:"1664 · Brussels",
+  hero_title:"Our Lady\nof Good Help",
+  hero_sub:"Brussels' baroque gem",
+  hero_date:"Kolenmarkt 91 · 1000 Brussels",
+  hero_scroll:"Discover",
+  nav_agenda:"Agenda",
+  nav_gesch:"History",
+  nav_samen:"Partners",
+  nav_voorbij:"Past activities",
+  nav_huren:"Hire",
+  nav_steunen:"Support",
+  nav_contact:"Contact",
+  footer_line1:"Our Lady of Good Help",
+  ag_title:"Agenda",
+  ag_intro:"Overview of upcoming services and activities.",
+  ag_today:"Today",
+  ag_empty:"No activities planned in the coming weeks.",
+  ag_leg_viering:"Service",
+  ag_leg_taize:"Taizé",
+  ag_leg_night:"Good Help by Night",
+  ag_leg_act:"Activity",
+  ev_sun:"Sunday service",
+  ev_sat:"Mass – Finis Terrae",
+  ev_taize:"Prayer in the spirit of Taizé",
+  ev_night:"Good Help by Night (6–10 PM)",
+  ev_palm:"Palm Sunday – Service",
+  ev_holy_thu:"Holy Thursday – Seder meal",
+  ev_good_fri:"Good Friday – Veneration",
+  ev_vigil:"Easter Vigil",
+  ev_easter:"Easter service",
+  ev_drempel:"Threshold Celebration",
+  gesch_title:"History of the building",
+  gesch_intro:"The Church of Our Lady of Good Help is one of the most striking baroque churches in the heart of Brussels.",
+  tl1_year:"1664", tl1_text:"The current baroque building is completed, dedicated to Our Lady of Good Help, located on the Kolenmarkt in the heart of Brussels' lower city.",
+  tl2_year:"17th–18th century", tl2_text:"Rich interior decoration. The impressive high altar, designed by Jan Pieter van Baurscheit the Elder, is installed. The church becomes an important place of pilgrimage.",
+  tl3_year:"19th century", tl3_text:"Restoration works and adaptations. The church retains its baroque soul despite changing fashions.",
+  tl4_year:"20th–21st century", tl4_text:"Inclusion in the 'Flemish Masters in Situ' project. Today a vibrant place for culture and community.",
+  gesch_arch_title:"Architecture & Art",
+  gesch_arch:"The interior is a true treasury of baroque art. The high altar by Jan Pieter van Baurscheit the Elder stands out for its masterful use of marble and gilding.",
+  gesch_visit_title:"Visiting",
+  gesch_open:"Every day: 9:00 AM – 5:00 PM\nSunday: 10:00 AM – 5:00 PM",
+  gesch_free:"Free admission.",
+  gesch_masters:"Discover the Flemish Masters in Situ →",
+  gesch_maps:"View on Google Maps →",
+  samen_title:"Partners",
+  samen_intro:"The church is a meeting place for diverse communities and cultural initiatives.",
+  p_parochie:"Parish of Good Help", p_parochie_desc:"The Dutch-speaking parish community that manages the church and organises weekly services.",
+  p_paulus:"Paulus Communities", p_paulus_desc:"Network of Dutch-speaking faith communities in Brussels. Good Help is one of the anchor points.",
+  p_taize:"Taizé", p_taize_desc:"Every third Saturday of the month: an evening of prayer open to everyone. Contact: bep.saintandre@gmail.com",
+  p_lgbtq:"LGBTQ+ Community", p_lgbtq_desc:"The church welcomes the LGBTQ+ community and strives to be an open and inclusive space for everyone.",
+  p_klank:"Week of Sound", p_klank_desc:"Annual music festival using the church as an acoustic gem for contemporary and classical music productions.",
+  p_klank_link:"lasemaineduson.be →",
+  p_meesters:"Flemish Masters in Situ", p_meesters_desc:"The church is part of this prestigious project opening baroque artworks in their original context to the public.",
+  p_meesters_link:"flemishmastersinsitu.com →",
+  voorbij_title:"Past activities",
+  voorbij_muziek_title:"Music group",
+  voorbij_muziek_intro:"Concerts and musical events that took place in the church.",
+  voorbij_film_title:"Sint-Lucas Films",
+  voorbij_film_intro:"Film screenings in collaboration with Sint-Lucas.",
+  huren_title:"Hire the building",
+  huren_intro:"The Church of Our Lady of Good Help offers a unique historic setting for your event.",
+  huren_cap_title:"Capacity & Space",
+  huren_cap:"The church offers space for large events. The acoustics are exceptionally suited to concerts, recitals and musical productions.",
+  huren_gesch_title:"Suitable for",
+  huren_gesch:"Concerts · Recitals · Exhibitions · Film shoots · Ceremonial events · Corporate events",
+  huren_loc_title:"Location",
+  huren_loc:"Centrally located in Brussels, near the Grand Place and public transport.",
+  huren_contact_title:"Enquiry",
+  huren_contact:"For enquiries and information on rates, please get in touch:",
+  huren_note:"The church is an active place of worship. Requests are evaluated individually.",
+  steunen_title:"Support the building",
+  steunen_intro:"Your support contributes to the preservation of this unique baroque heritage in the heart of Brussels.",
+  steunen_bank:"Donate by bank transfer",
+  steunen_qr:"Or scan a QR code",
+  steunen_terminal:"Or tap your bank card on the payment terminal in the church.",
+  steunen_q:"For questions: 2096@diomb.be",
+  contact_title:"Contact",
+  contact_gebouw:"Building management",
+  contact_secretariaat:"Secretariat",
+  contact_addr:"Bijstandsstraat 5, 1000 Brussels",
+  contact_email_label:"Email:",
+  contact_msg:"Send an email →",
+  contact_maps:"View on Google Maps →",
+  contact_open_title:"Church opening hours",
+  contact_open:"Every day: 9:00 AM–5:00 PM\nSunday: 10:00 AM–5:00 PM",
+  sb_open:"Opening hours",
+  sb_open_body:"Every day: 9 AM–5 PM\nSunday: 10 AM–5 PM",
+  sb_addr:"Address",
+  sb_trans:"Public transport",
+  sb_trans_body:"Metro Beurs (lines 1 & 5) · Tram 3, 4",
+  sb_free:"Free admission",
+  sb_masters:"Flemish Masters in Situ",
+  sb_masters_link:"More info →",
+},
+};
+
+let LANG = localStorage.getItem('gb_lang') || 'nl';
+const t = k => LANGS[LANG]?.[k] ?? LANGS.nl[k] ?? k;
+
+function setLang(l) {
+  LANG = l; localStorage.setItem('gb_lang', l);
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const v = t(el.dataset.i18n);
+    if (v) el.innerHTML = v.replace(/\n/g,'<br>');
+  });
+  const cur = document.querySelector('nav a.active');
+  render(cur?.dataset.page ?? 'agenda');
+}
+
+/* ─── DATE HELPERS ─── */
+const DN = {
+  nl:['Zo','Ma','Di','Wo','Do','Vr','Za'],
+  fr:['Di','Lu','Ma','Me','Je','Ve','Sa'],
+  en:['Su','Mo','Tu','We','Th','Fr','Sa'],
+};
+const MS = {
+  nl:['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'],
+  fr:['jan','fév','mar','avr','mai','jun','jul','aoû','sep','oct','nov','déc'],
+  en:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+};
+const ML = {
+  nl:['Januari','Februari','Maart','April','Mei','Juni','Juli','Augustus','September','Oktober','November','December'],
+  fr:['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
+  en:['January','February','March','April','May','June','July','August','September','October','November','December'],
+};
+const dkey = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+
+/* ─── AGENDA ENGINE ─── */
+const FIXED = [
+  { datum:'2026-03-29', tijd:'11:00', type:'viering', tk:'ev_palm' },
+  { datum:'2026-04-02', tijd:'17:00', type:'viering', tk:'ev_holy_thu' },
+  { datum:'2026-04-03', tijd:'19:00', type:'viering', tk:'ev_good_fri' },
+  { datum:'2026-04-04', tijd:'21:00', type:'viering', tk:'ev_vigil' },
+  { datum:'2026-04-05', tijd:'11:00', type:'viering', tk:'ev_easter' },
+  { datum:'2026-05-14', tijd:'11:00', type:'viering', tk:'ev_drempel' },
+];
+
+function genTaize() {
+  const res = [], now = new Date(); now.setHours(0,0,0,0);
+  const end = new Date(now); end.setDate(now.getDate()+42);
+  for (let m=0;m<3;m++) {
+    const yr=now.getFullYear()+Math.floor((now.getMonth()+m)/12), mn=(now.getMonth()+m)%12;
+    let cnt=0;
+    for (let d=1;d<=31;d++) {
+      const dt=new Date(yr,mn,d);
+      if (dt.getMonth()!==mn) break;
+      if (dt.getDay()===6&&++cnt===3) {
+        if (dt>=now&&dt<=end) res.push({datum:dkey(dt),tijd:'20:00',type:'taize',tk:'ev_taize'});
+        break;
+      }
+    }
+  }
+  return res;
+}
+
+function genNight() {
+  const res=[], now=new Date(); now.setHours(0,0,0,0);
+  const end=new Date(now); end.setDate(now.getDate()+42);
+  for (let d=new Date(now);d<=end;d.setDate(d.getDate()+1)) {
+    if (d.getDay()===5&&d.getMonth()>=4&&d.getMonth()<=7)
+      res.push({datum:dkey(d),tijd:'18:00',type:'nacht',tk:'ev_night'});
+  }
+  return res;
+}
+
+function buildAgenda() {
+  const map={};
+  [...FIXED,...genTaize(),...genNight()].forEach(ev=>{
+    (map[ev.datum]=map[ev.datum]||[]).push(ev);
+  });
+  for (const k of Object.keys(map)) map[k].sort((a,b)=>a.tijd.localeCompare(b.tijd));
+  return map;
+}
+
+function agendaHTML() {
+  const events=buildAgenda();
+  const now=new Date(); now.setHours(0,0,0,0);
+  const dn_=DN[LANG]||DN.nl, ms_=MS[LANG]||MS.nl, ml_=ML[LANG]||ML.nl;
+  let html='<div class="agenda-wrap">', curM=-1, count=0;
+  for (let i=0;i<42;i++) {
+    const d=new Date(now); d.setDate(now.getDate()+i);
+    const dw=d.getDay(), mn=d.getMonth(), yr=d.getFullYear(), nr=d.getDate(), sk=dkey(d);
+    const base=[];
+    if (dw===0&&!['2026-04-05','2026-03-29'].includes(sk)) base.push({tijd:'11:00',type:'viering',tekst:t('ev_sun')});
+    if (dw===6&&sk!=='2026-04-04') base.push({tijd:'16:30',type:'viering',tekst:t('ev_sat')});
+    const seen=new Set();
+    const evs=[...base,...(events[sk]||[]).map(e=>({...e,tekst:t(e.tk)}))].filter(e=>{
+      const k=`${e.tijd}|${e.tekst}`;
+      return seen.has(k)?false:(seen.add(k),true);
+    });
+    if (!evs.length) continue;
+    count++;
+    if (mn!==curM){curM=mn;html+=`<div class="agenda-month">${ml_[mn]} ${yr}</div>`;}
+    const cls='agenda-row'+(dw===0||dw===6?' weekend':'');
+    html+=`<div class="${cls}">
+      <div class="date-cell">
+        <span class="dn">${i===0?t('ag_today'):dn_[dw]}</span>
+        <span class="dd">${nr}</span>
+        <span class="dm">${ms_[mn]}</span>
+      </div>
+      <div class="events-cell">
+        ${evs.map(ev=>`<div class="ev-row">
+          <span class="ev-time">${ev.tijd}</span>
+          <span class="ev-dot">◆</span>
+          <span>${ev.tekst}</span>
+        </div>`).join('')}
+      </div>
+    </div>`;
+  }
+  if (!count) html+=`<div class="agenda-empty">${t('ag_empty')}</div>`;
+  html+='</div>';
+  html+=`<p style="margin-top:0.8rem;font-size:0.8rem;font-style:italic;color:var(--muted);">◆ ${t('ag_leg_viering')} &nbsp;|&nbsp; ◆ ${t('ag_leg_taize')} &nbsp;|&nbsp; ◆ ${t('ag_leg_night')} &nbsp;|&nbsp; ◆ ${t('ag_leg_act')}</p>`;
+  return html;
+}
+
+/* ─── PAGES ─── */
+const IMG_EXT = 'https://www.flemishmastersinsitu.com/sites/vlaamsemeestersinsitu/files/public/media/images/2023-06/Aangepast%20Exterieur_Knop%204%201%20Icoon%20Kerkgebouw%20Goede%20Bijstand.jpg';
+const IMG_INT = 'https://www.flemishmastersinsitu.com/sites/vlaamsemeestersinsitu/files/public/media/images/2023-06/Aangepast%20Interieur_Onze-Lieve-Vrouw%20van%20Goede%20Bijstandkerk_JPR4243_%C2%A9%20visit.brussels%20-%20Jean-Paul%20Remy.jpg';
+const IMG_ALT = 'https://www.flemishmastersinsitu.com/sites/vlaamsemeestersinsitu/files/public/media/images/2023-06/Aangepast%20Extra%20%28kunstwerk%20detail%29_Altaar%20Goede%20Bijstandskerk_0.jpg';
+
+const PAGES = {
+
+agenda: ()=>`
+<section class="section">
+  <h2 class="section-title">${t('ag_title')}</h2>
+  <p style="font-style:italic;color:var(--muted);margin-bottom:1.2rem;font-size:0.93rem;">${t('ag_intro')}</p>
+  ${agendaHTML()}
+</section>`,
+
+geschiedenis: ()=>`
+<section class="section">
+  <h2 class="section-title">${t('gesch_title')}</h2>
+  <img src="${IMG_EXT}" class="church-photo" style="height:280px;" alt="Exterieur">
+  <p>${t('gesch_intro')}</p>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">${t('tl1_year')}</div><div class="tl-text">${t('tl1_text')}</div></div>
+    <div class="tl-item"><div class="tl-year">${t('tl2_year')}</div><div class="tl-text">${t('tl2_text')}</div></div>
+    <div class="tl-item"><div class="tl-year">${t('tl3_year')}</div><div class="tl-text">${t('tl3_text')}</div></div>
+    <div class="tl-item"><div class="tl-year">${t('tl4_year')}</div><div class="tl-text">${t('tl4_text')}</div></div>
+  </div>
+  <div class="ornament">✦ ✦ ✦</div>
+  <p class="subsection">${t('gesch_arch_title')}</p>
+  <div class="photo-grid">
+    <img src="${IMG_INT}" alt="Interieur">
+    <img src="${IMG_ALT}" alt="Altaar">
+  </div>
+  <p>${t('gesch_arch')}</p>
+  <p><a href="https://www.flemishmastersinsitu.com/nl/locaties/onze-lieve-vrouw-van-goede-bijstandkerk-brussel" target="_blank">${t('gesch_masters')}</a></p>
+  <div class="ornament">✦ ✦ ✦</div>
+  <p class="subsection">${t('gesch_visit_title')}</p>
+  <div class="huren-grid">
+    <div class="info-box">
+      <h3>🕐 ${t('gesch_visit_title')}</h3>
+      <p style="white-space:pre-line;">${t('gesch_open')}</p>
+      <p style="margin-top:0.4rem;font-style:italic;color:var(--muted);font-size:0.88rem;">${t('gesch_free')}</p>
+    </div>
+    <div class="info-box">
+      <h3>📍 Adres</h3>
+      <p>Kolenmarkt 91<br>(kant Fontainasplein)<br>1000 Brussel</p>
+      <p style="margin-top:0.5rem;"><a href="https://maps.google.com/?q=Kolenmarkt+91,+1000+Brussel" target="_blank">${t('gesch_maps')}</a></p>
+    </div>
+  </div>
+</section>`,
+
+samenwerking: ()=>`
+<section class="section">
+  <h2 class="section-title">${t('samen_title')}</h2>
+  <p style="margin-bottom:1.4rem;">${t('samen_intro')}</p>
+  <div class="partner"><strong>${t('p_parochie')}</strong><p>${t('p_parochie_desc')}</p></div>
+  <div class="partner"><strong>${t('p_paulus')}</strong><p>${t('p_paulus_desc')} <a href="https://www.paulusgemeenschappen.be/nl" target="_blank">paulusgemeenschappen.be →</a></p></div>
+  <div class="partner"><strong>${t('p_taize')}</strong><p>${t('p_taize_desc')}</p></div>
+  <div class="partner"><strong>${t('p_lgbtq')}</strong><p>${t('p_lgbtq_desc')}</p></div>
+  <div class="partner"><strong>${t('p_klank')}</strong><p>${t('p_klank_desc')} <a href="https://www.lasemaineduson.be" target="_blank">${t('p_klank_link')}</a></p></div>
+  <div class="partner"><strong>${t('p_meesters')}</strong><p>${t('p_meesters_desc')} <a href="https://www.flemishmastersinsitu.com/nl/locaties/onze-lieve-vrouw-van-goede-bijstandkerk-brussel" target="_blank">${t('p_meesters_link')}</a></p></div>
+</section>`,
+
+voorbij: ()=>`
+<section class="section">
+  <h2 class="section-title">${t('voorbij_title')}</h2>
+  <p class="subsection">${t('voorbij_muziek_title')}</p>
+  <p style="font-style:italic;color:var(--muted);margin-bottom:0.8rem;font-size:0.92rem;">${t('voorbij_muziek_intro')}</p>
+  <p style="color:var(--muted);font-size:0.9rem;font-style:italic;">— Geen archiefitems beschikbaar —</p>
+  <div class="ornament">✦ ✦ ✦</div>
+  <p class="subsection">${t('voorbij_film_title')}</p>
+  <p style="font-style:italic;color:var(--muted);margin-bottom:0.8rem;font-size:0.92rem;">${t('voorbij_film_intro')}</p>
+  <p style="color:var(--muted);font-size:0.9rem;font-style:italic;">— Geen archiefitems beschikbaar —</p>
+</section>`,
+
+huren: ()=>`
+<section class="section">
+  <h2 class="section-title">${t('huren_title')}</h2>
+  <img src="${IMG_INT}" class="church-photo" style="height:260px;" alt="Interieur">
+  <p style="margin-bottom:1.4rem;">${t('huren_intro')}</p>
+  <div class="huren-grid">
+    <div class="info-box">
+      <h3>🏛 ${t('huren_cap_title')}</h3>
+      <p>${t('huren_cap')}</p>
+    </div>
+    <div class="info-box">
+      <h3>📍 ${t('huren_loc_title')}</h3>
+      <p>${t('huren_loc')}</p>
+    </div>
+    <div class="info-box" style="grid-column:1/-1;">
+      <h3>✓ ${t('huren_gesch_title')}</h3>
+      <p>${t('huren_gesch')}</p>
+    </div>
+  </div>
+  <div class="ornament">✦ ✦ ✦</div>
+  <p class="subsection">${t('huren_contact_title')}</p>
+  <p>${t('huren_contact')}</p>
+  <div class="contact-box" style="margin-top:1rem;">
+    <div class="icon">✉</div>
+    <div class="txt">
+      <p><strong>2096@diomb.be</strong></p>
+      <p>Bijstandsstraat 5, 1000 Brussel</p>
+    </div>
+    <a class="btn" href="mailto:2096@diomb.be">${t('contact_msg')}</a>
+  </div>
+  <p style="margin-top:1rem;font-size:0.85rem;font-style:italic;color:var(--muted);">${t('huren_note')}</p>
+</section>`,
+
+steunen: ()=>`
+<section class="section">
+  <h2 class="section-title">${t('steunen_title')}</h2>
+  <p>${t('steunen_intro')}</p>
+  <div class="ornament">✦ ✦ ✦</div>
+  <p class="subsection">${t('steunen_bank')}</p>
+  <div class="bank-block">
+    <p class="bank-name">KERKFABRIEK O-L VROUW GOEDE BIJSTAND BRUSSEL</p>
+    <p class="iban">BE27 0910 0107 1473</p>
+    <p class="bic">BIC: GKCCBEBBXXX</p>
+  </div>
+  <p class="subsection">${t('steunen_qr')}</p>
+  <div class="qr-row">
+    <div class="qr-item"><img src="Donate_02_qr_sumup.png" alt="QR SumUp"><span>SumUp</span></div>
+    <div class="qr-item"><img src="Donate_02_qr_wero.png" alt="QR Wero"><span>Wero</span></div>
+  </div>
+  <p style="margin-top:0.8rem;font-size:0.88rem;font-style:italic;color:var(--muted);">${t('steunen_terminal')}</p>
+  <p style="margin-top:1rem;font-size:0.88rem;color:var(--muted);">${t('steunen_q')}</p>
+</section>`,
+
+contact: ()=>`
+<section class="section">
+  <h2 class="section-title">${t('contact_title')}</h2>
+  <p class="subsection">${t('contact_gebouw')}</p>
+  <p class="subsection" style="margin-top:0;">${t('contact_secretariaat')}</p>
+  <p>${t('contact_addr')}</p>
+  <p>${t('contact_email_label')} <a href="mailto:2096@diomb.be">2096@diomb.be</a></p>
+  <div class="contact-box">
+    <div class="icon">✉</div>
+    <div class="txt">
+      <p><strong>2096@diomb.be</strong></p>
+      <p style="font-size:0.85rem;color:var(--muted);">Kerkfabriek Onze-Lieve-Vrouw van Goede Bijstand</p>
+    </div>
+    <a class="btn" href="mailto:2096@diomb.be">${t('contact_msg')}</a>
+  </div>
+  <div class="ornament">✦ ✦ ✦</div>
+  <p class="subsection">${t('contact_open_title')}</p>
+  <div class="huren-grid">
+    <div class="info-box">
+      <h3>🕐</h3>
+      <p style="white-space:pre-line;">${t('contact_open')}</p>
+    </div>
+    <div class="info-box">
+      <h3>📍 Adres</h3>
+      <p>Kolenmarkt 91<br>1000 Brussel</p>
+      <p style="margin-top:0.4rem;"><a href="https://maps.google.com/?q=Kolenmarkt+91,+1000+Brussel" target="_blank">${t('contact_maps')}</a></p>
+    </div>
+  </div>
+</section>`,
+
+};
+
+function sidebarHTML() {
+  return `
+  <img src="${IMG_EXT}" alt="Goede Bijstand" class="sidebar-img">
+  <div class="sidebar-box">
+    <h3>📍 ${t('sb_addr')}</h3>
+    <p class="addr">Kolenmarkt 91<br>(kant Fontainasplein)<br>1000 Brussel</p>
+  </div>
+  <div class="sidebar-box">
+    <h3>🕐 ${t('sb_open')}</h3>
+    <p style="white-space:pre-line;">${t('sb_open_body')}</p>
+    <p style="margin-top:0.5rem;font-size:0.83rem;font-style:italic;color:var(--gold-dk);">${t('sb_free')}</p>
+  </div>
+  <div class="sidebar-box">
+    <h3>🚌 ${t('sb_trans')}</h3>
+    <p style="white-space:pre-line;">${t('sb_trans_body')}</p>
+  </div>
+  <div class="sidebar-box">
+    <h3>${t('sb_masters')}</h3>
+    <img src="${IMG_ALT}" alt="Altaar" style="width:100%;height:110px;object-fit:cover;border-radius:2px;border:1px solid var(--border);margin:0.5rem 0;">
+    <p><a href="https://www.flemishmastersinsitu.com/nl/locaties/onze-lieve-vrouw-van-goede-bijstandkerk-brussel" target="_blank">${t('sb_masters_link')}</a></p>
+  </div>`;
+}
+
+/* ─── ROUTER ─── */
+function render(key) {
+  const fn = PAGES[key];
+  document.getElementById('main').innerHTML = fn ? fn() : '<section class="section"><p>404</p></section>';
+  document.getElementById('sidebar').innerHTML = sidebarHTML();
+  document.querySelectorAll('nav a[data-page]').forEach(a => a.classList.toggle('active', a.dataset.page===key));
+  document.title = (LANGS[LANG]?.['nav_'+{agenda:'agenda',geschiedenis:'gesch',samenwerking:'samen',voorbij:'voorbij',huren:'huren',steunen:'steunen',contact:'contact'}[key]]||key) + ' — ' + (LANGS[LANG]?.hero_title||'Goede Bijstand').replace('\n',' ');
+}
+
+function go(key) {
+  render(key);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ─── INIT ─── */
+document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang===LANG));
+document.querySelectorAll('[data-i18n]').forEach(el => {
+  const v = t(el.dataset.i18n);
+  if (v) el.innerHTML = v.replace(/\n/g,'<br>');
+});
+go('agenda');
+</script>
+</body>
+</html>
