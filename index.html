@@ -63,17 +63,18 @@ p:last-child { margin-bottom: 0; }
   position: absolute; top: 0; left: 0; right: 0;
   display: flex; justify-content: flex-end;
   padding: 1rem 2rem;
-  gap: 0.5rem;
+  gap: 0.4rem;
   z-index: 5;
+  flex-wrap: wrap;
 }
 .lang-btn {
   background: transparent;
   border: 1px solid rgba(201,169,110,0.4);
   color: rgba(201,169,110,0.7);
   font-family: var(--font-ui);
-  font-size: 0.65rem; font-weight: 600;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  padding: 0.22rem 0.6rem;
+  font-size: 0.6rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
   border-radius: 2px; cursor: pointer;
   transition: all var(--t);
 }
@@ -142,6 +143,19 @@ p:last-child { margin-bottom: 0; }
 .site-nav a:last-child { border-right: none; }
 .site-nav a:hover, .site-nav a.active { color: var(--gold); background: rgba(201,169,110,0.07); }
 .site-nav a.active { border-bottom: 2px solid var(--gold); margin-bottom: -2px; }
+
+/* ── RTL support ── */
+body.rtl { direction: rtl; }
+body.rtl .site-nav a { border-right: none; border-left: 1px solid rgba(201,169,110,0.1); }
+body.rtl .site-nav a:last-child { border-left: none; }
+body.rtl .hero-top-bar { flex-direction: row-reverse; justify-content: flex-start; }
+body.rtl .timeline { padding-left: 0; padding-right: 2rem; }
+body.rtl .timeline::before { left: auto; right: 0.5rem; }
+body.rtl .tl-item::before { left: auto; right: -1.55rem; }
+body.rtl .partner { border-left: none; border-right: 4px solid var(--gold); }
+body.rtl .bank-block { border-left: none; border-right: 5px solid var(--gold); }
+body.rtl .contact-box { border-left: none; border-right: 5px solid var(--stone-mid); }
+body.rtl .section-title::after { margin-left: 0; margin-right: 0.5rem; }
 
 /* ── LAYOUT ── */
 .page-wrap { max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem; }
@@ -263,6 +277,14 @@ aside { font-size: 0.9rem; color: var(--stone); }
 .site-footer a { color: var(--gold); }
 .site-footer a:hover { color: var(--gold-lt); }
 .footer-sep { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(201,169,110,0.15); font-size: 0.75rem; color: rgba(201,169,110,0.35); }
+
+/* Arabic font override */
+body.rtl .hero-title,
+body.rtl .section-title,
+body.rtl .subsection,
+body.rtl .tl-year {
+  font-family: 'Playfair Display', 'Georgia', serif;
+}
 </style>
 </head>
 <body>
@@ -275,6 +297,9 @@ aside { font-size: 0.9rem; color: var(--stone); }
     <button class="lang-btn active" onclick="setLang('nl')" data-lang="nl">NL</button>
     <button class="lang-btn" onclick="setLang('fr')" data-lang="fr">FR</button>
     <button class="lang-btn" onclick="setLang('en')" data-lang="en">EN</button>
+    <button class="lang-btn" onclick="setLang('de')" data-lang="de">DE</button>
+    <button class="lang-btn" onclick="setLang('es')" data-lang="es">ES</button>
+    <button class="lang-btn" onclick="setLang('ar')" data-lang="ar">عر</button>
   </div>
   <div class="hero-content">
     <div class="hero-ornament">
@@ -294,13 +319,13 @@ aside { font-size: 0.9rem; color: var(--stone); }
 
 <!-- NAV -->
 <nav class="site-nav" id="nav">
-  <a onclick="go('agenda')"    data-page="agenda"    data-i18n="nav_agenda">Agenda</a>
+  <a onclick="go('agenda')"       data-page="agenda"       data-i18n="nav_agenda">Agenda</a>
   <a onclick="go('geschiedenis')" data-page="geschiedenis" data-i18n="nav_gesch">Geschiedenis</a>
   <a onclick="go('samenwerking')" data-page="samenwerking" data-i18n="nav_samen">Samenwerking</a>
-  <a onclick="go('voorbij')"   data-page="voorbij"   data-i18n="nav_voorbij">Voorbije activiteiten</a>
-  <a onclick="go('huren')"     data-page="huren"     data-i18n="nav_huren">Huren</a>
-  <a onclick="go('steunen')"   data-page="steunen"   data-i18n="nav_steunen">Steunen</a>
-  <a onclick="go('contact')"   data-page="contact"   data-i18n="nav_contact">Contact</a>
+  <a onclick="go('voorbij')"      data-page="voorbij"      data-i18n="nav_voorbij">Voorbije activiteiten</a>
+  <a onclick="go('huren')"        data-page="huren"        data-i18n="nav_huren">Huren</a>
+  <a onclick="go('steunen')"      data-page="steunen"      data-i18n="nav_steunen">Steunen</a>
+  <a onclick="go('contact')"      data-page="contact"      data-i18n="nav_contact">Contact</a>
 </nav>
 
 <!-- MAIN -->
@@ -327,6 +352,8 @@ aside { font-size: 0.9rem; color: var(--stone); }
 
 /* ─── TRANSLATIONS ─── */
 const LANGS = {
+
+/* ═══════════════════════════ NEDERLANDS ═══════════════════════════ */
 nl: {
   hero_label:"1664 · Brussel",
   hero_title:"Onze-Lieve-Vrouw\nvan Goede Bijstand",
@@ -341,7 +368,6 @@ nl: {
   nav_steunen:"Steunen",
   nav_contact:"Contact",
   footer_line1:"Onze-Lieve-Vrouw van Goede Bijstand",
-  // agenda
   ag_title:"Agenda",
   ag_intro:"Overzicht van de komende vieringen en activiteiten in en rond de kerk.",
   ag_today:"Vandaag",
@@ -360,7 +386,6 @@ nl: {
   ev_vigil:"Paaswake",
   ev_easter:"Paasviering",
   ev_drempel:"Drempelviering",
-  // gesch
   gesch_title:"Geschiedenis van het gebouw",
   gesch_intro:"De Onze-Lieve-Vrouw van Goede Bijstandskerk is een van de markantste barokke kerkgebouwen in het hart van Brussel.",
   tl1_year:"1664",
@@ -378,7 +403,6 @@ nl: {
   gesch_free:"Toegang is gratis.",
   gesch_masters:"Ontdek de Vlaamse Meesters in Situ →",
   gesch_maps:"Bekijk op Google Maps →",
-  // samenwerking
   samen_title:"Samenwerking",
   samen_intro:"De kerk is een ontmoetingsplek voor diverse gemeenschappen en culturele initiatieven.",
   p_parochie:"Parochie Goede Bijstand",
@@ -393,15 +417,13 @@ nl: {
   p_klank_desc:"Jaarlijks muzikaal festival dat de kerk als akoestische parel inzet voor hedendaagse en klassieke muziekproducties.",
   p_klank_link:"lasemaineduson.be →",
   p_meesters:"Vlaamse Meesters in Situ",
-  p_meesters_desc:"De kerk maakt deel uit van dit prestigieuze project dat barokke kunstwerken in hun originele context ontsluiting voor het publiek.",
+  p_meesters_desc:"De kerk maakt deel uit van dit prestigieuze project dat barokke kunstwerken in hun originele context ontsluit voor het publiek.",
   p_meesters_link:"flemishmastersinsitu.com →",
-  // voorbij
   voorbij_title:"Voorbije activiteiten",
   voorbij_muziek_title:"Muziekgroep",
   voorbij_muziek_intro:"Concerten en muzikale evenementen die plaatsvonden in de Bijstandskerk.",
   voorbij_film_title:"Films Sint-Lucas",
   voorbij_film_intro:"Filmvertoningen in samenwerking met Sint-Lucas.",
-  // huren
   huren_title:"Het gebouw huren",
   huren_intro:"De Onze-Lieve-Vrouw van Goede Bijstandskerk biedt een unieke, historische setting voor uw evenement. De uitzonderlijke barokke architectuur en de centrale ligging in Brussel maken deze plek onvergetelijk.",
   huren_cap_title:"Capaciteit & Ruimte",
@@ -413,14 +435,12 @@ nl: {
   huren_contact_title:"Aanvraag",
   huren_contact:"Voor aanvragen en informatie over tarieven, neem contact op:",
   huren_note:"De kerk is een actief religieus gebouw. Aanvragen worden individueel beoordeeld.",
-  // steunen
   steunen_title:"Het gebouw steunen",
   steunen_intro:"Met uw steun draagt u bij aan het behoud en onderhoud van dit unieke barokke erfgoed in het hart van Brussel. Elke bijdrage, groot of klein, is waardevol.",
   steunen_bank:"Geef via overschrijving",
   steunen_qr:"Of scan een QR-code",
   steunen_terminal:"Of tik uw bankkaart op het betaalterminal in de kerk.",
   steunen_q:"Voor vragen: 2096@diomb.be",
-  // contact
   contact_title:"Contact",
   contact_gebouw:"Gebouwbeheer",
   contact_secretariaat:"Secretariaat",
@@ -438,7 +458,10 @@ nl: {
   sb_free:"Gratis toegang",
   sb_masters:"Vlaamse Meesters in Situ",
   sb_masters_link:"Meer info →",
+  rtl: false,
 },
+
+/* ═══════════════════════════ FRANÇAIS ═══════════════════════════ */
 fr: {
   hero_label:"1664 · Bruxelles",
   hero_title:"Notre-Dame\ndu Bon Secours",
@@ -473,10 +496,14 @@ fr: {
   ev_drempel:"Célébration du Seuil",
   gesch_title:"Histoire du bâtiment",
   gesch_intro:"L'église Notre-Dame du Bon Secours est l'un des édifices baroques les plus remarquables au cœur de Bruxelles.",
-  tl1_year:"1664", tl1_text:"L'édifice baroque actuel est achevé, dédié à Notre-Dame du Bon Secours, situé Rue du Marché au Charbon, au cœur de la basse-ville bruxelloise.",
-  tl2_year:"XVIIe–XVIIIe siècle", tl2_text:"Riche décoration intérieure. Le maître-autel impressionnant, conçu par Jan Pieter van Baurscheit l'Ancien, est installé. L'église devient un important lieu de pèlerinage.",
-  tl3_year:"XIXe siècle", tl3_text:"Travaux de restauration et adaptations à l'esprit néogothique. L'église conserve son âme baroque.",
-  tl4_year:"XXe–XXIe siècle", tl4_text:"Inclusion dans le projet 'Maîtres Flamands in Situ'. Aujourd'hui un lieu vivant pour la culture et la communauté.",
+  tl1_year:"1664",
+  tl1_text:"L'édifice baroque actuel est achevé, dédié à Notre-Dame du Bon Secours, situé Rue du Marché au Charbon, au cœur de la basse-ville bruxelloise.",
+  tl2_year:"XVIIe–XVIIIe siècle",
+  tl2_text:"Riche décoration intérieure. Le maître-autel impressionnant, conçu par Jan Pieter van Baurscheit l'Ancien, est installé. L'église devient un important lieu de pèlerinage.",
+  tl3_year:"XIXe siècle",
+  tl3_text:"Travaux de restauration et adaptations à l'esprit néogothique. L'église conserve son âme baroque.",
+  tl4_year:"XXe–XXIe siècle",
+  tl4_text:"Inclusion dans le projet 'Maîtres Flamands in Situ'. Aujourd'hui un lieu vivant pour la culture et la communauté.",
   gesch_arch_title:"Architecture & Art",
   gesch_arch:"L'intérieur est un véritable trésor d'art baroque. Le maître-autel de Jan Pieter van Baurscheit l'Ancien se distingue par son usage magistral du marbre et des dorures.",
   gesch_visit_title:"Visite",
@@ -486,14 +513,19 @@ fr: {
   gesch_maps:"Voir sur Google Maps →",
   samen_title:"Partenariats",
   samen_intro:"L'église est un lieu de rencontre pour diverses communautés et initiatives culturelles.",
-  p_parochie:"Paroisse Bon Secours", 
+  p_parochie:"Paroisse Bon Secours",
   p_parochie_desc:"La communauté paroissiale néerlandophone qui gère l'église. <a href=\"https://www.goedebijstand.be\" target=\"_blank\">goedebijstand.be →</a>",
-  p_paulus:"Communautés Paulus", p_paulus_desc:"Réseau de communautés de foi néerlandophones à Bruxelles.",
-  p_taize:"Taizé", p_taize_desc:"Chaque troisième samedi du mois : soirée de prière ouverte à tous.",
-  p_lgbtq:"Communauté LGBTQ+", p_lgbtq_desc:"L'église accueille la communauté LGBTQ+ dans un esprit d'ouverture et d'inclusion.",
-  p_klank:"La Semaine du Son", p_klank_desc:"Festival musical annuel utilisant l'église comme joyau acoustique pour des productions musicales contemporaines et classiques.",
+  p_paulus:"Communautés Paulus",
+  p_paulus_desc:"Réseau de communautés de foi néerlandophones à Bruxelles.",
+  p_taize:"Taizé",
+  p_taize_desc:"Chaque troisième samedi du mois : soirée de prière ouverte à tous. Contact : bep.saintandre@gmail.com",
+  p_lgbtq:"Communauté LGBTQ+",
+  p_lgbtq_desc:"L'église accueille la communauté LGBTQ+ dans un esprit d'ouverture et d'inclusion.",
+  p_klank:"La Semaine du Son",
+  p_klank_desc:"Festival musical annuel utilisant l'église comme joyau acoustique pour des productions musicales contemporaines et classiques.",
   p_klank_link:"lasemaineduson.be →",
-  p_meesters:"Maîtres Flamands in Situ", p_meesters_desc:"L'église fait partie de ce projet prestigieux qui met en valeur les œuvres baroques dans leur contexte original.",
+  p_meesters:"Maîtres Flamands in Situ",
+  p_meesters_desc:"L'église fait partie de ce projet prestigieux qui met en valeur les œuvres baroques dans leur contexte original.",
   p_meesters_link:"flemishmastersinsitu.com →",
   voorbij_title:"Activités passées",
   voorbij_muziek_title:"Groupe musical",
@@ -501,7 +533,7 @@ fr: {
   voorbij_film_title:"Films Sint-Lucas",
   voorbij_film_intro:"Projections de films en collaboration avec Sint-Lucas.",
   huren_title:"Louer le bâtiment",
-  huren_intro:"L'église Notre-Dame du Bon Secours offre un cadre historique unique pour votre événement.",
+  huren_intro:"L'église Notre-Dame du Bon Secours offre un cadre historique unique pour votre événement. L'exceptionnelle architecture baroque et la situation centrale à Bruxelles rendent ce lieu inoubliable.",
   huren_cap_title:"Capacité & Espace",
   huren_cap:"L'église offre un espace pour les grands événements. L'acoustique est exceptionnelle pour les concerts et productions musicales.",
   huren_gesch_title:"Convient pour",
@@ -512,8 +544,8 @@ fr: {
   huren_contact:"Pour les demandes et informations tarifaires, contactez-nous :",
   huren_note:"L'église est un lieu de culte actif. Les demandes sont évaluées individuellement.",
   steunen_title:"Soutenir le bâtiment",
-  steunen_intro:"Votre soutien contribue à la préservation de ce patrimoine baroque unique au cœur de Bruxelles.",
-  steunen_bank:"Don par virement",
+  steunen_intro:"Votre soutien contribue à la préservation de ce patrimoine baroque unique au cœur de Bruxelles. Chaque contribution, grande ou petite, est précieuse.",
+  steunen_bank:"Don par virement bancaire",
   steunen_qr:"Ou scannez un code QR",
   steunen_terminal:"Ou tapez votre carte bancaire sur le terminal de paiement dans l'église.",
   steunen_q:"Pour questions : 2096@diomb.be",
@@ -534,7 +566,10 @@ fr: {
   sb_free:"Entrée libre",
   sb_masters:"Maîtres Flamands in Situ",
   sb_masters_link:"Plus d'info →",
+  rtl: false,
 },
+
+/* ═══════════════════════════ ENGLISH ═══════════════════════════ */
 en: {
   hero_label:"1664 · Brussels",
   hero_title:"Our Lady\nof Good Help",
@@ -569,10 +604,14 @@ en: {
   ev_drempel:"Threshold Celebration",
   gesch_title:"History of the building",
   gesch_intro:"The Church of Our Lady of Good Help is one of the most striking baroque churches in the heart of Brussels.",
-  tl1_year:"1664", tl1_text:"The current baroque building is completed, dedicated to Our Lady of Good Help, located on the Kolenmarkt in the heart of Brussels' lower city.",
-  tl2_year:"17th–18th century", tl2_text:"Rich interior decoration. The impressive high altar, designed by Jan Pieter van Baurscheit the Elder, is installed. The church becomes an important place of pilgrimage.",
-  tl3_year:"19th century", tl3_text:"Restoration works and adaptations. The church retains its baroque soul despite changing fashions.",
-  tl4_year:"20th–21st century", tl4_text:"Inclusion in the 'Flemish Masters in Situ' project. Today a vibrant place for culture and community.",
+  tl1_year:"1664",
+  tl1_text:"The current baroque building is completed, dedicated to Our Lady of Good Help, located on the Kolenmarkt in the heart of Brussels' lower city.",
+  tl2_year:"17th–18th century",
+  tl2_text:"Rich interior decoration. The impressive high altar, designed by Jan Pieter van Baurscheit the Elder, is installed. The church becomes an important place of pilgrimage.",
+  tl3_year:"19th century",
+  tl3_text:"Restoration works and adaptations. The church retains its baroque soul despite changing fashions.",
+  tl4_year:"20th–21st century",
+  tl4_text:"Inclusion in the 'Flemish Masters in Situ' project. Today a vibrant place for culture and community.",
   gesch_arch_title:"Architecture & Art",
   gesch_arch:"The interior is a true treasury of baroque art. The high altar by Jan Pieter van Baurscheit the Elder stands out for its masterful use of marble and gilding.",
   gesch_visit_title:"Visiting",
@@ -582,13 +621,19 @@ en: {
   gesch_maps:"View on Google Maps →",
   samen_title:"Partners",
   samen_intro:"The church is a meeting place for diverse communities and cultural initiatives.",
-  p_parochie:"Parish of Good Help", p_parochie_desc:"The Dutch-speaking parish community that manages the church and organises weekly services. <a href=\"https://www.goedebijstand.be\" target=\"_blank\">goedebijstand.be →</a>",
-  p_paulus:"Paulus Communities", p_paulus_desc:"Network of Dutch-speaking faith communities in Brussels. Good Help is one of the anchor points.",
-  p_taize:"Taizé", p_taize_desc:"Every third Saturday of the month: an evening of prayer open to everyone. Contact: bep.saintandre@gmail.com",
-  p_lgbtq:"LGBTQ+ Community", p_lgbtq_desc:"The church welcomes the LGBTQ+ community and strives to be an open and inclusive space for everyone.",
-  p_klank:"Week of Sound", p_klank_desc:"Annual music festival using the church as an acoustic gem for contemporary and classical music productions.",
+  p_parochie:"Parish of Good Help",
+  p_parochie_desc:"The Dutch-speaking parish community that manages the church and organises weekly services. <a href=\"https://www.goedebijstand.be\" target=\"_blank\">goedebijstand.be →</a>",
+  p_paulus:"Paulus Communities",
+  p_paulus_desc:"Network of Dutch-speaking faith communities in Brussels. Good Help is one of the anchor points.",
+  p_taize:"Taizé",
+  p_taize_desc:"Every third Saturday of the month: an evening of prayer open to everyone. Contact: bep.saintandre@gmail.com",
+  p_lgbtq:"LGBTQ+ Community",
+  p_lgbtq_desc:"The church welcomes the LGBTQ+ community and strives to be an open and inclusive space for everyone.",
+  p_klank:"Week of Sound",
+  p_klank_desc:"Annual music festival using the church as an acoustic gem for contemporary and classical music productions.",
   p_klank_link:"lasemaineduson.be →",
-  p_meesters:"Flemish Masters in Situ", p_meesters_desc:"The church is part of this prestigious project opening baroque artworks in their original context to the public.",
+  p_meesters:"Flemish Masters in Situ",
+  p_meesters_desc:"The church is part of this prestigious project opening baroque artworks in their original context to the public.",
   p_meesters_link:"flemishmastersinsitu.com →",
   voorbij_title:"Past activities",
   voorbij_muziek_title:"Music group",
@@ -596,7 +641,7 @@ en: {
   voorbij_film_title:"Sint-Lucas Films",
   voorbij_film_intro:"Film screenings in collaboration with Sint-Lucas.",
   huren_title:"Hire the building",
-  huren_intro:"The Church of Our Lady of Good Help offers a unique historic setting for your event.",
+  huren_intro:"The Church of Our Lady of Good Help offers a unique historic setting for your event. The exceptional baroque architecture and central Brussels location make this an unforgettable venue.",
   huren_cap_title:"Capacity & Space",
   huren_cap:"The church offers space for large events. The acoustics are exceptionally suited to concerts, recitals and musical productions.",
   huren_gesch_title:"Suitable for",
@@ -607,7 +652,7 @@ en: {
   huren_contact:"For enquiries and information on rates, please get in touch:",
   huren_note:"The church is an active place of worship. Requests are evaluated individually.",
   steunen_title:"Support the building",
-  steunen_intro:"Your support contributes to the preservation of this unique baroque heritage in the heart of Brussels.",
+  steunen_intro:"Your support contributes to the preservation of this unique baroque heritage in the heart of Brussels. Every contribution, large or small, is valued.",
   steunen_bank:"Donate by bank transfer",
   steunen_qr:"Or scan a QR code",
   steunen_terminal:"Or tap your bank card on the payment terminal in the church.",
@@ -629,14 +674,346 @@ en: {
   sb_free:"Free admission",
   sb_masters:"Flemish Masters in Situ",
   sb_masters_link:"More info →",
+  rtl: false,
 },
-};
+
+/* ═══════════════════════════ DEUTSCH ═══════════════════════════ */
+de: {
+  hero_label:"1664 · Brüssel",
+  hero_title:"Unsere Liebe Frau\nvom Guten Beistand",
+  hero_sub:"Barockes Juwel von Brüssel",
+  hero_date:"Kolenmarkt 91 · 1000 Brüssel",
+  hero_scroll:"Entdecken",
+  nav_agenda:"Programm",
+  nav_gesch:"Geschichte",
+  nav_samen:"Kooperationen",
+  nav_voorbij:"Vergangene Aktivitäten",
+  nav_huren:"Mieten",
+  nav_steunen:"Unterstützen",
+  nav_contact:"Kontakt",
+  footer_line1:"Unsere Liebe Frau vom Guten Beistand",
+  ag_title:"Programm",
+  ag_intro:"Übersicht der kommenden Gottesdienste und Veranstaltungen.",
+  ag_today:"Heute",
+  ag_empty:"Keine Veranstaltungen in den kommenden Wochen geplant.",
+  ag_leg_viering:"Gottesdienst",
+  ag_leg_taize:"Taizé",
+  ag_leg_night:"Guter Beistand by Night",
+  ag_leg_act:"Veranstaltung",
+  ev_sun:"Sonntagsgottesdienst",
+  ev_sat:"Messe – Finis Terrae",
+  ev_taize:"Gebet im Geist von Taizé",
+  ev_night:"Guter Beistand by Night (18–22 Uhr)",
+  ev_palm:"Palmsonntag – Gottesdienst",
+  ev_holy_thu:"Gründonnerstag – Sedermahlzeit",
+  ev_good_fri:"Karfreitag – Kreuzverehrung",
+  ev_vigil:"Osternacht",
+  ev_easter:"Ostergottesdienst",
+  ev_drempel:"Schwellenfeier",
+  gesch_title:"Geschichte des Gebäudes",
+  gesch_intro:"Die Kirche Unsere Liebe Frau vom Guten Beistand ist eines der markantesten Barockkirchen im Herzen von Brüssel.",
+  tl1_year:"1664",
+  tl1_text:"Das heutige Barockgebäude wird fertiggestellt und ist Unserer Lieben Frau vom Guten Beistand geweiht. Es liegt am Kolenmarkt im Herzen der Brüsseler Unterstadt.",
+  tl2_year:"17.–18. Jahrhundert",
+  tl2_text:"Reiche Innenausstattung. Der imposante Hochaltar, entworfen von Jan Pieter van Baurscheit dem Älteren, wird aufgestellt. Die Kirche wird ein bedeutender Wallfahrtsort.",
+  tl3_year:"19. Jahrhundert",
+  tl3_text:"Restaurierungsarbeiten und Anpassungen an den neugotischen Zeitgeist. Die Kirche bewahrt ihre barocke Seele trotz wechselnder Moden.",
+  tl4_year:"20.–21. Jahrhundert",
+  tl4_text:"Aufnahme in das Projekt 'Flämische Meister in Situ'. Heute ein lebendiger Ort für Kultur und Gemeinschaft.",
+  gesch_arch_title:"Architektur & Kunst",
+  gesch_arch:"Das Innere der Kirche ist eine wahre Schatzkammer barocker Kunst. Der Hochaltar von Jan Pieter van Baurscheit dem Älteren besticht durch seinen meisterhaften Einsatz von Marmor und Vergoldung.",
+  gesch_visit_title:"Besuch",
+  gesch_open:"Täglich: 9:00 – 17:00 Uhr\nSonntag: 10:00 – 17:00 Uhr",
+  gesch_free:"Eintritt frei.",
+  gesch_masters:"Die Flämischen Meister in Situ entdecken →",
+  gesch_maps:"Auf Google Maps ansehen →",
+  samen_title:"Kooperationen",
+  samen_intro:"Die Kirche ist ein Begegnungsort für verschiedene Gemeinschaften und kulturelle Initiativen.",
+  p_parochie:"Pfarrgemeinde Guter Beistand",
+  p_parochie_desc:"Die niederländischsprachige Pfarrgemeinde, die die Kirche verwaltet und wöchentliche Gottesdienste organisiert. <a href=\"https://www.goedebijstand.be\" target=\"_blank\">goedebijstand.be →</a>",
+  p_paulus:"Paulus-Gemeinschaften",
+  p_paulus_desc:"Netzwerk niederländischsprachiger Glaubensgemeinschaften in Brüssel. Der Gute Beistand ist einer der Ankerpunkte.",
+  p_taize:"Taizé",
+  p_taize_desc:"Jeden dritten Samstag im Monat: ein Gebetsabend im Geist von Taizé, offen für alle. Kontakt: bep.saintandre@gmail.com",
+  p_lgbtq:"LGBTQ+-Gemeinschaft",
+  p_lgbtq_desc:"Die Kirche heißt die LGBTQ+-Gemeinschaft willkommen und strebt nach einem offenen und inklusiven Raum für alle.",
+  p_klank:"Woche des Klangs",
+  p_klank_desc:"Jährliches Musikfestival, das die Kirche als akustisches Juwel für zeitgenössische und klassische Musikproduktionen nutzt.",
+  p_klank_link:"lasemaineduson.be →",
+  p_meesters:"Flämische Meister in Situ",
+  p_meesters_desc:"Die Kirche ist Teil dieses renommierten Projekts, das barocke Kunstwerke in ihrem ursprünglichen Kontext der Öffentlichkeit zugänglich macht.",
+  p_meesters_link:"flemishmastersinsitu.com →",
+  voorbij_title:"Vergangene Aktivitäten",
+  voorbij_muziek_title:"Musikgruppe",
+  voorbij_muziek_intro:"Konzerte und Musikveranstaltungen in der Kirche.",
+  voorbij_film_title:"Sint-Lucas Filme",
+  voorbij_film_intro:"Filmvorführungen in Zusammenarbeit mit Sint-Lucas.",
+  huren_title:"Das Gebäude mieten",
+  huren_intro:"Die Kirche Unsere Liebe Frau vom Guten Beistand bietet einen einzigartigen historischen Rahmen für Ihre Veranstaltung. Die außergewöhnliche Barockarchitektur und die zentrale Lage in Brüssel machen diesen Ort unvergesslich.",
+  huren_cap_title:"Kapazität & Raum",
+  huren_cap:"Die Kirche bietet Platz für große Veranstaltungen. Die Akustik eignet sich hervorragend für Konzerte, Rezitale und Musikproduktionen.",
+  huren_gesch_title:"Geeignet für",
+  huren_gesch:"Konzerte · Rezitale · Ausstellungen · Filmaufnahmen · Zeremonielle Veranstaltungen · Firmenevents",
+  huren_loc_title:"Lage",
+  huren_loc:"Zentral in Brüssel gelegen, nahe dem Großen Markt und öffentlichen Verkehrsmitteln.",
+  huren_contact_title:"Anfrage",
+  huren_contact:"Für Anfragen und Informationen zu Tarifen wenden Sie sich bitte an:",
+  huren_note:"Die Kirche ist ein aktiver Sakralbau. Anfragen werden individuell beurteilt.",
+  steunen_title:"Das Gebäude unterstützen",
+  steunen_intro:"Mit Ihrer Unterstützung tragen Sie zur Erhaltung dieses einzigartigen Barockdenkmals im Herzen von Brüssel bei. Jeder Beitrag, groß oder klein, ist wertvoll.",
+  steunen_bank:"Spenden per Überweisung",
+  steunen_qr:"Oder scannen Sie einen QR-Code",
+  steunen_terminal:"Oder tippen Sie Ihre Bankkarte auf das Zahlungsterminal in der Kirche.",
+  steunen_q:"Bei Fragen: 2096@diomb.be",
+  contact_title:"Kontakt",
+  contact_gebouw:"Gebäudeverwaltung",
+  contact_secretariaat:"Sekretariat",
+  contact_addr:"Bijstandsstraat 5, 1000 Brüssel",
+  contact_email_label:"E-Mail:",
+  contact_msg:"E-Mail senden →",
+  contact_maps:"Auf Google Maps ansehen →",
+  contact_open_title:"Öffnungszeiten der Kirche",
+  contact_open:"Täglich: 9:00–17:00 Uhr\nSonntag: 10:00–17:00 Uhr",
+  sb_open:"Öffnungszeiten",
+  sb_open_body:"Täglich: 9–17 Uhr\nSonntag: 10–17 Uhr",
+  sb_addr:"Adresse",
+  sb_trans:"Öffentliche Verkehrsmittel",
+  sb_trans_body:"Metro Beurs (Linien 1 & 5) · Tram 3, 4",
+  sb_free:"Eintritt frei",
+  sb_masters:"Flämische Meister in Situ",
+  sb_masters_link:"Mehr Infos →",
+  rtl: false,
+},
+
+/* ═══════════════════════════ ESPAÑOL ═══════════════════════════ */
+es: {
+  hero_label:"1664 · Bruselas",
+  hero_title:"Nuestra Señora\ndel Buen Socorro",
+  hero_sub:"Joya barroca de Bruselas",
+  hero_date:"Kolenmarkt 91 · 1000 Bruselas",
+  hero_scroll:"Descubrir",
+  nav_agenda:"Agenda",
+  nav_gesch:"Historia",
+  nav_samen:"Colaboraciones",
+  nav_voorbij:"Actividades pasadas",
+  nav_huren:"Alquiler",
+  nav_steunen:"Apoyar",
+  nav_contact:"Contacto",
+  footer_line1:"Nuestra Señora del Buen Socorro",
+  ag_title:"Agenda",
+  ag_intro:"Resumen de las próximas celebraciones y actividades.",
+  ag_today:"Hoy",
+  ag_empty:"No hay actividades previstas en las próximas semanas.",
+  ag_leg_viering:"Celebración",
+  ag_leg_taize:"Taizé",
+  ag_leg_night:"Buen Socorro by Night",
+  ag_leg_act:"Actividad",
+  ev_sun:"Celebración dominical",
+  ev_sat:"Misa – Finis Terrae",
+  ev_taize:"Oración en el espíritu de Taizé",
+  ev_night:"Buen Socorro by Night (18h–22h)",
+  ev_palm:"Domingo de Ramos – Celebración",
+  ev_holy_thu:"Jueves Santo – Cena pascual",
+  ev_good_fri:"Viernes Santo – Veneración",
+  ev_vigil:"Vigilia pascual",
+  ev_easter:"Celebración de Pascua",
+  ev_drempel:"Celebración del Umbral",
+  gesch_title:"Historia del edificio",
+  gesch_intro:"La iglesia de Nuestra Señora del Buen Socorro es uno de los edificios barrocos más destacados en el corazón de Bruselas.",
+  tl1_year:"1664",
+  tl1_text:"Se termina el actual edificio barroco, dedicado a Nuestra Señora del Buen Socorro, ubicado en el Kolenmarkt, en el corazón de la ciudad baja de Bruselas.",
+  tl2_year:"Siglos XVII–XVIII",
+  tl2_text:"Rica decoración interior. Se instala el imponente altar mayor, diseñado por Jan Pieter van Baurscheit el Viejo. La iglesia se convierte en un importante lugar de peregrinación.",
+  tl3_year:"Siglo XIX",
+  tl3_text:"Trabajos de restauración y adaptaciones al espíritu neogótico. La iglesia conserva su alma barroca pese a las modas cambiantes.",
+  tl4_year:"Siglos XX–XXI",
+  tl4_text:"Incorporación al proyecto 'Maestros Flamencos in Situ'. Hoy es un lugar vivo de cultura y comunidad.",
+  gesch_arch_title:"Arquitectura & Arte",
+  gesch_arch:"El interior es un auténtico tesoro de arte barroco. El altar mayor de Jan Pieter van Baurscheit el Viejo destaca por su magistral uso del mármol y el dorado.",
+  gesch_visit_title:"Visita",
+  gesch_open:"Cada día: 9:00 – 17:00 h\nDomingo: 10:00 – 17:00 h",
+  gesch_free:"Entrada gratuita.",
+  gesch_masters:"Descubrir los Maestros Flamencos in Situ →",
+  gesch_maps:"Ver en Google Maps →",
+  samen_title:"Colaboraciones",
+  samen_intro:"La iglesia es un lugar de encuentro para diversas comunidades e iniciativas culturales.",
+  p_parochie:"Parroquia Buen Socorro",
+  p_parochie_desc:"La comunidad parroquial neerlandófona que gestiona la iglesia y organiza celebraciones semanales. <a href=\"https://www.goedebijstand.be\" target=\"_blank\">goedebijstand.be →</a>",
+  p_paulus:"Comunidades Paulus",
+  p_paulus_desc:"Red de comunidades de fe neerlandófonas en Bruselas. Buen Socorro es uno de los puntos de referencia.",
+  p_taize:"Taizé",
+  p_taize_desc:"Cada tercer sábado del mes: una velada de oración abierta a todos. Contacto: bep.saintandre@gmail.com",
+  p_lgbtq:"Comunidad LGBTQ+",
+  p_lgbtq_desc:"La iglesia acoge a la comunidad LGBTQ+ y aspira a ser un espacio abierto e inclusivo para todos.",
+  p_klank:"Semana del Sonido",
+  p_klank_desc:"Festival musical anual que utiliza la iglesia como joya acústica para producciones musicales contemporáneas y clásicas.",
+  p_klank_link:"lasemaineduson.be →",
+  p_meesters:"Maestros Flamencos in Situ",
+  p_meesters_desc:"La iglesia forma parte de este prestigioso proyecto que abre al público las obras barrocas en su contexto original.",
+  p_meesters_link:"flemishmastersinsitu.com →",
+  voorbij_title:"Actividades pasadas",
+  voorbij_muziek_title:"Grupo musical",
+  voorbij_muziek_intro:"Conciertos y eventos musicales celebrados en la iglesia.",
+  voorbij_film_title:"Películas Sint-Lucas",
+  voorbij_film_intro:"Proyecciones de cine en colaboración con Sint-Lucas.",
+  huren_title:"Alquilar el edificio",
+  huren_intro:"La iglesia de Nuestra Señora del Buen Socorro ofrece un marco histórico único para su evento. La excepcional arquitectura barroca y la ubicación central en Bruselas hacen de este lugar un espacio inolvidable.",
+  huren_cap_title:"Capacidad & Espacio",
+  huren_cap:"La iglesia ofrece espacio para grandes eventos. La acústica es excepcionalmente adecuada para conciertos, recitales y producciones musicales.",
+  huren_gesch_title:"Adecuado para",
+  huren_gesch:"Conciertos · Recitales · Exposiciones · Rodajes · Eventos ceremoniales · Eventos corporativos",
+  huren_loc_title:"Ubicación",
+  huren_loc:"Situado en el centro de Bruselas, cerca de la Grand Place y el transporte público.",
+  huren_contact_title:"Solicitud",
+  huren_contact:"Para consultas e información sobre tarifas, póngase en contacto:",
+  huren_note:"La iglesia es un lugar de culto activo. Las solicitudes se evalúan individualmente.",
+  steunen_title:"Apoyar el edificio",
+  steunen_intro:"Su apoyo contribuye a la preservación de este patrimonio barroco único en el corazón de Bruselas. Cada contribución, grande o pequeña, es valiosa.",
+  steunen_bank:"Donar mediante transferencia bancaria",
+  steunen_qr:"O escanee un código QR",
+  steunen_terminal:"O utilice su tarjeta bancaria en el terminal de pago de la iglesia.",
+  steunen_q:"Para preguntas: 2096@diomb.be",
+  contact_title:"Contacto",
+  contact_gebouw:"Gestión del edificio",
+  contact_secretariaat:"Secretaría",
+  contact_addr:"Bijstandsstraat 5, 1000 Bruselas",
+  contact_email_label:"Correo electrónico:",
+  contact_msg:"Enviar un correo →",
+  contact_maps:"Ver en Google Maps →",
+  contact_open_title:"Horario de apertura",
+  contact_open:"Cada día: 9:00–17:00 h\nDomingo: 10:00–17:00 h",
+  sb_open:"Horario de apertura",
+  sb_open_body:"Cada día: 9–17 h\nDomingo: 10–17 h",
+  sb_addr:"Dirección",
+  sb_trans:"Transporte público",
+  sb_trans_body:"Metro Beurs (líneas 1 & 5) · Tranvía 3, 4",
+  sb_free:"Entrada gratuita",
+  sb_masters:"Maestros Flamencos in Situ",
+  sb_masters_link:"Más información →",
+  rtl: false,
+},
+
+/* ═══════════════════════════ العربية ═══════════════════════════ */
+ar: {
+  hero_label:"١٦٦٤ · بروكسل",
+  hero_title:"سيدتنا العذراء\nذات المعونة الصالحة",
+  hero_sub:"جوهرة البروك البروكسيلية",
+  hero_date:"كولنمارخت ٩١ · بروكسل ١٠٠٠",
+  hero_scroll:"اكتشف",
+  nav_agenda:"جدول الأنشطة",
+  nav_gesch:"التاريخ",
+  nav_samen:"الشراكات",
+  nav_voorbij:"أنشطة سابقة",
+  nav_huren:"الاستئجار",
+  nav_steunen:"الدعم",
+  nav_contact:"التواصل",
+  footer_line1:"سيدتنا العذراء ذات المعونة الصالحة",
+  ag_title:"جدول الأنشطة",
+  ag_intro:"نظرة عامة على القداسات والأنشطة القادمة.",
+  ag_today:"اليوم",
+  ag_empty:"لا توجد أنشطة مخططة في الأسابيع القادمة.",
+  ag_leg_viering:"قداس",
+  ag_leg_taize:"تيزيه",
+  ag_leg_night:"الكنيسة ليلاً",
+  ag_leg_act:"نشاط",
+  ev_sun:"قداس الأحد",
+  ev_sat:"قداس – فينيس تيريه",
+  ev_taize:"صلاة على روح تيزيه",
+  ev_night:"الكنيسة ليلاً (١٨–٢٢)",
+  ev_palm:"أحد الشعانين",
+  ev_holy_thu:"خميس الأسرار – عشاء الفصح",
+  ev_good_fri:"الجمعة العظيمة – تبجيل الصليب",
+  ev_vigil:"سهرة القيامة",
+  ev_easter:"قداس القيامة",
+  ev_drempel:"احتفال العتبة",
+  gesch_title:"تاريخ المبنى",
+  gesch_intro:"كنيسة سيدتنا العذراء ذات المعونة الصالحة من أبرز الكنائس الباروكية في قلب بروكسل.",
+  tl1_year:"١٦٦٤",
+  tl1_text:"اكتمل بناء المبنى الباروكي الحالي، المكرَّس لسيدتنا العذراء ذات المعونة الصالحة، في كولنمارخت بقلب المدينة السفلى في بروكسل.",
+  tl2_year:"القرنان ١٧–١٨",
+  tl2_text:"زُيِّن الداخل بديكور باذخ. نُصب المذبح الرئيسي الرائع من تصميم يان بيتر فان بورشايت الأكبر. أصبحت الكنيسة مزاراً دينياً مهماً.",
+  tl3_year:"القرن ١٩",
+  tl3_text:"أعمال ترميم وتكيّف مع الروح القوطية الجديدة. احتفظت الكنيسة بروحها الباروكية رغم تغيّر الأذواق.",
+  tl4_year:"القرنان ٢٠–٢١",
+  tl4_text:"الانضمام إلى مشروع 'الأساتذة الفلاماندييون في الموقع'. اليوم مكان حيوي للثقافة والمجتمع.",
+  gesch_arch_title:"العمارة والفن",
+  gesch_arch:"داخل الكنيسة كنز حقيقي من الفن الباروكي. يتميز المذبح الرئيسي ليان بيتر فان بورشايت الأكبر باستخدامه الماهر للرخام والتذهيب.",
+  gesch_visit_title:"الزيارة",
+  gesch_open:"يومياً: ٩:٠٠ – ١٧:٠٠\nالأحد: ١٠:٠٠ – ١٧:٠٠",
+  gesch_free:"الدخول مجاني.",
+  gesch_masters:"اكتشف الأساتذة الفلاماندييون في الموقع ←",
+  gesch_maps:"عرض على خرائط غوغل ←",
+  samen_title:"الشراكات",
+  samen_intro:"الكنيسة مكان لقاء لمجتمعات متنوعة ومبادرات ثقافية.",
+  p_parochie:"رعية المعونة الصالحة",
+  p_parochie_desc:"المجتمع الرعوي الناطق بالهولندية الذي يدير الكنيسة وينظم قداسات أسبوعية. <a href=\"https://www.goedebijstand.be\" target=\"_blank\">goedebijstand.be ←</a>",
+  p_paulus:"مجتمعات بولس",
+  p_paulus_desc:"شبكة مجتمعات إيمانية ناطقة بالهولندية في بروكسل.",
+  p_taize:"تيزيه",
+  p_taize_desc:"كل سبت ثالث من الشهر: أمسية صلاة مفتوحة للجميع. التواصل: bep.saintandre@gmail.com",
+  p_lgbtq:"مجتمع LGBTQ+",
+  p_lgbtq_desc:"ترحّب الكنيسة بمجتمع LGBTQ+ وتسعى لأن تكون فضاءً مفتوحاً وشاملاً للجميع.",
+  p_klank:"أسبوع الصوت",
+  p_klank_desc:"مهرجان موسيقي سنوي يستخدم الكنيسة كجوهرة صوتية للإنتاجات الموسيقية المعاصرة والكلاسيكية.",
+  p_klank_link:"lasemaineduson.be ←",
+  p_meesters:"الأساتذة الفلاماندييون في الموقع",
+  p_meesters_desc:"الكنيسة جزء من هذا المشروع المرموق الذي يتيح للجمهور الاطلاع على الأعمال الباروكية في سياقها الأصلي.",
+  p_meesters_link:"flemishmastersinsitu.com ←",
+  voorbij_title:"أنشطة سابقة",
+  voorbij_muziek_title:"المجموعة الموسيقية",
+  voorbij_muziek_intro:"حفلات موسيقية وفعاليات أُقيمت في الكنيسة.",
+  voorbij_film_title:"أفلام سينت-لوقاس",
+  voorbij_film_intro:"عروض سينمائية بالتعاون مع سينت-لوقاس.",
+  huren_title:"استئجار المبنى",
+  huren_intro:"توفر كنيسة سيدتنا العذراء ذات المعونة الصالحة إطاراً تاريخياً فريداً لفعالياتكم. العمارة الباروكية الاستثنائية والموقع المركزي في بروكسل يجعلان من هذا المكان حدثاً لا يُنسى.",
+  huren_cap_title:"السعة والمساحة",
+  huren_cap:"توفر الكنيسة مساحة للفعاليات الكبيرة. الصوتيات مناسبة بشكل استثنائي للحفلات والعروض الموسيقية.",
+  huren_gesch_title:"مناسب لـ",
+  huren_gesch:"الحفلات · الريسيتالات · المعارض · التصوير السينمائي · المناسبات الاحتفالية · الفعاليات المؤسسية",
+  huren_loc_title:"الموقع",
+  huren_loc:"موقع مركزي في بروكسل، بالقرب من الساحة الكبرى ووسائل النقل العام.",
+  huren_contact_title:"الطلب",
+  huren_contact:"للاستفسارات والمعلومات حول الأسعار، يُرجى التواصل:",
+  huren_note:"الكنيسة مكان عبادة نشط. يُقيَّم كل طلب بشكل فردي.",
+  steunen_title:"دعم المبنى",
+  steunen_intro:"بدعمكم تساهمون في الحفاظ على هذا الإرث الباروكي الفريد في قلب بروكسل. كل مساهمة، كبيرة أو صغيرة، ذات قيمة.",
+  steunen_bank:"تبرع بالتحويل البنكي",
+  steunen_qr:"أو امسح رمز QR",
+  steunen_terminal:"أو استخدم بطاقتك المصرفية على جهاز الدفع داخل الكنيسة.",
+  steunen_q:"للاستفسارات: 2096@diomb.be",
+  contact_title:"التواصل",
+  contact_gebouw:"إدارة المبنى",
+  contact_secretariaat:"السكرتارية",
+  contact_addr:"بيستاندسستراات ٥، بروكسل ١٠٠٠",
+  contact_email_label:"البريد الإلكتروني:",
+  contact_msg:"أرسل بريداً إلكترونياً ←",
+  contact_maps:"عرض على خرائط غوغل ←",
+  contact_open_title:"ساعات فتح الكنيسة",
+  contact_open:"يومياً: ٩:٠٠–١٧:٠٠\nالأحد: ١٠:٠٠–١٧:٠٠",
+  sb_open:"ساعات الفتح",
+  sb_open_body:"يومياً: ٩–١٧\nالأحد: ١٠–١٧",
+  sb_addr:"العنوان",
+  sb_trans:"النقل العام",
+  sb_trans_body:"مترو بورس (خطا ١ و٥) · ترام ٣، ٤",
+  sb_free:"دخول مجاني",
+  sb_masters:"الأساتذة الفلاماندييون في الموقع",
+  sb_masters_link:"مزيد من المعلومات ←",
+  rtl: true,
+},
+
+}; // end LANGS
 
 let LANG = localStorage.getItem('gb_lang') || 'nl';
 const t = k => LANGS[LANG]?.[k] ?? LANGS.nl[k] ?? k;
 
 function setLang(l) {
   LANG = l; localStorage.setItem('gb_lang', l);
+  // RTL
+  const isRtl = LANGS[l]?.rtl === true;
+  document.body.classList.toggle('rtl', isRtl);
+  document.documentElement.setAttribute('dir', isRtl ? 'rtl' : 'ltr');
+  document.documentElement.setAttribute('lang', l);
+
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const v = t(el.dataset.i18n);
@@ -651,16 +1028,25 @@ const DN = {
   nl:['Zo','Ma','Di','Wo','Do','Vr','Za'],
   fr:['Di','Lu','Ma','Me','Je','Ve','Sa'],
   en:['Su','Mo','Tu','We','Th','Fr','Sa'],
+  de:['So','Mo','Di','Mi','Do','Fr','Sa'],
+  es:['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+  ar:['أح','إث','ثل','أر','خم','جم','سب'],
 };
 const MS = {
   nl:['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'],
   fr:['jan','fév','mar','avr','mai','jun','jul','aoû','sep','oct','nov','déc'],
   en:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+  de:['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'],
+  es:['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'],
+  ar:['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'],
 };
 const ML = {
   nl:['Januari','Februari','Maart','April','Mei','Juni','Juli','Augustus','September','Oktober','November','December'],
   fr:['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
   en:['January','February','March','April','May','June','July','August','September','October','November','December'],
+  de:['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
+  es:['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+  ar:['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'],
 };
 const dkey = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 
@@ -794,7 +1180,7 @@ geschiedenis: ()=>`
       <p style="margin-top:0.4rem;font-style:italic;color:var(--muted);font-size:0.88rem;">${t('gesch_free')}</p>
     </div>
     <div class="info-box">
-      <h3>📍 Adres</h3>
+      <h3>📍 ${t('sb_addr')}</h3>
       <p>Kolenmarkt 91<br>(kant Fontainasplein)<br>1000 Brussel</p>
       <p style="margin-top:0.5rem;"><a href="https://maps.google.com/?q=Kolenmarkt+91,+1000+Brussel" target="_blank">${t('gesch_maps')}</a></p>
     </div>
@@ -818,11 +1204,11 @@ voorbij: ()=>`
   <h2 class="section-title">${t('voorbij_title')}</h2>
   <p class="subsection">${t('voorbij_muziek_title')}</p>
   <p style="font-style:italic;color:var(--muted);margin-bottom:0.8rem;font-size:0.92rem;">${t('voorbij_muziek_intro')}</p>
-  <p style="color:var(--muted);font-size:0.9rem;font-style:italic;">— Geen archiefitems beschikbaar —</p>
+  <p style="color:var(--muted);font-size:0.9rem;font-style:italic;">— — —</p>
   <div class="ornament">✦ ✦ ✦</div>
   <p class="subsection">${t('voorbij_film_title')}</p>
   <p style="font-style:italic;color:var(--muted);margin-bottom:0.8rem;font-size:0.92rem;">${t('voorbij_film_intro')}</p>
-  <p style="color:var(--muted);font-size:0.9rem;font-style:italic;">— Geen archiefitems beschikbaar —</p>
+  <p style="color:var(--muted);font-size:0.9rem;font-style:italic;">— — —</p>
 </section>`,
 
 huren: ()=>`
@@ -901,7 +1287,7 @@ contact: ()=>`
       <p style="white-space:pre-line;">${t('contact_open')}</p>
     </div>
     <div class="info-box">
-      <h3>📍 Adres</h3>
+      <h3>📍 ${t('sb_addr')}</h3>
       <p>Kolenmarkt 91<br>1000 Brussel</p>
       <p style="margin-top:0.4rem;"><a href="https://maps.google.com/?q=Kolenmarkt+91,+1000+Brussel" target="_blank">${t('contact_maps')}</a></p>
     </div>
@@ -939,7 +1325,8 @@ function render(key) {
   document.getElementById('main').innerHTML = fn ? fn() : '<section class="section"><p>404</p></section>';
   document.getElementById('sidebar').innerHTML = sidebarHTML();
   document.querySelectorAll('nav a[data-page]').forEach(a => a.classList.toggle('active', a.dataset.page===key));
-  document.title = (LANGS[LANG]?.['nav_'+{agenda:'agenda',geschiedenis:'gesch',samenwerking:'samen',voorbij:'voorbij',huren:'huren',steunen:'steunen',contact:'contact'}[key]]||key) + ' — ' + (LANGS[LANG]?.hero_title||'Goede Bijstand').replace('\n',' ');
+  const pageKey = {agenda:'nav_agenda',geschiedenis:'nav_gesch',samenwerking:'nav_samen',voorbij:'nav_voorbij',huren:'nav_huren',steunen:'nav_steunen',contact:'nav_contact'}[key];
+  document.title = (t(pageKey)||key) + ' — ' + (t('hero_title')||'Goede Bijstand').replace('\n',' ');
 }
 
 function go(key) {
@@ -948,12 +1335,18 @@ function go(key) {
 }
 
 /* ─── INIT ─── */
-document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang===LANG));
-document.querySelectorAll('[data-i18n]').forEach(el => {
-  const v = t(el.dataset.i18n);
-  if (v) el.innerHTML = v.replace(/\n/g,'<br>');
-});
-render('agenda');  
+(function init() {
+  const isRtl = LANGS[LANG]?.rtl === true;
+  document.body.classList.toggle('rtl', isRtl);
+  document.documentElement.setAttribute('dir', isRtl ? 'rtl' : 'ltr');
+  document.documentElement.setAttribute('lang', LANG);
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang===LANG));
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const v = t(el.dataset.i18n);
+    if (v) el.innerHTML = v.replace(/\n/g,'<br>');
+  });
+  render('agenda');
+})();
 </script>
 </body>
 </html>
