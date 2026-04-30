@@ -319,6 +319,24 @@ body.rtl .tl-year {
   padding: 0; white-space: nowrap;
 }
 .gdpr-link:hover { color: var(--gold); }
+  /* ── TRANSLATION NOTICE ── */
+.translation-notice {
+  background: #EEF4FB;
+  border-left: 4px solid var(--gold);
+  color: var(--stone-mid);
+  font-size: 0.82rem;
+  font-style: italic;
+  padding: 0.55rem 1.1rem;
+  margin-bottom: 1.2rem;
+  border-radius: var(--r);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+body.rtl .translation-notice {
+  border-left: none;
+  border-right: 4px solid var(--gold);
+}
 </style>
 </head>
 <body>
@@ -521,6 +539,7 @@ nl: {
 
 /* ═══════════════════════════ FRANÇAIS ═══════════════════════════ */
 fr: {
+  translation_notice:"Ceci est une traduction automatique. Merci de signaler toute erreur à la fabrique d'église.",
   hero_label:"1664 · Bruxelles",
   hero_title:"Notre-Dame\ndu Bon Secours",
   hero_sub:"Joyau baroque de Bruxelles",
@@ -628,6 +647,7 @@ fr: {
 
 /* ═══════════════════════════ ENGLISH ═══════════════════════════ */
 en: {
+  translation_notice:"This is an auto-generated translation. Please notify the church board if you spot any errors.",
   hero_label:"1664 · Brussels",
   hero_title:"Our Lady\nof Good Help",
   hero_sub:"Brussels' baroque gem",
@@ -735,6 +755,7 @@ en: {
 
 /* ═══════════════════════════ DEUTSCH ═══════════════════════════ */
 de: {
+  translation_notice:"Dies ist eine automatische Übersetzung. Bitte teilen Sie der Kirchenfabrik Fehler mit.",
   hero_label:"1664 · Brüssel",
   hero_title:"Unsere Liebe Frau\nvom Guten Beistand",
   hero_sub:"Barockes Juwel von Brüssel",
@@ -842,6 +863,7 @@ de: {
 
 /* ═══════════════════════════ ESPAÑOL ═══════════════════════════ */
 es: {
+  translation_notice:"Esta es una traducción automática. Le rogamos que comunique cualquier error a la junta parroquial.",
   hero_label:"1664 · Bruselas",
   hero_title:"Nuestra Señora\ndel Buen Socorro",
   hero_sub:"Joya barroca de Bruselas",
@@ -949,6 +971,7 @@ es: {
 
 /* ═══════════════════════════ العربية ═══════════════════════════ */
 ar: {
+  translation_notice:"هذه ترجمة آلية. يُرجى إبلاغ مجلس الكنيسة عن أي أخطاء تلاحظها.",
   hero_label:"١٦٦٤ · بروكسل",
   hero_title:"سيدتنا العذراء\nذات المعونة الصالحة",
   hero_sub:"جوهرة البروك البروكسيلية",
@@ -1384,7 +1407,17 @@ function sidebarHTML() {
 /* ─── ROUTER ─── */
 function render(key) {
   const fn = PAGES[key];
-  document.getElementById('main').innerHTML = fn ? fn() : '<section class="section"><p>404</p></section>';
+  const noticeKey = `gb_notice_${LANG}`;
+  const noticeSeen = sessionStorage.getItem(noticeKey);
+  const notice = (LANG !== 'nl' && !noticeSeen)
+    ? `<div class="translation-notice" id="translationNotice">
+        ⚠ ${t('translation_notice')}
+        <button onclick="dismissNotice()" style="margin-left:auto;background:none;border:none;cursor:pointer;font-size:1rem;color:var(--muted);">✕</button>
+       </div>`
+    : '';
+  document.getElementById('main').innerHTML = fn
+    ? notice + fn()
+    : '<section class="section"><p>404</p></section>';
   document.getElementById('sidebar').innerHTML = sidebarHTML();
   document.querySelectorAll('nav a[data-page]').forEach(a => a.classList.toggle('active', a.dataset.page===key));
   const pageKey = {agenda:'nav_agenda',geschiedenis:'nav_gesch',samenwerking:'nav_samen',voorbij:'nav_voorbij',huren:'nav_huren',steunen:'nav_steunen',contact:'nav_contact'}[key];
@@ -1395,6 +1428,14 @@ function go(key) {
   render(key);
   document.getElementById('nav').scrollIntoView({behavior:'smooth', block:'start'});
 }
+
+  /* ─── TRANSLATION NOTICE ─── */
+function dismissNotice() {
+  sessionStorage.setItem(`gb_notice_${LANG}`, '1');
+  const el = document.getElementById('translationNotice');
+  if (el) el.remove();
+}
+  
 /* ─── GDPR ─── */
 function gdprAccept() {
   localStorage.setItem('gb_gdpr', '1');
