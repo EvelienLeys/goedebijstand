@@ -285,8 +285,7 @@ body.rtl .subsection,
 body.rtl .tl-year {
   font-family: 'Playfair Display', 'Georgia', serif;
 }
-
-  /* ── GDPR BANNER ── */
+/* ── GDPR BANNER ── */
 .gdpr-overlay {
   position: fixed; inset: 0;
   background: rgba(44,36,22,0.55);
@@ -320,10 +319,24 @@ body.rtl .tl-year {
   padding: 0; white-space: nowrap;
 }
 .gdpr-link:hover { color: var(--gold); }
-  
 </style>
 </head>
 <body>
+  
+  <!-- GDPR COOKIE BANNER -->
+<div class="gdpr-overlay hidden" id="gdprOverlay">
+  <div class="gdpr-box">
+    <p id="gdprText">
+      Deze website gebruikt enkel functionele cookies om uw taalvoorkeur te bewaren.
+      Er worden geen tracking- of advertentiecookies geplaatst.
+      <a href="#" onclick="go('privacy');document.getElementById('gdprOverlay').classList.add('hidden');return false;">Meer info</a>
+    </p>
+    <div class="gdpr-btns">
+      <button class="btn" onclick="gdprAccept()">Begrepen</button>
+      <button class="gdpr-link" onclick="gdprAccept()">Sluiten</button>
+    </div>
+  </div>
+</div>
 
 <!-- HERO -->
 <section class="hero" id="top">
@@ -392,20 +405,6 @@ body.rtl .tl-year {
   </div>
 </footer>
 
-  <!-- GDPR COOKIE BANNER -->
-<div class="gdpr-overlay hidden" id="gdprOverlay">
-  <div class="gdpr-box">
-    <p id="gdprText">
-      Deze website gebruikt enkel functionele cookies om uw taalvoorkeur te bewaren.
-      Er worden geen tracking- of advertentiecookies geplaatst.
-      <a href="#" onclick="go('privacy');document.getElementById('gdprOverlay').classList.add('hidden');return false;">Meer info</a>
-    </p>
-    <div class="gdpr-btns">
-      <button class="btn" onclick="gdprAccept()">Begrepen</button>
-      <button class="gdpr-link" onclick="gdprAccept()">Sluiten</button>
-    </div>
-  </div>
-</div>
 <script>
 'use strict';
 
@@ -1348,6 +1347,15 @@ contact: ()=>`
   </div>
 </section>`,
 
+  privacy: ()=>`
+<section class="section">
+  <h2 class="section-title">Cookie- &amp; privacybeleid</h2>
+  <p>Deze website gebruikt uitsluitend <strong>functionele cookies</strong> om uw taalvoorkeur op te slaan (<code>gb_lang</code>) en uw cookiekeuze te bewaren (<code>gb_gdpr</code>). Er worden geen persoonsgegevens verzameld of gedeeld met derden. Er zijn geen tracking-, analyse- of advertentiecookies aanwezig.</p>
+  <p style="margin-top:0.8rem;">Beheerder: <strong>Kerkfabriek Onze-Lieve-Vrouw van Goede Bijstand</strong><br>
+  Kolenmarkt 91, 1000 Brussel<br>
+  <a href="mailto:kerkfabriek@goedebijstand.brussels">kerkfabriek@goedebijstand.brussels</a></p>
+</section>`,
+
 };
 
 function sidebarHTML() {
@@ -1387,8 +1395,6 @@ function go(key) {
   render(key);
   document.getElementById('nav').scrollIntoView({behavior:'smooth', block:'start'});
 }
-
-/* ─── INIT ─── */
 /* ─── GDPR ─── */
 function gdprAccept() {
   localStorage.setItem('gb_gdpr', '1');
@@ -1397,7 +1403,8 @@ function gdprAccept() {
 function showGdpr() {
   document.getElementById('gdprOverlay').classList.remove('hidden');
 }
-  (function init() {
+/* ─── INIT ─── */
+(function init() {
   const isRtl = LANGS[LANG]?.rtl === true;
   document.body.classList.toggle('rtl', isRtl);
   document.documentElement.setAttribute('dir', isRtl ? 'rtl' : 'ltr');
@@ -1408,7 +1415,8 @@ function showGdpr() {
     if (v) el.innerHTML = v.replace(/\n/g,'<br>');
   });
   render('agenda');
-    if (!localStorage.getItem('gb_gdpr')) showGdpr();
+  if (!localStorage.getItem('gb_gdpr')) showGdpr();
+  
 })();
 </script>
 </body>
