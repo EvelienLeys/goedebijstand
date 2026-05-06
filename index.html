@@ -508,7 +508,7 @@ nl: {
   ev_easter:"Paasviering",
   ev_drempel:"Onze-Lieve-Heer Hemelvaart met Drempelviering",
   ev_pinksterwake:"Pinksterwake (uitzonderlijk geen viering LGBTQ+)",
-  ev_pinkster:"Pinksterviering",
+  ev_pinkster:"Pinksteren - Woorddienst met eucharistie",
   ev_concert_juni:"Barokconcert klavecimbel en baroktrombone",
   gesch_title:"Geschiedenis van het gebouw",
   gesch_intro:"De Onze-Lieve-Vrouw van Goede Bijstandskerk is een van de markantste barokke kerkgebouwen in het hart van Brussel.",
@@ -628,7 +628,7 @@ fr: {
   ev_easter:"Célébration de Pâques",
   ev_drempel:"L'Ascension de Notre Seigneur avec Célébration du Seuil",
   ev_pinksterwake:"Veillée de Pentecôte (exceptionnellement pas de célébration LGBTQ+)",
-  ev_pinkster:"Célébration de la Pentecôte",
+  ev_pinkster:"La Pentecôte - Célébration de la Parole avec eucharistie",
   ev_concert_juni:"Concert baroque clavecin et saqueboute",
   gesch_title:"Histoire du bâtiment",
   gesch_intro:"L'église Notre-Dame du Bon Secours est l'un des édifices baroques les plus remarquables au cœur de Bruxelles.",
@@ -748,7 +748,7 @@ en: {
   ev_easter:"Easter service",
   ev_drempel:"Our Lord's Ascension with Threshold Celebration",
   ev_pinksterwake:"Pentecost Vigil (exceptionally no LGBTQ+ celebration)",
-  ev_pinkster:"Pentecost service",
+  ev_pinkster:"Pentecost - Liturgy of the Word with Eucharist",
   ev_concert_juni:"Baroque concert harpsichord and sackbut",
   gesch_title:"History of the building",
   gesch_intro:"The Church of Our Lady of Good Help is one of the most striking baroque churches in the heart of Brussels.",
@@ -867,7 +867,7 @@ de: {
   ev_easter:"Ostergottesdienst",
   ev_drempel:"Die Himmelfahrt unseres Herrn mit Schwellenfeier",
   ev_pinksterwake:"Pfingstnacht (ausnahmsweise keine LGBTQ+-Feier)",
-ev_pinkster:"Pfingsten",
+  ev_pinkster:"Pfingsten - Wortgottesdienst mit Eucharistie",
   ev_concert_juni:"Barockkonzert Cembalo und Posaune",
   gesch_title:"Geschichte des Gebäudes",
   gesch_intro:"Die Kirche Unsere Liebe Frau vom Guten Beistand ist eines der markantesten Barockkirchen im Herzen von Brüssel.",
@@ -987,7 +987,7 @@ es: {
   ev_easter:"Celebración de Pascua",
   ev_drempel:"La Ascensión de Nuestro Señor con Celebración del Umbral",
   ev_pinksterwake:"Vigilia de Pentecostés (excepcionalmente sin celebración LGBTQ+)",
-  ev_pinkster:"Celebración de Pentecostés",
+  ev_pinkster:"Pentecostés - Liturgia de la Palabra con eucaristía ",
   ev_concert_juni:"Concierto barroco clavicémbalo y sacabuche",
   gesch_title:"Historia del edificio",
   gesch_intro:"La iglesia de Nuestra Señora del Buen Socorro es uno de los edificios barrocos más destacados en el corazón de Bruselas.",
@@ -1385,7 +1385,8 @@ function agendaHTML() {
     const evs = (events[sk]||[]).map(e => ({
       ...e,
       tekst: e.tekst || t(e.tk),
-      voorganger: e.voorganger || e.extra || ''
+      voorganger: e.voorganger || e.extra || '',
+      rol: e.rol || ''
     })).filter(e => {
       const k = `${e.tijd}|${e.tekst}`;
       return seen.has(k) ? false : (seen.add(k), true);
@@ -1414,7 +1415,7 @@ function agendaHTML() {
           <span>${ev.tekst}${ev.gratis
             ? `<span style="margin-left:0.5rem;font-size:0.75rem;font-weight:600;color:var(--gold-dk);">(gratis)</span>`
             : ''}${ev.voorganger
-            ? `<span style="margin-left:0.7rem;font-size:0.78rem;color:var(--muted);font-style:italic;">— ${t('ev_voorganger')}: ${ev.voorganger}</span>`
+            ? `<span style="margin-left:0.7rem;font-size:0.78rem;color:var(--muted);font-style:italic;">— ${ev.rol === 'voorgangers' ? 'Voorgangers' : t('ev_voorganger')}: ${ev.voorganger}</span>`
             : ''}</span>
         </div>`).join('')}
       </div>
