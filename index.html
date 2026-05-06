@@ -1335,18 +1335,18 @@ function genNight() {
   return res;
 }
 function buildAgenda() {
-  const map={};
-  [...FIXED,...genTaize(),...genNight(),...genLGBTQ()].forEach(ev=>{
-    (map[ev.datum]=map[ev.datum]||[]).push(ev);
+  const map = {};
+  [...FIXED, ...genTaize(), ...genNight(), ...genLGBTQ()].forEach(ev => {
+    (map[ev.datum] = map[ev.datum] || []).push(ev);
   });
 
-  const now=new Date(); now.setHours(0,0,0,0);
+  const now = new Date(); now.setHours(0,0,0,0);
 
-  for (let i=0;i<42;i++) {
-    const d=new Date(now); d.setDate(now.getDate()+i);
-    const dw=d.getDay(), sk=dkey(d);
+  for (let i = 0; i < 42; i++) {
+    const d = new Date(now); d.setDate(now.getDate()+i);
+    const dw = d.getDay(), sk = dkey(d);
 
-    if (dw===0 && !['2026-04-05','2026-03-29'].includes(sk)) {
+    if (dw === 0 && !['2026-04-05','2026-03-29'].includes(sk)) {
       if (ZONDAG_UITZONDERINGEN[sk] === 'skip') {
         // geen automatische viering, FIXED neemt over
       } else {
@@ -1354,19 +1354,20 @@ function buildAgenda() {
         const isWoord  = zondagNr === 4 || ZONDAG_UITZONDERINGEN[sk] === 'woord';
         const tkSun    = isWoord ? 'ev_sun_woord' : 'ev_sun_eucharistie';
         const vg       = VOORGANGERS[sk] || { naam: '', rol: '' };
-        (map[sk]=map[sk]||[]).unshift({
-          datum: sk,
-          tijd: '11:00',
-          type: 'viering',
-          tekst: t(tkSun),
+        (map[sk] = map[sk] || []).unshift({
+          datum:     sk,
+          tijd:      '11:00',
+          type:      'viering',
+          tekst:     t(tkSun),
           voorganger: vg.naam,
-          extra: vg.rol
+          extra:     vg.rol,
+          rol:       vg.rol
         });
       }
     }
   }
 
-  for (const k of Object.keys(map)) map[k].sort((a,b)=>a.tijd.localeCompare(b.tijd));
+  for (const k of Object.keys(map)) map[k].sort((a,b) => a.tijd.localeCompare(b.tijd));
   return map;
 }
 
