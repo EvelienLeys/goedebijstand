@@ -1244,11 +1244,29 @@ const dkey = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-
 
   /* Voorganger per zondag: sleutel = datum 'YYYY-MM-DD' */
  const VOORGANGERS = {
-  '2026-05-03': { naam: 'Johnny De Mot', rol: '' },
-  '2026-05-10': { naam: 'Chris Ruelens', rol: 'voorganger' },
-  '2026-05-17': { naam: '', rol: '' },
-  '2026-05-24': { naam: '', rol: '' },  // vierde zondag → woorddienst
+  '2026-05-03': { naam: 'Johnny De Mot', rol: 'voorganger' },
+  '2026-05-10': { naam: 'Chris Ruelens', rol: 'voorganger' },  // uitz. skip
+  '2026-05-17': { naam: 'Johnny De Mot', rol: 'voorganger' },
+  '2026-05-24': { naam: 'Katia Vanhemelryck & Nieneke Heesen', rol: 'voorgangers' },  // vierde zondag → woorddienst + Pinksteren → skip
   '2026-05-31': { naam: '', rol: '' },
+  '2026-06-07': { naam: '', rol: '' },
+  '2026-06-14': { naam: '', rol: '' },
+  '2026-06-21': { naam: '', rol: '' },
+  '2026-06-28': { naam: '', rol: '' },  // vierde zondag → woorddienst
+  '2026-07-05': { naam: '', rol: '' },
+  '2026-07-12': { naam: '', rol: '' },
+  '2026-07-19': { naam: '', rol: '' },
+  '2026-07-26': { naam: '', rol: '' }, // vierde zondag → woorddienst
+  '2026-08-02': { naam: '', rol: '' },
+  '2026-08-09': { naam: '', rol: '' },
+  '2026-08-16': { naam: '', rol: '' },
+  '2026-08-23': { naam: '', rol: '' },
+  '2026-08-30': { naam: '', rol: '' },
+  '2026-09-26': { naam: '', rol: '' },
+  '2026-09-26': { naam: '', rol: '' },
+  '2026-09-26': { naam: '', rol: '' },
+  '2026-09-26': { naam: '', rol: '' },
+  '2026-09-26': { naam: '', rol: '' },
   // voeg hier verder aan toe...
 };
 const FIXED = [
@@ -1259,7 +1277,7 @@ const FIXED = [
   { datum:'2026-04-05', tijd:'11:00', type:'viering', tk:'ev_easter' },
   { datum:'2026-05-14', tijd:'11:00', type:'viering', tk:'ev_drempel' },
   { datum:'2026-05-23', tijd:'19:00', type:'viering', tk:'ev_pinksterwake', extra:'Johnny De Mot' },
-  { datum:'2026-05-24', tijd:'11:00', type:'viering', tk:'ev_pinkster', extra:'Johnny De Mot' },
+  { datum:'2026-05-24', tijd:'11:00', type:'woord', tk:'ev_pinkster', extra:'Katia Vanhemelryck & Nieneke Heesen' },
   { datum:'2026-06-26', tijd:'19:00', type:'viering', tk:'ev_concert_juni', extra:'Baptiste Zeronian', gratis:true },
 ];
 const ZONDAG_UITZONDERINGEN = {
