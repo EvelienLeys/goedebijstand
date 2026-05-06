@@ -508,7 +508,8 @@ nl: {
   ev_easter:"Paasviering",
   ev_drempel:"Onze-Lieve-Heer Hemelvaart met Drempelviering",
   ev_pinksterwake:"Pinksterwake (uitzonderlijk geen viering LGBTQ+)",
-ev_pinkster:"Pinksterviering",
+  ev_pinkster:"Pinksterviering",
+  ev_concert_juni:"Barokconcert klavecimbel en baroktrombone",
   gesch_title:"Geschiedenis van het gebouw",
   gesch_intro:"De Onze-Lieve-Vrouw van Goede Bijstandskerk is een van de markantste barokke kerkgebouwen in het hart van Brussel.",
   tl1_year:"1664",
@@ -621,7 +622,8 @@ fr: {
   ev_easter:"Célébration de Pâques",
   ev_drempel:"L'Ascension de Notre Seigneur avec Célébration du Seuil",
   ev_pinksterwake:"Veillée de Pentecôte (exceptionnellement pas de célébration LGBTQ+)",
-ev_pinkster:"Célébration de la Pentecôte",
+  ev_pinkster:"Célébration de la Pentecôte",
+  ev_concert_juni:"Concert baroque clavecin et saqueboute",
   gesch_title:"Histoire du bâtiment",
   gesch_intro:"L'église Notre-Dame du Bon Secours est l'un des édifices baroques les plus remarquables au cœur de Bruxelles.",
   tl1_year:"1664",
@@ -734,7 +736,8 @@ en: {
   ev_easter:"Easter service",
   ev_drempel:"Our Lord's Ascension with Threshold Celebration",
   ev_pinksterwake:"Pentecost Vigil (exceptionally no LGBTQ+ celebration)",
-ev_pinkster:"Pentecost service",
+  ev_pinkster:"Pentecost service",
+  ev_concert_juni:"Baroque concert harpsichord and sackbut",
   gesch_title:"History of the building",
   gesch_intro:"The Church of Our Lady of Good Help is one of the most striking baroque churches in the heart of Brussels.",
   tl1_year:"1664",
@@ -847,6 +850,7 @@ de: {
   ev_drempel:"Die Himmelfahrt unseres Herrn mit Schwellenfeier",
   ev_pinksterwake:"Pfingstnacht (ausnahmsweise keine LGBTQ+-Feier)",
 ev_pinkster:"Pfingsten",
+  ev_concert_juni:"Barockkonzert Cembalo und Posaune",
   gesch_title:"Geschichte des Gebäudes",
   gesch_intro:"Die Kirche Unsere Liebe Frau vom Guten Beistand ist eines der markantesten Barockkirchen im Herzen von Brüssel.",
   tl1_year:"1664",
@@ -959,7 +963,8 @@ es: {
   ev_easter:"Celebración de Pascua",
   ev_drempel:"La Ascensión de Nuestro Señor con Celebración del Umbral",
   ev_pinksterwake:"Vigilia de Pentecostés (excepcionalmente sin celebración LGBTQ+)",
-ev_pinkster:"Celebración de Pentecostés",
+  ev_pinkster:"Celebración de Pentecostés",
+  ev_concert_juni:"Concierto barroco clavicémbalo y sacabuche",
   gesch_title:"Historia del edificio",
   gesch_intro:"La iglesia de Nuestra Señora del Buen Socorro es uno de los edificios barrocos más destacados en el corazón de Bruselas.",
   tl1_year:"1664",
@@ -1073,7 +1078,8 @@ ar: {
   ev_easter:"قداس القيامة",
   ev_drempel:"عيد صعود ربنا يسوع المسيح مع احتفالات العتبة",
   ev_pinksterwake:"سهرة العنصرة (استثنائياً بدون احتفال LGBTQ+)",
-ev_pinkster:"قداس العنصرة",
+  ev_pinkster:"قداس العنصرة",
+  ev_concert_juni:"حفل باروكي — هاربسيكورد وساكبوت",
   gesch_title:"تاريخ المبنى",
   gesch_intro:"كنيسة سيدتنا العذراء ذات المعونة الصالحة من أبرز الكنائس الباروكية في قلب بروكسل.",
   tl1_year:"١٦٦٤",
@@ -1201,12 +1207,13 @@ const dkey = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-
 /* ─── AGENDA ENGINE ─── */
 
   /* Voorganger per zondag: sleutel = datum 'YYYY-MM-DD' */
-const VOORGANGERS = {
-  '2026-05-03': 'Johnny De Mot',
-  '2026-05-10': '',
-  '2026-05-17': '',
-  '2026-05-24': '',   // 4e zondag → woorddienst
-  '2026-05-31': '',
+ const VOORGANGERS = {
+  '2026-05-03': { naam: 'Johnny De Mot', rol: '' },
+  '2026-05-10': { naam: 'Chris Ruelens', rol: 'voorganger' },
+  '2026-05-17': { naam: '', rol: '' },
+  '2026-05-24': { naam: '', rol: '' },  //vierde zondag → woorddienst
+  '2026-05-31': { naam: '', rol: '' },
+};
   // voeg hier verder aan toe...
 };
 const FIXED = [
@@ -1216,10 +1223,15 @@ const FIXED = [
   { datum:'2026-04-04', tijd:'21:00', type:'viering', tk:'ev_vigil' },
   { datum:'2026-04-05', tijd:'11:00', type:'viering', tk:'ev_easter' },
   { datum:'2026-05-14', tijd:'11:00', type:'viering', tk:'ev_drempel' },
-  { datum:'2026-05-23', tijd:'19:00', type:'viering', tk:'ev_pinksterwake' },
-  { datum:'2026-05-24', tijd:'11:00', type:'viering', tk:'ev_pinkster' },
+  { datum:'2026-05-23', tijd:'19:00', type:'viering', tk:'ev_pinksterwake', extra:'Johnny De Mot' },
+  { datum:'2026-05-24', tijd:'11:00', type:'viering', tk:'ev_pinkster', extra:'Johnny De Mot' },
+  { datum:'2026-06-26', tijd:'19:00', type:'viering', tk:'ev_concert_juni', extra:'Baptiste Zeronian', gratis:true },
 ];
-
+const ZONDAG_UITZONDERINGEN = {
+  '2026-05-10': 'woord',
+  '2026-05-24': 'skip',
+};
+  
 function genTaize() {
   const res = [], now = new Date(); now.setHours(0,0,0,0);
   const end = new Date(now); end.setDate(now.getDate()+42);
@@ -1268,12 +1280,38 @@ function genNight() {
   }
   return res;
 }
-
 function buildAgenda() {
   const map={};
   [...FIXED,...genTaize(),...genNight(),...genLGBTQ()].forEach(ev=>{
     (map[ev.datum]=map[ev.datum]||[]).push(ev);
   });
+
+  const now=new Date(); now.setHours(0,0,0,0);
+
+  for (let i=0;i<42;i++) {
+    const d=new Date(now); d.setDate(now.getDate()+i);
+    const dw=d.getDay(), sk=dkey(d);
+
+    if (dw===0 && !['2026-04-05','2026-03-29'].includes(sk)) {
+      if (ZONDAG_UITZONDERINGEN[sk] === 'skip') {
+        // geen automatische viering, FIXED neemt over
+      } else {
+        const zondagNr = Math.ceil(d.getDate() / 7);
+        const isWoord  = zondagNr === 4 || ZONDAG_UITZONDERINGEN[sk] === 'woord';
+        const tkSun    = isWoord ? 'ev_sun_woord' : 'ev_sun_eucharistie';
+        const vg       = VOORGANGERS[sk] || { naam: '', rol: '' };
+        (map[sk]=map[sk]||[]).unshift({
+          datum: sk,
+          tijd: '11:00',
+          type: 'viering',
+          tekst: t(tkSun),
+          voorganger: vg.naam,
+          extra: vg.rol
+        });
+      }
+    }
+  }
+
   for (const k of Object.keys(map)) map[k].sort((a,b)=>a.tijd.localeCompare(b.tijd));
   return map;
 }
@@ -1283,26 +1321,23 @@ function agendaHTML() {
   const now=new Date(); now.setHours(0,0,0,0);
   const dn_=DN[LANG]||DN.nl, ms_=MS[LANG]||MS.nl, ml_=ML[LANG]||ML.nl;
   let html='<div class="agenda-wrap">', curM=-1, count=0;
+
   for (let i=0;i<42;i++) {
     const d=new Date(now); d.setDate(now.getDate()+i);
     const dw=d.getDay(), mn=d.getMonth(), yr=d.getFullYear(), nr=d.getDate(), sk=dkey(d);
-    const base=[];
-    if (dw===0 && !['2026-04-05','2026-03-29'].includes(sk)) {
-  const zondagNr = Math.ceil(d.getDate() / 7);
-  const isWoord  = zondagNr === 4;
-  const tkSun    = isWoord ? 'ev_sun_woord' : 'ev_sun_eucharistie';
-  const vg       = VOORGANGERS[sk] || '';
-  base.push({tijd:'11:00', type:'viering', tekst: t(tkSun), voorganger: vg});
-}
-    const seen=new Set();
-    const evs=[...base,...(events[sk]||[]).map(e=>({...e,tekst:t(e.tk)}))].filter(e=>{
-      const k=`${e.tijd}|${e.tekst}`;
-      return seen.has(k)?false:(seen.add(k),true);
-    });
+
+    const evs=(events[sk]||[]).map(e=>({
+      ...e,
+      tekst: e.tekst || t(e.tk),
+      voorganger: e.voorganger || e.extra || ''
+    }));
+
     if (!evs.length) continue;
     count++;
+
     if (mn!==curM){curM=mn;html+=`<div class="agenda-month">${ml_[mn]} ${yr}</div>`;}
     const cls='agenda-row'+(dw===0||dw===6?' weekend':'');
+
     html+=`<div class="${cls}">
       <div class="date-cell">
         <span class="dn">${i===0?t('ag_today'):dn_[dw]}</span>
@@ -1310,16 +1345,19 @@ function agendaHTML() {
         <span class="dm">${ms_[mn]}</span>
       </div>
       <div class="events-cell">
-       ${evs.map(ev=>`<div class="ev-row">
-  <span class="ev-time">${ev.tijd}</span>
-  <span class="ev-dot">◆</span>
-  <span>${ev.tekst}${ev.voorganger
-    ? `<span style="margin-left:0.7rem;font-size:0.78rem;color:var(--muted);font-style:italic;">— ${t('ev_voorganger')}: ${ev.voorganger}</span>`
-    : ''}</span>
-</div>`).join('')}
+        ${evs.map(ev=>`<div class="ev-row">
+          <span class="ev-time">${ev.tijd}</span>
+          <span class="ev-dot">◆</span>
+          <span>${ev.tekst}${ev.gratis
+            ? `<span style="margin-left:0.5rem;font-size:0.75rem;font-weight:600;color:var(--gold-dk);">(gratis)</span>`
+            : ''}${ev.voorganger
+            ? `<span style="margin-left:0.7rem;font-size:0.78rem;color:var(--muted);font-style:italic;">— ${t('ev_voorganger')}: ${ev.voorganger}</span>`
+            : ''}</span>
+        </div>`).join('')}
       </div>
     </div>`;
   }
+
   if (!count) html+=`<div class="agenda-empty">${t('ag_empty')}</div>`;
   html+='</div>';
   html+=`<p style="margin-top:0.8rem;font-size:0.8rem;font-style:italic;color:var(--muted);">◆ ${t('ag_leg_viering')} &nbsp;|&nbsp; ◆ ${t('ag_leg_taize')} &nbsp;|&nbsp; ◆ ${t('ag_leg_night')} &nbsp;|&nbsp; ◆ ${t('ag_leg_act')}</p>`;
