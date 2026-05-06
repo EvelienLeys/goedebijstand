@@ -1288,8 +1288,9 @@ function genTaize() {
 function genNight() {
   const res=[], now=new Date(); now.setHours(0,0,0,0);
   const end=new Date(now); end.setDate(now.getDate()+42);
+  const uitsluitingen = ['2026-06-26'];  // ← ontbreekt in jouw huidige code
   for (let d=new Date(now);d<=end;d.setDate(d.getDate()+1)) {
-    if (d.getDay()===5&&d.getMonth()>=4&&d.getMonth()<=7)
+    if (d.getDay()===5 && d.getMonth()>=4 && d.getMonth()<=7 && !uitsluitingen.includes(dkey(d)))
       res.push({datum:dkey(d),tijd:'18:00',type:'nacht',tk:'ev_night'});
   }
   return res;
@@ -1355,6 +1356,15 @@ function agendaHTML() {
   const events=buildAgenda();
   const now=new Date(); now.setHours(0,0,0,0);
   const dn_=DN[LANG]||DN.nl, ms_=MS[LANG]||MS.nl, ml_=ML[LANG]||ML.nl;
+  const seen = new Set();
+const evs = (events[sk]||[]).map(e=>({
+  ...e,
+  tekst: e.tekst || t(e.tk),
+  voorganger: e.voorganger || e.extra || ''
+})).filter(e => {
+  const k = `${e.tijd}|${e.tekst}`;
+  return seen.has(k) ? false : (seen.add(k), true);
+});
   let html='<div class="agenda-wrap">', curM=-1, count=0;
 
   for (let i=0;i<42;i++) {
