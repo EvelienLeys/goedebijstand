@@ -500,6 +500,7 @@ nl: {
   
   ev_taize:"Gebed in de geest van Taizé",
   ev_night:"Bijstand by Night (18–22 u)",
+  ev_lgbtq: 'Oecumenische viering van de LGBTQ+-gemeenschap',
   ev_palm:"Palmzondag – Viering",
   ev_holy_thu:"Witte Donderdag – Sedermaaltijd",
   ev_good_fri:"Goede Vrijdag – Kruishulde",
@@ -610,6 +611,7 @@ fr: {
   ev_voorganger:"Célébrant",
   ev_taize:"Prière dans l'esprit de Taizé",
   ev_night:"Bon Secours by Night (18h–22h)",
+  ev_lgbtq: 'Célébration œcuménique de la communauté LGBTQ+',
   ev_palm:"Dimanche des Rameaux",
   ev_holy_thu:"Jeudi Saint – Repas de la Cène",
   ev_good_fri:"Vendredi Saint – Vénération",
@@ -720,6 +722,7 @@ en: {
   ev_voorganger:"Celebrant",
   ev_taize:"Prayer in the spirit of Taizé",
   ev_night:"Good Help by Night (6–10 PM)",
+  ev_lgbtq: 'Ecumenical celebration of the LGBTQ+ community',
   ev_palm:"Palm Sunday – Service",
   ev_holy_thu:"Holy Thursday – Seder meal",
   ev_good_fri:"Good Friday – Veneration",
@@ -830,6 +833,7 @@ de: {
   ev_voorganger:"Zelebrant",
   ev_taize:"Gebet im Geist von Taizé",
   ev_night:"Guter Beistand by Night (18–22 Uhr)",
+  ev_lgbtq: 'Ökumenischer Gottesdienst der LGBTQ+-Gemeinschaft',
   ev_palm:"Palmsonntag – Gottesdienst",
   ev_holy_thu:"Gründonnerstag – Sedermahlzeit",
   ev_good_fri:"Karfreitag – Kreuzverehrung",
@@ -940,6 +944,7 @@ es: {
   ev_voorganger:"Celebrante",
   ev_taize:"Oración en el espíritu de Taizé",
   ev_night:"Buen Socorro by Night (18h–22h)",
+  ev_lgbtq: 'Celebración ecuménica de la comunidad LGBTQ+',
   ev_palm:"Domingo de Ramos – Celebración",
   ev_holy_thu:"Jueves Santo – Cena pascual",
   ev_good_fri:"Viernes Santo – Veneración",
@@ -1051,6 +1056,7 @@ ar: {
   ev_sat:"قداس – فينيس تيريه",
   ev_taize:"صلاة على روح تيزيه",
   ev_night:"الكنيسة ليلاً (١٨–٢٢)",
+  ev_lgbtq: 'احتفال مسكوني لمجتمع LGBTQ+',
   ev_palm:"أحد الشعانين",
   ev_holy_thu:"خميس الأسرار – عشاء الفصح",
   ev_good_fri:"الجمعة العظيمة – تبجيل الصليب",
@@ -1229,9 +1235,30 @@ function genNight() {
   return res;
 }
 
+  function genLGBTQ() {
+  const res = [], now = new Date(); now.setHours(0,0,0,0);
+  const start = new Date(2026, 5, 27); // 27 juni 2026
+  const end = new Date(now); end.setDate(now.getDate() + 42);
+  for (let m = 0; m < 24; m++) {
+    const yr = start.getFullYear() + Math.floor((start.getMonth() + m) / 12);
+    const mn = (start.getMonth() + m) % 12;
+    let cnt = 0;
+    for (let d = 1; d <= 31; d++) {
+      const dt = new Date(yr, mn, d);
+      if (dt.getMonth() !== mn) break;
+      if (dt.getDay() === 0 && ++cnt === 4) {
+        if (dt >= now && dt <= end && dt >= start)
+          res.push({ datum: dkey(dt), tijd: '20:00', type: 'viering', tk: 'ev_lgbtq' });
+        break;
+      }
+    }
+  }
+  return res;
+}
+
 function buildAgenda() {
   const map={};
-  [...FIXED,...genTaize(),...genNight()].forEach(ev=>{
+  [...FIXED,...genTaize(),...genNight(),...genLGBTQ()].forEach(ev=>{
     (map[ev.datum]=map[ev.datum]||[]).push(ev);
   });
   for (const k of Object.keys(map)) map[k].sort((a,b)=>a.tijd.localeCompare(b.tijd));
