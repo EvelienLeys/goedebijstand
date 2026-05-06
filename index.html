@@ -1262,11 +1262,11 @@ const dkey = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-
   '2026-08-16': { naam: '', rol: '' },
   '2026-08-23': { naam: '', rol: '' },
   '2026-08-30': { naam: '', rol: '' },
-  '2026-09-26': { naam: '', rol: '' },
-  '2026-09-26': { naam: '', rol: '' },
-  '2026-09-26': { naam: '', rol: '' },
-  '2026-09-26': { naam: '', rol: '' },
-  '2026-09-26': { naam: '', rol: '' },
+  '2026-09-06': { naam: '', rol: '' },
+  '2026-09-13': { naam: '', rol: '' },
+  '2026-09-20': { naam: '', rol: '' },
+  '2026-09-27': { naam: '', rol: '' },
+  '2026-10-04': { naam: '', rol: '' },
   // voeg hier verder aan toe...
 };
 const FIXED = [
@@ -1287,7 +1287,7 @@ const ZONDAG_UITZONDERINGEN = {
   
 function genTaize() {
   const res = [], now = new Date(); now.setHours(0,0,0,0);
-  const end = new Date(now); end.setDate(now.getDate()+42);
+  const end = new Date(now); end.setDate(now.getDate()+42); 
   for (let m=0;m<3;m++) {
     const yr=now.getFullYear()+Math.floor((now.getMonth()+m)/12), mn=(now.getMonth()+m)%12;
     let cnt=0;
@@ -1306,7 +1306,7 @@ function genTaize() {
 function genNight() {
   const res=[], now=new Date(); now.setHours(0,0,0,0);
   const end=new Date(now); end.setDate(now.getDate()+42);
-  const uitsluitingen = ['2026-06-26'];  // ← ontbreekt in jouw huidige code
+  const uitsluitingen = ['2026-06-26']; 
   for (let d=new Date(now);d<=end;d.setDate(d.getDate()+1)) {
     if (d.getDay()===5 && d.getMonth()>=4 && d.getMonth()<=7 && !uitsluitingen.includes(dkey(d)))
       res.push({datum:dkey(d),tijd:'18:00',type:'nacht',tk:'ev_night'});
@@ -1371,44 +1371,44 @@ function buildAgenda() {
 }
 
 function agendaHTML() {
-  const events=buildAgenda();
-  const now=new Date(); now.setHours(0,0,0,0);
-  const dn_=DN[LANG]||DN.nl, ms_=MS[LANG]||MS.nl, ml_=ML[LANG]||ML.nl;
-  const seen = new Set();
-const evs = (events[sk]||[]).map(e=>({
-  ...e,
-  tekst: e.tekst || t(e.tk),
-  voorganger: e.voorganger || e.extra || ''
-})).filter(e => {
-  const k = `${e.tijd}|${e.tekst}`;
-  return seen.has(k) ? false : (seen.add(k), true);
-});
-  let html='<div class="agenda-wrap">', curM=-1, count=0;
+  const events = buildAgenda();
+  const now = new Date(); now.setHours(0,0,0,0);
+  const dn_ = DN[LANG]||DN.nl, ms_ = MS[LANG]||MS.nl, ml_ = ML[LANG]||ML.nl;
 
-  for (let i=0;i<42;i++) {
-    const d=new Date(now); d.setDate(now.getDate()+i);
-    const dw=d.getDay(), mn=d.getMonth(), yr=d.getFullYear(), nr=d.getDate(), sk=dkey(d);
+  let html = '<div class="agenda-wrap">', curM = -1, count = 0;
 
-    const evs=(events[sk]||[]).map(e=>({
+  for (let i = 0; i < 42; i++) {
+    const d = new Date(now); d.setDate(now.getDate()+i);
+    const dw = d.getDay(), mn = d.getMonth(), yr = d.getFullYear(), nr = d.getDate(), sk = dkey(d);
+
+    const seen = new Set();
+    const evs = (events[sk]||[]).map(e => ({
       ...e,
       tekst: e.tekst || t(e.tk),
       voorganger: e.voorganger || e.extra || ''
-    }));
+    })).filter(e => {
+      const k = `${e.tijd}|${e.tekst}`;
+      return seen.has(k) ? false : (seen.add(k), true);
+    });
 
     if (!evs.length) continue;
     count++;
 
-    if (mn!==curM){curM=mn;html+=`<div class="agenda-month">${ml_[mn]} ${yr}</div>`;}
-    const cls='agenda-row'+(dw===0||dw===6?' weekend':'');
+    if (mn !== curM) {
+      curM = mn;
+      html += `<div class="agenda-month">${ml_[mn]} ${yr}</div>`;
+    }
 
-    html+=`<div class="${cls}">
+    const cls = 'agenda-row' + (dw === 0 || dw === 6 ? ' weekend' : '');
+
+    html += `<div class="${cls}">
       <div class="date-cell">
-        <span class="dn">${i===0?t('ag_today'):dn_[dw]}</span>
+        <span class="dn">${i === 0 ? t('ag_today') : dn_[dw]}</span>
         <span class="dd">${nr}</span>
         <span class="dm">${ms_[mn]}</span>
       </div>
       <div class="events-cell">
-        ${evs.map(ev=>`<div class="ev-row">
+        ${evs.map(ev => `<div class="ev-row">
           <span class="ev-time">${ev.tijd}</span>
           <span class="ev-dot">◆</span>
           <span>${ev.tekst}${ev.gratis
@@ -1421,9 +1421,9 @@ const evs = (events[sk]||[]).map(e=>({
     </div>`;
   }
 
-  if (!count) html+=`<div class="agenda-empty">${t('ag_empty')}</div>`;
-  html+='</div>';
-  html+=`<p style="margin-top:0.8rem;font-size:0.8rem;font-style:italic;color:var(--muted);">◆ ${t('ag_leg_viering')} &nbsp;|&nbsp; ◆ ${t('ag_leg_taize')} &nbsp;|&nbsp; ◆ ${t('ag_leg_night')} &nbsp;|&nbsp; ◆ ${t('ag_leg_act')}</p>`;
+  if (!count) html += `<div class="agenda-empty">${t('ag_empty')}</div>`;
+  html += '</div>';
+  html += `<p style="margin-top:0.8rem;font-size:0.8rem;font-style:italic;color:var(--muted);">◆ ${t('ag_leg_viering')} &nbsp;|&nbsp; ◆ ${t('ag_leg_taize')} &nbsp;|&nbsp; ◆ ${t('ag_leg_night')} &nbsp;|&nbsp; ◆ ${t('ag_leg_act')}</p>`;
   return html;
 }
 
