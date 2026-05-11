@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>De Wereld van de Goede Bijstand — Grond & Schelpen</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=Libre+Baskerville:ital@0;1&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink:       #0d1b2a;
+      --sepia:     #2c4a6e;
+      --paper:     #e8f0f7;
+      --parchment: #d4e4f0;
+      --cream:     #f0f6fb;
+      --rule:      #7aaac8;
+      --gold:      #3a7bbf;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--cream); color: var(--ink); font-family: 'EB Garamond', Georgia, serif; font-size: 18px; line-height: 1.7; }
+
+    /* ── LANGUAGE BAR ── */
+    .lang-bar { background: var(--ink); display: flex; justify-content: flex-end; align-items: center; padding: 0 20px; gap: 2px; border-bottom: 2px solid var(--gold); }
+    .lang-label { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--rule); margin-right: 10px; padding: 10px 0; opacity: 0.7; }
+    .lang-btn { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--rule); background: transparent; border: none; cursor: pointer; padding: 10px 12px; border-bottom: 3px solid transparent; transition: color 0.18s, border-color 0.18s, background 0.18s; position: relative; top: 2px; }
+    .lang-btn:hover { color: var(--paper); background: rgba(255,255,255,0.05); }
+    .lang-btn.active { color: #fff; border-bottom-color: var(--gold); }
+
+    /* ── MASTHEAD ── */
+    header { background: var(--ink); color: var(--paper); padding: 0; text-align: center; border-bottom: 4px solid var(--gold); }
+    .masthead-rule { display: flex; align-items: center; justify-content: center; gap: 16px; padding: 18px 24px 10px; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 12px; font-weight: 300; letter-spacing: 0.25em; text-transform: uppercase; color: var(--rule); }
+    .masthead-rule::before, .masthead-rule::after { content: ''; flex: 1; max-width: 180px; height: 1px; background: var(--gold); opacity: 0.5; }
+    .site-title { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(1.6rem, 5vw, 3rem); font-weight: 600; letter-spacing: 0.04em; line-height: 1.15; padding: 4px 24px 6px; color: #e8f0f7; }
+    .site-subtitle { font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: clamp(0.9rem, 2.5vw, 1.15rem); color: var(--rule); padding: 0 24px 18px; letter-spacing: 0.01em; }
+
+    /* ── NAV ── */
+    nav { background: var(--parchment); border-bottom: 1px solid var(--rule); display: flex; justify-content: center; gap: 0; flex-wrap: wrap; }
+    nav a { display: inline-block; padding: 10px 22px; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; color: var(--sepia); border-right: 1px solid var(--rule); transition: background 0.2s, color 0.2s; }
+    nav a:first-child { border-left: 1px solid var(--rule); }
+    nav a:hover { background: var(--ink); color: var(--paper); }
+
+    /* ── INTRO ── */
+    .intro { max-width: 760px; margin: 52px auto 0; padding: 0 24px; text-align: center; }
+    .intro-kicker { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+    .intro h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(1.5rem, 4vw, 2.4rem); font-weight: 600; line-height: 1.25; color: var(--ink); margin-bottom: 20px; }
+    .intro p { font-family: 'EB Garamond', Georgia, serif; font-size: 1.05rem; color: var(--sepia); max-width: 620px; margin: 0 auto 10px; }
+    .intro-divider { width: 60px; height: 2px; background: var(--gold); margin: 28px auto; border: none; }
+
+    /* ── STATS ── */
+    .stats-strip { display: flex; justify-content: center; gap: 0; flex-wrap: wrap; max-width: 760px; margin: 0 auto 48px; padding: 0 24px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .stat { flex: 1; min-width: 130px; padding: 18px 12px; text-align: center; border-right: 1px solid var(--rule); }
+    .stat:last-child { border-right: none; }
+    .stat-number { display: block; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 2.2rem; font-weight: 600; color: var(--ink); line-height: 1; }
+    .stat-label { display: block; font-family: 'EB Garamond', Georgia, serif; font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-top: 4px; }
+
+    /* ── MAP SECTION ── */
+    .map-section { padding: 0 0 16px; }
+    .section-label { text-align: center; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+
+    /* ── LAYER TOGGLE ── */
+    .layer-toggle {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 14px;
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      overflow: hidden;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .layer-btn {
+      flex: 1;
+      padding: 10px 16px;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 13px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      background: var(--parchment);
+      color: var(--sepia);
+      border-right: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .layer-btn:last-child { border-right: none; }
+    .layer-btn.active { background: var(--ink); color: var(--paper); }
+    .layer-btn:hover:not(.active) { background: var(--rule); color: var(--ink); }
+
+    #map { width: 100%; height: clamp(320px, 55vw, 560px); border-top: 2px solid var(--rule); border-bottom: 2px solid var(--rule); }
+    .map-caption { text-align: center; font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 0.85rem; color: var(--gold); padding: 10px 24px 0; }
+    .leaflet-container { background: #c9d8e8 !important; font-family: 'EB Garamond', Georgia, serif !important; }
+    .leaflet-popup-content-wrapper { background: var(--ink); color: var(--paper); border-radius: 2px; box-shadow: 0 4px 20px rgba(0,0,0,0.35); border: 1px solid var(--gold); }
+    .leaflet-popup-tip { background: var(--ink); }
+    .leaflet-popup-content { margin: 10px 14px; font-family: 'EB Garamond', Georgia, serif; font-size: 14px; line-height: 1.5; }
+    .leaflet-popup-content strong { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 16px; display: block; color: var(--rule); letter-spacing: 0.02em; }
+    .leaflet-popup-close-button { color: var(--rule) !important; }
+
+    .map-legend { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; padding: 14px 24px 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 13px; letter-spacing: 0.08em; }
+    .legend-item { display: flex; align-items: center; gap: 6px; color: var(--sepia); }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+
+    /* ── MAP COUNT ── */
+    .map-count { text-align: center; font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 0.85rem; color: var(--rule); padding: 8px 24px 0; min-height: 1.5em; }
+
+    /* ── SCHELP FORM ── */
+    .schelp-panel {
+      display: none;
+      max-width: 700px;
+      margin: 28px auto 0;
+      padding: 0 24px;
+    }
+    .schelp-panel.visible { display: block; }
+    .schelp-form-wrap {
+      background: var(--parchment);
+      border: 1px solid var(--rule);
+      border-left: 4px solid var(--gold);
+      border-radius: 2px;
+      padding: 22px 26px;
+    }
+    .schelp-form-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .schelp-form-intro {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--sepia);
+      margin-bottom: 16px;
+    }
+    .schelp-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 520px) { .schelp-form-row { grid-template-columns: 1fr; } }
+    .schelp-field { display: flex; flex-direction: column; gap: 4px; }
+    .schelp-label { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sepia); }
+    .schelp-req { color: var(--gold); }
+    .schelp-input {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 1rem;
+      color: var(--ink);
+      background: var(--cream);
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      padding: 7px 10px;
+      outline: none;
+      transition: border-color 0.18s, box-shadow 0.18s;
+      width: 100%;
+    }
+    .schelp-input:focus { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(58,123,191,0.15); }
+    .schelp-textarea { resize: vertical; min-height: 56px; }
+    .btn-schelp {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 10px 28px;
+      background: var(--ink);
+      color: var(--paper);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border: 1px solid var(--ink);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-schelp:hover { background: var(--paper); color: var(--ink); }
+    .btn-schelp:disabled { opacity: 0.5; cursor: default; }
+    .schelp-status { font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 0.9rem; color: var(--gold); margin-left: 12px; }
+
+    /* ── SCHELP LIST ── */
+    .schelp-list-wrap {
+      max-width: 700px;
+      margin: 20px auto 0;
+      padding: 0 24px;
+    }
+    .schelp-list-title { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .schelp-list { list-style: none; border-top: 1px solid var(--rule); }
+    .schelp-list li { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 7px 0; border-bottom: 1px solid var(--parchment); font-size: 0.92rem; }
+    .schelp-list-left { color: var(--ink); }
+    .schelp-list-date { font-style: italic; font-size: 0.78rem; color: var(--rule); white-space: nowrap; flex-shrink: 0; }
+
+    /* ── ARTICLE SECTION ── */
+    .article-section { background: var(--parchment); border-top: 3px double var(--rule); border-bottom: 3px double var(--rule); padding: 56px 24px; }
+    .article-inner { max-width: 700px; margin: 0 auto; }
+    .article-dateline { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 12px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .article-headline { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(1.5rem, 4vw, 2.3rem); font-weight: 600; line-height: 1.2; color: var(--ink); margin-bottom: 6px; }
+    .article-deck { font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 1.1rem; color: var(--sepia); border-left: 3px solid var(--gold); padding-left: 16px; margin: 18px 0 28px; line-height: 1.55; }
+    .article-rule { border: none; border-top: 1px solid var(--rule); margin: 24px 0; }
+    .article-body p { font-family: 'EB Garamond', Georgia, serif; font-size: 1.05rem; color: var(--ink); margin-bottom: 1.1em; text-align: justify; hyphens: auto; }
+    .article-link-wrap { margin-top: 32px; text-align: center; }
+    .btn-article { display: inline-block; padding: 12px 32px; background: var(--ink); color: var(--paper); text-decoration: none; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; border: 1px solid var(--ink); transition: background 0.25s, color 0.25s; }
+    .btn-article:hover { background: var(--paper); color: var(--ink); }
+
+    /* ── LIST SECTION ── */
+    .list-section { padding: 52px 24px; text-align: center; }
+    .list-section h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(1.3rem, 3.5vw, 2rem); font-weight: 600; color: var(--ink); margin-bottom: 14px; }
+    .list-section p { font-family: 'EB Garamond', Georgia, serif; font-style: italic; color: var(--sepia); font-size: 1rem; max-width: 480px; margin: 0 auto 28px; }
+    .btn-list { display: inline-block; padding: 13px 36px; background: transparent; color: var(--ink); text-decoration: none; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase; border: 1px solid var(--ink); transition: background 0.25s, color 0.25s; margin: 0 8px 10px; }
+    .btn-list:hover { background: var(--ink); color: var(--paper); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--ink); color: var(--rule); text-align: center; padding: 28px 24px; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 13px; letter-spacing: 0.12em; }
+    footer a { color: var(--rule); text-decoration: none; }
+    footer a:hover { color: var(--paper); }
+
+    @media (max-width: 520px) {
+      nav a { padding: 9px 14px; font-size: 11px; letter-spacing: 0.1em; }
+      .stat { min-width: 100px; }
+      .map-legend { gap: 10px; font-size: 12px; }
+      .lang-label { display: none; }
+      .lang-btn { padding: 10px 8px; font-size: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LANGUAGE BAR -->
+<div class="lang-bar">
+  <span class="lang-label">Taal / Langue / Language</span>
+  <button class="lang-btn active" data-lang="nl">NL</button>
+  <button class="lang-btn" data-lang="fr">FR</button>
+  <button class="lang-btn" data-lang="de">DE</button>
+  <button class="lang-btn" data-lang="en">EN</button>
+  <button class="lang-btn" data-lang="es">ES</button>
+</div>
+
+<!-- MASTHEAD -->
+<header>
+  <div class="masthead-rule" id="txt-kicker">Een pelgrimage in aarde</div>
+  <div class="site-title" id="txt-site-title">De Wereld van de Goede Bijstand</div>
+  <div class="site-subtitle" id="txt-site-subtitle">Van elke plek op aarde een potje grond</div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <a href="#kaart" id="nav-map">De Kaart</a>
+  <a href="#verhaal" id="nav-story">Het Verhaal</a>
+  <a href="#locaties" id="nav-locations">Alle Locaties</a>
+</nav>
+
+<!-- INTRO -->
+<div class="intro">
+  <div class="intro-kicker" id="txt-intro-kicker">Een Levenslange Missie</div>
+  <h2 id="txt-intro-title">Van elke uithoek van de wereld<br/>een handvol aarde verzameld</h2>
+  <p id="txt-intro-body">De gemeenschap van de Goede Bijstand reist de wereld rond met één bijzondere opdracht: van elke plek waar ze komt, brengt ze een potje grond mee naar huis. Een stille getuigenis van verbondenheid over grenzen en culturen heen.</p>
+  <hr class="intro-divider" />
+</div>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stat"><span class="stat-number">155</span><span class="stat-label" id="stat-locations">Locaties</span></div>
+  <div class="stat"><span class="stat-number">6</span><span class="stat-label" id="stat-continents">Continenten</span></div>
+  <div class="stat"><span class="stat-number">40+</span><span class="stat-label" id="stat-countries">Landen</span></div>
+  <div class="stat"><span class="stat-number">∞</span><span class="stat-label" id="stat-stories">Verhalen</span></div>
+</div>
+
+<!-- MAP -->
+<section id="kaart" class="map-section">
+  <div class="section-label" id="txt-map-label">Wereldkaart der Bestemmingen</div>
+
+  <!-- Layer toggle -->
+  <div class="layer-toggle" style="display:none;"></div>
+
+  <div id="map"></div>
+  <div class="map-legend" id="legend"></div>
+  <div class="map-count" id="map-count"></div>
+  <div class="map-caption" id="txt-map-caption">Klik op een punt om de naam van de locatie te zien — zoom met het scrollwiel of de knoppen links</div>
+</section>
+
+<!-- SCHELP FORM PANEL (shown only in schelp layer) -->
+<div class="schelp-panel" id="schelp-panel" style="display:none!important;">
+  <div class="schelp-form-wrap">
+    <div class="schelp-form-title" id="schelp-form-title">📍 Pin uw schelp op de kaart</div>
+    <div class="schelp-form-intro" id="schelp-form-intro">Hebt u een schelp meegenomen uit de Bijstandskerk als geschenk? Laat zien waar ze terechtgekomen is.</div>
+    <div class="schelp-form-row">
+      <div class="schelp-field">
+        <label class="schelp-label" for="sf-city"><span id="lbl-city">Stad of land</span> <span class="schelp-req">*</span></label>
+        <input id="sf-city" type="text" class="schelp-input" placeholder="bijv. Tokyo, Japan" autocomplete="off">
+      </div>
+      <div class="schelp-field">
+        <label class="schelp-label" for="sf-name" id="lbl-name">Uw naam (optioneel)</label>
+        <input id="sf-name" type="text" class="schelp-input" placeholder="bijv. Marie">
+      </div>
+    </div>
+    <div class="schelp-field" style="margin-top:10px;">
+      <label class="schelp-label" for="sf-msg" id="lbl-msg">Berichtje (optioneel)</label>
+      <textarea id="sf-msg" class="schelp-input schelp-textarea" rows="2" placeholder="bijv. Cadeau voor mijn zus"></textarea>
+    </div>
+    <div style="display:flex;align-items:center;flex-wrap:wrap;">
+      <button class="btn-schelp" id="sf-submit" onclick="schelpSubmit()">🐚 <span id="btn-pin-label">Zet pin op de kaart</span></button>
+      <span class="schelp-status" id="sf-status"></span>
+    </div>
+  </div>
+</div>
+
+<!-- SCHELP LIST -->
+<div class="schelp-list-wrap" id="schelp-list-wrap" style="display:none!important;">
+  <div class="schelp-list-title" id="schelp-list-title">Alle schelpen</div>
+  <ul class="schelp-list" id="schelp-list"></ul>
+</div>
+
+<!-- ARTICLE -->
+<section id="verhaal" class="article-section">
+  <div class="article-inner">
+    <h2 class="article-headline" id="txt-art-headline">De droom van pastoor Johnny: van elke plek op aarde een potje grond</h2>
+    <p class="article-deck" id="txt-art-deck">Een wereldwijde pelgrimage in aarde.</p>
+    <hr class="article-rule" />
+    <div class="article-body">
+      <p id="txt-art-p1">De gemeenschap van de Goede Bijstand verzamelt al jaren aarde van over de hele wereld. Iedere reisbestemming — of het nu een afgelegen dorpje in Congo is, een strand in de Seychellen of een bergpas in de Dolomieten — levert een klein potje grond op. Samen vormen die potjes een stille, tastbare atlas voor iedereen.</p>
+      <p id="txt-art-p2">De collectie telt inmiddels meer dan 155 unieke locaties, verspreid over 6 continenten en tientallen landen. Elk potje draagt een etiket met de naam van de plek en de datum van bezoek — een archief van herinneringen, ontmoetingen en gebed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATIONS LINK -->
+<section id="locaties" class="list-section">
+  <h3 id="txt-list-title">Alle 155 Locaties</h3>
+  <p id="txt-list-body">Bekijk de volledige lijst van alle bezochte plekken, gerangschikt per continent.</p>
+  <button class="btn-list" id="btn-toggle-list" onclick="toggleList()">Bekijk de volledige lijst</button>
+  <div id="inline-list" style="display:none; margin-top:32px; text-align:left;"></div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p id="txt-footer">Een project van de Goede Bijstand &nbsp;·&nbsp; Te raadplegen in de pastorie <a href="https://www.google.com/maps/place/Rue+de+Bon+Secours+5,+1000+Bruxelles/@50.8459531,4.3451545,16z">Bijstandsstraat 5</a>, 1000 Brussel</p>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════
+   TRANSLATIONS
+══════════════════════════════════════════ */
+const TX = {
+  nl: {
+    kicker:"Een pelgrimage in aarde", siteTitle:"De Wereld van de Goede Bijstand", siteSubtitle:"Van elke plek op aarde een potje grond",
+    navMap:"De Kaart", navStory:"Het Verhaal", navLocations:"Alle Locaties", 
+    introKicker:"Een Levenslange Missie", introTitle:"Van elke uithoek van de wereld<br/>een handvol aarde verzameld",
+    introBody:"De gemeenschap van de Goede Bijstand reist de wereld rond met één bijzondere opdracht: van elke plek waar ze komt, brengt ze een potje grond mee naar huis. Een stille getuigenis van verbondenheid over grenzen en culturen heen.",
+    statLocations:"Locaties", statContinents:"Continenten", statCountries:"Landen", statStories:"Verhalen",
+    mapLabel:"Wereldkaart der Bestemmingen",
+    mapCaption:"Klik op een punt om de naam van de locatie te zien — zoom met het scrollwiel of de knoppen links",
+    layerAarde:"Grondbibliotheek", layerSchelp:"Schelpen van Brussel",
+    continentLabels:{"Afrika":"Afrika","Azië & M-O":"Azië & M-O","Europa":"Europa","Amerika":"Amerika"},
+    schelpFormTitle:"📍 Pin uw schelp op de kaart",
+    schelpFormIntro:"Hebt u een schelp meegenomen uit de Bijstandskerk als geschenk? Laat zien waar ze terechtgekomen is.",
+    lblCity:"Stad of land", lblName:"Uw naam (optioneel)", lblMsg:"Berichtje (optioneel)",
+    cityPh:"bijv. Tokyo, Japan", namePh:"bijv. Marie", msgPh:"bijv. Cadeau voor mijn zus",
+    btnPin:"Zet pin op de kaart",
+    errCity:"Vul een stad of land in.", searching:"Locatie zoeken…",
+    errNotFound:"Locatie niet gevonden. Probeer een andere schrijfwijze.",
+    errGeo:"Kon locatie niet opzoeken. Controleer uw internetverbinding.",
+    errSave:"Kon pin niet opslaan. Probeer opnieuw.",
+    success:"✓ Schelp geplaatst in {city}!",
+    countSchelp0:"Nog geen schelpen gepind — wees de eerste!",
+    countSchelp1:"1 schelp vond haar weg de wereld in.",
+    countSchelpN:"{n} schelpen vonden hun weg de wereld in.",
+    listSchelpTitle:"Alle schelpen",
+    artHeadline:"De droom van pastoor Johnny: van elke plek op aarde een potje grond",
+    artDeck:"Een wereldwijde pelgrimage in aarde.",
+    artP1:"De gemeenschap van de Goede Bijstand verzamelt al jaren aarde van over de hele wereld. Iedere reisbestemming — of het nu een afgelegen dorpje in Congo is, een strand in de Seychellen of een bergpas in de Dolomieten — levert een klein potje grond op. Samen vormen die potjes een stille, tastbare atlas voor iedereen.",
+    artP2:"De collectie telt inmiddels meer dan 155 unieke locaties, verspreid over 6 continenten en tientallen landen. Elk potje draagt een etiket met de naam van de plek en de datum van bezoek — een archief van herinneringen, ontmoetingen en gebed.",
+    listTitle:"Alle 155 Locaties", listBody:"Bekijk de volledige lijst van alle bezochte plekken, gerangschikt per continent.", listBtn:"Bekijk de volledige lijst",
+    footer:"Een project van de Goede Bijstand \u00a0·\u00a0 Te raadplegen in de pastorie <a href=\"https://www.google.com/maps/place/Rue+de+Bon+Secours+5,+1000+Bruxelles/@50.8459531,4.3451545,16z\" style=\"color:var(--rule)\">Bijstandsstraat 5</a>, 1000 Brussel",
+    locationNames:{"Benin":"Benin","Ouagadougou, Burkina Faso":"Ouagadougou, Burkina Faso","Gran Canaria, Spanje":"Gran Canaria, Spanje","Katako-Kindu, Congo":"Katako-Kindu, Congo","Wamba, Congo":"Wamba, Congo","Zuid-Kivu, Congo":"Zuid-Kivu, Congo","Congo":"Congo","Egypte":"Egypte","Praia, Kaapverdië":"Praia, Kaapverdië","Nador, Marokko":"Nador, Marokko","Marrakesh, Marokko":"Marrakesh, Marokko","Ouarzazate, Marokko":"Ouarzazate, Marokko","Driouch, Marokko":"Driouch, Marokko","Oeganda":"Oeganda","Kigali, Rwanda":"Kigali, Rwanda","Seychellen":"Seychellen","Togo":"Togo","Witsand, Zuid-Afrika":"Witsand, Zuid-Afrika","Willowmore, Zuid-Afrika":"Willowmore, Zuid-Afrika","Myanmar":"Myanmar","Nanning, China":"Nanning, China","Troodos, Cyprus":"Troodos, Cyprus","Delhi, India":"Delhi, India","Madhya Pradesh, India":"Madhya Pradesh, India","Prayagraj, India":"Prayagraj, India","Teheran, Iran":"Teheran, Iran","Jeruzalem, Israël":"Jeruzalem, Israël","Dode Zee, Jordanië":"Dode Zee, Jordanië","Libanon":"Libanon","Nepal":"Nepal","Palestina":"Palestina","Colombo, Sri Lanka":"Colombo, Sri Lanka","Thailand":"Thailand","Vietnam":"Vietnam","Istanbul, Turkije":"Istanbul, Turkije","Bozjom, Georgië":"Bozjom, Georgië","Oostende, België":"Oostende, België","Postel, België":"Postel, België","Kopenhagen, Denemarken":"Kopenhagen, Denemarken","Ribe, Denemarken":"Ribe, Denemarken","Lindet Skov, Denemarken":"Lindet Skov, Denemarken","Keulen, Duitsland":"Keulen, Duitsland","Freiburg, Duitsland":"Freiburg, Duitsland","Colchester, Engeland":"Colchester, Engeland","Londen, Engeland":"Londen, Engeland","Derwent Water, Engeland":"Derwent Water, Engeland","Kallislaki, Finland":"Kallislaki, Finland","Roquetaillade, Frankrijk":"Roquetaillade, Frankrijk","Corsica, Frankrijk":"Corsica, Frankrijk","Colmar, Frankrijk":"Colmar, Frankrijk","Dijon, Frankrijk":"Dijon, Frankrijk","Fontenay, Frankrijk":"Fontenay, Frankrijk","Grenoble, Frankrijk":"Grenoble, Frankrijk","Lyon, Frankrijk":"Lyon, Frankrijk","Nice, Frankrijk":"Nice, Frankrijk","Puy de Dôme, Frankrijk":"Puy de Dôme, Frankrijk","Mulhouse, Frankrijk":"Mulhouse, Frankrijk","Thessaloniki, Griekenland":"Thessaloniki, Griekenland","Vergina, Griekenland":"Vergina, Griekenland","Keszthely, Hongarije":"Keszthely, Hongarije","Dublin, Ierland":"Dublin, Ierland","Rosslare, Ierland":"Rosslare, Ierland","Diamond Beach, IJsland":"Diamond Beach, IJsland","Dolomieten, Italië":"Dolomieten, Italië","Etna, Italië":"Etna, Italië","San Remo, Italië":"San Remo, Italië","Rome, Italië":"Rome, Italië","Stelvio, Italië":"Stelvio, Italië","Trapani, Italië":"Trapani, Italië","Venetië, Italië":"Venetië, Italië","Vesuvius, Italië":"Vesuvius, Italië","Zuid-Tirol, Italië":"Zuid-Tirol, Italië","Gardameer, Italië":"Gardameer, Italië","Assisi, Italië":"Assisi, Italië","Dubrovnik, Kroatië":"Dubrovnik, Kroatië","Varaždin, Kroatië":"Varaždin, Kroatië","Dalmatia, Kroatië":"Dalmatia, Kroatië","Poreč, Kroatië":"Poreč, Kroatië","Malta":"Malta","Monaco":"Monaco","Rotterdam, Nederland":"Rotterdam, Nederland","Gardnos, Noorwegen":"Gardnos, Noorwegen","Ifnefoss, Noorwegen":"Ifnefoss, Noorwegen","Lillehammer, Noorwegen":"Lillehammer, Noorwegen","Norefjell, Noorwegen":"Norefjell, Noorwegen","Oslo, Noorwegen":"Oslo, Noorwegen","Steindalfoss, Noorwegen":"Steindalfoss, Noorwegen","Wenen, Oostenrijk":"Wenen, Oostenrijk","Krakau, Polen":"Krakau, Polen","Zgorzelec, Polen":"Zgorzelec, Polen","Madeira, Portugal":"Madeira, Portugal","Santiago do Cacém, Portugal":"Santiago do Cacém, Portugal","Braga, Portugal":"Braga, Portugal","Ponte de Lima, Portugal":"Ponte de Lima, Portugal","Boekarest, Roemenië":"Boekarest, Roemenië","Sint-Petersburg, Rusland":"Sint-Petersburg, Rusland","Ben Nevis, Schotland":"Ben Nevis, Schotland","Isle of Skye, Schotland":"Isle of Skye, Schotland","Loch Ness, Schotland":"Loch Ness, Schotland","Lockerbie, Schotland":"Lockerbie, Schotland","Port Achan, Schotland":"Port Achan, Schotland","Tighnabruaich, Schotland":"Tighnabruaich, Schotland","Barcelona, Spanje":"Barcelona, Spanje","Gerona, Spanje":"Gerona, Spanje","Granada, Spanje":"Granada, Spanje","Valga, Spanje":"Valga, Spanje","Zaragoza, Spanje":"Zaragoza, Spanje","La Rioja, Spanje":"La Rioja, Spanje","Praag, Tsjechië":"Praag, Tsjechië","Karlsbad, Tsjechië":"Karlsbad, Tsjechië","Brechfa, Wales":"Brechfa, Wales","Brecon Beacons, Wales":"Brecon Beacons, Wales","Veberöd, Zweden":"Veberöd, Zweden","Bayou la Batre, Alabama":"Bayou la Batre, Alabama","Robertsdale, Alabama":"Robertsdale, Alabama","Lockesburg, Arkansas":"Lockesburg, Arkansas","Texarkana, Arkansas":"Texarkana, Arkansas","Montréal, Canada":"Montréal, Canada","Niagara Falls, Canada":"Niagara Falls, Canada","Cayman Eilanden":"Cayman Eilanden","Cuba":"Cuba","Curaçao":"Curaçao","Klein Curaçao":"Klein Curaçao","Dominicaanse Republiek":"Dominicaanse Republiek","Lee, Florida":"Lee, Florida","Alto, Georgia":"Alto, Georgia","Montego Bay, Jamaica":"Montego Bay, Jamaica","Ferryday, Louisiana":"Ferryday, Louisiana","Gilliam, Louisiana":"Gilliam, Louisiana","Biloxi, Mississippi":"Biloxi, Mississippi","Natchez, Mississippi":"Natchez, Mississippi","Akumal, Mexico":"Akumal, Mexico","Albuquerque, New Mexico":"Albuquerque, New Mexico","Santa Fe, New Mexico":"Santa Fe, New Mexico","New York City":"New York City","Smoky Mountains, North Carolina":"Smoky Mountains, North Carolina","Waynesville, North Carolina":"Waynesville, North Carolina","Elk City, Oklahoma":"Elk City, Oklahoma","Oklahoma City, Oklahoma":"Oklahoma City, Oklahoma","Panama City":"Panama City","Charleston, South Carolina":"Charleston, South Carolina","Holly Hill, South Carolina":"Holly Hill, South Carolina","Gatlinburg, Tennessee":"Gatlinburg, Tennessee","Kellerville, Texas":"Kellerville, Texas","Wildorado, Texas":"Wildorado, Texas","Brazilië":"Brazilië","Cusco, Peru":"Cusco, Peru","Arequipa, Peru":"Arequipa, Peru"},
+    listBtnClose: '▲ Verberg de lijst',
+  },
+  fr: {
+    kicker:"Un pèlerinage sur terre", siteTitle:"Le Monde de la Bonne Assistance", siteSubtitle:"De chaque endroit sur terre, un pot de terre",
+    navMap:"La Carte", navStory:"L'Histoire", navLocations:"Tous les Sites", 
+    introKicker:"Une Mission de Toute une Vie", introTitle:"De chaque coin du monde,<br/>une poignée de terre récoltée",
+    introBody:"La communauté de la Bonne Assistance parcourt le monde avec une mission particulière : de chaque endroit visité, elle rapporte un petit pot de terre. Un témoignage silencieux de solidarité par-delà les frontières et les cultures.",
+    statLocations:"Sites", statContinents:"Continents", statCountries:"Pays", statStories:"Histoires",
+    mapLabel:"Carte du Monde des Destinations",
+    mapCaption:"Cliquez sur un point pour voir le nom du lieu — zoomez avec la molette ou les boutons à gauche",
+    layerAarde:"Bibliothèque de terres", layerSchelp:"Coquillages de Bruxelles",
+    continentLabels:{"Afrika":"Afrique","Azië & M-O":"Asie & M-O","Europa":"Europe","Amerika":"Amérique"},
+    schelpFormTitle:"📍 Épinglez votre coquillage",
+    schelpFormIntro:"Avez-vous emporté un coquillage de l'église comme cadeau ? Montrez où il est arrivé.",
+    lblCity:"Ville ou pays", lblName:"Votre nom (optionnel)", lblMsg:"Un petit message (optionnel)",
+    cityPh:"ex. Tokyo, Japon", namePh:"ex. Marie", msgPh:"ex. Cadeau pour ma sœur",
+    btnPin:"Épingler sur la carte",
+    errCity:"Veuillez entrer une ville ou un pays.", searching:"Recherche de la localisation…",
+    errNotFound:"Localisation introuvable. Essayez une autre orthographe.",
+    errGeo:"Impossible de localiser. Vérifiez votre connexion.", errSave:"Impossible d'enregistrer. Réessayez.",
+    success:"✓ Coquillage placé à {city} !",
+    countSchelp0:"Aucun coquillage encore épinglé — soyez le premier !",
+    countSchelp1:"1 coquillage a trouvé son chemin dans le monde.",
+    countSchelpN:"{n} coquillages ont trouvé leur chemin dans le monde.",
+    listSchelpTitle:"Tous les coquillages",
+    artHeadline:"Le rêve du curé Johnny : un pot de terre de chaque endroit sur terre",
+    artDeck:"Une collection remarquable.",
+    artP1:"La communauté de la Bonne Assistance collecte depuis des années de la terre aux quatre coins du monde.",
+    artP2:"La collection compte désormais plus de 155 sites uniques, répartis sur 6 continents.",
+    listTitle:"Les 155 Sites", listBody:"Consultez la liste complète de tous les lieux visités.", listBtn:"Voir la liste complète",
+    footer:"Un projet de la Bonne Assistance \u00a0·\u00a0 Consultable au presbytère <a href=\"https://www.google.com/maps/place/Rue+de+Bon+Secours+5,+1000+Bruxelles/@50.8459531,4.3451545,16z\" style=\"color:var(--rule)\">Rue de l'Assistance 5</a>, 1000 Bruxelles",
+    locationNames:{"Benin":"Bénin","Ouagadougou, Burkina Faso":"Ouagadougou, Burkina Faso","Gran Canaria, Spanje":"Grande Canarie, Espagne","Katako-Kindu, Congo":"Katako-Kindu, Congo","Wamba, Congo":"Wamba, Congo","Zuid-Kivu, Congo":"Sud-Kivu, Congo","Congo":"Congo","Egypte":"Égypte","Praia, Kaapverdië":"Praia, Cap-Vert","Nador, Marokko":"Nador, Maroc","Marrakesh, Marokko":"Marrakech, Maroc","Ouarzazate, Marokko":"Ouarzazate, Maroc","Driouch, Marokko":"Driouch, Maroc","Oeganda":"Ouganda","Kigali, Rwanda":"Kigali, Rwanda","Seychellen":"Seychelles","Togo":"Togo","Witsand, Zuid-Afrika":"Witsand, Afrique du Sud","Willowmore, Zuid-Afrika":"Willowmore, Afrique du Sud","Myanmar":"Myanmar","Nanning, China":"Nanning, Chine","Troodos, Cyprus":"Troodos, Chypre","Delhi, India":"Delhi, Inde","Madhya Pradesh, India":"Madhya Pradesh, Inde","Prayagraj, India":"Prayagraj, Inde","Teheran, Iran":"Téhéran, Iran","Jeruzalem, Israël":"Jérusalem, Israël","Dode Zee, Jordanië":"Mer Morte, Jordanie","Libanon":"Liban","Nepal":"Népal","Palestina":"Palestine","Colombo, Sri Lanka":"Colombo, Sri Lanka","Thailand":"Thaïlande","Vietnam":"Viêt Nam","Istanbul, Turkije":"Istanbul, Turquie","Bozjom, Georgië":"Bozjoumi, Géorgie","Oostende, België":"Ostende, Belgique","Postel, België":"Postel, Belgique","Kopenhagen, Denemarken":"Copenhague, Danemark","Ribe, Denemarken":"Ribe, Danemark","Lindet Skov, Denemarken":"Lindet Skov, Danemark","Keulen, Duitsland":"Cologne, Allemagne","Freiburg, Duitsland":"Fribourg-en-Brisgau, Allemagne","Colchester, Engeland":"Colchester, Angleterre","Londen, Engeland":"Londres, Angleterre","Derwent Water, Engeland":"Derwent Water, Angleterre","Kallislaki, Finland":"Kallislaki, Finlande","Roquetaillade, Frankrijk":"Roquetaillade, France","Corsica, Frankrijk":"Corse, France","Colmar, Frankrijk":"Colmar, France","Dijon, Frankrijk":"Dijon, France","Fontenay, Frankrijk":"Fontenay, France","Grenoble, Frankrijk":"Grenoble, France","Lyon, Frankrijk":"Lyon, France","Nice, Frankrijk":"Nice, France","Puy de Dôme, Frankrijk":"Puy de Dôme, France","Mulhouse, Frankrijk":"Mulhouse, France","Thessaloniki, Griekenland":"Thessalonique, Grèce","Vergina, Griekenland":"Vergina, Grèce","Keszthely, Hongarije":"Keszthely, Hongrie","Dublin, Ierland":"Dublin, Irlande","Rosslare, Ierland":"Rosslare, Irlande","Diamond Beach, IJsland":"Diamond Beach, Islande","Dolomieten, Italië":"Dolomites, Italie","Etna, Italië":"Etna, Italie","San Remo, Italië":"San Remo, Italie","Rome, Italië":"Rome, Italie","Stelvio, Italië":"Stelvio, Italie","Trapani, Italië":"Trapani, Italie","Venetië, Italië":"Venise, Italie","Vesuvius, Italië":"Vésuve, Italie","Zuid-Tirol, Italië":"Tyrol du Sud, Italie","Gardameer, Italië":"Lac de Garde, Italie","Assisi, Italië":"Assise, Italie","Dubrovnik, Kroatië":"Dubrovnik, Croatie","Varaždin, Kroatië":"Varaždin, Croatie","Dalmatia, Kroatië":"Dalmatie, Croatie","Poreč, Kroatië":"Poreč, Croatie","Malta":"Malte","Monaco":"Monaco","Rotterdam, Nederland":"Rotterdam, Pays-Bas","Gardnos, Noorwegen":"Gardnos, Norvège","Ifnefoss, Noorwegen":"Ifnefoss, Norvège","Lillehammer, Noorwegen":"Lillehammer, Norvège","Norefjell, Noorwegen":"Norefjell, Norvège","Oslo, Noorwegen":"Oslo, Norvège","Steindalfoss, Noorwegen":"Steindalfoss, Norvège","Wenen, Oostenrijk":"Vienne, Autriche","Krakau, Polen":"Cracovie, Pologne","Zgorzelec, Polen":"Zgorzelec, Pologne","Madeira, Portugal":"Madère, Portugal","Santiago do Cacém, Portugal":"Santiago do Cacém, Portugal","Braga, Portugal":"Braga, Portugal","Ponte de Lima, Portugal":"Ponte de Lima, Portugal","Boekarest, Roemenië":"Bucarest, Roumanie","Sint-Petersburg, Rusland":"Saint-Pétersbourg, Russie","Ben Nevis, Schotland":"Ben Nevis, Écosse","Isle of Skye, Schotland":"Isle of Skye, Écosse","Loch Ness, Schotland":"Loch Ness, Écosse","Lockerbie, Schotland":"Lockerbie, Écosse","Port Achan, Schotland":"Port Achan, Écosse","Tighnabruaich, Schotland":"Tighnabruaich, Écosse","Barcelona, Spanje":"Barcelone, Espagne","Gerona, Spanje":"Gérone, Espagne","Granada, Spanje":"Grenade, Espagne","Valga, Spanje":"Valga, Espagne","Zaragoza, Spanje":"Saragosse, Espagne","La Rioja, Spanje":"La Rioja, Espagne","Praag, Tsjechië":"Prague, République tchèque","Karlsbad, Tsjechië":"Karlovy Vary, République tchèque","Brechfa, Wales":"Brechfa, Pays de Galles","Brecon Beacons, Wales":"Brecon Beacons, Pays de Galles","Veberöd, Zweden":"Veberöd, Suède","Bayou la Batre, Alabama":"Bayou la Batre, Alabama","Robertsdale, Alabama":"Robertsdale, Alabama","Lockesburg, Arkansas":"Lockesburg, Arkansas","Texarkana, Arkansas":"Texarkana, Arkansas","Montréal, Canada":"Montréal, Canada","Niagara Falls, Canada":"Niagara Falls, Canada","Cayman Eilanden":"Îles Caïmans","Cuba":"Cuba","Curaçao":"Curaçao","Klein Curaçao":"Klein Curaçao","Dominicaanse Republiek":"République dominicaine","Lee, Florida":"Lee, Floride","Alto, Georgia":"Alto, Géorgie","Montego Bay, Jamaica":"Montego Bay, Jamaïque","Ferryday, Louisiana":"Ferryday, Louisiane","Gilliam, Louisiana":"Gilliam, Louisiane","Biloxi, Mississippi":"Biloxi, Mississippi","Natchez, Mississippi":"Natchez, Mississippi","Akumal, Mexico":"Akumal, Mexique","Albuquerque, New Mexico":"Albuquerque, Nouveau-Mexique","Santa Fe, New Mexico":"Santa Fe, Nouveau-Mexique","New York City":"New York City","Smoky Mountains, North Carolina":"Smoky Mountains, Caroline du Nord","Waynesville, North Carolina":"Waynesville, Caroline du Nord","Elk City, Oklahoma":"Elk City, Oklahoma","Oklahoma City, Oklahoma":"Oklahoma City, Oklahoma","Panama City":"Panama City","Charleston, South Carolina":"Charleston, Caroline du Sud","Holly Hill, South Carolina":"Holly Hill, Caroline du Sud","Gatlinburg, Tennessee":"Gatlinburg, Tennessee","Kellerville, Texas":"Kellerville, Texas","Wildorado, Texas":"Wildorado, Texas","Brazilië":"Brésil","Cusco, Peru":"Cusco, Pérou","Arequipa, Peru":"Arequipa, Pérou"},
+    listBtnClose: '▲ Masquer la liste',
+},
+  de: {
+    kicker:"Eine Pilgerreise auf Erden", siteTitle:"Die Welt der Guten Beistandschaft", siteSubtitle:"Von jedem Ort der Erde ein Töpfchen Erde",
+    navMap:"Die Karte", navStory:"Die Geschichte", navLocations:"Alle Standorte", 
+    introKicker:"Eine Lebenslange Mission", introTitle:"Aus jedem Winkel der Welt<br/>eine Handvoll Erde gesammelt",
+    introBody:"Die Gemeinschaft der Guten Beistandschaft bereist die Welt mit einem besonderen Auftrag: Von jedem Ort, den sie besucht, bringt sie ein Töpfchen Erde mit nach Hause.",
+    statLocations:"Standorte", statContinents:"Kontinente", statCountries:"Länder", statStories:"Geschichten",
+    mapLabel:"Weltkarte der Reiseziele",
+    mapCaption:"Klicken Sie auf einen Punkt, um den Namen des Ortes zu sehen — zoomen Sie mit dem Mausrad oder den Schaltflächen links",
+    layerAarde:"Erdbibliothek", layerSchelp:"Muscheln aus Brüssel",
+    continentLabels:{"Afrika":"Afrika","Azië & M-O":"Asien & N-O","Europa":"Europa","Amerika":"Amerika"},
+    schelpFormTitle:"📍 Ihre Muschel auf der Karte markieren",
+    schelpFormIntro:"Haben Sie eine Muschel aus der Kirche als Geschenk mitgenommen? Zeigen Sie, wo sie gelandet ist.",
+    lblCity:"Stadt oder Land", lblName:"Ihr Name (optional)", lblMsg:"Eine kurze Nachricht (optional)",
+    cityPh:"z.B. Tokio, Japan", namePh:"z.B. Marie", msgPh:"z.B. Geschenk für meine Schwester",
+    btnPin:"Auf der Karte platzieren",
+    errCity:"Bitte geben Sie eine Stadt oder ein Land ein.", searching:"Standort wird gesucht…",
+    errNotFound:"Standort nicht gefunden. Versuchen Sie eine andere Schreibweise.",
+    errGeo:"Standort konnte nicht ermittelt werden.", errSave:"Speichern nicht möglich. Bitte erneut versuchen.",
+    success:"✓ Muschel in {city} platziert!",
+    countSchelp0:"Noch keine Muscheln markiert — seien Sie der Erste!",
+    countSchelp1:"1 Muschel hat ihren Weg in die Welt gefunden.",
+    countSchelpN:"{n} Muscheln haben ihren Weg in die Welt gefunden.",
+    listSchelpTitle:"Alle Muscheln",
+    artHeadline:"Der Traum von Pfarrer Johnny: von jedem Ort der Erde ein Töpfchen Erde",
+    artDeck:"Die Geschichte hinter dieser besonderen Sammlung.",
+    artP1:"Die Gemeinschaft der Guten Beistandschaft sammelt seit Jahren Erde aus aller Welt.",
+    artP2:"Die Sammlung umfasst mittlerweile mehr als 155 einzigartige Standorte.",
+    listTitle:"Alle 155 Standorte", listBody:"Sehen Sie die vollständige Liste aller besuchten Orte.", listBtn:"Vollständige Liste ansehen",
+    footer:"Ein Projekt der Guten Beistandschaft \u00a0·\u00a0 Einsehbar im Pfarrhaus <a href=\"https://www.google.com/maps/place/Rue+de+Bon+Secours+5,+1000+Bruxelles/@50.8459531,4.3451545,16z\" style=\"color:var(--rule)\">Beistandsstraat 5</a>, 1000 Brüssel",
+    locationNames:{"Benin":"Benin","Ouagadougou, Burkina Faso":"Ouagadougou, Burkina Faso","Gran Canaria, Spanje":"Gran Canaria, Spanien","Katako-Kindu, Congo":"Katako-Kindu, Kongo","Wamba, Congo":"Wamba, Kongo","Zuid-Kivu, Congo":"Süd-Kivu, Kongo","Congo":"Kongo","Egypte":"Ägypten","Praia, Kaapverdië":"Praia, Kap Verde","Nador, Marokko":"Nador, Marokko","Marrakesh, Marokko":"Marrakesch, Marokko","Ouarzazate, Marokko":"Ouarzazate, Marokko","Driouch, Marokko":"Driouch, Marokko","Oeganda":"Uganda","Kigali, Rwanda":"Kigali, Ruanda","Seychellen":"Seychellen","Togo":"Togo","Witsand, Zuid-Afrika":"Witsand, Südafrika","Willowmore, Zuid-Afrika":"Willowmore, Südafrika","Myanmar":"Myanmar","Nanning, China":"Nanning, China","Troodos, Cyprus":"Troodos, Zypern","Delhi, India":"Delhi, Indien","Madhya Pradesh, India":"Madhya Pradesh, Indien","Prayagraj, India":"Prayagraj, Indien","Teheran, Iran":"Teheran, Iran","Jeruzalem, Israël":"Jerusalem, Israel","Dode Zee, Jordanië":"Totes Meer, Jordanien","Libanon":"Libanon","Nepal":"Nepal","Palestina":"Palästina","Colombo, Sri Lanka":"Colombo, Sri Lanka","Thailand":"Thailand","Vietnam":"Vietnam","Istanbul, Turkije":"Istanbul, Türkei","Bozjom, Georgië":"Bozjomi, Georgien","Oostende, België":"Ostende, Belgien","Postel, België":"Postel, Belgien","Kopenhagen, Denemarken":"Kopenhagen, Dänemark","Ribe, Denemarken":"Ribe, Dänemark","Lindet Skov, Denemarken":"Lindet Skov, Dänemark","Keulen, Duitsland":"Köln, Deutschland","Freiburg, Duitsland":"Freiburg, Deutschland","Colchester, Engeland":"Colchester, England","Londen, Engeland":"London, England","Derwent Water, Engeland":"Derwent Water, England","Kallislaki, Finland":"Kallislaki, Finnland","Roquetaillade, Frankrijk":"Roquetaillade, Frankreich","Corsica, Frankrijk":"Korsika, Frankreich","Colmar, Frankrijk":"Colmar, Frankreich","Dijon, Frankrijk":"Dijon, Frankreich","Fontenay, Frankrijk":"Fontenay, Frankreich","Grenoble, Frankrijk":"Grenoble, Frankreich","Lyon, Frankrijk":"Lyon, Frankreich","Nice, Frankrijk":"Nizza, Frankreich","Puy de Dôme, Frankrijk":"Puy de Dôme, Frankreich","Mulhouse, Frankrijk":"Mülhausen, Frankreich","Thessaloniki, Griekenland":"Thessaloniki, Griechenland","Vergina, Griekenland":"Vergina, Griechenland","Keszthely, Hongarije":"Keszthely, Ungarn","Dublin, Ierland":"Dublin, Irland","Rosslare, Ierland":"Rosslare, Irland","Diamond Beach, IJsland":"Diamond Beach, Island","Dolomieten, Italië":"Dolomiten, Italien","Etna, Italië":"Ätna, Italien","San Remo, Italië":"San Remo, Italien","Rome, Italië":"Rom, Italien","Stelvio, Italië":"Stelvio, Italien","Trapani, Italië":"Trapani, Italien","Venetië, Italië":"Venedig, Italien","Vesuvius, Italië":"Vesuv, Italien","Zuid-Tirol, Italië":"Südtirol, Italien","Gardameer, Italië":"Gardasee, Italien","Assisi, Italië":"Assisi, Italien","Dubrovnik, Kroatië":"Dubrovnik, Kroatien","Varaždin, Kroatië":"Varaždin, Kroatien","Dalmatia, Kroatië":"Dalmatien, Kroatien","Poreč, Kroatië":"Poreč, Kroatien","Malta":"Malta","Monaco":"Monaco","Rotterdam, Nederland":"Rotterdam, Niederlande","Gardnos, Noorwegen":"Gardnos, Norwegen","Ifnefoss, Noorwegen":"Ifnefoss, Norwegen","Lillehammer, Noorwegen":"Lillehammer, Norwegen","Norefjell, Noorwegen":"Norefjell, Norwegen","Oslo, Noorwegen":"Oslo, Norwegen","Steindalfoss, Noorwegen":"Steindalfoss, Norwegen","Wenen, Oostenrijk":"Wien, Österreich","Krakau, Polen":"Krakau, Polen","Zgorzelec, Polen":"Zgorzelec, Polen","Madeira, Portugal":"Madeira, Portugal","Santiago do Cacém, Portugal":"Santiago do Cacém, Portugal","Braga, Portugal":"Braga, Portugal","Ponte de Lima, Portugal":"Ponte de Lima, Portugal","Boekarest, Roemenië":"Bukarest, Rumänien","Sint-Petersburg, Rusland":"Sankt Petersburg, Russland","Ben Nevis, Schotland":"Ben Nevis, Schottland","Isle of Skye, Schotland":"Isle of Skye, Schottland","Loch Ness, Schotland":"Loch Ness, Schottland","Lockerbie, Schotland":"Lockerbie, Schottland","Port Achan, Schotland":"Port Achan, Schottland","Tighnabruaich, Schotland":"Tighnabruaich, Schottland","Barcelona, Spanje":"Barcelona, Spanien","Gerona, Spanje":"Girona, Spanien","Granada, Spanje":"Granada, Spanien","Valga, Spanje":"Valga, Spanien","Zaragoza, Spanje":"Saragossa, Spanien","La Rioja, Spanje":"La Rioja, Spanien","Praag, Tsjechië":"Prag, Tschechien","Karlsbad, Tsjechië":"Karlsbad, Tschechien","Brechfa, Wales":"Brechfa, Wales","Brecon Beacons, Wales":"Brecon Beacons, Wales","Veberöd, Zweden":"Veberöd, Schweden","Bayou la Batre, Alabama":"Bayou la Batre, Alabama","Robertsdale, Alabama":"Robertsdale, Alabama","Lockesburg, Arkansas":"Lockesburg, Arkansas","Texarkana, Arkansas":"Texarkana, Arkansas","Montréal, Canada":"Montréal, Kanada","Niagara Falls, Canada":"Niagara Falls, Kanada","Cayman Eilanden":"Kaimaninseln","Cuba":"Kuba","Curaçao":"Curaçao","Klein Curaçao":"Klein Curaçao","Dominicaanse Republiek":"Dominikanische Republik","Lee, Florida":"Lee, Florida","Alto, Georgia":"Alto, Georgia","Montego Bay, Jamaica":"Montego Bay, Jamaika","Ferryday, Louisiana":"Ferryday, Louisiana","Gilliam, Louisiana":"Gilliam, Louisiana","Biloxi, Mississippi":"Biloxi, Mississippi","Natchez, Mississippi":"Natchez, Mississippi","Akumal, Mexico":"Akumal, Mexiko","Albuquerque, New Mexico":"Albuquerque, New Mexico","Santa Fe, New Mexico":"Santa Fe, New Mexico","New York City":"New York City","Smoky Mountains, North Carolina":"Smoky Mountains, North Carolina","Waynesville, North Carolina":"Waynesville, North Carolina","Elk City, Oklahoma":"Elk City, Oklahoma","Oklahoma City, Oklahoma":"Oklahoma City, Oklahoma","Panama City":"Panama City","Charleston, South Carolina":"Charleston, South Carolina","Holly Hill, South Carolina":"Holly Hill, South Carolina","Gatlinburg, Tennessee":"Gatlinburg, Tennessee","Kellerville, Texas":"Kellerville, Texas","Wildorado, Texas":"Wildorado, Texas","Brazilië":"Brasilien","Cusco, Peru":"Cusco, Peru","Arequipa, Peru":"Arequipa, Peru"},
+    listBtnClose: '▲ Liste verbergen',
+ },
+  en: {
+    kicker:"A pilgrimage on earth", siteTitle:"The World of the Good Assistance", siteSubtitle:"A jar of soil from every place on earth",
+    navMap:"The Map", navStory:"The Story", navLocations:"All Locations", 
+    introKicker:"A Lifelong Mission", introTitle:"From every corner of the world,<br/>a handful of earth collected",
+    introBody:"The community of the Good Assistance travels the world with one special mission: from every place they visit, they bring home a small jar of soil.",
+    statLocations:"Locations", statContinents:"Continents", statCountries:"Countries", statStories:"Stories",
+    mapLabel:"World Map of Destinations",
+    mapCaption:"Click on a dot to see the name of the location — zoom with the scroll wheel or the buttons on the left",
+    layerAarde:"Soil Library", layerSchelp:"Shells from Brussels",
+    continentLabels:{"Afrika":"Africa","Azië & M-O":"Asia & M-E","Europa":"Europe","Amerika":"Americas"},
+    schelpFormTitle:"📍 Pin your shell on the map",
+    schelpFormIntro:"Did you take a shell from the church as a gift? Show where it ended up.",
+    lblCity:"City or country", lblName:"Your name (optional)", lblMsg:"A short message (optional)",
+    cityPh:"e.g. Tokyo, Japan", namePh:"e.g. Marie", msgPh:"e.g. A gift for my sister",
+    btnPin:"Place on the map",
+    errCity:"Please enter a city or country.", searching:"Looking up location…",
+    errNotFound:"Location not found. Try a different spelling.",
+    errGeo:"Could not look up location. Check your internet connection.", errSave:"Could not save. Please try again.",
+    success:"✓ Shell placed in {city}!",
+    countSchelp0:"No shells pinned yet — be the first!",
+    countSchelp1:"1 shell has found its way into the world.",
+    countSchelpN:"{n} shells have found their way into the world.",
+    listSchelpTitle:"All shells",
+    artHeadline:"Father Johnny's dream: a jar of soil from every place on earth",
+    artDeck:"A remarkable collection.",
+    artP1:"The community of the Good Assistance has been collecting soil from around the world for years.",
+    artP2:"The collection now counts more than 155 unique locations, spread across 6 continents.",
+    listTitle:"All 155 Locations", listBody:"View the complete list of all visited places.", listBtn:"View the full list",
+    footer:"A project of the Good Assistance \u00a0·\u00a0 On display at the rectory <a href=\"https://www.google.com/maps/place/Rue+de+Bon+Secours+5,+1000+Bruxelles/@50.8459531,4.3451545,16z\" style=\"color:var(--rule)\">Bijstandsstraat 5</a>, 1000 Brussels",
+    locationNames:{"Benin":"Benin","Ouagadougou, Burkina Faso":"Ouagadougou, Burkina Faso","Gran Canaria, Spanje":"Gran Canaria, Spain","Katako-Kindu, Congo":"Katako-Kindu, Congo","Wamba, Congo":"Wamba, Congo","Zuid-Kivu, Congo":"South Kivu, Congo","Congo":"Congo","Egypte":"Egypt","Praia, Kaapverdië":"Praia, Cape Verde","Nador, Marokko":"Nador, Morocco","Marrakesh, Marokko":"Marrakesh, Morocco","Ouarzazate, Marokko":"Ouarzazate, Morocco","Driouch, Marokko":"Driouch, Morocco","Oeganda":"Uganda","Kigali, Rwanda":"Kigali, Rwanda","Seychellen":"Seychelles","Togo":"Togo","Witsand, Zuid-Afrika":"Witsand, South Africa","Willowmore, Zuid-Afrika":"Willowmore, South Africa","Myanmar":"Myanmar","Nanning, China":"Nanning, China","Troodos, Cyprus":"Troodos, Cyprus","Delhi, India":"Delhi, India","Madhya Pradesh, India":"Madhya Pradesh, India","Prayagraj, India":"Prayagraj, India","Teheran, Iran":"Tehran, Iran","Jeruzalem, Israël":"Jerusalem, Israel","Dode Zee, Jordanië":"Dead Sea, Jordan","Libanon":"Lebanon","Nepal":"Nepal","Palestina":"Palestine","Colombo, Sri Lanka":"Colombo, Sri Lanka","Thailand":"Thailand","Vietnam":"Vietnam","Istanbul, Turkije":"Istanbul, Turkey","Bozjom, Georgië":"Borjomi, Georgia","Oostende, België":"Ostend, Belgium","Postel, België":"Postel, Belgium","Kopenhagen, Denemarken":"Copenhagen, Denmark","Ribe, Denemarken":"Ribe, Denmark","Lindet Skov, Denemarken":"Lindet Skov, Denmark","Keulen, Duitsland":"Cologne, Germany","Freiburg, Duitsland":"Freiburg, Germany","Colchester, Engeland":"Colchester, England","Londen, Engeland":"London, England","Derwent Water, Engeland":"Derwent Water, England","Kallislaki, Finland":"Kallislaki, Finland","Roquetaillade, Frankrijk":"Roquetaillade, France","Corsica, Frankrijk":"Corsica, France","Colmar, Frankrijk":"Colmar, France","Dijon, Frankrijk":"Dijon, France","Fontenay, Frankrijk":"Fontenay, France","Grenoble, Frankrijk":"Grenoble, France","Lyon, Frankrijk":"Lyon, France","Nice, Frankrijk":"Nice, France","Puy de Dôme, Frankrijk":"Puy de Dôme, France","Mulhouse, Frankrijk":"Mulhouse, France","Thessaloniki, Griekenland":"Thessaloniki, Greece","Vergina, Griekenland":"Vergina, Greece","Keszthely, Hongarije":"Keszthely, Hungary","Dublin, Ierland":"Dublin, Ireland","Rosslare, Ierland":"Rosslare, Ireland","Diamond Beach, IJsland":"Diamond Beach, Iceland","Dolomieten, Italië":"Dolomites, Italy","Etna, Italië":"Etna, Italy","San Remo, Italië":"San Remo, Italy","Rome, Italië":"Rome, Italy","Stelvio, Italië":"Stelvio, Italy","Trapani, Italië":"Trapani, Italy","Venetië, Italië":"Venice, Italy","Vesuvius, Italië":"Vesuvius, Italy","Zuid-Tirol, Italië":"South Tyrol, Italy","Gardameer, Italië":"Lake Garda, Italy","Assisi, Italië":"Assisi, Italy","Dubrovnik, Kroatië":"Dubrovnik, Croatia","Varaždin, Kroatië":"Varaždin, Croatia","Dalmatia, Kroatië":"Dalmatia, Croatia","Poreč, Kroatië":"Poreč, Croatia","Malta":"Malta","Monaco":"Monaco","Rotterdam, Nederland":"Rotterdam, Netherlands","Gardnos, Noorwegen":"Gardnos, Norway","Ifnefoss, Noorwegen":"Ifnefoss, Norway","Lillehammer, Noorwegen":"Lillehammer, Norway","Norefjell, Noorwegen":"Norefjell, Norway","Oslo, Noorwegen":"Oslo, Norway","Steindalfoss, Noorwegen":"Steindalfoss, Norway","Wenen, Oostenrijk":"Vienna, Austria","Krakau, Polen":"Kraków, Poland","Zgorzelec, Polen":"Zgorzelec, Poland","Madeira, Portugal":"Madeira, Portugal","Santiago do Cacém, Portugal":"Santiago do Cacém, Portugal","Braga, Portugal":"Braga, Portugal","Ponte de Lima, Portugal":"Ponte de Lima, Portugal","Boekarest, Roemenië":"Bucharest, Romania","Sint-Petersburg, Rusland":"Saint Petersburg, Russia","Ben Nevis, Schotland":"Ben Nevis, Scotland","Isle of Skye, Schotland":"Isle of Skye, Scotland","Loch Ness, Schotland":"Loch Ness, Scotland","Lockerbie, Schotland":"Lockerbie, Scotland","Port Achan, Schotland":"Port Achan, Scotland","Tighnabruaich, Schotland":"Tighnabruaich, Scotland","Barcelona, Spanje":"Barcelona, Spain","Gerona, Spanje":"Girona, Spain","Granada, Spanje":"Granada, Spain","Valga, Spanje":"Valga, Spain","Zaragoza, Spanje":"Zaragoza, Spain","La Rioja, Spanje":"La Rioja, Spain","Praag, Tsjechië":"Prague, Czech Republic","Karlsbad, Tsjechië":"Karlsbad, Czech Republic","Brechfa, Wales":"Brechfa, Wales","Brecon Beacons, Wales":"Brecon Beacons, Wales","Veberöd, Zweden":"Veberöd, Sweden","Bayou la Batre, Alabama":"Bayou la Batre, Alabama","Robertsdale, Alabama":"Robertsdale, Alabama","Lockesburg, Arkansas":"Lockesburg, Arkansas","Texarkana, Arkansas":"Texarkana, Arkansas","Montréal, Canada":"Montréal, Canada","Niagara Falls, Canada":"Niagara Falls, Canada","Cayman Eilanden":"Cayman Islands","Cuba":"Cuba","Curaçao":"Curaçao","Klein Curaçao":"Klein Curaçao","Dominicaanse Republiek":"Dominican Republic","Lee, Florida":"Lee, Florida","Alto, Georgia":"Alto, Georgia","Montego Bay, Jamaica":"Montego Bay, Jamaica","Ferryday, Louisiana":"Ferryday, Louisiana","Gilliam, Louisiana":"Gilliam, Louisiana","Biloxi, Mississippi":"Biloxi, Mississippi","Natchez, Mississippi":"Natchez, Mississippi","Akumal, Mexico":"Akumal, Mexico","Albuquerque, New Mexico":"Albuquerque, New Mexico","Santa Fe, New Mexico":"Santa Fe, New Mexico","New York City":"New York City","Smoky Mountains, North Carolina":"Smoky Mountains, North Carolina","Waynesville, North Carolina":"Waynesville, North Carolina","Elk City, Oklahoma":"Elk City, Oklahoma","Oklahoma City, Oklahoma":"Oklahoma City, Oklahoma","Panama City":"Panama City","Charleston, South Carolina":"Charleston, South Carolina","Holly Hill, South Carolina":"Holly Hill, South Carolina","Gatlinburg, Tennessee":"Gatlinburg, Tennessee","Kellerville, Texas":"Kellerville, Texas","Wildorado, Texas":"Wildorado, Texas","Brazilië":"Brazil","Cusco, Peru":"Cusco, Peru","Arequipa, Peru":"Arequipa, Peru"},
+    listBtnClose: '▲ Hide the list',
+  },
+  es: {
+    kicker:"Una peregrinación en la tierra", siteTitle:"El Mundo de la Buena Asistencia", siteSubtitle:"De cada lugar de la tierra, un tarro de suelo",
+    navMap:"El Mapa", navStory:"La Historia", navLocations:"Todos los Lugares", 
+    introKicker:"Una Misión de Toda la Vida", introTitle:"De cada rincón del mundo,<br/>un puñado de tierra recogido",
+    introBody:"La comunidad de la Buena Asistencia recorre el mundo con una misión especial: de cada lugar que visita, trae consigo un pequeño tarro de tierra.",
+    statLocations:"Lugares", statContinents:"Continentes", statCountries:"Países", statStories:"Historias",
+    mapLabel:"Mapa Mundial de Destinos",
+    mapCaption:"Haga clic en un punto para ver el nombre del lugar — amplíe con la rueda del ratón o los botones de la izquierda",
+    layerAarde:"Biblioteca de tierras", layerSchelp:"Conchas de Bruselas",
+    continentLabels:{"Afrika":"África","Azië & M-O":"Asia y O-M","Europa":"Europa","Amerika":"América"},
+    schelpFormTitle:"📍 Marca tu concha en el mapa",
+    schelpFormIntro:"¿Te llevaste una concha de la iglesia como regalo? Muestra dónde ha llegado.",
+    lblCity:"Ciudad o país", lblName:"Su nombre (opcional)", lblMsg:"Un pequeño mensaje (opcional)",
+    cityPh:"p.ej. Tokio, Japón", namePh:"p.ej. Marie", msgPh:"p.ej. Regalo para mi hermana",
+    btnPin:"Colocar en el mapa",
+    errCity:"Por favor, introduzca una ciudad o un país.", searching:"Buscando ubicación…",
+    errNotFound:"Ubicación no encontrada. Pruebe con otra ortografía.",
+    errGeo:"No se pudo encontrar la ubicación.", errSave:"No se pudo guardar. Inténtelo de nuevo.",
+    success:"✓ ¡Concha colocada en {city}!",
+    countSchelp0:"Todavía no hay conchas marcadas — ¡sea el primero!",
+    countSchelp1:"1 concha ha encontrado su camino en el mundo.",
+    countSchelpN:"{n} conchas han encontrado su camino en el mundo.",
+    listSchelpTitle:"Todas las conchas",
+    artHeadline:"El sueño del párroco Johnny: un tarro de tierra de cada lugar del mundo",
+    artDeck:"La historia detrás de esta notable colección.",
+    artP1:"La comunidad de la Buena Asistencia lleva años recolectando tierra de todo el mundo.",
+    artP2:"La colección cuenta ahora con más de 155 ubicaciones únicas, repartidas en 6 continentes.",
+    listTitle:"Los 155 Lugares", listBody:"Consulte la lista completa de todos los lugares visitados.", listBtn:"Ver la lista completa",
+    footer:"Un proyecto de la Buena Asistencia \u00a0·\u00a0 Visible en la rectoría <a href=\"https://www.google.com/maps/place/Rue+de+Bon+Secours+5,+1000+Bruxelles/@50.8459531,4.3451545,16z\" style=\"color:var(--rule)\">Bijstandsstraat 5</a>, 1000 Bruselas",
+    locationNames:{"Benin":"Benín","Ouagadougou, Burkina Faso":"Ouagadougou, Burkina Faso","Gran Canaria, Spanje":"Gran Canaria, España","Katako-Kindu, Congo":"Katako-Kindu, Congo","Wamba, Congo":"Wamba, Congo","Zuid-Kivu, Congo":"Kivu del Sur, Congo","Congo":"Congo","Egypte":"Egipto","Praia, Kaapverdië":"Praia, Cabo Verde","Nador, Marokko":"Nador, Marruecos","Marrakesh, Marokko":"Marrakech, Marruecos","Ouarzazate, Marokko":"Ouarzazate, Marruecos","Driouch, Marokko":"Driouch, Marruecos","Oeganda":"Uganda","Kigali, Rwanda":"Kigali, Ruanda","Seychellen":"Seychelles","Togo":"Togo","Witsand, Zuid-Afrika":"Witsand, Sudáfrica","Willowmore, Zuid-Afrika":"Willowmore, Sudáfrica","Myanmar":"Myanmar","Nanning, China":"Nanning, China","Troodos, Cyprus":"Troodos, Chipre","Delhi, India":"Delhi, India","Madhya Pradesh, India":"Madhya Pradesh, India","Prayagraj, India":"Prayagraj, India","Teheran, Iran":"Teherán, Irán","Jeruzalem, Israël":"Jerusalén, Israel","Dode Zee, Jordanië":"Mar Muerto, Jordania","Libanon":"Líbano","Nepal":"Nepal","Palestina":"Palestina","Colombo, Sri Lanka":"Colombo, Sri Lanka","Thailand":"Tailandia","Vietnam":"Vietnam","Istanbul, Turkije":"Estambul, Turquía","Bozjom, Georgië":"Borjomi, Georgia","Oostende, België":"Ostende, Bélgica","Postel, België":"Postel, Bélgica","Kopenhagen, Denemarken":"Copenhague, Dinamarca","Ribe, Denemarken":"Ribe, Dinamarca","Lindet Skov, Denemarken":"Lindet Skov, Dinamarca","Keulen, Duitsland":"Colonia, Alemania","Freiburg, Duitsland":"Friburgo, Alemania","Colchester, Engeland":"Colchester, Inglaterra","Londen, Engeland":"Londres, Inglaterra","Derwent Water, Engeland":"Derwent Water, Inglaterra","Kallislaki, Finland":"Kallislaki, Finlandia","Roquetaillade, Frankrijk":"Roquetaillade, Francia","Corsica, Frankrijk":"Córcega, Francia","Colmar, Frankrijk":"Colmar, Francia","Dijon, Frankrijk":"Dijon, Francia","Fontenay, Frankrijk":"Fontenay, Francia","Grenoble, Frankrijk":"Grenoble, Francia","Lyon, Frankrijk":"Lyon, Francia","Nice, Frankrijk":"Niza, Francia","Puy de Dôme, Frankrijk":"Puy de Dôme, Francia","Mulhouse, Frankrijk":"Mulhouse, Francia","Thessaloniki, Griekenland":"Tesalónica, Grecia","Vergina, Griekenland":"Vergina, Grecia","Keszthely, Hongarije":"Keszthely, Hungría","Dublin, Ierland":"Dublín, Irlanda","Rosslare, Ierland":"Rosslare, Irlanda","Diamond Beach, IJsland":"Diamond Beach, Islandia","Dolomieten, Italië":"Dolomitas, Italia","Etna, Italië":"Etna, Italia","San Remo, Italië":"San Remo, Italia","Rome, Italië":"Roma, Italia","Stelvio, Italië":"Stelvio, Italia","Trapani, Italië":"Trápani, Italia","Venetië, Italië":"Venecia, Italia","Vesuvius, Italië":"Vesubio, Italia","Zuid-Tirol, Italië":"Tirol del Sur, Italia","Gardameer, Italië":"Lago de Garda, Italia","Assisi, Italië":"Asís, Italia","Dubrovnik, Kroatië":"Dubrovnik, Croacia","Varaždin, Kroatië":"Varaždin, Croacia","Dalmatia, Kroatië":"Dalmacia, Croacia","Poreč, Kroatië":"Poreč, Croacia","Malta":"Malta","Monaco":"Mónaco","Rotterdam, Nederland":"Róterdam, Países Bajos","Gardnos, Noorwegen":"Gardnos, Noruega","Ifnefoss, Noorwegen":"Ifnefoss, Noruega","Lillehammer, Noorwegen":"Lillehammer, Noruega","Norefjell, Noorwegen":"Norefjell, Noruega","Oslo, Noorwegen":"Oslo, Noruega","Steindalfoss, Noorwegen":"Steindalfoss, Noruega","Wenen, Oostenrijk":"Viena, Austria","Krakau, Polen":"Cracovia, Polonia","Zgorzelec, Polen":"Zgorzelec, Polonia","Madeira, Portugal":"Madeira, Portugal","Santiago do Cacém, Portugal":"Santiago do Cacém, Portugal","Braga, Portugal":"Braga, Portugal","Ponte de Lima, Portugal":"Ponte de Lima, Portugal","Boekarest, Roemenië":"Bucarest, Rumanía","Sint-Petersburg, Rusland":"San Petersburgo, Rusia","Ben Nevis, Schotland":"Ben Nevis, Escocia","Isle of Skye, Schotland":"Isle of Skye, Escocia","Loch Ness, Schotland":"Loch Ness, Escocia","Lockerbie, Schotland":"Lockerbie, Escocia","Port Achan, Schotland":"Port Achan, Escocia","Tighnabruaich, Schotland":"Tighnabruaich, Escocia","Barcelona, Spanje":"Barcelona, España","Gerona, Spanje":"Girona, España","Granada, Spanje":"Granada, España","Valga, Spanje":"Valga, España","Zaragoza, Spanje":"Zaragoza, España","La Rioja, Spanje":"La Rioja, España","Praag, Tsjechië":"Praga, República Checa","Karlsbad, Tsjechië":"Karlsbad, República Checa","Brechfa, Wales":"Brechfa, Gales","Brecon Beacons, Wales":"Brecon Beacons, Gales","Veberöd, Zweden":"Veberöd, Suecia","Bayou la Batre, Alabama":"Bayou la Batre, Alabama","Robertsdale, Alabama":"Robertsdale, Alabama","Lockesburg, Arkansas":"Lockesburg, Arkansas","Texarkana, Arkansas":"Texarkana, Arkansas","Montréal, Canada":"Montréal, Canadá","Niagara Falls, Canada":"Cataratas del Niágara, Canadá","Cayman Eilanden":"Islas Caimán","Cuba":"Cuba","Curaçao":"Curaçao","Klein Curaçao":"Klein Curaçao","Dominicaanse Republiek":"República Dominicana","Lee, Florida":"Lee, Florida","Alto, Georgia":"Alto, Georgia","Montego Bay, Jamaica":"Montego Bay, Jamaica","Ferryday, Louisiana":"Ferryday, Luisiana","Gilliam, Louisiana":"Gilliam, Luisiana","Biloxi, Mississippi":"Biloxi, Misisipi","Natchez, Mississippi":"Natchez, Misisipi","Akumal, Mexico":"Akumal, México","Albuquerque, New Mexico":"Albuquerque, Nuevo México","Santa Fe, New Mexico":"Santa Fe, Nuevo México","New York City":"Nueva York","Smoky Mountains, North Carolina":"Smoky Mountains, Carolina del Norte","Waynesville, North Carolina":"Waynesville, Carolina del Norte","Elk City, Oklahoma":"Elk City, Oklahoma","Oklahoma City, Oklahoma":"Oklahoma City, Oklahoma","Panama City":"Ciudad de Panamá","Charleston, South Carolina":"Charleston, Carolina del Sur","Holly Hill, South Carolina":"Holly Hill, Carolina del Sur","Gatlinburg, Tennessee":"Gatlinburg, Tennessee","Kellerville, Texas":"Kellerville, Texas","Wildorado, Texas":"Wildorado, Texas","Brazilië":"Brasil","Cusco, Peru":"Cusco, Perú","Arequipa, Peru":"Arequipa, Perú"},
+    listBtnClose: '▲ Ocultar la lista',
+  }
+};
+
+/* ══════════════════════════════════════════
+   LOCATION DATA
+══════════════════════════════════════════ */
+const continentColors = { "Afrika":"#1565c0","Azië & M-O":"#0288d1","Europa":"#0097a7","Amerika":"#1976d2" };
+const locations = [
+  {name:"Benin",continent:"Afrika",lat:9.3077,lng:2.3158},{name:"Ouagadougou, Burkina Faso",continent:"Afrika",lat:12.3647,lng:-1.5332},{name:"Gran Canaria, Spanje",continent:"Afrika",lat:27.9202,lng:-15.5474},{name:"Katako-Kindu, Congo",continent:"Afrika",lat:-3.4086,lng:26.3280},{name:"Wamba, Congo",continent:"Afrika",lat:2.1480,lng:27.9900},{name:"Zuid-Kivu, Congo",continent:"Afrika",lat:-2.9453,lng:28.8658},{name:"Congo",continent:"Afrika",lat:-4.0383,lng:21.7587},{name:"Egypte",continent:"Afrika",lat:26.8206,lng:30.8025},{name:"Praia, Kaapverdië",continent:"Afrika",lat:14.9305,lng:-23.5133},{name:"Nador, Marokko",continent:"Afrika",lat:35.1688,lng:-2.9286},{name:"Marrakesh, Marokko",continent:"Afrika",lat:31.6295,lng:-7.9811},{name:"Ouarzazate, Marokko",continent:"Afrika",lat:30.9189,lng:-6.8934},{name:"Driouch, Marokko",continent:"Afrika",lat:34.9820,lng:-3.3887},{name:"Oeganda",continent:"Afrika",lat:1.3733,lng:32.2903},{name:"Kigali, Rwanda",continent:"Afrika",lat:-1.9441,lng:30.0619},{name:"Seychellen",continent:"Afrika",lat:-4.6796,lng:55.4920},{name:"Togo",continent:"Afrika",lat:8.6195,lng:0.8248},{name:"Witsand, Zuid-Afrika",continent:"Afrika",lat:-34.3977,lng:20.8593},{name:"Willowmore, Zuid-Afrika",continent:"Afrika",lat:-33.2906,lng:23.4881},
+  {name:"Myanmar",continent:"Azië & M-O",lat:19.7633,lng:96.0785},{name:"Nanning, China",continent:"Azië & M-O",lat:22.8170,lng:108.3665},{name:"Troodos, Cyprus",continent:"Azië & M-O",lat:34.9227,lng:32.8794},{name:"Delhi, India",continent:"Azië & M-O",lat:28.7041,lng:77.1025},{name:"Madhya Pradesh, India",continent:"Azië & M-O",lat:23.4736,lng:77.9470},{name:"Prayagraj, India",continent:"Azië & M-O",lat:25.4358,lng:81.8463},{name:"Teheran, Iran",continent:"Azië & M-O",lat:35.6892,lng:51.3890},{name:"Jeruzalem, Israël",continent:"Azië & M-O",lat:31.7683,lng:35.2137},{name:"Dode Zee, Jordanië",continent:"Azië & M-O",lat:31.5590,lng:35.4732},{name:"Libanon",continent:"Azië & M-O",lat:33.8547,lng:35.8623},{name:"Nepal",continent:"Azië & M-O",lat:28.3949,lng:84.1240},{name:"Palestina",continent:"Azië & M-O",lat:31.9522,lng:35.2332},{name:"Colombo, Sri Lanka",continent:"Azië & M-O",lat:6.9271,lng:79.8612},{name:"Thailand",continent:"Azië & M-O",lat:15.8700,lng:100.9925},{name:"Vietnam",continent:"Azië & M-O",lat:14.0583,lng:108.2772},{name:"Istanbul, Turkije",continent:"Azië & M-O",lat:41.0082,lng:28.9784},{name:"Bozjom, Georgië",continent:"Azië & M-O",lat:42.3154,lng:43.3569},
+  {name:"Oostende, België",continent:"Europa",lat:51.2293,lng:2.9164},{name:"Postel, België",continent:"Europa",lat:51.2780,lng:5.0830},{name:"Kopenhagen, Denemarken",continent:"Europa",lat:55.6761,lng:12.5683},{name:"Ribe, Denemarken",continent:"Europa",lat:55.3246,lng:8.7583},{name:"Lindet Skov, Denemarken",continent:"Europa",lat:55.2360,lng:9.1690},{name:"Keulen, Duitsland",continent:"Europa",lat:50.9333,lng:6.9500},{name:"Freiburg, Duitsland",continent:"Europa",lat:47.9990,lng:7.8421},{name:"Colchester, Engeland",continent:"Europa",lat:51.8959,lng:0.8919},{name:"Londen, Engeland",continent:"Europa",lat:51.5074,lng:-0.1278},{name:"Derwent Water, Engeland",continent:"Europa",lat:54.5725,lng:-3.1340},{name:"Kallislaki, Finland",continent:"Europa",lat:61.0,lng:25.5},{name:"Roquetaillade, Frankrijk",continent:"Europa",lat:44.6500,lng:0.0400},{name:"Corsica, Frankrijk",continent:"Europa",lat:42.0396,lng:9.0129},{name:"Colmar, Frankrijk",continent:"Europa",lat:48.0793,lng:7.3586},{name:"Dijon, Frankrijk",continent:"Europa",lat:47.3220,lng:5.0415},{name:"Fontenay, Frankrijk",continent:"Europa",lat:47.6220,lng:4.0470},{name:"Grenoble, Frankrijk",continent:"Europa",lat:45.1885,lng:5.7245},{name:"Lyon, Frankrijk",continent:"Europa",lat:45.7640,lng:4.8357},{name:"Nice, Frankrijk",continent:"Europa",lat:43.7102,lng:7.2620},{name:"Puy de Dôme, Frankrijk",continent:"Europa",lat:45.7724,lng:2.9653},{name:"Mulhouse, Frankrijk",continent:"Europa",lat:47.7508,lng:7.3359},{name:"Thessaloniki, Griekenland",continent:"Europa",lat:40.6401,lng:22.9444},{name:"Vergina, Griekenland",continent:"Europa",lat:40.4874,lng:22.3213},{name:"Keszthely, Hongarije",continent:"Europa",lat:46.7660,lng:17.2447},{name:"Dublin, Ierland",continent:"Europa",lat:53.3498,lng:-6.2603},{name:"Rosslare, Ierland",continent:"Europa",lat:52.2540,lng:-6.3380},{name:"Diamond Beach, IJsland",continent:"Europa",lat:63.8317,lng:-16.3796},{name:"Dolomieten, Italië",continent:"Europa",lat:46.4102,lng:11.8440},{name:"Etna, Italië",continent:"Europa",lat:37.7510,lng:14.9934},{name:"San Remo, Italië",continent:"Europa",lat:43.8159,lng:7.7760},{name:"Rome, Italië",continent:"Europa",lat:41.9028,lng:12.4964},{name:"Stelvio, Italië",continent:"Europa",lat:46.5289,lng:10.4544},{name:"Trapani, Italië",continent:"Europa",lat:38.0177,lng:12.5365},{name:"Venetië, Italië",continent:"Europa",lat:45.4408,lng:12.3155},{name:"Vesuvius, Italië",continent:"Europa",lat:40.8210,lng:14.4260},{name:"Zuid-Tirol, Italië",continent:"Europa",lat:46.7,lng:11.3},{name:"Gardameer, Italië",continent:"Europa",lat:45.5819,lng:10.6652},{name:"Assisi, Italië",continent:"Europa",lat:43.0707,lng:12.6196},{name:"Dubrovnik, Kroatië",continent:"Europa",lat:42.6507,lng:18.0944},{name:"Varaždin, Kroatië",continent:"Europa",lat:46.3044,lng:16.3369},{name:"Dalmatia, Kroatië",continent:"Europa",lat:43.5,lng:16.5},{name:"Poreč, Kroatië",continent:"Europa",lat:45.2268,lng:13.5960},{name:"Malta",continent:"Europa",lat:35.9375,lng:14.3754},{name:"Monaco",continent:"Europa",lat:43.7333,lng:7.4167},{name:"Rotterdam, Nederland",continent:"Europa",lat:51.9244,lng:4.4777},{name:"Gardnos, Noorwegen",continent:"Europa",lat:60.4070,lng:9.0900},{name:"Ifnefoss, Noorwegen",continent:"Europa",lat:60.2,lng:8.9},{name:"Lillehammer, Noorwegen",continent:"Europa",lat:61.1153,lng:10.4662},{name:"Norefjell, Noorwegen",continent:"Europa",lat:60.3880,lng:9.6540},{name:"Oslo, Noorwegen",continent:"Europa",lat:59.9139,lng:10.7522},{name:"Steindalfoss, Noorwegen",continent:"Europa",lat:62.1,lng:7.2},{name:"Wenen, Oostenrijk",continent:"Europa",lat:48.2082,lng:16.3738},{name:"Krakau, Polen",continent:"Europa",lat:50.0647,lng:19.9450},{name:"Zgorzelec, Polen",continent:"Europa",lat:51.1517,lng:15.0093},{name:"Madeira, Portugal",continent:"Europa",lat:32.7607,lng:-16.9595},{name:"Santiago do Cacém, Portugal",continent:"Europa",lat:38.0168,lng:-8.6968},{name:"Braga, Portugal",continent:"Europa",lat:41.5454,lng:-8.4265},{name:"Ponte de Lima, Portugal",continent:"Europa",lat:41.7674,lng:-8.5836},{name:"Boekarest, Roemenië",continent:"Europa",lat:44.4268,lng:26.1025},{name:"Sint-Petersburg, Rusland",continent:"Europa",lat:59.9343,lng:30.3351},{name:"Ben Nevis, Schotland",continent:"Europa",lat:56.7969,lng:-5.0035},{name:"Isle of Skye, Schotland",continent:"Europa",lat:57.2736,lng:-6.2149},{name:"Loch Ness, Schotland",continent:"Europa",lat:57.3229,lng:-4.4244},{name:"Lockerbie, Schotland",continent:"Europa",lat:55.1225,lng:-3.3555},{name:"Port Achan, Schotland",continent:"Europa",lat:56.7980,lng:-5.1300},{name:"Tighnabruaich, Schotland",continent:"Europa",lat:55.9240,lng:-5.2280},{name:"Barcelona, Spanje",continent:"Europa",lat:41.3851,lng:2.1734},{name:"Gerona, Spanje",continent:"Europa",lat:41.9794,lng:2.8214},{name:"Granada, Spanje",continent:"Europa",lat:37.1773,lng:-3.5986},{name:"Valga, Spanje",continent:"Europa",lat:42.0030,lng:-8.4080},{name:"Zaragoza, Spanje",continent:"Europa",lat:41.6488,lng:-0.8891},{name:"La Rioja, Spanje",continent:"Europa",lat:42.2871,lng:-2.5396},{name:"Praag, Tsjechië",continent:"Europa",lat:50.0755,lng:14.4378},{name:"Karlsbad, Tsjechië",continent:"Europa",lat:50.2319,lng:12.8716},{name:"Brechfa, Wales",continent:"Europa",lat:51.9260,lng:-4.1340},{name:"Brecon Beacons, Wales",continent:"Europa",lat:51.8836,lng:-3.4370},{name:"Veberöd, Zweden",continent:"Europa",lat:55.5860,lng:13.4980},
+  {name:"Bayou la Batre, Alabama",continent:"Amerika",lat:30.4035,lng:-88.2487},{name:"Robertsdale, Alabama",continent:"Amerika",lat:30.5560,lng:-87.7114},{name:"Lockesburg, Arkansas",continent:"Amerika",lat:33.9707,lng:-94.1716},{name:"Texarkana, Arkansas",continent:"Amerika",lat:33.4418,lng:-94.0477},{name:"Montréal, Canada",continent:"Amerika",lat:45.5017,lng:-73.5673},{name:"Niagara Falls, Canada",continent:"Amerika",lat:43.0896,lng:-79.0849},{name:"Cayman Eilanden",continent:"Amerika",lat:19.3133,lng:-81.2546},{name:"Cuba",continent:"Amerika",lat:21.5218,lng:-77.7812},{name:"Curaçao",continent:"Amerika",lat:12.1696,lng:-68.9900},{name:"Klein Curaçao",continent:"Amerika",lat:11.9830,lng:-68.6500},{name:"Dominicaanse Republiek",continent:"Amerika",lat:18.7357,lng:-70.1627},{name:"Lee, Florida",continent:"Amerika",lat:30.4201,lng:-83.2921},{name:"Alto, Georgia",continent:"Amerika",lat:34.4618,lng:-83.5705},{name:"Montego Bay, Jamaica",continent:"Amerika",lat:18.4762,lng:-77.8939},{name:"Ferryday, Louisiana",continent:"Amerika",lat:31.6285,lng:-91.5565},{name:"Gilliam, Louisiana",continent:"Amerika",lat:32.8243,lng:-93.8185},{name:"Biloxi, Mississippi",continent:"Amerika",lat:30.3960,lng:-88.8853},{name:"Natchez, Mississippi",continent:"Amerika",lat:31.5604,lng:-91.4032},{name:"Akumal, Mexico",continent:"Amerika",lat:20.3955,lng:-87.3139},{name:"Albuquerque, New Mexico",continent:"Amerika",lat:35.0844,lng:-106.6504},{name:"Santa Fe, New Mexico",continent:"Amerika",lat:35.6870,lng:-105.9378},{name:"New York City",continent:"Amerika",lat:40.7128,lng:-74.0060},{name:"Smoky Mountains, North Carolina",continent:"Amerika",lat:35.6532,lng:-83.5070},{name:"Waynesville, North Carolina",continent:"Amerika",lat:35.4885,lng:-82.9874},{name:"Elk City, Oklahoma",continent:"Amerika",lat:35.4118,lng:-99.4040},{name:"Oklahoma City, Oklahoma",continent:"Amerika",lat:35.4676,lng:-97.5164},{name:"Panama City",continent:"Amerika",lat:8.9936,lng:-79.5197},{name:"Charleston, South Carolina",continent:"Amerika",lat:32.7765,lng:-79.9311},{name:"Holly Hill, South Carolina",continent:"Amerika",lat:33.3254,lng:-80.4076},{name:"Gatlinburg, Tennessee",continent:"Amerika",lat:35.7143,lng:-83.5129},{name:"Kellerville, Texas",continent:"Amerika",lat:35.3534,lng:-100.3482},{name:"Wildorado, Texas",continent:"Amerika",lat:35.1793,lng:-102.1780},{name:"Brazilië",continent:"Amerika",lat:-14.2350,lng:-51.9253},{name:"Cusco, Peru",continent:"Amerika",lat:-13.5319,lng:-71.9675},{name:"Arequipa, Peru",continent:"Amerika",lat:-16.4090,lng:-71.5375}
+];
+
+/* ══════════════════════════════════════════
+   MAP SETUP
+══════════════════════════════════════════ */
+const map = L.map('map', {
+  center:[20,10], zoom:2, minZoom:2, maxZoom:12,
+  scrollWheelZoom:true, doubleClickZoom:true, zoomControl:true,
+  worldCopyJump:false, maxBounds:[[-90,-180],[90,180]], maxBoundsViscosity:1.0,
+});
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+  attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
+  subdomains:'abcd', maxZoom:20, noWrap:true, bounds:[[-90,-180],[90,180]],
+}).addTo(map);
+
+function makeCircleIcon(color) {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5.5" fill="${color}" stroke="#fff" stroke-width="1.8" opacity="0.92"/></svg>`;
+  return L.divIcon({ html:svg, className:'', iconSize:[14,14], iconAnchor:[7,7], popupAnchor:[0,-10] });
+}
+function makeShellIcon() {
+  return L.divIcon({
+    className:'',
+    html:'<div style="font-size:1.4rem;line-height:1;filter:drop-shadow(0 1px 3px rgba(0,0,0,0.45));">🐚</div>',
+    iconSize:[26,26], iconAnchor:[13,13], popupAnchor:[0,-13]
+  });
+}
+const brusselIcon = L.divIcon({
+  className:'',
+  html:'<div style="font-size:1.1rem;line-height:1;filter:drop-shadow(0 1px 3px rgba(0,0,0,0.5));">⛪</div>',
+  iconSize:[22,22], iconAnchor:[11,11], popupAnchor:[0,-11]
+});
+
+/* Aarde markers */
+const aardeMarkers = locations.map(loc => {
+  const color = continentColors[loc.continent] || '#1565c0';
+  const m = L.marker([loc.lat, loc.lng], { icon: makeCircleIcon(color) });
+  m._dutchName = loc.name;
+  m._continent = loc.continent;
+  m.bindPopup(`<strong>${loc.name}</strong><br><span style="font-size:12px;color:var(--rule);">${loc.continent}</span>`);
+  m.on('mouseover', function() { this.openPopup(); });
+  m.on('mouseout', function() { this.closePopup(); });
+  return m;
+});
+
+/* Brussel origin marker (always visible in schelp layer) */
+const brusselMarker = L.marker([50.8503, 4.3517], { icon: brusselIcon });
+brusselMarker._isBrussel = true;
+
+/* Shell markers (loaded from storage) */
+let schelpMarkers = [];
+let schelpPins = [];
+
+/* ══════════════════════════════════════════
+   LAYER SWITCHING
+══════════════════════════════════════════ */
+let activeLayer = 'aarde';
+
+function setLayer(layer) {
+  activeLayer = layer;
+
+  // Toggle buttons
+  document.getElementById('btn-layer-aarde').classList.toggle('active', layer === 'aarde');
+  document.getElementById('btn-layer-schelp').classList.toggle('active', layer === 'schelp');
+
+  // Show/hide aarde markers
+  aardeMarkers.forEach(m => layer === 'aarde' ? m.addTo(map) : map.removeLayer(m));
+
+  // Show/hide schelp markers + Brussel pin
+  if (layer === 'schelp') {
+    brusselMarker.addTo(map);
+    schelpMarkers.forEach(m => m.addTo(map));
+  } else {
+    map.removeLayer(brusselMarker);
+    schelpMarkers.forEach(m => map.removeLayer(m));
+  }
+
+  // Toggle legend vs schelp form
+  document.getElementById('legend').style.display = layer === 'aarde' ? 'flex' : 'none';
+  document.getElementById('map-count').style.display = layer === 'schelp' ? 'block' : 'none';
+  document.getElementById('schelp-panel').classList.toggle('visible', layer === 'schelp');
+  document.getElementById('schelp-list-wrap').style.display = layer === 'schelp' && schelpPins.length > 0 ? 'block' : 'none';
+
+  updateCount();
+  if (layer === 'aarde') { buildLegend(activeLang); } 
+}
+
+/* ══════════════════════════════════════════
+   SCHELP STORAGE & RENDERING
+══════════════════════════════════════════ */
+const STORAGE_KEY = 'schelpen-pins';
+
+async function loadSchelpPins() {
+  try {
+    const res = await window.storage.get(STORAGE_KEY, true);
+    schelpPins = res ? JSON.parse(res.value) : [];
+  } catch(e) { schelpPins = []; }
+  renderSchelpMarkers();
+  renderSchelpList();
+  updateCount();
+}
+
+function renderSchelpMarkers() {
+  schelpMarkers.forEach(m => map.removeLayer(m));
+  schelpMarkers = [];
+  const icon = makeShellIcon();
+  schelpPins.forEach(pin => {
+    const m = L.marker([pin.lat, pin.lng], { icon })
+      .bindPopup(buildSchelpPopup(pin));
+    if (activeLayer === 'schelp') m.addTo(map);
+    schelpMarkers.push(m);
+  });
+}
+
+function buildSchelpPopup(pin) {
+  const name = pin.name ? `<strong>${esc(pin.name)}</strong><br>` : '';
+  const msg  = pin.msg  ? `<em>${esc(pin.msg)}</em><br>` : '';
+  return `<div style="min-width:130px;">🐚 <strong style="color:var(--rule);">${esc(pin.city)}</strong><br>${name}${msg}<small style="color:var(--rule);opacity:0.7;">${pin.date}</small></div>`;
+}
+
+function renderSchelpList() {
+  const ul = document.getElementById('schelp-list');
+  const wrap = document.getElementById('schelp-list-wrap');
+  if (!schelpPins.length) { wrap.style.display = 'none'; return; }
+  if (activeLayer === 'schelp') wrap.style.display = 'block';
+  ul.innerHTML = [...schelpPins].reverse().map(pin => {
+    const name = pin.name ? `<strong>${esc(pin.name)}</strong> · ` : '';
+    const msg  = pin.msg  ? `<em>${esc(pin.msg)}</em>` : '';
+    return `<li><span class="schelp-list-left">🐚 <strong>${esc(pin.city)}</strong>${pin.name||pin.msg?' — ':''}${name}${msg}</span><span class="schelp-list-date">${pin.date}</span></li>`;
+  }).join('');
+}
+
+function updateCount() {
+  const el = document.getElementById('map-count');
+  if (!el) return;
+  const tx = TX[activeLang];
+  const n = schelpPins.length;
+  if (n === 0) el.textContent = tx.countSchelp0;
+  else if (n === 1) el.textContent = tx.countSchelp1;
+  else el.textContent = tx.countSchelpN.replace('{n}', n);
+}
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ══════════════════════════════════════════
+   SCHELP SUBMIT
+══════════════════════════════════════════ */
+window.schelpSubmit = async function() {
+  const tx = TX[activeLang];
+  const cityEl   = document.getElementById('sf-city');
+  const nameEl   = document.getElementById('sf-name');
+  const msgEl    = document.getElementById('sf-msg');
+  const statusEl = document.getElementById('sf-status');
+  const btnEl    = document.getElementById('sf-submit');
+  const city = cityEl.value.trim();
+  if (!city) { cityEl.focus(); statusEl.textContent = tx.errCity; return; }
+  btnEl.disabled = true;
+  statusEl.textContent = tx.searching;
+  let lat, lng, displayName;
+  try {
+    const url = 'https://nominatim.openstreetmap.org/search?format=json&limit=1&q=' + encodeURIComponent(city);
+    const res = await fetch(url, { headers:{ 'Accept-Language': activeLang } });
+    const data = await res.json();
+    if (!data.length) { statusEl.textContent = tx.errNotFound; btnEl.disabled = false; return; }
+    lat = parseFloat(data[0].lat);
+    lng = parseFloat(data[0].lon);
+    displayName = data[0].display_name.split(',')[0];
+  } catch(e) { statusEl.textContent = tx.errGeo; btnEl.disabled = false; return; }
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('nl-BE', { day:'numeric', month:'long', year:'numeric' });
+  const pin = { id:Date.now(), city:displayName||city, name:nameEl.value.trim(), msg:msgEl.value.trim(), lat, lng, date:dateStr };
+  try {
+    await window.storage.set(STORAGE_KEY, JSON.stringify([...schelpPins, pin]), true);
+    schelpPins.push(pin);
+  } catch(e) { statusEl.textContent = tx.errSave; btnEl.disabled = false; return; }
+  cityEl.value = ''; nameEl.value = ''; msgEl.value = '';
+  statusEl.textContent = tx.success.replace('{city}', pin.city);
+  btnEl.disabled = false;
+  const icon = makeShellIcon();
+  const m = L.marker([lat, lng], { icon }).bindPopup(buildSchelpPopup(pin));
+  if (activeLayer === 'schelp') { m.addTo(map); map.flyTo([lat, lng], 6, { duration:1.4 }); setTimeout(() => m.openPopup(), 1500); }
+  schelpMarkers.push(m);
+  renderSchelpList();
+  updateCount();
+  if (activeLayer === 'schelp') document.getElementById('schelp-list-wrap').style.display = 'block';
+};
+
+/* ══════════════════════════════════════════
+   LANGUAGE
+══════════════════════════════════════════ */
+let activeLang = 'nl';
+
+function buildLegend(lang) {
+  const t = TX[lang];
+  const legend = document.getElementById('legend');
+  legend.innerHTML = '';
+  Object.entries(continentColors).forEach(([key, color]) => {
+    const label = t.continentLabels[key] || key;
+    const item = document.createElement('div');
+    item.className = 'legend-item';
+    item.innerHTML = `<span class="legend-dot" style="background:${color}"></span>${label}`;
+    legend.appendChild(item);
+  });
+}
+
+function updateAardePopups(lang) {
+  const t = TX[lang];
+  aardeMarkers.forEach(m => {
+    const localName = t.locationNames[m._dutchName] || m._dutchName;
+    const localCont = t.continentLabels[m._continent] || m._continent;
+    m.bindPopup(`<strong>${localName}</strong><br><span style="font-size:12px;color:var(--rule);">${localCont}</span>`);
+  });
+}
+
+function applyLanguage(lang) {
+  activeLang = lang;
+  const t = TX[lang];
+  document.documentElement.lang = lang;
+  document.getElementById('txt-kicker').textContent        = t.kicker;
+  document.getElementById('txt-site-title').textContent    = t.siteTitle;
+  document.getElementById('txt-site-subtitle').textContent = t.siteSubtitle;
+  document.getElementById('nav-map').textContent           = t.navMap;
+  document.getElementById('nav-story').textContent         = t.navStory;
+  document.getElementById('nav-locations').textContent     = t.navLocations;
+  document.getElementById('txt-intro-kicker').textContent  = t.introKicker;
+  document.getElementById('txt-intro-title').innerHTML     = t.introTitle;
+  document.getElementById('txt-intro-body').textContent    = t.introBody;
+  document.getElementById('stat-locations').textContent    = t.statLocations;
+  document.getElementById('stat-continents').textContent   = t.statContinents;
+  document.getElementById('stat-countries').textContent    = t.statCountries;
+  document.getElementById('stat-stories').textContent      = t.statStories;
+  document.getElementById('txt-map-label').textContent     = t.mapLabel;
+  document.getElementById('txt-map-caption').textContent   = t.mapCaption;
+  document.getElementById('layer-aarde-label').textContent = t.layerAarde;
+  document.getElementById('layer-schelp-label').textContent= t.layerSchelp;
+  document.getElementById('schelp-form-title').textContent = t.schelpFormTitle;
+  document.getElementById('schelp-form-intro').textContent = t.schelpFormIntro;
+  document.getElementById('lbl-city').textContent          = t.lblCity;
+  document.getElementById('lbl-name').textContent          = t.lblName;
+  document.getElementById('lbl-msg').textContent           = t.lblMsg;
+  document.getElementById('sf-city').placeholder           = t.cityPh;
+  document.getElementById('sf-name').placeholder           = t.namePh;
+  document.getElementById('sf-msg').placeholder            = t.msgPh;
+  document.getElementById('btn-pin-label').textContent     = t.btnPin;
+  document.getElementById('schelp-list-title').textContent = t.listSchelpTitle;
+  document.getElementById('txt-art-headline').textContent  = t.artHeadline;
+  document.getElementById('txt-art-deck').textContent      = t.artDeck;
+  document.getElementById('txt-art-p1').textContent        = t.artP1;
+  document.getElementById('txt-art-p2').textContent        = t.artP2;
+  document.getElementById('txt-list-title').textContent    = t.listTitle;
+  document.getElementById('txt-list-body').textContent     = t.listBody;
+  document.getElementById('txt-list-btn').textContent      = t.listBtn;
+  document.getElementById('txt-footer').innerHTML          = t.footer;
+  updateAardePopups(lang);
+  buildLegend(lang);
+  updateCount();
+}
+
+  function toggleList() {
+  const div = document.getElementById('inline-list');
+  const btn = document.getElementById('btn-toggle-list');
+  const t = TX[activeLang];
+  if (div.style.display === 'none') {
+    div.style.display = 'block';
+    btn.textContent = t.listBtnClose || '▲ Verberg de lijst';
+    // Build list
+    const continentKeys = ["Afrika","Azië & M-O","Europa","Amerika"];
+    const locationContinents = [
+      "Afrika","Afrika","Afrika","Afrika","Afrika","Afrika","Afrika","Afrika","Afrika","Afrika",
+      "Afrika","Afrika","Afrika","Afrika","Afrika","Afrika","Afrika","Afrika","Afrika",
+      "Azië & M-O","Azië & M-O","Azië & M-O","Azië & M-O","Azië & M-O","Azië & M-O",
+      "Azië & M-O","Azië & M-O","Azië & M-O","Azië & M-O","Azië & M-O","Azië & M-O",
+      "Azië & M-O","Azië & M-O","Azië & M-O","Azië & M-O","Azië & M-O",
+      "Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa",
+      "Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa",
+      "Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa",
+      "Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa",
+      "Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa",
+      "Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa",
+      "Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa",
+      "Europa","Europa","Europa","Europa","Europa",
+      "Amerika","Amerika","Amerika","Amerika","Amerika","Amerika","Amerika","Amerika","Amerika",
+      "Amerika","Amerika","Amerika","Amerika","Amerika","Amerika","Amerika","Amerika","Amerika",
+      "Amerika","Amerika","Amerika","Amerika","Amerika","Amerika","Amerika","Amerika","Amerika",
+      "Amerika","Amerika","Amerika","Amerika","Amerika","Amerika","Amerika","Amerika"
+    ];
+    const dutchNames = [
+      "Benin","Ouagadougou, Burkina Faso","Gran Canaria, Spanje","Katako-Kindu, Congo",
+      "Wamba, Congo","Zuid-Kivu, Congo","Congo","Egypte","Praia, Kaapverdië",
+      "Nador, Marokko","Marrakesh, Marokko","Ouarzazate, Marokko","Driouch, Marokko",
+      "Oeganda","Kigali, Rwanda","Seychellen","Togo","Witsand, Zuid-Afrika",
+      "Willowmore, Zuid-Afrika","Myanmar","Nanning, China","Troodos, Cyprus",
+      "Delhi, India","Madhya Pradesh, India","Prayagraj, India","Teheran, Iran",
+      "Jeruzalem, Israël","Dode Zee, Jordanië","Libanon","Nepal","Palestina",
+      "Colombo, Sri Lanka","Thailand","Vietnam","Istanbul, Turkije","Bozjom, Georgië",
+      "Oostende, België","Postel, België","Kopenhagen, Denemarken","Ribe, Denemarken",
+      "Lindet Skov, Denemarken","Keulen, Duitsland","Freiburg, Duitsland",
+      "Colchester, Engeland","Londen, Engeland","Derwent Water, Engeland",
+      "Kallislaki, Finland","Roquetaillade, Frankrijk","Corsica, Frankrijk",
+      "Colmar, Frankrijk","Dijon, Frankrijk","Fontenay, Frankrijk","Grenoble, Frankrijk",
+      "Lyon, Frankrijk","Nice, Frankrijk","Puy de Dôme, Frankrijk","Mulhouse, Frankrijk",
+      "Thessaloniki, Griekenland","Vergina, Griekenland","Keszthely, Hongarije",
+      "Dublin, Ierland","Rosslare, Ierland","Diamond Beach, IJsland","Dolomieten, Italië",
+      "Etna, Italië","San Remo, Italië","Rome, Italië","Stelvio, Italië",
+      "Trapani, Italië","Venetië, Italië","Vesuvius, Italië","Zuid-Tirol, Italië",
+      "Gardameer, Italië","Assisi, Italië","Dubrovnik, Kroatië","Varaždin, Kroatië",
+      "Dalmatia, Kroatië","Poreč, Kroatië","Malta","Monaco","Rotterdam, Nederland",
+      "Gardnos, Noorwegen","Ifnefoss, Noorwegen","Lillehammer, Noorwegen",
+      "Norefjell, Noorwegen","Oslo, Noorwegen","Steindalfoss, Noorwegen",
+      "Wenen, Oostenrijk","Krakau, Polen","Zgorzelec, Polen","Madeira, Portugal",
+      "Santiago do Cacém, Portugal","Braga, Portugal","Ponte de Lima, Portugal",
+      "Boekarest, Roemenië","Sint-Petersburg, Rusland","Ben Nevis, Schotland",
+      "Isle of Skye, Schotland","Loch Ness, Schotland","Lockerbie, Schotland",
+      "Port Achan, Schotland","Tighnabruaich, Schotland","Barcelona, Spanje",
+      "Gerona, Spanje","Granada, Spanje","Valga, Spanje","Zaragoza, Spanje",
+      "La Rioja, Spanje","Praag, Tsjechië","Karlsbad, Tsjechië","Brechfa, Wales",
+      "Brecon Beacons, Wales","Veberöd, Zweden","Bayou la Batre, Alabama",
+      "Robertsdale, Alabama","Lockesburg, Arkansas","Texarkana, Arkansas",
+      "Montréal, Canada","Niagara Falls, Canada","Cayman Eilanden","Cuba",
+      "Curaçao","Klein Curaçao","Dominicaanse Republiek","Lee, Florida",
+      "Alto, Georgia","Montego Bay, Jamaica","Ferryday, Louisiana","Gilliam, Louisiana",
+      "Biloxi, Mississippi","Natchez, Mississippi","Akumal, Mexico",
+      "Albuquerque, New Mexico","Santa Fe, New Mexico","New York City",
+      "Smoky Mountains, North Carolina","Waynesville, North Carolina",
+      "Elk City, Oklahoma","Oklahoma City, Oklahoma","Panama City",
+      "Charleston, South Carolina","Holly Hill, South Carolina","Gatlinburg, Tennessee",
+      "Kellerville, Texas","Wildorado, Texas","Brazilië","Cusco, Peru","Arequipa, Peru"
+    ];
+    let html = '';
+    continentKeys.forEach(key => {
+      const color = continentColors[key];
+      const continentLabel = t.continentLabels[key] || key;
+      const locs = locationContinents
+        .map((c, i) => ({ continent: c, dutchKey: dutchNames[i] }))
+        .filter(l => l.continent === key)
+        .map(l => t.locationNames[l.dutchKey] || l.dutchKey);
+      html += `
+        <div style="margin-bottom:32px;">
+          <div style="display:flex;align-items:center;gap:12px;border-bottom:2px solid var(--gold);padding-bottom:8px;margin-bottom:12px;">
+            <span style="width:12px;height:12px;border-radius:50%;background:${color};display:inline-block;flex-shrink:0;"></span>
+            <span style="font-family:'Cormorant Garamond',Georgia,serif;font-size:1.3rem;font-weight:600;color:var(--ink);">${continentLabel}</span>
+            <span style="font-family:'Cormorant Garamond',Georgia,serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-left:auto;">${locs.length}</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));border-top:1px solid var(--rule);border-left:1px solid var(--rule);">
+            ${locs.map(name => `<div style="padding:7px 12px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);font-family:'EB Garamond',Georgia,serif;font-size:0.92rem;color:var(--sepia);">· ${name}</div>`).join('')}
+          </div>
+        </div>`;
+    });
+    div.innerHTML = html;
+  } else {
+    div.style.display = 'none';
+    btn.textContent = t.listBtn;
+  }
+}
+
+/* ══════════════════════════════════════════
+   INIT
+══════════════════════════════════════════ */
+// Start with aarde layer active
+aardeMarkers.forEach(m => m.addTo(map));
+applyLanguage('nl');
+setLayer('aarde');
+document.getElementById('map-count').style.display = 'none';
+;
+
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b === btn));
+    applyLanguage(btn.dataset.lang);
+  });
+});
+
+// Load shell pins from shared storage
+loadSchelpPins();
+</script>
+</body>
+</html>
