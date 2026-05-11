@@ -433,6 +433,7 @@ body.rtl .translation-notice {
   <a onclick="go('agenda')"       data-page="agenda"       data-i18n="nav_agenda">Agenda</a>
   <a onclick="go('geschiedenis')" data-page="geschiedenis" data-i18n="nav_gesch">Geschiedenis</a>
   <a onclick="go('samenwerking')" data-page="samenwerking" data-i18n="nav_samen">Samenwerking</a>
+  <a onclick="go('grond')"        data-page="grond"        data-i18n="nav_grond">Grondbibliotheek</a>
   <a onclick="go('voorbij')"      data-page="voorbij"      data-i18n="nav_voorbij">Voorbije activiteiten</a>
   <a onclick="go('huren')"        data-page="huren"        data-i18n="nav_huren">Huren</a>
   <a onclick="go('steunen')"      data-page="steunen"      data-i18n="nav_steunen">Steunen</a>
@@ -486,6 +487,7 @@ nl: {
   nav_agenda:"Agenda",
   nav_gesch:"Geschiedenis",
   nav_samen:"Samenwerking",
+  nav_grond:"Grondbibliotheek",
   nav_voorbij:"Voorbije activiteiten",
   nav_huren:"Gebruik van de kerk",
   nav_steunen:"Steunen",
@@ -614,6 +616,7 @@ fr: {
   nav_agenda:"Agenda",
   nav_gesch:"Histoire",
   nav_samen:"Partenariats",
+  nav_grond:"Bibliothèque de terres",
   nav_voorbij:"Activités passées",
   nav_huren:"Utilisation de l'église",
   nav_steunen:"Soutenir",
@@ -737,6 +740,7 @@ en: {
   nav_agenda:"Agenda",
   nav_gesch:"History",
   nav_samen:"Partners",
+  nav_grond:"Soil Library",
   nav_voorbij:"Past activities",
   nav_huren:"Use of the church",
   nav_steunen:"Support",
@@ -864,6 +868,7 @@ de: {
   nav_agenda:"Programm",
   nav_gesch:"Geschichte",
   nav_samen:"Kooperationen",
+  nav_grond:"Erdbibliothek",
   nav_voorbij:"Vergangene Aktivitäten",
   nav_huren:"Nutzung der Kirche",
   nav_steunen:"Unterstützen",
@@ -987,6 +992,7 @@ es: {
   nav_agenda:"Agenda",
   nav_gesch:"Historia",
   nav_samen:"Colaboraciones",
+  nav_grond:"Biblioteca de tierras",
   nav_voorbij:"Actividades pasadas",
   nav_huren:"Uso de la iglesia",
   nav_steunen:"Apoyar",
@@ -1111,6 +1117,7 @@ ar: {
   nav_agenda:"جدول الأنشطة",
   nav_gesch:"التاريخ",
   nav_samen:"الشراكات",
+  nav_grond:"مكتبة التربة",
   nav_voorbij:"أنشطة سابقة",
   nav_huren:"استخدام الكنيسة",
   nav_steunen:"الدعم",
@@ -1312,7 +1319,7 @@ const FIXED = [
   { datum:'2026-05-14', tijd:'11:00', type:'viering', tk:'ev_drempel' },
   { datum:'2026-05-23', tijd:'19:00', type:'viering', tk:'ev_pinksterwake', extra:'' },       //{ datum:'2026-05-23', tijd:'19:00', type:'viering', tk:'ev_pinksterwake', extra:'Johnny De Mot' },
   { datum:'2026-05-24', tijd:'11:00', type:'woord', tk:'ev_pinkster', extra:'', rol:'' },        //{ datum:'2026-05-24', tijd:'11:00', type:'woord', tk:'ev_pinkster', extra:'Katia Vanhemelryck & Nieneke Heesen', rol:'voorgangers' },
-  { datum:'2026-05-30', tijd:'19:00', type:'viering', tk: 'ev_lgbtq' },
+  { datum:'2026-05-30', tijd:'19:00', type:'viering', tk:'ev_lgbtq' },
   { datum:'2026-06-14', tijd:'10:00', type:'viering', tk:'ev_14juni' },
   { datum:'2026-06-26', tijd:'19:00', type:'viering', tk:'ev_concert_juni', extra:'Baptiste Zeronian', gratis:true },
 ];
@@ -1591,7 +1598,17 @@ samenwerking: ()=>`
   <div class="partner"><strong>${t('p_klank')}</strong><p>${t('p_klank_desc')} <a href="https://www.lasemaineduson.be" target="_blank">${t('p_klank_link')}</a></p></div>
   <div class="partner"><strong>${t('p_meesters')}</strong><p>${t('p_meesters_desc')} <a href="https://www.flemishmastersinsitu.com/nl/locaties/onze-lieve-vrouw-van-goede-bijstandkerk-brussel" target="_blank">${t('p_meesters_link')}</a></p></div>
 </section>`,
-
+  
+grond: ()=>`
+<section class="section" style="padding:0;border:none;margin:0;">
+  <iframe
+    src="grond.html"
+    style="width:100%;height:calc(100vh - 52px);border:none;display:block;"
+    title="Grondbibliotheek"
+    loading="lazy"
+  ></iframe>
+</section>`,
+  
 voorbij: ()=>`
 <section class="section">
   <h2 class="section-title">${t('voorbij_title')}</h2>
@@ -1778,6 +1795,22 @@ function sidebarHTML() {
 
 /* ─── ROUTER ─── */
 function render(key) {
+  // Volledig scherm voor grond-pagina
+  const pageWrap = document.querySelector('.page-wrap');
+  const sidebar  = document.getElementById('sidebar');
+  const twoCol   = document.querySelector('.two-col');
+
+  if (key === 'grond') {
+    pageWrap.style.maxWidth  = '100%';
+    pageWrap.style.padding   = '0';
+    twoCol.style.display     = 'block';
+    sidebar.style.display    = 'none';
+  } else {
+    pageWrap.style.maxWidth  = '';
+    pageWrap.style.padding   = '';
+    twoCol.style.display     = '';
+    sidebar.style.display    = '';
+  }
   const fn = PAGES[key];
   const noticeKey = `gb_notice_${LANG}`;
   const noticeSeen = sessionStorage.getItem(noticeKey);
@@ -1792,7 +1825,7 @@ function render(key) {
     : '<section class="section"><p>404</p></section>';
   document.getElementById('sidebar').innerHTML = sidebarHTML();
   document.querySelectorAll('nav a[data-page]').forEach(a => a.classList.toggle('active', a.dataset.page===key));
-  const pageKey = {agenda:'nav_agenda',geschiedenis:'nav_gesch',samenwerking:'nav_samen',voorbij:'nav_voorbij',huren:'nav_huren',steunen:'nav_steunen',contact:'nav_contact'}[key];
+  const pageKey = {agenda:'nav_agenda',geschiedenis:'nav_gesch',samenwerking:'nav_samen',grond:'nav_grond',voorbij:'nav_voorbij',huren:'nav_huren',steunen:'nav_steunen',contact:'nav_contact'}[key];
   document.title = (t(pageKey)||key) + ' — ' + (t('hero_title')||'Goede Bijstand').replace('\n',' ');
 }
 
