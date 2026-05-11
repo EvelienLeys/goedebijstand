@@ -423,13 +423,10 @@ body.rtl .translation-notice {
   <p class="hero-sub" data-i18n="hero_sub">
     Nederlandstalige parochie in Brussel-centrum
   </p>
-  <p class="hero-link">
-    <a href="https://www.paulusgemeenschappen.be" target="_blank">paulusgemeenschappen.be →</a>
-  </p>
   <p class="hero-date" data-i18n="hero_date">Kolenmarkt 91 · 1000 Brussel</p>
 </div>
   <div class="hero-scroll" onclick="document.getElementById('nav').scrollIntoView({behavior:'smooth'})">
-    <span data-i18n="hero_scroll">Ontdekken</span>
+    <span data-i18n="hero_scroll" style="font-size:1.4rem;letter-spacing:0.25em;">🚪 Ontdekken</span>
     <div class="hero-scroll-line"></div>
   </div>
 </section>
@@ -1682,6 +1679,20 @@ contact: ()=>`
     </div>
     <a class="btn" href="mailto:kerkfabriek@goedebijstand.brussels">${t('contact_msg')}</a>
   </div>
+  <div class="ornament">✦ ✦ ✦</div>
+  <p class="subsection" style="font-style:italic;font-size:0.9rem;color:var(--muted);margin-bottom:0.8rem;">Voor vragen i.v.m. de parochie / pastores</p>
+  <div class="contact-box" style="margin-bottom:1.5rem;">
+    <div class="icon">
+      <img src="paulusgemeenschappen_logo.png" alt="Paulusgemeenschappen" style="width:120px;height:auto;object-fit:contain;">
+    </div>
+    <div class="txt">
+      <p><strong>Paulusgemeenschappen</strong></p>
+      <p style="font-size:0.85rem;color:var(--muted);">Katholieke Kerk Brussel</p>
+    </div>
+    <a class="btn" href="https://www.paulusgemeenschappen.be/nl/contact" target="_blank">Contactformulier →</a>
+  </div>
+  <div class="ornament">✦ ✦ ✦</div>
+  <p class="subsection">${t('contact_open_title')}</p>
   <div class="ornament">✦ ✦ ✦</div>
   <p class="subsection">${t('contact_open_title')}</p>
   <div class="huren-grid">
