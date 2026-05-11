@@ -518,6 +518,7 @@ nl: {
   ev_drempel:"Onze-Lieve-Heer Hemelvaart met <a href='https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/drempelviering' target='_blank' rel='noopener noreferrer'>Drempelviering</a>",
   ev_pinksterwake:"<a href='https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/pinksterwake' target='_blank' rel='noopener noreferrer'>Pinksterwake</a> (uitzonderlijk geen viering LGBTQ+)",
   ev_pinkster:"Pinksteren - Woorddienst met eucharistie",
+  ev_cleanup: "Clean-Up",
   ev_14juni: "Geen viering (wegens tv-mis in Evere: iedereen welkom - <a href='https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/tv-mis'>meer info</a>)",
   ev_concert_juni:"Barokconcert klavecimbel en baroktrombone",
   gesch_title:"Geschiedenis van het gebouw",
@@ -1317,6 +1318,7 @@ const FIXED = [
   { datum:'2026-04-04', tijd:'21:00', type:'viering', tk:'ev_vigil' },
   { datum:'2026-04-05', tijd:'11:00', type:'viering', tk:'ev_easter' },
   { datum:'2026-05-14', tijd:'11:00', type:'viering', tk:'ev_drempel' },
+  { datum:'2026-05-17', tijd:'12:00', type:'cleanup', tk:'ev_cleanup', link:'https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/zorg-voor-de-schepping' },
   { datum:'2026-05-23', tijd:'19:00', type:'viering', tk:'ev_pinksterwake', extra:'' },       //{ datum:'2026-05-23', tijd:'19:00', type:'viering', tk:'ev_pinksterwake', extra:'Johnny De Mot' },
   { datum:'2026-05-24', tijd:'11:00', type:'woord', tk:'ev_pinkster', extra:'', rol:'' },        //{ datum:'2026-05-24', tijd:'11:00', type:'woord', tk:'ev_pinkster', extra:'Katia Vanhemelryck & Nieneke Heesen', rol:'voorgangers' },
   { datum:'2026-05-30', tijd:'19:00', type:'viering', tk:'ev_lgbtq' },
@@ -1467,11 +1469,15 @@ function agendaHTML() {
   ev.tk === 'ev_pinkster' ? '✝' :
   ev.tk === 'ev_pinksterwake' ? '✝' :
   ev.type === 'viering' ? '✝' :
-  ev.tekst?.includes(t('ev_sun_eucharistie')) ? '✝' :
+  ev.type === 'cleanup' ? `<img src="paulusgemeenschappen_logo_tekening.png" style="height:1.1em;vertical-align:middle;display:inline-block;">` :
+ev.tekst?.includes(t('ev_sun_eucharistie')) ? '✝' :
   ev.tekst?.includes(t('ev_sun_woord')) ? '✝' :
+  ev.type === 'cleanup' ? `<img src="paulusgemeenschappen_logo_tekening.png" style="height:1.1em;vertical-align:middle;display:inline-block;">` :
   '◆'
 }</span>
-          <span>${ev.tekst}${ev.gratis
+          <span>${ev.link
+            ? `<a href="${ev.link}" target="_blank">${ev.tekst}</a>`
+            : ev.tekst}${ev.gratis
             ? `<span style="margin-left:0.5rem;font-size:0.75rem;font-weight:600;color:var(--gold-dk);">(gratis)</span>`
             : ''}${ev.voorganger
             ? `<span style="margin-left:0.7rem;font-size:0.78rem;color:var(--muted);font-style:italic;">— ${ev.rol === 'voorgangers' ? 'Voorgangers' : t('ev_voorganger')}: ${ev.voorganger}</span>`
