@@ -234,7 +234,7 @@ body.rtl .section-title::after { margin-left: 0; margin-right: 0.5rem; }
 .events-cell { padding: 0.4rem 1rem; display: flex; flex-direction: column; justify-content: center; }
 .ev-row { display: flex; align-items: baseline; gap: 0.5rem; padding: 0.06rem 0; font-size: 0.86rem; color: var(--stone); }
 .ev-time { font-family: var(--font-ui); font-size: 0.7rem; font-weight: 600; color: var(--gold-dk); min-width: 40px; flex-shrink: 0; }
-.ev-dot { font-size: 0.5rem; color: var(--gold); flex-shrink: 0; }
+.ev-dot { font-size: 1rem; color: var(--gold); flex-shrink: 0; }
 .agenda-empty { padding: 1.2rem; font-style: italic; color: var(--muted); font-size: 0.9rem; }
 
 /* ── CARDS ── */
@@ -1456,8 +1456,7 @@ function agendaHTML() {
 
   if (!count) html += `<div class="agenda-empty">${t('ag_empty')}</div>`;
   html += '</div>';
-  html += `<p style="margin-top:0.8rem;font-size:0.8rem;font-style:italic;color:var(--muted);">◆ ${t('ag_leg_viering')} &nbsp;|&nbsp; ◆ ${t('ag_leg_taize')} &nbsp;|&nbsp; ◆ ${t('ag_leg_night')} &nbsp;|&nbsp; ◆ ${t('ag_leg_act')}</p>`;
-  return html;
+  html += `<p style="margin-top:0.8rem;font-size:0.8rem;font-style:italic;color:var(--muted);">✝ ${t('ag_leg_viering')} &nbsp;|&nbsp; ✝ ${t('ag_leg_taize')} &nbsp;|&nbsp; 🌙 ${t('ag_leg_night')} &nbsp;|&nbsp; 🎵 ${t('ag_leg_act')}</p>`;  return html;
 }
 
 /* ─── PAGES ─── */
