@@ -1434,7 +1434,19 @@ function agendaHTML() {
       <div class="events-cell">
         ${evs.map(ev => `<div class="ev-row">
           <span class="ev-time">${ev.tijd}</span>
-          <span class="ev-dot">◆</span>
+          <span class="ev-dot">${
+  ev.type === 'nacht' ? '🌙' :
+  ev.type === 'taize' ? '✝' :
+  ev.tk === 'ev_lgbtq' ? '✝' :
+  ev.tk === 'ev_concert_juni' ? '🎵' :
+  ev.tk === 'ev_drempel' ? '✝👼' :
+  ev.tk === 'ev_pinkster' ? '✝' :
+  ev.tk === 'ev_pinksterwake' ? '✝' :
+  ev.type === 'viering' ? '✝' :
+  ev.tekst?.includes(t('ev_sun_eucharistie')) ? '✝' :
+  ev.tekst?.includes(t('ev_sun_woord')) ? '✝' :
+  '◆'
+}</span>
           <span>${ev.tekst}${ev.gratis
             ? `<span style="margin-left:0.5rem;font-size:0.75rem;font-weight:600;color:var(--gold-dk);">(gratis)</span>`
             : ''}${ev.voorganger
