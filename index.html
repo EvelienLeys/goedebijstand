@@ -499,10 +499,12 @@ nl: {
   ag_leg_taize:"Taizé",
   ag_leg_night:"Bijstand by Night",
   ag_leg_act:"Activiteit",
+  ag_leg_lgbtq: "LGBTQ+",
+  ag_leg_concert: "Concert",
+  ag_leg_drempel: "Kinderdienst",
   ev_sun_eucharistie:"Eucharistieviering",
   ev_sun_woord:"Woorddienst met communie",
-  ev_voorganger:"Voorganger",
-  
+  ev_voorganger:"Voorganger",  
   ev_taize:"Gebed in de geest van Taizé",
   ev_night:"Bijstand by Night (18–22 u)",
   ev_lgbtq: 'Oecumenische viering van de LGBTQ+-gemeenschap',
@@ -625,6 +627,9 @@ fr: {
   ag_leg_taize:"Taizé",
   ag_leg_night:"Bon Secours by Night",
   ag_leg_act:"Activité",
+  ag_leg_lgbtq: "LGBTQ+",
+  ag_leg_concert: "Concert",
+  ag_leg_drempel: "Célébration enfants",
   ev_sun_eucharistie:"Célébration de l'Eucharistie",
   ev_sun_woord:"Célébration de la Parole avec communion",
   ev_voorganger:"Célébrant",
@@ -745,6 +750,9 @@ en: {
   ag_leg_taize:"Taizé",
   ag_leg_night:"Good Help by Night",
   ag_leg_act:"Activity",
+  ag_leg_lgbtq: "LGBTQ+",
+  ag_leg_concert: "Concert",
+  ag_leg_drempel: "Children's service",
   ev_sun_eucharistie:"Holy Eucharist",
   ev_sun_woord:"Liturgy of the Word with Holy Communion",
   ev_voorganger:"Celebrant",
@@ -869,6 +877,9 @@ de: {
   ag_leg_taize:"Taizé",
   ag_leg_night:"Guter Beistand by Night",
   ag_leg_act:"Veranstaltung",
+  ag_leg_lgbtq: "LGBTQ+",
+  ag_leg_concert: "Konzert",
+  ag_leg_drempel: "Kindergottesdienst",
   ev_sun_eucharistie:"Eucharistiefeier",
   ev_sun_woord:"Wortgottesdienst mit Kommunion",
   ev_voorganger:"Zelebrant",
@@ -989,6 +1000,9 @@ es: {
   ag_leg_taize:"Taizé",
   ag_leg_night:"Buen Socorro by Night",
   ag_leg_act:"Actividad",
+  ag_leg_lgbtq: "LGBTQ+",
+  ag_leg_concert: "Concierto",
+  ag_leg_drempel: "Celebración infantil",
   ev_sun_eucharistie:"la Eucaristía",
   ev_sun_woord:"Servicio de la Palabra con la Sagrada Comunión",
   ev_voorganger:"Celebrante",
@@ -1110,6 +1124,9 @@ ar: {
   ag_leg_taize:"تيزيه",
   ag_leg_night:"الكنيسة ليلاً",
   ag_leg_act:"نشاط",
+  ag_leg_lgbtq: "LGBTQ+",
+  ag_leg_concert: "حفلة موسيقية",
+  ag_leg_drempel: "قداس الأطفال",
   ev_sun_eucharistie:"القداس الإلهي",
   ev_sun_woord:"قداس مع القربان المقدس",
   ev_voorganger:"المحتفل",
@@ -1456,7 +1473,7 @@ function agendaHTML() {
 
   if (!count) html += `<div class="agenda-empty">${t('ag_empty')}</div>`;
   html += '</div>';
-  html += `<p style="margin-top:0.8rem;font-size:0.8rem;font-style:italic;color:var(--muted);">✝ ${t('ag_leg_viering')} &nbsp;|&nbsp; ✝ ${t('ag_leg_taize')} &nbsp;|&nbsp; 🌙 ${t('ag_leg_night')} &nbsp;|&nbsp; 🎵 ${t('ag_leg_act')}</p>`;  return html;
+  html += `<p style="margin-top:0.8rem;font-size:0.8rem;font-style:italic;color:var(--muted);">✝ ${t('ag_leg_viering')} · ${t('ag_leg_taize')} · ${t('ag_leg_lgbtq')} &nbsp;|&nbsp; 🌙 ${t('ag_leg_night')} &nbsp;|&nbsp; 🎵 ${t('ag_leg_concert')} &nbsp;|&nbsp; ✝👼 ${t('ag_leg_drempel')}</p>`;  return html;
 }
 
 /* ─── PAGES ─── */
