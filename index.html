@@ -1489,7 +1489,8 @@ ev.tekst?.includes(t('ev_sun_eucharistie')) ? '✝' :
 
   if (!count) html += `<div class="agenda-empty">${t('ag_empty')}</div>`;
   html += '</div>';
-  html += `<p style="margin-top:0.8rem;font-size:0.8rem;font-style:italic;color:var(--muted);">✝ ${t('ag_leg_viering')} · ${t('ag_leg_taize')} · ${t('ag_leg_lgbtq')} &nbsp;|&nbsp; 🌙 ${t('ag_leg_night')} &nbsp;|&nbsp; 🎵 ${t('ag_leg_concert')} &nbsp;|&nbsp; ✝👼 ${t('ag_leg_drempel')}</p>`;  return html;
+  html += `<p style="margin-top:0.8rem;font-size:0.8rem;font-style:italic;color:var(--muted);">✝ ${t('ag_leg_viering')} · ${t('ag_leg_taize')} · ${t('ag_leg_lgbtq')} &nbsp;|&nbsp; 🌙 ${t('ag_leg_night')} &nbsp;|&nbsp; 🎵 ${t('ag_leg_concert')} &nbsp;|&nbsp; 👼 ${t('ag_leg_drempel')} &nbsp;|&nbsp; <img src="paulusgemeenschappen_logo_tekening.png" style="height:1em;vertical-align:middle;display:inline-block;"> Paulusgemeenschappen</p>`;  
+  return html;
 }
 
 /* ─── PAGES ─── */
