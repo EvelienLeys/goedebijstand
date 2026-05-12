@@ -1321,12 +1321,6 @@ function setLang(l) {
   });
   const cur = document.querySelector('nav a.active');
   render(cur?.dataset.page ?? 'agenda');
-
-  // Stuur taal door naar grondbibliotheek-iframe indien actief
-  const grondFrame = document.querySelector('#main iframe[src="grond.html"]');
-  if (grondFrame) {
-    grondFrame.contentWindow.postMessage({ type: 'setLang', lang: l }, '*');
-  }
 }
 
 /* ─── DATE HELPERS ─── */
@@ -1759,12 +1753,10 @@ samenwerking: ()=>`
 grond: ()=>`
 <section class="section" style="padding:0;border:none;margin:0;">
   <iframe
-    id="grond-iframe"
     src="grond.html"
     style="width:100%;height:calc(100vh - 52px);border:none;display:block;"
     title="Grondbibliotheek"
     loading="lazy"
-    onload="syncGrondLang(this)"
   ></iframe>
 </section>`,
   
@@ -1953,7 +1945,6 @@ function sidebarHTML() {
 }
 
 /* ─── ROUTER ─── */
-  
 function render(key) {
   // Volledig scherm voor grond-pagina
   const pageWrap = document.querySelector('.page-wrap');
@@ -2122,12 +2113,6 @@ function sluitFoto() {
   document.body.style.overflow = '';
 }
 
-  function syncGrondLang(iframe) {
-  try {
-    iframe.contentWindow.postMessage({ type: 'setLang', lang: LANG }, '*');
-  } catch(e) {}
-}
-  
 </script>
 </body>
 </html>
