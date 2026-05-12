@@ -2014,6 +2014,7 @@ function gdprAccept() {
 function showGdpr() {
   document.getElementById('gdprOverlay').classList.remove('hidden');
 }
+  
 /* ─── INIT ─── */
 (function init() {
   const isRtl = LANGS[LANG]?.rtl === true;
@@ -2031,19 +2032,101 @@ function showGdpr() {
 })();
 
 function toggleTab(id) {
-  ['kerkfabriek','parochieploeg','bijstandnight'].forEach(name => {
+  ['kerkfabriek','parochieploeg','wereldwijd'].forEach(name => {
     const tab = document.getElementById('tab-' + name);
     const btn = document.getElementById('btn-' + name);
     if (!tab) return;
     const isTarget = name === id;
-    const isOpen = tab.style.display === 'block';
+    const isOpen   = tab.style.display === 'block';
     tab.style.display = (isTarget && !isOpen) ? 'block' : 'none';
     if (btn) {
       btn.style.background = (isTarget && !isOpen) ? 'var(--stone-mid)' : 'var(--cream)';
-      btn.style.color = (isTarget && !isOpen) ? 'var(--gold-lt)' : 'var(--stone-mid)';
+      btn.style.color       = (isTarget && !isOpen) ? 'var(--gold-lt)'   : 'var(--stone-mid)';
     }
   });
+
+  if (id === 'wereldwijd') {
+    const tab    = document.getElementById('tab-wereldwijd');
+    const iframe = document.getElementById('wereldwijd-iframe');
+    const isNowOpen = tab.style.display === 'block';
+
+    if (isNowOpen) {
+      // Laad iframe als dat nog niet gedaan is
+      if (iframe && !iframe.src.includes('grond.html')) {
+        iframe.src = 'grond.html';
+      }
+      // Zet tab in fullscreen via CSS (werkt op iOS + Android)
+      tab.classList.add('tab-fullscreen');
+      document.body.style.overflow = 'hidden';
+    }
+  }
 }
+
+function toggleFullscreen() {
+  // Sluit de wereldwijd tab volledig
+  sluitWerelwijd();
+}
+
+function sluitWerelwijd() {
+  const tab = document.getElementById('tab-wereldwijd');
+  const btn = document.getElementById('btn-wereldwijd');
+  tab.classList.remove('tab-fullscreen');
+  tab.style.display = 'none';
+  document.body.style.overflow = '';
+  if (btn) {
+    btn.style.background = 'var(--cream)';
+    btn.style.color = 'var(--stone-mid)';
+  }
+}
+
+function minimaliserKaart() {
+  const iframe = document.getElementById('wereldwijd-iframe');
+  const btnMin = document.getElementById('btn-minimaliseer');
+  if (iframe) iframe.contentWindow.postMessage('minimaliserKaart', '*');
+  if (btnMin) btnMin.style.display = 'none';
+}
+
+window.addEventListener('message', (e) => {
+  if (e.data === 'kaartGemaximaliseerd') {
+    // iframe meldt: kaart is max → niets nodig, tab is al fullscreen
+  }
+  if (e.data === 'kaartGeminimaliseerd') {
+    // iframe meldt: kaart terug naar normaal → tab blijft open maar niet fullscreen
+    const tab = document.getElementById('tab-wereldwijd');
+    tab.classList.remove('tab-fullscreen');
+    document.body.style.overflow = '';
+    // Scroll naar de tab
+    setTimeout(() => tab.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+  }
+   if (e.data === 'sluitWerelwijd') {
+    sluitWerelwijd();
+  }
+}); 
+
+function openFoto() {
+  let overlay = document.getElementById('foto-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'foto-overlay';
+    overlay.style.cssText = 'position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,0.92);display:flex;align-items:center;justify-content:center;padding:1rem;cursor:zoom-out;';
+    overlay.innerHTML = `
+      <img src="goede_bijstand_welkomstfoto.jpg" style="max-width:100%;max-height:100%;object-fit:contain;border-radius:2px;">
+      <button onclick="event.stopPropagation();sluitFoto()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:white;font-size:2.5rem;cursor:pointer;line-height:1;">✕</button>
+    `;
+    overlay.onclick = sluitFoto;
+    document.body.appendChild(overlay);
+  } else {
+    overlay.style.display = 'flex';
+  }
+  document.body.style.overflow = 'hidden';
+}
+
+function sluitFoto() {
+  const overlay = document.getElementById('foto-overlay');
+  if (overlay) overlay.style.display = 'none';
+  document.body.style.overflow = '';
+}
+
 </script>
 </body>
 </html>
