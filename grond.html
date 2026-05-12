@@ -60,7 +60,138 @@ body { background: var(--cream); color: var(--ink); font-family: 'Jost', sans-se
     /* ── MAP SECTION ── */
     .map-section { padding: 0 0 16px; }
     .section-label { text-align: center; font-family: 'Playfair Display', serif; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
-   
+
+    /* ── LAYER TOGGLE ── */
+    .layer-toggle {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 14px;
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      overflow: hidden;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .layer-btn {
+      flex: 1;
+      padding: 10px 16px;
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      background: var(--parchment);
+      color: var(--sepia);
+      border-right: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .layer-btn:last-child { border-right: none; }
+    .layer-btn.active { background: var(--ink); color: var(--paper); }
+    .layer-btn:hover:not(.active) { background: var(--rule); color: var(--ink); }
+
+    #map { width: 100%; height: clamp(320px, 55vw, 560px); border-top: 2px solid var(--rule); border-bottom: 2px solid var(--rule); }
+    .map-caption { text-align: center; font-family: 'Jost', sans-serif; font-style: italic; font-size: 0.85rem; color: var(--gold); padding: 10px 24px 0; }
+    .leaflet-container { background: #c9d8e8 !important; font-family: 'Jost', sans-serif !important; }
+    .leaflet-popup-content-wrapper { background: var(--ink); color: var(--paper); border-radius: 2px; box-shadow: 0 4px 20px rgba(0,0,0,0.35); border: 1px solid var(--gold); }
+    .leaflet-popup-tip { background: var(--ink); }
+    .leaflet-popup-content { margin: 10px 14px; font-family: 'Jost', sans-serif; font-size: 14px; line-height: 1.5; }
+    .leaflet-popup-content strong { font-family: 'Playfair Display', serif; font-size: 16px; display: block; color: var(--rule); letter-spacing: 0.02em; }
+    .leaflet-popup-close-button { color: var(--rule) !important; }
+
+    .map-legend { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; padding: 14px 24px 0; font-family: 'Playfair Display', serif; font-size: 13px; letter-spacing: 0.08em; }
+    .legend-item { display: flex; align-items: center; gap: 6px; color: var(--sepia); }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+
+    /* ── MAP COUNT ── */
+    .map-count { text-align: center; font-family: 'Jost', sans-serif; font-style: italic; font-size: 0.85rem; color: var(--rule); padding: 8px 24px 0; min-height: 1.5em; }
+
+    /* ── SCHELP FORM ── */
+    .schelp-panel {
+      display: none;
+      max-width: 700px;
+      margin: 28px auto 0;
+      padding: 0 24px;
+    }
+    .schelp-panel.visible { display: block; }
+    .schelp-form-wrap {
+      background: var(--parchment);
+      border: 1px solid var(--rule);
+      border-left: 4px solid var(--gold);
+      border-radius: 2px;
+      padding: 22px 26px;
+    }
+    .schelp-form-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .schelp-form-intro {
+      font-family: 'Jost', sans-serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--sepia);
+      margin-bottom: 16px;
+    }
+    .schelp-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 520px) { .schelp-form-row { grid-template-columns: 1fr; } }
+    .schelp-field { display: flex; flex-direction: column; gap: 4px; }
+    .schelp-label { font-family: 'Playfair Display', serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sepia); }
+    .schelp-req { color: var(--gold); }
+    .schelp-input {
+      font-family: 'Jost', sans-serif;
+      font-size: 1rem;
+      color: var(--ink);
+      background: var(--cream);
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      padding: 7px 10px;
+      outline: none;
+      transition: border-color 0.18s, box-shadow 0.18s;
+      width: 100%;
+    }
+    .schelp-input:focus { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(58,123,191,0.15); }
+    .schelp-textarea { resize: vertical; min-height: 56px; }
+    .btn-schelp {
+  display: inline-block;
+  margin-top: 14px;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: #1B3A5C;
+  color: #F0F6FB;
+  border: none;
+  border-radius: 2px;
+  padding: 0.55rem 1.6rem;
+  cursor: pointer;
+  transition: background 0.25s;
+}
+.btn-schelp:hover { background: #2B5F8A; color: #E8F1FF; }
+.btn-schelp:disabled { opacity: 0.5; cursor: default; }
+    .schelp-status { font-family: 'Jost', sans-serif; font-style: italic; font-size: 0.9rem; color: var(--gold); margin-left: 12px; }
+
+    /* ── SCHELP LIST ── */
+    .schelp-list-wrap {
+      max-width: 700px;
+      margin: 20px auto 0;
+      padding: 0 24px;
+    }
+    .schelp-list-title { font-family: 'Playfair Display', serif; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .schelp-list { list-style: none; border-top: 1px solid var(--rule); }
+    .schelp-list li { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 7px 0; border-bottom: 1px solid var(--parchment); font-size: 0.92rem; }
+    .schelp-list-left { color: var(--ink); }
+    .schelp-list-date { font-style: italic; font-size: 0.78rem; color: var(--rule); white-space: nowrap; flex-shrink: 0; }
 
     /* ── ARTICLE SECTION ── */
     .article-section { background: var(--parchment); border-top: 3px double var(--rule); border-bottom: 3px double var(--rule); padding: 56px 24px; }
@@ -141,11 +272,46 @@ footer a:hover { color: #E8F1FF; }
 <section id="kaart" class="map-section">
   <div class="section-label" id="txt-map-label">Wereldkaart der Bestemmingen</div>
 
+  <!-- Layer toggle -->
+  <div class="layer-toggle" style="display:none;"></div>
+
   <div id="map"></div>
   <div class="map-legend" id="legend"></div>
   <div class="map-count" id="map-count"></div>
   <div class="map-caption" id="txt-map-caption">Klik op een punt om de naam van de locatie te zien — zoom met het scrollwiel of de knoppen links</div>
 </section>
+
+<!-- SCHELP FORM PANEL (shown only in schelp layer) -->
+<div class="schelp-panel" id="schelp-panel" style="display:none!important;">
+  <div class="schelp-form-wrap">
+    <div class="schelp-form-title" id="schelp-form-title">📍 Pin uw schelp op de kaart</div>
+    <div class="schelp-form-intro" id="schelp-form-intro">Hebt u een schelp meegenomen uit de Bijstandskerk als geschenk? Laat zien waar ze terechtgekomen is.</div>
+    <div class="schelp-form-row">
+      <div class="schelp-field">
+        <label class="schelp-label" for="sf-city"><span id="lbl-city">Stad of land</span> <span class="schelp-req">*</span></label>
+        <input id="sf-city" type="text" class="schelp-input" placeholder="bijv. Tokyo, Japan" autocomplete="off">
+      </div>
+      <div class="schelp-field">
+        <label class="schelp-label" for="sf-name" id="lbl-name">Uw naam (optioneel)</label>
+        <input id="sf-name" type="text" class="schelp-input" placeholder="bijv. Marie">
+      </div>
+    </div>
+    <div class="schelp-field" style="margin-top:10px;">
+      <label class="schelp-label" for="sf-msg" id="lbl-msg">Berichtje (optioneel)</label>
+      <textarea id="sf-msg" class="schelp-input schelp-textarea" rows="2" placeholder="bijv. Cadeau voor mijn zus"></textarea>
+    </div>
+    <div style="display:flex;align-items:center;flex-wrap:wrap;">
+      <button class="btn-schelp" id="sf-submit" onclick="schelpSubmit()">🐚 <span id="btn-pin-label">Zet pin op de kaart</span></button>
+      <span class="schelp-status" id="sf-status"></span>
+    </div>
+  </div>
+</div>
+
+<!-- SCHELP LIST -->
+<div class="schelp-list-wrap" id="schelp-list-wrap" style="display:none!important;">
+  <div class="schelp-list-title" id="schelp-list-title">Alle schelpen</div>
+  <ul class="schelp-list" id="schelp-list"></ul>
+</div>
 
 <!-- ARTICLE -->
 <section id="verhaal" class="article-section">
@@ -170,7 +336,7 @@ footer a:hover { color: #E8F1FF; }
 
 <!-- FOOTER -->
 <footer>
-  <p id="txt-footer">Een project van de Goede Bijstand &nbsp;·&nbsp; <a href="https://www.openstreetmap.org/search?query=bijstandsstraat+5&zoom=20&minlon=4.346058368682862&minlat=50.84508851087027&maxlon=4.349424540996552&maxlat=50.84610973956321#map=20/50.8459345/4.3477079&layers=H">Bijstandsstraat 5</a>, 1000 Brussel</p>
+  <p id="txt-footer">Een project van de Goede Bijstand &nbsp;·&nbsp; <a href="https://www.google.com/maps/place/Rue+de+Bon+Secours+5,+1000+Bruxelles/@50.8459531,4.3451545,16z">Bijstandsstraat 5</a>, 1000 Brussel</p>
 </footer>
 
 <script>
@@ -407,6 +573,35 @@ let schelpPins = [];
 ══════════════════════════════════════════ */
 let activeLayer = 'aarde';
 
+function setLayer(layer) {
+  activeLayer = layer;
+
+  // Toggle buttons
+  document.getElementById('btn-layer-aarde').classList.toggle('active', layer === 'aarde');
+  document.getElementById('btn-layer-schelp').classList.toggle('active', layer === 'schelp');
+
+  // Show/hide aarde markers
+  aardeMarkers.forEach(m => layer === 'aarde' ? m.addTo(map) : map.removeLayer(m));
+
+  // Show/hide schelp markers + Brussel pin
+  if (layer === 'schelp') {
+    brusselMarker.addTo(map);
+    schelpMarkers.forEach(m => m.addTo(map));
+  } else {
+    map.removeLayer(brusselMarker);
+    schelpMarkers.forEach(m => map.removeLayer(m));
+  }
+
+  // Toggle legend vs schelp form
+  document.getElementById('legend').style.display = layer === 'aarde' ? 'flex' : 'none';
+  document.getElementById('map-count').style.display = layer === 'schelp' ? 'block' : 'none';
+  document.getElementById('schelp-panel').classList.toggle('visible', layer === 'schelp');
+  document.getElementById('schelp-list-wrap').style.display = layer === 'schelp' && schelpPins.length > 0 ? 'block' : 'none';
+
+  updateCount();
+  if (layer === 'aarde') { buildLegend(activeLang); } 
+}
+
 /* ══════════════════════════════════════════
    SCHELP STORAGE & RENDERING
 ══════════════════════════════════════════ */
@@ -555,16 +750,29 @@ function applyLanguage(lang) {
   document.getElementById('stat-stories').textContent      = t.statStories;
   document.getElementById('txt-map-label').textContent     = t.mapLabel;
   document.getElementById('txt-map-caption').textContent   = t.mapCaption;
+  document.getElementById('layer-aarde-label').textContent = t.layerAarde;
+  document.getElementById('layer-schelp-label').textContent= t.layerSchelp;
+  document.getElementById('schelp-form-title').textContent = t.schelpFormTitle;
+  document.getElementById('schelp-form-intro').textContent = t.schelpFormIntro;
+  document.getElementById('lbl-city').textContent          = t.lblCity;
+  document.getElementById('lbl-name').textContent          = t.lblName;
+  document.getElementById('lbl-msg').textContent           = t.lblMsg;
+  document.getElementById('sf-city').placeholder           = t.cityPh;
+  document.getElementById('sf-name').placeholder           = t.namePh;
+  document.getElementById('sf-msg').placeholder            = t.msgPh;
+  document.getElementById('btn-pin-label').textContent     = t.btnPin;
+  document.getElementById('schelp-list-title').textContent = t.listSchelpTitle;
   document.getElementById('txt-art-headline').textContent  = t.artHeadline;
   document.getElementById('txt-art-deck').textContent      = t.artDeck;
   document.getElementById('txt-art-p1').textContent        = t.artP1;
   document.getElementById('txt-art-p2').textContent        = t.artP2;
   document.getElementById('txt-list-title').textContent    = t.listTitle;
   document.getElementById('txt-list-body').textContent     = t.listBody;
-  document.getElementById('btn-toggle-list').textContent   = t.listBtn;
+  document.getElementById('txt-list-btn').textContent      = t.listBtn;
   document.getElementById('txt-footer').innerHTML          = t.footer;
   updateAardePopups(lang);
   buildLegend(lang);
+  updateCount();
 }
 
   function toggleList() {
@@ -667,10 +875,10 @@ function applyLanguage(lang) {
 /* ══════════════════════════════════════════
    INIT
 ══════════════════════════════════════════ */
-// Start: alle grondpunten op de kaart
+// Start with aarde layer active
 aardeMarkers.forEach(m => m.addTo(map));
-buildLegend('nl');
 applyLanguage('nl');
+setLayer('aarde');
 document.getElementById('map-count').style.display = 'none';
 ;
 
@@ -683,17 +891,6 @@ document.querySelectorAll('.lang-btn').forEach(btn => {
 
 // Load shell pins from shared storage
 loadSchelpPins();
-
- // Ontvang taalwijziging van de kerksite (parent)
-window.addEventListener('message', function(e) {
-  if (e.data && e.data.type === 'setLang' && TX[e.data.lang]) {
-    const safeLang = TX[e.data.lang] ? e.data.lang : 'en';
-    document.querySelectorAll('.lang-btn').forEach(b =>
-      b.classList.toggle('active', b.dataset.lang === safeLang)
-    );
-    applyLanguage(safeLang);
-  }
-});
 </script>
 </body>
 </html>
