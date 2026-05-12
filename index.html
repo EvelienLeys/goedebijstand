@@ -1568,10 +1568,41 @@ const IMG_ALT = 'https://www.flemishmastersinsitu.com/sites/vlaamsemeestersinsit
 
 const PAGES = {
 
-  welkom: ()=>`
+welkom: ()=>`
 <section class="section">
-  <img src="goede_bijstand_welkomstfoto.jpg" class="church-photo" style="height:340px;object-fit:cover;object-position:center 30%;" alt="Interieur Goede Bijstand">
-  <p style="font-family:var(--font-disp);font-size:1.1rem;font-style:italic;color:var(--stone-mid);margin-bottom:1.6rem;">${t('welkom_intro')}</p>
+<img src="goede_bijstand_welkomstfoto.jpg" 
+     class="church-photo" 
+     style="height:340px;object-fit:cover;object-position:center 30%;cursor:zoom-in;" 
+     alt="Interieur Goede Bijstand"
+     onclick="document.getElementById('foto-overlay').style.display='flex';document.body.style.overflow='hidden'">
+
+<div id="foto-overlay" 
+     onclick="this.style.display='none';document.body.style.overflow=''" 
+     style="display:none;position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,0.92);cursor:zoom-out;align-items:center;justify-content:center;padding:1rem;">
+  <img src="goede_bijstand_welkomstfoto.jpg" 
+       alt="Interieur Goede Bijstand" 
+       style="max-width:100%;max-height:100%;object-fit:contain;border-radius:var(--r);box-shadow:var(--shadow-lg);">
+  <button onclick="event.stopPropagation();document.getElementById('foto-overlay').style.display='none';document.body.style.overflow=''" 
+          style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:white;font-size:2rem;cursor:pointer;line-height:1;">✕</button>
+</div>
+<div style="background:var(--parchment);border:1px solid var(--border);border-left:5px solid var(--gold);border-radius:var(--r);padding:1.4rem 1.6rem;margin:1.4rem 0 1.8rem;">
+  <h2 class="section-title" style="font-size:1.3rem;margin-bottom:1.2rem;">📰 Nieuws</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;align-items:start;">
+
+    <a href="https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/drempelviering" target="_blank" rel="noopener" style="display:block;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);transition:box-shadow var(--t),transform var(--t);" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='var(--shadow-lg)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--shadow)'">
+      <img src="drempelviering_2026_affiche.png" alt="Drempelviering op Hemelvaart" style="width:100%;display:block;">
+    </a>
+
+    <a href="https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/zorg-voor-de-schepping" target="_blank" rel="noopener" style="display:block;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);transition:box-shadow var(--t),transform var(--t);" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='var(--shadow-lg)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--shadow)'">
+      <img src="cleanup_affiche.png" alt="Clean-up: Zorg voor de schepping" style="width:100%;display:block;">
+    </a>
+
+  </div>
+</div>
+
+    </div>
+  </div>
+
   <div class="card-grid">
     <div class="card" onclick="go('agenda')">
       <div class="card-icon">📅</div>
