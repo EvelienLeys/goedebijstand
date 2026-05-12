@@ -336,7 +336,7 @@ footer a:hover { color: #E8F1FF; }
 
 <!-- FOOTER -->
 <footer>
-  <p id="txt-footer">Een project van de Goede Bijstand &nbsp;·&nbsp; <a href="https://www.google.com/maps/place/Rue+de+Bon+Secours+5,+1000+Bruxelles/@50.8459531,4.3451545,16z">Bijstandsstraat 5</a>, 1000 Brussel</p>
+  <p id="txt-footer">Een project van de Goede Bijstand &nbsp;·&nbsp; <a href="https://www.openstreetmap.org/search?query=bijstandsstraat+5&zoom=20&minlon=4.346058368682862&minlat=50.84508851087027&maxlon=4.349424540996552&maxlat=50.84610973956321#map=20/50.8459345/4.3477079&layers=H">Bijstandsstraat 5</a>, 1000 Brussel</p>
 </footer>
 
 <script>
@@ -573,35 +573,6 @@ let schelpPins = [];
 ══════════════════════════════════════════ */
 let activeLayer = 'aarde';
 
-function setLayer(layer) {
-  activeLayer = layer;
-
-  // Toggle buttons
-  document.getElementById('btn-layer-aarde').classList.toggle('active', layer === 'aarde');
-  document.getElementById('btn-layer-schelp').classList.toggle('active', layer === 'schelp');
-
-  // Show/hide aarde markers
-  aardeMarkers.forEach(m => layer === 'aarde' ? m.addTo(map) : map.removeLayer(m));
-
-  // Show/hide schelp markers + Brussel pin
-  if (layer === 'schelp') {
-    brusselMarker.addTo(map);
-    schelpMarkers.forEach(m => m.addTo(map));
-  } else {
-    map.removeLayer(brusselMarker);
-    schelpMarkers.forEach(m => map.removeLayer(m));
-  }
-
-  // Toggle legend vs schelp form
-  document.getElementById('legend').style.display = layer === 'aarde' ? 'flex' : 'none';
-  document.getElementById('map-count').style.display = layer === 'schelp' ? 'block' : 'none';
-  document.getElementById('schelp-panel').classList.toggle('visible', layer === 'schelp');
-  document.getElementById('schelp-list-wrap').style.display = layer === 'schelp' && schelpPins.length > 0 ? 'block' : 'none';
-
-  updateCount();
-  if (layer === 'aarde') { buildLegend(activeLang); } 
-}
-
 /* ══════════════════════════════════════════
    SCHELP STORAGE & RENDERING
 ══════════════════════════════════════════ */
@@ -750,29 +721,16 @@ function applyLanguage(lang) {
   document.getElementById('stat-stories').textContent      = t.statStories;
   document.getElementById('txt-map-label').textContent     = t.mapLabel;
   document.getElementById('txt-map-caption').textContent   = t.mapCaption;
-  document.getElementById('layer-aarde-label').textContent = t.layerAarde;
-  document.getElementById('layer-schelp-label').textContent= t.layerSchelp;
-  document.getElementById('schelp-form-title').textContent = t.schelpFormTitle;
-  document.getElementById('schelp-form-intro').textContent = t.schelpFormIntro;
-  document.getElementById('lbl-city').textContent          = t.lblCity;
-  document.getElementById('lbl-name').textContent          = t.lblName;
-  document.getElementById('lbl-msg').textContent           = t.lblMsg;
-  document.getElementById('sf-city').placeholder           = t.cityPh;
-  document.getElementById('sf-name').placeholder           = t.namePh;
-  document.getElementById('sf-msg').placeholder            = t.msgPh;
-  document.getElementById('btn-pin-label').textContent     = t.btnPin;
-  document.getElementById('schelp-list-title').textContent = t.listSchelpTitle;
   document.getElementById('txt-art-headline').textContent  = t.artHeadline;
   document.getElementById('txt-art-deck').textContent      = t.artDeck;
   document.getElementById('txt-art-p1').textContent        = t.artP1;
   document.getElementById('txt-art-p2').textContent        = t.artP2;
   document.getElementById('txt-list-title').textContent    = t.listTitle;
   document.getElementById('txt-list-body').textContent     = t.listBody;
-  document.getElementById('txt-list-btn').textContent      = t.listBtn;
+  document.getElementById('btn-toggle-list').textContent   = t.listBtn;
   document.getElementById('txt-footer').innerHTML          = t.footer;
   updateAardePopups(lang);
   buildLegend(lang);
-  updateCount();
 }
 
   function toggleList() {
@@ -875,10 +833,10 @@ function applyLanguage(lang) {
 /* ══════════════════════════════════════════
    INIT
 ══════════════════════════════════════════ */
-// Start with aarde layer active
+// Start: alle grondpunten op de kaart
 aardeMarkers.forEach(m => m.addTo(map));
+buildLegend('nl');
 applyLanguage('nl');
-setLayer('aarde');
 document.getElementById('map-count').style.display = 'none';
 ;
 
@@ -891,6 +849,17 @@ document.querySelectorAll('.lang-btn').forEach(btn => {
 
 // Load shell pins from shared storage
 loadSchelpPins();
+
+ // Ontvang taalwijziging van de kerksite (parent)
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.type === 'setLang' && TX[e.data.lang]) {
+    const safeLang = TX[e.data.lang] ? e.data.lang : 'en';
+    document.querySelectorAll('.lang-btn').forEach(b =>
+      b.classList.toggle('active', b.dataset.lang === safeLang)
+    );
+    applyLanguage(safeLang);
+  }
+});
 </script>
 </body>
 </html>
