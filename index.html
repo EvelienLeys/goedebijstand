@@ -1405,7 +1405,7 @@ function buildAgenda() {
   datum:     sk,
   tijd:      '11:00',
   type:      'viering',
-  tekst:     t(tkSun) + (zondagNr3 ? ' 👼 <em style="font-size:0.82rem;color:var(--muted);">Goede Bijtjes en Mosterdzaadjes</em>' : ''),
+  tekst:     t(tkSun) + (zondagNr3 ? ' 👪 <em style="font-size:0.82rem;color:var(--muted);">Goede Bijtjes en Mosterdzaadjes</em>' : ''),
   voorganger: vg.naam,
   extra:     vg.rol,
   rol:       vg.rol
@@ -1465,7 +1465,7 @@ function agendaHTML() {
   ev.type === 'taize' ? '✝' :
   ev.tk === 'ev_lgbtq' ? '✝' :
   ev.tk === 'ev_concert_juni' ? '🎵' :
-  ev.tk === 'ev_drempel' ? '✝👼' :
+  ev.tk === 'ev_drempel' ? '✝👪' :
   ev.tk === 'ev_pinkster' ? '✝' :
   ev.tk === 'ev_pinksterwake' ? '✝ <img src="paulusgemeenschappen_logo_tekening.png" style="height:1.1em;vertical-align:middle;display:inline-block;">' :
   ev.type === 'viering' ? '✝' :
@@ -1489,7 +1489,7 @@ ev.tekst?.includes(t('ev_sun_eucharistie')) ? '✝' :
 
   if (!count) html += `<div class="agenda-empty">${t('ag_empty')}</div>`;
   html += '</div>';
-  html += `<p style="margin-top:0.8rem;font-size:0.8rem;font-style:italic;color:var(--muted);">✝ ${t('ag_leg_viering')} · ${t('ag_leg_taize')} · ${t('ag_leg_lgbtq')} &nbsp;|&nbsp; 🌙 ${t('ag_leg_night')} &nbsp;|&nbsp; 🎵 ${t('ag_leg_concert')} &nbsp;|&nbsp; 👼 ${t('ag_leg_drempel')} &nbsp;|&nbsp; <img src="paulusgemeenschappen_logo_tekening.png" style="height:1em;vertical-align:middle;display:inline-block;"> Paulusgemeenschappen</p>`;  
+  html += `<p style="margin-top:0.8rem;font-size:0.8rem;font-style:italic;color:var(--muted);">✝ ${t('ag_leg_viering')} · ${t('ag_leg_taize')} · ${t('ag_leg_lgbtq')} &nbsp;|&nbsp; 🌙 ${t('ag_leg_night')} &nbsp;|&nbsp; 🎵 ${t('ag_leg_concert')} &nbsp;|&nbsp; 👪 ${t('ag_leg_drempel')} &nbsp;|&nbsp; <img src="paulusgemeenschappen_logo_tekening.png" style="height:1em;vertical-align:middle;display:inline-block;"> Paulusgemeenschappen</p>`;  
   return html;
 }
 
