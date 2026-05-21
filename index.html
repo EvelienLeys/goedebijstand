@@ -1397,7 +1397,7 @@ const FIXED = [
   { datum:'2026-05-24', tijd:'11:00', type:'woord', tk:'ev_pinkster', extra:'', rol:'' },        //{ datum:'2026-05-24', tijd:'11:00', type:'woord', tk:'ev_pinkster', extra:'Katia Vanhemelryck & Nieneke Heesen', rol:'voorgangers' },
   { datum:'2026-05-30', tijd:'19:00', type:'viering', tk:'ev_lgbtq' },
   { datum:'2026-06-14', tijd:'10:00', type:'viering', tk:'ev_14juni' },
-  { datum:'2026-06-26', tijd:'19:00', type:'viering', tk:'ev_concert_juni', extra:'Baptiste Zeronian', gratis:true },
+  { datum:'2026-06-26', tijd:'19:00', type:'concert', tk:'ev_concert_juni', extra:'Baptiste Zeronian', gratis:true },
 ];
 const ZONDAG_UITZONDERINGEN = {
   '2026-05-10': 'woord',
@@ -1554,7 +1554,7 @@ ev.tekst?.includes(t('ev_sun_eucharistie')) ? '✝' :
             : ev.tekst}${ev.gratis
             ? `<span style="margin-left:0.5rem;font-size:0.75rem;font-weight:600;color:var(--gold-dk);">(gratis)</span>`
             : ''}${ev.voorganger
-            ? `<span style="margin-left:0.7rem;font-size:0.78rem;color:var(--muted);font-style:italic;">— ${ev.rol === 'voorgangers' ? 'Voorgangers' : t('ev_voorganger')}: ${ev.voorganger}</span>`
+            ? `<span style="margin-left:0.7rem;font-size:0.78rem;color:var(--muted);font-style:italic;">— ${ev.rol === 'voorgangers' ? 'Voorgangers' : ev.type === 'concert' || ev.tk === 'ev_concert_juni' ? 'Muzikanten' : t('ev_voorganger')}: ${ev.voorganger}</span>`
             : ''}</span>
         </div>`).join('')}
       </div>
