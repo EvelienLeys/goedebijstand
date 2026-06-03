@@ -174,7 +174,7 @@ p:last-child { margin-bottom: 0; }
   background: var(--stone);
   display: flex; flex-wrap: wrap;
   justify-content: center;
-  position: sticky; top: 0; z-index: 100;
+  position: static;
   border-bottom: 2px solid var(--gold-dk);
   box-shadow: 0 4px 20px rgba(44,36,22,0.3);
 }
@@ -326,6 +326,8 @@ aside { font-size: 0.9rem; color: var(--stone); }
 
   .nieuws-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; align-items: start; }
 @media(max-width: 640px) { .nieuws-grid { grid-template-columns: 1fr; } }
+
+  @media(max-width: 640px) { .site-nav { position: static; } }
 
 /* Arabic font override */
 body.rtl .hero-title,
