@@ -146,7 +146,7 @@ function buildAgenda() {
       if (ZONDAG_UITZONDERINGEN[sk] !== 'skip') {
         const zondagNr = Math.ceil(d.getDate() / 7);
         const isWoord  = zondagNr === 4 || ZONDAG_UITZONDERINGEN[sk] === 'woord';
-        const zondagNr3 = zondagNr === ;
+        const zondagNr3 = zondagNr === 3;
         const tkSun    = isWoord ? 'ev_sun_woord' : 'ev_sun_eucharistie';
         const vg       = VOORGANGERS[sk] || { naam: '', rol: '' };
 
