@@ -154,7 +154,7 @@ function buildAgenda() {
           datum: sk,
           tijd: '11:00',
           type: 'viering',
-          tekst: t(tkSun)  + (zondagNr3 ? ' 👪 <em style="font-size:0.82rem;color:var(--muted);">Goede Bijtjes en Mosterdzaadjes</em>' : ''),
+          tekst: t(tkSun)  + (zondagNr3 ? ' ' : ''),
           voorganger: vg.naam,
           extra: vg.rol,
           rol: vg.rol
