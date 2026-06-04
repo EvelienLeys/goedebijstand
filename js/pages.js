@@ -114,9 +114,34 @@ samenwerking: ()=>`
     <strong>${t('p_parochie')}</strong>
     <p>${t('p_parochie_desc')}</p>
     <div style="display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:0.8rem;">
-      <button onclick="toggleTab('kerkfabriek')" id="btn-kerkfabriek">${t('p_kerkfabriek')}</button>
-      <button onclick="toggleTab('parochieploeg')" id="btn-parochieploeg">${t('p_parochieploeg')}</button>
-      <button onclick="toggleTab('bijstandnight')" id="btn-bijstandnight">🌙 Bijstand by Night</button>
+      <button onclick="toggleTab('kerkfabriek')"
+  style="font-family:var(--font-ui);font-size:0.72rem;font-weight:600;letter-spacing:0.08em;
+         padding:0.35rem 0.9rem;border-radius:var(--r);cursor:pointer;transition:all var(--t);
+         background:var(--cream);border:1px solid var(--border);color:var(--stone-mid);"
+  id="btn-kerkfabriek">
+  ${t('p_kerkfabriek')}
+</button>
+<button onclick="toggleTab('parochieploeg')"
+  style="font-family:var(--font-ui);font-size:0.72rem;font-weight:600;letter-spacing:0.08em;
+         padding:0.35rem 0.9rem;border-radius:var(--r);cursor:pointer;transition:all var(--t);
+         background:var(--cream);border:1px solid var(--border);color:var(--stone-mid);"
+  id="btn-parochieploeg">
+  ${t('p_parochieploeg')}
+</button>
+<button onclick="toggleTab('bijstandnight')"
+  style="font-family:var(--font-ui);font-size:0.72rem;font-weight:600;letter-spacing:0.08em;
+         padding:0.35rem 0.9rem;border-radius:var(--r);cursor:pointer;transition:all var(--t);
+         background:var(--cream);border:1px solid var(--border);color:var(--stone-mid);"
+  id="btn-bijstandnight">
+  🌙 Bijstand by Night
+</button>
+<a href="https://www.paulusgemeenschappen.be/nl/vieringen-sacramenten#vormsel" target="_blank"
+  style="font-family:var(--font-ui);font-size:0.72rem;font-weight:600;letter-spacing:0.08em;
+         padding:0.35rem 0.9rem;border-radius:var(--r);cursor:pointer;transition:all var(--t);
+         background:var(--cream);border:1px solid var(--border);color:var(--stone-mid);
+         text-decoration:none;display:inline-block;">
+  ${t('p_sacramenten')} ↗
+</a>
       <a href="https://www.paulusgemeenschappen.be/nl/vieringen-sacramenten#vormsel" target="_blank">${t('p_sacramenten')} ↗</a>
     </div>
 
