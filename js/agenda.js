@@ -146,7 +146,7 @@ function buildAgenda() {
       if (ZONDAG_UITZONDERINGEN[sk] !== 'skip') {
         const zondagNr = Math.ceil(d.getDate() / 7);
         const isWoord  = zondagNr === 4 || ZONDAG_UITZONDERINGEN[sk] === 'woord';
-        const zondagNr3 = zondagNr === 3;
+        const zondagNr3 = zondagNr === ;
         const tkSun    = isWoord ? 'ev_sun_woord' : 'ev_sun_eucharistie';
         const vg       = VOORGANGERS[sk] || { naam: '', rol: '' };
 
@@ -154,7 +154,7 @@ function buildAgenda() {
           datum: sk,
           tijd: '11:00',
           type: 'viering',
-          tekst: t(tkSun),
+          tekst: t(tkSun)  + (zondagNr3 ? ' 👪 <em style="font-size:0.82rem;color:var(--muted);">Goede Bijtjes en Mosterdzaadjes</em>' : ''),
           voorganger: vg.naam,
           extra: vg.rol,
           rol: vg.rol
