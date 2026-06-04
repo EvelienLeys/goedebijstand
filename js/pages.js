@@ -258,7 +258,7 @@ huren: ()=>`
       <p><strong>kerkfabriek@goedebijstand.brussels</strong></p>
       <p>Bijstandsstraat 5, 1000 Brussel</p>
     </div>
-    <a class="btn" href="mailto:kerkfabriek@goedebijstand.brussels">${t('contact_msg')}</a>
+    <a class="btn" href="mailto:kerkfabriek@goedebijstand.brussels" target="_blank">${t('contact_msg')}</a>
   </div>
 
   <p style="margin-top:1rem;font-size:0.85rem;font-style:italic;color:var(--muted);">${t('huren_note')}</p>
