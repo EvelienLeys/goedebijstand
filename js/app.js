@@ -242,6 +242,9 @@ function sluitGeenViering() { _sluitOverlay('geenviering-overlay'); }
 function openTaize()  { _makeOverlay('taize-overlay', 'Taizé.png', 'sluitTaize'); }
 function sluitTaize() { _sluitOverlay('taize-overlay'); }
 
+function openLGBTQ()  { _makeOverlay('lgbtq-overlay', 'lgbtq.jpg', 'sluitLGBTQ'); }
+function sluitLGBTQ() { _sluitOverlay('lgbtq-overlay'); }
+
 /* ─── GROND TAAL SYNC ─── */
 function syncGrondLang(iframe) {
   try {
@@ -269,7 +272,9 @@ Object.assign(window, {
   openGeenViering,
   sluitGeenViering,
   openTaize,
-  sluitTaize
+  sluitTaize,
+  openLGBTQ,
+  sluitLGBTQ
 });
 
 /* ─── HELPENDE HANDEN FORMULIER ─── */
