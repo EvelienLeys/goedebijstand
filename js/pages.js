@@ -310,6 +310,55 @@ steunen: ()=>`
 
   <p style="margin-top:0.8rem;font-size:0.88rem;font-style:italic;color:var(--muted);">${t('steunen_terminal')}</p>
   <p style="margin-top:1rem;font-size:0.88rem;color:var(--muted);">${t('steunen_q')}</p>
+
+  <div class="ornament">✦ ✦ ✦</div>
+
+  <!-- HELPENDE HANDEN -->
+  <p class="subsection">🙌 ${t('handen_title')}</p>
+  <p style="margin-bottom:1.2rem;">${t('handen_intro')}</p>
+
+  <div class="handen-form-wrap" id="handenFormWrap">
+    <div class="handen-form-box">
+
+      <div class="hf-field">
+        <label class="hf-label" for="hf_naam">${t('handen_naam')} <span class="hf-req">*</span></label>
+        <input class="hf-input" type="text" id="hf_naam" name="naam" required autocomplete="name" placeholder="${t('handen_naam_ph')}">
+      </div>
+
+      <div class="hf-field">
+        <label class="hf-label" for="hf_email">${t('handen_email')} <span class="hf-req">*</span></label>
+        <input class="hf-input" type="email" id="hf_email" name="email" required autocomplete="email" placeholder="naam@voorbeeld.be">
+      </div>
+
+      <div class="hf-field">
+        <label class="hf-label">${t('handen_beschik')}</label>
+        <div class="hf-checks">
+          <label class="hf-check"><input type="checkbox" name="beschik" value="weekdag"> ${t('handen_weekdag')}</label>
+          <label class="hf-check"><input type="checkbox" name="beschik" value="weekend"> ${t('handen_weekend')}</label>
+          <label class="hf-check"><input type="checkbox" name="beschik" value="vakantie"> ${t('handen_vakantie')}</label>
+        </div>
+      </div>
+
+      <div class="hf-field">
+        <label class="hf-label" for="hf_bericht">${t('handen_bericht')}</label>
+        <textarea class="hf-input hf-textarea" id="hf_bericht" name="bericht" rows="4" placeholder="${t('handen_bericht_ph')}"></textarea>
+      </div>
+
+      <div class="hf-field hf-gdpr-row">
+        <label class="hf-check">
+          <input type="checkbox" id="hf_gdpr" required>
+          <span>${t('handen_gdpr')} <a href="#" onclick="go('privacy');return false;">${t('handen_gdpr_link')}</a>.</span>
+        </label>
+      </div>
+
+      <div id="handenFeedback" class="hf-feedback" style="display:none;"></div>
+
+      <button class="btn hf-submit" onclick="submitHanden()">${t('handen_verzend')}</button>
+
+    </div>
+  </div>
+
+  <p style="margin-top:0.8rem;font-size:0.78rem;font-style:italic;color:var(--muted);">${t('handen_note')}</p>
 </section>`,
 
 contact: ()=>`
@@ -357,6 +406,7 @@ privacy: ()=>`
 <section class="section">
   <h2 class="section-title">Cookie- &amp; privacybeleid</h2>
   <p>Deze website gebruikt uitsluitend <strong>functionele cookies</strong> om uw taalvoorkeur op te slaan (<code>gb_lang</code>) en uw cookiekeuze te bewaren (<code>gb_gdpr</code>). Er worden geen persoonsgegevens verzameld of gedeeld met derden. Er zijn geen tracking-, analyse- of advertentiecookies aanwezig.</p>
+  <p style="margin-top:0.8rem;"><strong>Helpende Handen-formulier:</strong> de gegevens die u invult (naam, e-mailadres, beschikbaarheid en eventueel een bericht) worden uitsluitend gebruikt om contact met u op te nemen in het kader van vrijwilligerswerk voor de kerkfabriek. Ze worden niet bewaard op een externe server en niet gedeeld met derden. De verwerking verloopt via Formspree (VS, Privacy Shield-conform). U kunt uw gegevens op elk moment laten verwijderen via <a href="mailto:kerkfabriek@goedebijstand.brussels">kerkfabriek@goedebijstand.brussels</a>.</p>
   <p style="margin-top:0.8rem;">Beheerder: <strong>Kerkfabriek Onze-Lieve-Vrouw van Goede Bijstand</strong><br>
   Bijstandsstraat 5, 1000 Brussel<br>
   <a href="mailto:kerkfabriek@goedebijstand.brussels">kerkfabriek@goedebijstand.brussels</a></p>
