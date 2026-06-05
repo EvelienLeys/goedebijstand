@@ -127,7 +127,7 @@ function genLGBTQ() {
       if (dt.getMonth() !== mn) break;
       if (dt.getDay() === 6 && ++cnt === 4) {
         if (dt >= now && dt <= end && dt >= start)
-          res.push({ datum: dkey(dt), tijd: '20:00', type: 'viering', tk: 'ev_lgbtq' });
+          res.push({ datum: dkey(dt), tijd: '194:30', type: 'viering', tk: 'ev_lgbtq' });
         break;
       }
     }
