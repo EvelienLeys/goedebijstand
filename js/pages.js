@@ -156,27 +156,37 @@ samenwerking: ()=>`
   </div>
   
   <div class="partner">
+  <a href="https://www.paulusgemeenschappen.be/nl" target="_blank" rel="noopener">
     <img src="paulusgemeenschappen_logo.png" alt="Paulusgemeenschappen" style="height:40px;object-fit:contain;object-position:left;margin-bottom:0.4rem;display:block;">
-    <p>${t('p_paulus_desc')} <a href="https://www.paulusgemeenschappen.be/nl" target="_blank">paulusgemeenschappen.be →</a></p>
-  </div>
+  </a>
+  <p>${t('p_paulus_desc')} <a href="https://www.paulusgemeenschappen.be/nl" target="_blank">paulusgemeenschappen.be →</a></p>
+</div>
 
   <div class="partner">
-    <img src="taize-logo-HR.jpg" alt="Taizé" style="height:40px;object-fit:contain;object-position:left;margin-bottom:0.4rem;display:block;">
+    <a href="https://www.taize.fr/nl" target="_blank" rel="noopener">
+  <img src="taize-logo-HR.jpg" alt="Taizé" style="height:40px;object-fit:contain;object-position:left;margin-bottom:0.4rem;display:block;">
+</a>
     <p>${t('p_taize_desc')}</p>
   </div>
   
   <div class="partner">
+  <a href="https://ccl-be.net/" target="_blank" rel="noopener">
   <img src="logo_lgbtq.png" alt="La Communauté du Christ Libérateur – LGBTQIA+" style="height:80px;width:auto;object-fit:contain;object-position:left;margin-bottom:0.4rem;display:block;">
+</a>
   <p>${t('p_lgbtq_desc')}</p>
 </div>
 
   <div class="partner">
-    <img src="week_van_de_klank_logo.png" alt="Week van de Klank" style="height:60px;width:auto;object-fit:contain;object-position:left;margin-bottom:0.4rem;display:block;">
+    <a href="https://www.lasemaineduson.be" target="_blank" rel="noopener">
+  <img src="week_van_de_klank_logo.png" alt="Week van de Klank" style="height:60px;width:auto;object-fit:contain;object-position:left;margin-bottom:0.4rem;display:block;">
+</a>
     <p>${t('p_klank_desc')} <a href="https://www.lasemaineduson.be" target="_blank">${t('p_klank_link')}</a></p>
   </div>
 
   <div class="partner">
-    <img src="vlaamse-meesters-logo.png" alt="Vlaamse Meesters" style="height:60px;width:auto;object-fit:contain;object-position:left;margin-bottom:0.4rem;display:block;">
+    <a href="https://www.flemishmastersinsitu.com/nl/locaties/onze-lieve-vrouw-van-goede-bijstandkerk-brussel" target="_blank" rel="noopener">
+  <img src="vlaamse-meesters-logo.png" alt="Vlaamse Meesters" style="height:60px;width:auto;object-fit:contain;object-position:left;margin-bottom:0.4rem;display:block;">
+</a>
     <p>${t('p_meesters_desc')} <a href="https://www.flemishmastersinsitu.com/nl/locaties/onze-lieve-vrouw-van-goede-bijstandkerk-brussel" target="_blank">${t('p_meesters_link')}</a></p>
   </div>
 </section>`,
