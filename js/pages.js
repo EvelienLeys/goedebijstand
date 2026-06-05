@@ -165,7 +165,10 @@ samenwerking: ()=>`
     <p>${t('p_taize_desc')}</p>
   </div>
   
-  <div class="partner"><strong>${t('p_lgbtq')}</strong><p>${t('p_lgbtq_desc')}</p></div>
+  <div class="partner">
+  <img src="logo_lgbtq.png" alt="La Communauté du Christ Libérateur – LGBTQIA+" style="height:80px;width:auto;object-fit:contain;object-position:left;margin-bottom:0.4rem;display:block;">
+  <p>${t('p_lgbtq_desc')}</p>
+</div>
 
   <div class="partner">
     <img src="week_van_de_klank_logo.png" alt="Week van de Klank" style="height:60px;width:auto;object-fit:contain;object-position:left;margin-bottom:0.4rem;display:block;">
