@@ -271,3 +271,75 @@ Object.assign(window, {
   openTaize,
   sluitTaize
 });
+
+/* ─── HELPENDE HANDEN FORMULIER ─── */
+async function submitHanden() {
+  const naam    = document.getElementById('hf_naam');
+  const email   = document.getElementById('hf_email');
+  const bericht = document.getElementById('hf_bericht');
+  const gdpr    = document.getElementById('hf_gdpr');
+  const fb      = document.getElementById('handenFeedback');
+  const btn     = document.querySelector('.hf-submit');
+
+  // Reset
+  [naam, email, bericht].forEach(el => el?.classList.remove('hf-error'));
+  fb.style.display = 'none';
+  fb.className = 'hf-feedback';
+
+  // Validatie
+  let ok = true;
+  if (!naam.value.trim())                                  { naam.classList.add('hf-error');  ok = false; }
+  if (!email.value.trim() || !email.value.includes('@'))   { email.classList.add('hf-error'); ok = false; }
+  if (!gdpr.checked)                                       { ok = false; }
+
+  if (!ok) {
+    fb.className = 'hf-feedback err';
+    fb.textContent = t('handen_err_verplicht');
+    fb.style.display = 'block';
+    return;
+  }
+
+  // Beschikbaarheid samenvoegen
+  const beschik = [...document.querySelectorAll('input[name="beschik"]:checked')]
+    .map(cb => cb.value).join(', ') || '—';
+
+  btn.disabled = true;
+  btn.textContent = t('handen_bezig');
+
+  try {
+    const res = await fetch('https://formspree.io/f/xaqznkjd', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        naam:        naam.value.trim(),
+        email:       email.value.trim(),
+        beschikbaar: beschik,
+        bericht:     bericht.value.trim(),
+        _subject:    'Helpende Handen – ' + naam.value.trim(),
+        _language:   LANG,
+      })
+    });
+
+    if (res.ok) {
+      fb.className = 'hf-feedback ok';
+      fb.textContent = t('handen_ok');
+      fb.style.display = 'block';
+      naam.value = '';
+      email.value = '';
+      bericht.value = '';
+      gdpr.checked = false;
+      document.querySelectorAll('input[name="beschik"]').forEach(cb => cb.checked = false);
+    } else {
+      throw new Error('server');
+    }
+  } catch {
+    fb.className = 'hf-feedback err';
+    fb.textContent = t('handen_err_server');
+    fb.style.display = 'block';
+  }
+
+  btn.disabled = false;
+  btn.textContent = t('handen_verzend');
+}
+
+Object.assign(window, { submitHanden });
