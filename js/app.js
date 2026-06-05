@@ -239,6 +239,9 @@ function sluitPaysages()  { _sluitOverlay('paysages-overlay'); }
 function openGeenViering()  { _makeOverlay('geenviering-overlay', 'affiche_geenviering_kleur.jpg', 'sluitGeenViering'); }
 function sluitGeenViering() { _sluitOverlay('geenviering-overlay'); }
 
+function openTaize()  { _makeOverlay('taize-overlay', 'Taizé.png', 'sluitTaize'); }
+function sluitTaize() { _sluitOverlay('taize-overlay'); }
+
 /* ─── GROND TAAL SYNC ─── */
 function syncGrondLang(iframe) {
   try {
@@ -264,5 +267,7 @@ Object.assign(window, {
   openPaysages,
   sluitPaysages,
   openGeenViering,
-  sluitGeenViering
+  sluitGeenViering,
+  openTaize,
+  sluitTaize
 });
