@@ -1,7 +1,6 @@
 window.addEventListener('message', function(e) {
   if (e.data && e.data.type === 'setLang' && LANGS[e.data.lang]) {
     const lang = e.data.lang;
-    // Arabic en andere talen die grond.html niet kent, vallen terug op Engels
     const safeLang = LANGS[lang] ? lang : 'en';
     document.querySelectorAll('.lang-btn').forEach(b =>
       b.classList.toggle('active', b.dataset.lang === safeLang)
@@ -9,9 +8,8 @@ window.addEventListener('message', function(e) {
     setLang(safeLang);
   }
 });
-  
+
 function render(key) {
-  // Volledig scherm voor grond-pagina
   const pageWrap = document.querySelector('.page-wrap');
   const sidebar  = document.getElementById('sidebar');
   const twoCol   = document.querySelector('.two-col');
@@ -45,26 +43,27 @@ function render(key) {
   document.getElementById('sidebar').innerHTML = sidebarHTML();
 
   document.querySelectorAll('nav a[data-page]').forEach(a =>
-    a.classList.toggle('active', a.dataset.page===key)
+    a.classList.toggle('active', a.dataset.page === key)
   );
 
   const pageKey = {
-    agenda:'nav_agenda',
-    geschiedenis:'nav_gesch',
-    samenwerking:'nav_samen',
-    grond:'nav_grond',
-    voorbij:'nav_voorbij',
-    huren:'nav_huren',
-    steunen:'nav_steunen',
-    contact:'nav_contact'
+    agenda:       'nav_agenda',
+    geschiedenis: 'nav_gesch',
+    samenwerking: 'nav_samen',
+    grond:        'nav_grond',
+    voorbij:      'nav_voorbij',
+    huren:        'nav_huren',
+    steunen:      'nav_steunen',
+    contact:      'nav_contact'
   }[key];
 
-  document.title = (t(pageKey)||key) + ' — ' + (t('hero_title')||'Goede Bijstand').replace('\n',' ');
+  document.title = (t(pageKey) || key) + ' — ' + (t('hero_title') || 'Goede Bijstand').replace('\n', ' ');
 }
 
 function go(key) {
+  history.pushState({ page: key }, '', '#' + key);
   render(key);
-  document.getElementById('nav').scrollIntoView({behavior:'smooth', block:'start'});
+  document.getElementById('nav').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 /* ─── TRANSLATION NOTICE ─── */
@@ -73,7 +72,7 @@ function dismissNotice() {
   const el = document.getElementById('translationNotice');
   if (el) el.remove();
 }
-  
+
 /* ─── GDPR ─── */
 function gdprAccept() {
   localStorage.setItem('gb_gdpr', '1');
@@ -83,7 +82,7 @@ function gdprAccept() {
 function showGdpr() {
   document.getElementById('gdprOverlay').classList.remove('hidden');
 }
-  
+
 /* ─── INIT ─── */
 (function init() {
   document.querySelectorAll('.lang-btn[data-lang]').forEach(button => {
@@ -103,21 +102,37 @@ function showGdpr() {
   document.documentElement.setAttribute('lang', LANG);
 
   document.querySelectorAll('.lang-btn').forEach(b =>
-    b.classList.toggle('active', b.dataset.lang===LANG)
+    b.classList.toggle('active', b.dataset.lang === LANG)
   );
 
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const v = t(el.dataset.i18n);
-    if (v) el.innerHTML = v.replace(/\n/g,'<br>');
+    if (v) el.innerHTML = v.replace(/\n/g, '<br>');
   });
 
-  render('welkom');
+  // Herstel pagina bij refresh of directe URL via hash
+  const hash = location.hash.replace('#', '');
+  const startPage = (hash && PAGES[hash]) ? hash : 'welkom';
+  if (startPage !== 'welkom') {
+    history.replaceState({ page: startPage }, '', '#' + startPage);
+  } else {
+    history.replaceState({ page: 'welkom' }, '', location.href.split('#')[0]);
+  }
+  render(startPage);
+
+  // Terugknop / vooruitknop
+  window.addEventListener('popstate', e => {
+    const page = e.state?.page ?? 'welkom';
+    render(page);
+    document.getElementById('nav').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
 
   if (!localStorage.getItem('gb_gdpr')) showGdpr();
 })();
 
+/* ─── TABS (samenwerking) ─── */
 function toggleTab(id) {
-  ['kerkfabriek','parochieploeg','bijstandnight'].forEach(name => {
+  ['kerkfabriek', 'parochieploeg', 'bijstandnight'].forEach(name => {
     const tab = document.getElementById('tab-' + name);
     const btn = document.getElementById('btn-' + name);
     if (!tab) return;
@@ -129,7 +144,7 @@ function toggleTab(id) {
 
     if (btn) {
       btn.style.background = (isTarget && !isOpen) ? 'var(--stone-mid)' : 'var(--cream)';
-      btn.style.color = (isTarget && !isOpen) ? 'var(--gold-lt)' : 'var(--stone-mid)';
+      btn.style.color      = (isTarget && !isOpen) ? 'var(--gold-lt)'   : 'var(--stone-mid)';
     }
   });
 
@@ -142,13 +157,13 @@ function toggleTab(id) {
       if (iframe && !iframe.src.includes('grond.html')) {
         iframe.src = 'grond.html';
       }
-
       tab.classList.add('tab-fullscreen');
       document.body.style.overflow = 'hidden';
     }
   }
 }
 
+/* ─── GRONDBIBLIOTHEEK ─── */
 function toggleFullscreen() {
   sluitWerelwijd();
 }
@@ -163,7 +178,7 @@ function sluitWerelwijd() {
 
   if (btn) {
     btn.style.background = 'var(--cream)';
-    btn.style.color = 'var(--stone-mid)';
+    btn.style.color      = 'var(--stone-mid)';
   }
 }
 
@@ -176,9 +191,7 @@ function minimaliserKaart() {
 }
 
 window.addEventListener('message', (e) => {
-  if (e.data === 'kaartGemaximaliseerd') {
-    // iframe meldt: kaart is max → niets nodig, tab is al fullscreen
-  }
+  if (e.data === 'kaartGemaximaliseerd') { /* tab is al fullscreen */ }
 
   if (e.data === 'kaartGeminimaliseerd') {
     const tab = document.getElementById('tab-wereldwijd');
@@ -190,92 +203,50 @@ window.addEventListener('message', (e) => {
   if (e.data === 'sluitWerelwijd') {
     sluitWerelwijd();
   }
-}); 
+});
 
-function openFoto() {
-  let overlay = document.getElementById('foto-overlay');
-
+/* ─── FOTO OVERLAYS ─── */
+function _makeOverlay(id, src, sluitFn) {
+  let overlay = document.getElementById(id);
   if (!overlay) {
     overlay = document.createElement('div');
-    overlay.id = 'foto-overlay';
+    overlay.id = id;
     overlay.style.cssText = 'position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,0.92);display:flex;align-items:center;justify-content:center;padding:1rem;cursor:zoom-out;';
     overlay.innerHTML = `
-      <img src="goede_bijstand_welkomstfoto.jpg" style="max-width:100%;max-height:100%;object-fit:contain;border-radius:2px;">
-      <button onclick="event.stopPropagation();sluitFoto()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:white;font-size:2.5rem;cursor:pointer;line-height:1;">✕</button>
+      <img src="${src}" style="max-width:100%;max-height:100%;object-fit:contain;border-radius:2px;">
+      <button onclick="event.stopPropagation();${sluitFn}()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:white;font-size:2.5rem;cursor:pointer;line-height:1;">✕</button>
     `;
-    overlay.onclick = sluitFoto;
+    overlay.onclick = window[sluitFn];
     document.body.appendChild(overlay);
   } else {
     overlay.style.display = 'flex';
   }
-
   document.body.style.overflow = 'hidden';
 }
 
-function sluitFoto() {
-  const overlay = document.getElementById('foto-overlay');
+function _sluitOverlay(id) {
+  const overlay = document.getElementById(id);
   if (overlay) overlay.style.display = 'none';
   document.body.style.overflow = '';
 }
 
+function openFoto()       { _makeOverlay('foto-overlay',       'goede_bijstand_welkomstfoto.jpg', 'sluitFoto'); }
+function sluitFoto()      { _sluitOverlay('foto-overlay'); }
+
+function openPaysages()   { _makeOverlay('paysages-overlay',   'Paysages.jpg',                   'sluitPaysages'); }
+function sluitPaysages()  { _sluitOverlay('paysages-overlay'); }
+
+function openGeenViering()  { _makeOverlay('geenviering-overlay', 'affiche_geenviering_kleur.jpg', 'sluitGeenViering'); }
+function sluitGeenViering() { _sluitOverlay('geenviering-overlay'); }
+
+/* ─── GROND TAAL SYNC ─── */
 function syncGrondLang(iframe) {
   try {
     iframe.contentWindow.postMessage({ type: 'setLang', lang: LANG }, '*');
   } catch(e) {}
 }
 
-function openPaysages() {
-  let overlay = document.getElementById('paysages-overlay');
-
-  if (!overlay) {
-    overlay = document.createElement('div');
-    overlay.id = 'paysages-overlay';
-    overlay.style.cssText = 'position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,0.92);display:flex;align-items:center;justify-content:center;padding:1rem;cursor:zoom-out;';
-    overlay.innerHTML = `
-      <img src="Paysages.jpg" style="max-width:100%;max-height:100%;object-fit:contain;border-radius:2px;">
-      <button onclick="event.stopPropagation();sluitPaysages()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:white;font-size:2.5rem;cursor:pointer;line-height:1;">✕</button>
-    `;
-    overlay.onclick = sluitPaysages;
-    document.body.appendChild(overlay);
-  } else {
-    overlay.style.display = 'flex';
-  }
-
-  document.body.style.overflow = 'hidden';
-}
-
-function sluitPaysages() {
-  const overlay = document.getElementById('paysages-overlay');
-  if (overlay) overlay.style.display = 'none';
-  document.body.style.overflow = '';
-}
-
-function openGeenViering() {
-  let overlay = document.getElementById('geenviering-overlay');
-
-  if (!overlay) {
-    overlay = document.createElement('div');
-    overlay.id = 'geenviering-overlay';
-    overlay.style.cssText = 'position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,0.92);display:flex;align-items:center;justify-content:center;padding:1rem;cursor:zoom-out;';
-    overlay.innerHTML = `
-      <img src="affiche_geenviering_kleur.jpg" style="max-width:100%;max-height:100%;object-fit:contain;border-radius:2px;">
-      <button onclick="event.stopPropagation();sluitGeenViering()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:white;font-size:2.5rem;cursor:pointer;line-height:1;">✕</button>
-    `;
-    overlay.onclick = sluitGeenViering;
-    document.body.appendChild(overlay);
-  } else {
-    overlay.style.display = 'flex';
-  }
-
-  document.body.style.overflow = 'hidden';
-}
-
-function sluitGeenViering() {
-  const overlay = document.getElementById('geenviering-overlay');
-  if (overlay) overlay.style.display = 'none';
-  document.body.style.overflow = '';
-}
-
+/* ─── GLOBALS ─── */
 Object.assign(window, {
   setLang,
   render,
