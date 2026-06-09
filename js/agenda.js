@@ -213,9 +213,10 @@ function agendaHTML() {
       </div>
       <div class="events-cell">
         ${evs.map(ev => `<div class="ev-row">
-          <span class="ev-time">${ev.tijd}</span>
+          <span class="ev-time">${ev.tijd === '00:00' ? t('ag_hele_dag') : ev.tijd}</span>
           <span class="ev-dot">${
             ev.datum === '2026-06-14' ? '<span style="color:var(--gold-lt);font-size:1rem;">!</span>' :
+            ev.type === 'filmopname' ? '🎬' :
             ev.type === 'nacht' ? '🌙' :
             ev.type === 'taize' ? '✝' :
             ev.tk === 'ev_lgbtq' ? '✝' :
