@@ -71,6 +71,7 @@ const FIXED = [
   { datum:'2026-05-30', tijd:'19:00', type:'viering', tk:'ev_lgbtq' },
   { datum:'2026-06-06', tijd:'10:30', type:'viering', tk:'ev_processie_jacob', link:'https://st-jacques.be/nl/agenda/consult/12/processie-van-brussel-zegeningsmis-voor-pelgrims' },
   { datum:'2026-06-14', tijd:'10:00', type:'viering', tk:'ev_14juni' },
+  { datum:'2026-06-18', tijd:'00:00', type:'filmopname', tk:'ev_filmopname' },
   { datum:'2026-06-26', tijd:'19:00', type:'concert', tk:'ev_concert_juni', extra:'ensemble En Chemin', gratis:true, onclick:'openPaysages()' },
 ];
 
