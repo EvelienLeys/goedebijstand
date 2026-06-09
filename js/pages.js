@@ -12,15 +12,21 @@ welkom: ()=>`
        alt="Interieur Goede Bijstand"
        onclick="openFoto()">
 
-  <div style="background:var(--parchment);border:1px solid var(--border);border-left:5px solid var(--gold);border-radius:var(--r);padding:1.4rem 1.6rem;margin:1.4rem 0 1.8rem;">
+ <div style="background:var(--parchment);border:1px solid var(--border);border-left:5px solid var(--gold);border-radius:var(--r);padding:1.4rem 1.6rem;margin:1.4rem 0 1.8rem;">
     <h2 class="section-title" style="font-size:1.3rem;margin-bottom:1.2rem;">📰 Nieuws</h2>
-   <div class="nieuws-grid">
-  <a href="https://st-jacques.be/nl/agenda/consult/12/processie-van-brussel-zegeningsmis-voor-pelgrims" target="_blank" rel="noopener" style="display:block;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);transition:box-shadow var(--t),transform var(--t);" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='var(--shadow-lg)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--shadow)'">
-    <img src="processie_sint_jacob.png" alt="Processie Sint-Jacob" style="width:100%;height:400px;object-fit:cover;display:block;">
-  </a>
-  <img src="affiche_geenviering_kleur.jpg" alt="Geen viering 14 juni" style="display:block;width:100%;height:400px;object-fit:contain;background:white;border-radius:var(--r);box-shadow:var(--shadow);cursor:zoom-in;" onclick="event.stopPropagation();openGeenViering()">
-  <img src="Paysages.jpg" alt="Paysages" style="display:block;width:100%;height:400px;object-fit:contain;background:white;border-radius:var(--r);box-shadow:var(--shadow);cursor:zoom-in;" onclick="event.stopPropagation();openPaysages()">
-</div>
+    <div class="nieuws-grid">
+      <img src="affiche_geenviering_kleur.jpg" alt="Geen viering 14 juni" style="display:block;width:100%;height:400px;object-fit:contain;background:white;border-radius:var(--r);box-shadow:var(--shadow);cursor:zoom-in;" onclick="event.stopPropagation();openGeenViering()">
+      <img src="Paysages.jpg" alt="Paysages" style="display:block;width:100%;height:400px;object-fit:contain;background:white;border-radius:var(--r);box-shadow:var(--shadow);cursor:zoom-in;" onclick="event.stopPropagation();openPaysages()">
+    </div>
+    <div style="display:flex;align-items:center;gap:0.8rem;margin-top:1.2rem;background:var(--white);border:1px solid var(--border);border-left:4px solid var(--stone-mid);border-radius:var(--r);padding:0.9rem 1.2rem;box-shadow:var(--shadow);">
+      <span style="font-size:1.6rem;">🎬</span>
+      <div>
+        <p style="font-weight:600;color:var(--stone-mid);margin:0;">Donderdag 18 juni — Filmopnames</p>
+        <p style="font-size:0.88rem;color:var(--muted);margin:0;">
+    <strong>De kerk is die dag gesloten voor bezoekers.</strong>
+    </p>
+      </div>
+    </div>
   </div>
   
   <div class="card-grid">
