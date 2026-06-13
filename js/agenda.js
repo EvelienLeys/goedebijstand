@@ -73,6 +73,7 @@ const FIXED = [
   { datum:'2026-06-14', tijd:'10:00', type:'viering', tk:'ev_14juni' },
   { datum:'2026-06-18', tijd:'00:00', type:'filmopname', tk:'ev_filmopname' },
   { datum:'2026-06-26', tijd:'19:00', type:'concert', tk:'ev_concert_juni', extra:'ensemble En Chemin', gratis:true, onclick:'openPaysages()' },
+  { datum:'2026-08-15', tijd:'11:00', type:'viering', tk:'ev_olvhemelvaart' },
 ];
 
 const ZONDAG_UITZONDERINGEN = {
