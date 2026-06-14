@@ -40,7 +40,7 @@ const VOORGANGERS = {
   '2026-05-31': { naam: '', rol: '' },
   '2026-06-07': { naam: '', rol: '' },
   '2026-06-14': { naam: '', rol: '' },
-  '2026-06-21': { naam: '', rol: '' },
+  '2026-06-21': { naam: 'Johnny De Mot', rol: 'Voorganger' },
   '2026-06-28': { naam: '', rol: '' },
   '2026-07-05': { naam: '', rol: '' },
   '2026-07-12': { naam: '', rol: '' },
