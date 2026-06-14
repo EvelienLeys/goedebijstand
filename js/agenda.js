@@ -72,7 +72,8 @@ const FIXED = [
   { datum:'2026-06-06', tijd:'10:30', type:'viering', tk:'ev_processie_jacob', link:'https://st-jacques.be/nl/agenda/consult/12/processie-van-brussel-zegeningsmis-voor-pelgrims' },
   { datum:'2026-06-14', tijd:'10:00', type:'viering', tk:'ev_14juni' },
   { datum:'2026-06-18', tijd:'00:00', type:'filmopname', tk:'ev_filmopname' },
-  { datum:'2026-06-26', tijd:'19:00', type:'concert', tk:'ev_concert_juni', extra:'<a href="https://www.visit.brussels/en/visitors/event-details.Ensemble-baroque-En-chemin.5700023640" target="_blank">ensemble En Chemin</a>', gratis:true, onclick:'openPaysages()' },
+  { datum:'2026-06-26', tijd:'19:00', type:'concert', tk:'ev_concert_juni', extra:'ensemble En Chemin', gratis:true, onclick:'openPaysages()' },
+  { datum:'2026-08-15', tijd:'11:00', type:'viering', tk:'ev_olvhemelvaart' },
 ];
 
 const ZONDAG_UITZONDERINGEN = {
