@@ -26,12 +26,11 @@ welkom: ()=>`
     </div>
   </div>
 
-  <!-- affiches -->
-  <div class="nieuws-grid">
-    <img src="affiche_geenviering_kleur.jpg" alt="Geen viering 14 juni" style="display:block;width:100%;height:400px;object-fit:contain;background:white;border-radius:var(--r);box-shadow:var(--shadow);cursor:zoom-in;" onclick="event.stopPropagation();openGeenViering()">
-    
-    <img src="Paysages.jpg" alt="Paysages" style="display:block;width:100%;height:400px;object-fit:contain;background:white;border-radius:var(--r);box-shadow:var(--shadow);cursor:zoom-in;" onclick="event.stopPropagation();openPaysages()">
-  </div>
+<!-- affiches -->
+<div class="nieuws-grid">
+  <img src="Paysages.jpg" alt="Paysages"
+       style="display:block;width:100%;height:400px;object-fit:contain;background:white;border-radius:var(--r);box-shadow:var(--shadow);cursor:zoom-in;"
+       onclick="event.stopPropagation();openPaysages()">
 </div>
   
   <div class="card-grid">
