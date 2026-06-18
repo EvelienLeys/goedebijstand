@@ -72,7 +72,8 @@ const FIXED = [
   { datum:'2026-06-06', tijd:'10:30', type:'viering', tk:'ev_processie_jacob', link:'https://st-jacques.be/nl/agenda/consult/12/processie-van-brussel-zegeningsmis-voor-pelgrims' },
   { datum:'2026-06-14', tijd:'10:00', type:'viering', tk:'ev_14juni' },
   { datum:'2026-06-18', tijd:'00:00', type:'filmopname', tk:'ev_filmopname' },
-  { datum:'2026-06-18', tijd:'18:00', type:'concert', extra:'gitaar en accordion'},
+  { datum:'2026-06-19', tijd:'18:00', type:'concert', tk:'ev_gitaar' },
+  { datum:'2026-06-19', tijd:'20:00', type:'nacht', tk:'ev_night' },
   { datum:'2026-06-26', tijd:'19:00', type:'concert', tk:'ev_concert_juni', extra:'<a href="https://www.visit.brussels/en/visitors/event-details.Ensemble-baroque-En-chemin.5700023640" target="_blank">ensemble En Chemin</a>', gratis:true, onclick:'openPaysages()' },
   { datum:'2026-08-15', tijd:'11:00', type:'viering', tk:'ev_olvhemelvaart' },
 ];
@@ -81,7 +82,6 @@ const ZONDAG_UITZONDERINGEN = {
   '2026-05-10': 'woord',
   '2026-05-24': 'skip',
   '2026-06-14': 'skip',
-  '2026-06-19': 'skip',
   '2026-07-12': 'woord',
   '2026-07-26': 'viering',
   '2026-08-09': 'woord',
@@ -110,7 +110,7 @@ function genTaize() {
 function genNight() {
   const res=[], now=new Date(); now.setHours(0,0,0,0);
   const end=new Date(now); end.setDate(now.getDate()+42);
-  const uitsluitingen = ['2026-06-26']; 
+  const uitsluitingen = ['2026-06-26', '2026-06-19'];
   for (let d=new Date(now);d<=end;d.setDate(d.getDate()+1)) {
     if (d.getDay()===5 && d.getMonth()>=4 && d.getMonth()<=7 && !uitsluitingen.includes(dkey(d)))
       res.push({datum:dkey(d),tijd:'18:00',type:'nacht',tk:'ev_night'});
