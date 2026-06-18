@@ -223,6 +223,7 @@ function agendaHTML() {
             ev.type === 'nacht' ? '🌙' :
             ev.type === 'taize' ? '✝' :
             ev.tk === 'ev_lgbtq' ? '✝' :
+            ev.tk === 'ev_gitaar' ? '🎵' :
             ev.tk === 'ev_concert_juni' ? '🎵' :
             ev.tk === 'ev_drempel' ? '✝👪' :
             ev.tk === 'ev_pinkster' ? '✝' :
