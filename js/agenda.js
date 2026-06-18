@@ -154,7 +154,7 @@ function buildAgenda() {
     if (dw === 0 && !['2026-04-05','2026-03-29'].includes(sk)) {
       if (ZONDAG_UITZONDERINGEN[sk] !== 'skip') {
         const zondagNr = Math.ceil(d.getDate() / 7);
-        const isWoord  = zondagNr === 4 || ZONDAG_UITZONDERINGEN[sk] === 'woord';
+        const isWoord = (zondagNr === 4 && ZONDAG_UITZONDERINGEN[sk] !== 'viering') || ZONDAG_UITZONDERINGEN[sk] === 'woord';
         const zondagNr3 = zondagNr === 3;
         const tkSun    = isWoord ? 'ev_sun_woord' : 'ev_sun_eucharistie';
         const vg       = VOORGANGERS[sk] || { naam: '', rol: '' };
