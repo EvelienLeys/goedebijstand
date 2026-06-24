@@ -274,7 +274,8 @@ voorbij: ()=>`
 huren: ()=>`
 <section class="section">
   <h2 class="section-title">${t('huren_title')}</h2>
-  <img src="${IMG_INT}" class="church-photo" style="height:260px;" alt="Interieur">
+  <img src="${IMG_INT}" class="church-photo" style="height:260px;margin-bottom:0.2rem;" alt="Interieur">
+  <p style="font-size:0.72rem;font-style:italic;color:var(--gold);margin-bottom:1rem;">Dominique Provost - Art in Flanders</p>
   <p style="margin-bottom:1.4rem;">${t('huren_intro')}</p>
 
   <div class="huren-grid">
