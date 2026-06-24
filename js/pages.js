@@ -82,13 +82,11 @@ geschiedenis: ()=>`
   </div>
   <div class="ornament">✦ ✦ ✦</div>
   <p class="subsection">${t('gesch_arch_title')}</p>
-  <div class="photo-grid">
+  <div class="photo-grid" style="margin-bottom:0.3rem;">
   <img src="${IMG_INT}" alt="Interieur">
-  <div>
-    <img src="${IMG_ALT}" alt="Altaar" style="margin-bottom:0;">
-  </div>
+  <img src="${IMG_ALT}" alt="Altaar">
 </div>
-<p class="photo-caption" style="text-align:right;margin-top:0.3rem;margin-bottom:1.2rem;font-size:0.85rem;font-style:italic;color:var(--gold);padding-right:1.5rem;">Foto's: Dominique Provost – Art in Flanders</p>
+<p class="photo-caption" style="text-align:right;margin-top:0;margin-bottom:1.2rem;font-size:0.85rem;font-style:italic;color:var(--gold);padding-right:0.2rem;">Foto's: Dominique Provost – Art in Flanders</p>
     </div>
   </div>
   <p>${t('gesch_arch')}</p>
