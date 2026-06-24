@@ -255,13 +255,13 @@ voorbij: ()=>`
   </div>
   <div style="margin-bottom:1rem;">
     <iframe width="100%" height="270"
-      src="https://www.youtube.com/embed/igPMLKkT9KA"
+      src="https://www.youtube-nocookie.com/embed/igPMLKkT9KA"
       title="Les Trois Cordes"
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
       style="border-radius:var(--r);border:2px solid var(--border);box-shadow:var(--shadow);max-width:480px;display:block;">
-    </iframe>
+</iframe>
   </div>
 
   <div class="ornament">✦ ✦ ✦</div>
