@@ -84,7 +84,10 @@ geschiedenis: ()=>`
   <p class="subsection">${t('gesch_arch_title')}</p>
   <div class="photo-grid">
     <img src="${IMG_INT}" alt="Interieur">
-    <img src="${IMG_ALT}" alt="Altaar">
+    <div>
+      <img src="${IMG_ALT}" alt="Altaar" style="margin-bottom:0;">
+      <p class="photo-caption" style="margin-top:0.3rem;margin-bottom:0;">Foto: Dominique Provost – Art in Flanders</p>
+    </div>
   </div>
   <p>${t('gesch_arch')}</p>
   <p><a href="https://www.flemishmastersinsitu.com/nl/locaties/onze-lieve-vrouw-van-goede-bijstandkerk-brussel" target="_blank">${t('gesch_masters')}</a></p>
