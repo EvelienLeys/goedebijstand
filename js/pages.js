@@ -81,14 +81,17 @@ geschiedenis: ()=>`
     <div class="tl-item"><div class="tl-year">${t('tl4_year')}</div><div class="tl-text">${t('tl4_text')}</div></div>
   </div>
   <div class="ornament">✦ ✦ ✦</div>
-  <p class="subsection">${t('gesch_arch_title')}</p>
-  <div class="photo-grid" style="margin-bottom:0.3rem;">
-  <img src="${IMG_INT}" alt="Interieur">
-  <img src="${IMG_ALT}" alt="Altaar">
-</div>
-<p class="photo-caption" style="text-align:right;margin-top:0;margin-bottom:1.2rem;font-size:0.85rem;font-style:italic;color:var(--gold);padding-right:0.2rem;">Dominique Provost – Art in Flanders</p>
-    </div>
+<p class="subsection">${t('gesch_arch_title')}</p>
+<div class="photo-grid">
+  <div>
+    <img src="${IMG_INT}" alt="Interieur" style="margin-bottom:0;">
+    <p class="photo-caption" style="text-align:right;margin-top:0.3rem;margin-bottom:0;font-size:0.78rem;font-style:italic;color:var(--gold);">Dominique Provost – Art in Flanders</p>
   </div>
+  <div>
+    <img src="${IMG_ALT}" alt="Altaar" style="margin-bottom:0;">
+    <p class="photo-caption" style="text-align:right;margin-top:0.3rem;margin-bottom:0;font-size:0.78rem;font-style:italic;color:var(--gold);">Dominique Provost – Art in Flanders</p>
+  </div>
+</div>
   <p>${t('gesch_arch')}</p>
   <p><a href="https://www.flemishmastersinsitu.com/nl/locaties/onze-lieve-vrouw-van-goede-bijstandkerk-brussel" target="_blank">${t('gesch_masters')}</a></p>
   <div class="ornament">✦ ✦ ✦</div>
