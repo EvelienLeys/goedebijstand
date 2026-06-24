@@ -175,27 +175,18 @@ samenwerking: ()=>`
   <p>${t('p_lgbtq_desc')}</p>
 </div>
 
-  <div class="past-item">
-  <a href="https://www.lasemaineduson.be/nl/event/hoarses/" target="_blank">${t('voorbij_klank_2026')}</a>
-  <span class="past-date">2026</span>
-</div>
-<img src="https://www.lasemaineduson.be/wp-content/uploads/2025/11/Late-Bush_Hoarses.jpg.webp"
-     alt="Week van de Klank 2026 – Hoarses"
-     style="width:100%;max-width:480px;height:240px;object-fit:cover;border-radius:var(--r);border:2px solid var(--border);box-shadow:var(--shadow);">
-<p class="photo-credit" style="font-size:0.75rem;color:var(--text-muted, #888);margin-top:0.25rem;margin-bottom:1rem;">
-  Foto: <a href="https://www.lasemaineduson.be/" target="_blank">Week van de Klank</a>
-</p>
+  <div class="partner">
+    <a href="https://www.lasemaineduson.be" target="_blank" rel="noopener">
+  <img src="week_van_de_klank_logo.png" alt="Week van de Klank" style="height:60px;width:auto;object-fit:contain;object-position:left;margin-bottom:0.4rem;display:block;">
+</a>
+    <p>${t('p_klank_desc')} <a href="https://www.lasemaineduson.be" target="_blank">${t('p_klank_link')}</a></p>
+  </div>
 
-<div class="past-item">
-  <a href="https://www.lasemaineduson.be/nl/event/rothko-chapel/" target="_blank">${t('voorbij_klank_2025')}</a>
-  <span class="past-date">2025</span>
-</div>
-<img src="https://www.lasemaineduson.be/wp-content/uploads/2024/12/JacobHus_rothkochapel_LieveKleeven_1.jpg.webp"
-     alt="Week van de Klank 2025 – Rothko Chapel"
-     style="width:100%;max-width:480px;height:240px;object-fit:cover;border-radius:var(--r);border:2px solid var(--border);box-shadow:var(--shadow);">
-<p class="photo-credit" style="font-size:0.75rem;color:var(--text-muted, #888);margin-top:0.25rem;margin-bottom:1rem;">
-  Foto: <a href="https://www.lasemaineduson.be/" target="_blank">Week van de Klank</a>
-</p>
+  <div class="partner">
+    <a href="https://www.flemishmastersinsitu.com/nl/locaties/onze-lieve-vrouw-van-goede-bijstandkerk-brussel" target="_blank" rel="noopener">
+  <img src="vlaamse-meesters-logo.png" alt="Vlaamse Meesters" style="height:60px;width:auto;object-fit:contain;object-position:left;margin-bottom:0.4rem;display:block;">
+</a>
+    <p>${t('p_meesters_desc')} <a href="https://www.flemishmastersinsitu.com/nl/locaties/onze-lieve-vrouw-van-goede-bijstandkerk-brussel" target="_blank">${t('p_meesters_link')}</a></p>
   </div>
 </section>`,
   
