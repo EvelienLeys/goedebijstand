@@ -86,7 +86,7 @@ geschiedenis: ()=>`
   <img src="${IMG_INT}" alt="Interieur">
   <img src="${IMG_ALT}" alt="Altaar">
 </div>
-<p class="photo-caption" style="text-align:right;margin-top:0;margin-bottom:1.2rem;font-size:0.85rem;font-style:italic;color:var(--gold);padding-right:0.2rem;">Foto's: Dominique Provost – Art in Flanders</p>
+<p class="photo-caption" style="text-align:right;margin-top:0;margin-bottom:1.2rem;font-size:0.85rem;font-style:italic;color:var(--gold);padding-right:0.2rem;">Dominique Provost – Art in Flanders</p>
     </div>
   </div>
   <p>${t('gesch_arch')}</p>
@@ -448,8 +448,10 @@ function sidebarHTML() {
     <p style="white-space:pre-line;">${t('sb_trans_body')}</p>
   </div>
   <div class="sidebar-box">
-    <h3>${t('sb_masters')}</h3>
-    <img src="${IMG_ALT}" alt="Altaar" style="width:100%;height:110px;object-fit:cover;border-radius:2px;border:1px solid var(--border);margin:0.5rem 0;">
-    <p><a href="https://www.flemishmastersinsitu.com/nl/locaties/onze-lieve-vrouw-van-goede-bijstandkerk-brussel" target="_blank">${t('sb_masters_link')}</a></p>
-  </div>`;
+  <h3>${t('sb_masters')}</h3>
+  <img src="${IMG_ALT}" alt="Altaar" style="width:100%;height:110px;object-fit:cover;border-radius:2px;border:1px solid var(--border);margin:0.5rem 0 0.2rem;">
+  <p style="font-size:0.72rem;font-style:italic;color:var(--gold);margin-bottom:0.5rem;">Dominique Provost - Art in Flanders</p>
+  <p><a href="https://www.flemishmastersinsitu.com/nl/locaties/onze-lieve-vrouw-van-goede-bijstandkerk-brussel" target="_blank">${t('sb_masters_link')}</a></p>
+</div>
+`;
 }
