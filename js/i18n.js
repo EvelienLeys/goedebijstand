@@ -9,7 +9,7 @@ nl: {
   hero_title:"Onze-Lieve-Vrouw\nvan Goede Bijstand",
   hero_sub:" Kerk en Nederlandstalige parochie in Brussel-centrum ",
   hero_date:"Kolenmarkt 91 · 1000 Brussel",
-  hero_scroll:"Ontdekken",
+  hero_scroll:"Welkom",
 
   nav_welkom:"Welkom",
   welkom_intro:"Welkom in de Onze-Lieve-Vrouw van Goede Bijstandskerk — een barokke parel in het hart van Brussel, open voor bezoekers, gelovigen en cultuurliefhebbers.",
@@ -178,7 +178,7 @@ fr: {
   hero_title:"Notre-Dame\ndu Bon Secours",
   hero_sub:"Église et paroisse néerlandophone dans le centre de Bruxelles",
   hero_date:"Rue du Marché au Charbon 91 · 1000 Bruxelles",
-  hero_scroll:"Découvrir",
+  hero_scroll:"Bienvenue",
 
   nav_welkom:"Bienvenue",
   welkom_intro:"Bienvenue dans l'église Notre-Dame du Bon Secours — un joyau baroque au cœur de Bruxelles, ouvert aux visiteurs, aux fidèles et aux amateurs de culture.",
@@ -321,7 +321,7 @@ en: {
   hero_title:"Our Lady\nof Good Help",
   hero_sub:"Church and Dutch-speaking parish in central Brussels",
   hero_date:"Kolenmarkt 91 · 1000 Brussels",
-  hero_scroll:"Discover",
+  hero_scroll:"Welcome",
 
   nav_welkom:"Welcome",
   welkom_intro:"Welcome to the Church of Our Lady of Good Help — a baroque gem in the heart of Brussels, open to visitors, worshippers and culture lovers alike.",
@@ -469,7 +469,7 @@ de: {
   hero_title:"Unsere Liebe Frau\nvom Guten Beistand",
   hero_sub:"Kirche und Niederländischsprachige Pfarrei im Zentrum von Brüssel",
   hero_date:"Kolenmarkt 91 · 1000 Brüssel",
-  hero_scroll:"Entdecken",
+  hero_scroll:"Willkommen",
 
   nav_welkom:"Willkommen",
   welkom_intro:"Willkommen in der Kirche Unsere Liebe Frau vom Guten Beistand — ein Barockjuwel im Herzen von Brüssel, offen für Besucher, Gläubige und Kulturliebhaber.",
@@ -612,7 +612,7 @@ it: {
   hero_title:"Nostra Signora\ndel Buon Soccorso",
   hero_sub:"Chiesa e parrocchia di lingua olandese nel centro di Bruxelles",
   hero_date:"Kolenmarkt 91 · 1000 Bruxelles",
-  hero_scroll:"Scoprire",
+  hero_scroll:"Benvenuto",
 
   nav_welkom:"Benvenuto",
   welkom_intro:"Benvenuti nella chiesa di Nostra Signora del Buon Soccorso — un gioiello barocco nel cuore di Bruxelles, aperto a visitatori, fedeli e amanti della cultura.",
@@ -761,7 +761,7 @@ es: {
   hero_title:"Nuestra Señora\ndel Buen Socorro",
   hero_sub:"Iglesia y parroquia neerlandófona en el centro de Bruselas",
   hero_date:"Kolenmarkt 91 · 1000 Bruselas",
-  hero_scroll:"Descubrir",
+  hero_scroll:"Bienvenido",
 
   nav_welkom:"Bienvenida",
   welkom_intro:"Bienvenido a la iglesia de Nuestra Señora del Buen Socorro — una joya barroca en el corazón de Bruselas, abierta a visitantes, fieles y amantes de la cultura.",
@@ -904,7 +904,7 @@ ru: {
   hero_title:"Богоматерь\nДоброй Помощи",
   hero_sub:"Церковь и нидерландоязычный приход в центре Брюсселя",
   hero_date:"Kolenmarkt 91 · 1000 Брюссель",
-  hero_scroll:"Открыть",
+  hero_scroll:"Добро пожаловать",
 
   nav_welkom:"Добро пожаловать",
   welkom_intro:"Добро пожаловать в церковь Богоматери Доброй Помощи — барочная жемчужина в сердце Брюсселя, открытая для посетителей, верующих и любителей культуры.",
@@ -1054,7 +1054,7 @@ ar: {
   hero_title:"سيدتنا العذراء\nذات المعونة الصالحة",
   hero_sub:"الكنيسة والرعية الناطقة باللغة الهولندية في وسط بروكسل",
   hero_date:"كولنمارخت ٩١ · بروكسل ١٠٠٠",
-  hero_scroll:"اكتشف",
+  hero_scroll:"مرحباً",
 
   nav_welkom:"مرحباً",
   welkom_intro:"أهلاً بكم في كنيسة سيدتنا العذراء ذات المعونة الصالحة — جوهرة باروكية في قلب بروكسل، مفتوحة للزوار والمؤمنين وعشاق الثقافة.",
