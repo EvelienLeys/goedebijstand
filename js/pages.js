@@ -86,7 +86,7 @@ geschiedenis: ()=>`
     <img src="${IMG_INT}" alt="Interieur">
     <div>
       <img src="${IMG_ALT}" alt="Altaar" style="margin-bottom:0;">
-      <p class="photo-caption" style="margin-top:0.3rem;margin-bottom:0;">Foto: Dominique Provost – Art in Flanders</p>
+      <p class="photo-caption" style="margin-top:0.3rem;margin-bottom:0;font-size:0.7rem;font-style:italic;color:var(--gold);">Foto's: Dominique Provost – Art in Flanders</p>
     </div>
   </div>
   <p>${t('gesch_arch')}</p>
