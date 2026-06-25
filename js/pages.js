@@ -219,8 +219,8 @@ voorbij: ()=>`
     <a href="https://www.lasemaineduson.be/nl/event/hoarses/" target="_blank">${t('voorbij_klank_2026')}</a>
     <span class="past-date">2026</span>
   </div>
-  <img src="Latebush_concert_profil.png"
-       alt="Son.Oor/De Week van de Klank 2026 – Hoarses"
+  <img src="https://www.lasemaineduson.be/wp-content/uploads/2025/11/Late-Bush_Hoarses.jpg.webp"
+       alt="Week van de Klank 2026 – Hoarses"
        style="width:100%;max-width:480px;height:240px;object-fit:cover;border-radius:var(--r);border:2px solid var(--border);box-shadow:var(--shadow);margin-bottom:0.3rem;">
   <p class="photo-caption" style="text-align:left;margin-bottom:1rem;">${t('voorbij_klank_credit')}</p>
 
@@ -228,8 +228,8 @@ voorbij: ()=>`
     <a href="https://www.lasemaineduson.be/nl/event/rothko-chapel/" target="_blank">${t('voorbij_klank_2025')}</a>
     <span class="past-date">2025</span>
   </div>
-  <img src="Rothko_1.2.1.jpg"
-       alt="Son.Oor/De Week van de Klank 2025 – Rothko Chapel"
+  <img src="https://www.lasemaineduson.be/wp-content/uploads/2024/12/JacobHus_rothkochapel_LieveKleeven_1.jpg.webp"
+       alt="Week van de Klank 2025 – Rothko Chapel"
        style="width:100%;max-width:480px;height:240px;object-fit:cover;border-radius:var(--r);border:2px solid var(--border);box-shadow:var(--shadow);margin-bottom:0.3rem;">
   <p class="photo-caption" style="text-align:left;margin-bottom:1rem;">${t('voorbij_klank_credit')}</p>
 
