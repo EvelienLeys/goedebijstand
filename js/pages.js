@@ -15,11 +15,6 @@ welkom: ()=>`
   <div style="background:var(--parchment);border:1px solid var(--border);border-left:5px solid var(--gold);border-radius:var(--r);padding:1.4rem 1.6rem;margin:1.4rem 0 1.8rem;">
     <h2 class="section-title" style="font-size:1.3rem;margin-bottom:1.2rem;">📰 Nieuws</h2>
     <!-- affiches -->
-    <div class="nieuws-grid">
-      <img src="Paysages.jpg" alt="Paysages"
-           style="display:block;width:100%;height:400px;object-fit:contain;background:white;border-radius:var(--r);box-shadow:var(--shadow);cursor:zoom-in;"
-           onclick="event.stopPropagation();openPaysages()">
-    </div>
   </div>
 
   <div class="card-grid">
@@ -216,17 +211,14 @@ voorbij: ()=>`
   <p style="font-style:italic;color:var(--muted);margin-bottom:0.8rem;font-size:0.92rem;">${t('voorbij_muziek_intro')}</p>
 
   <div class="past-item">
-    <a href="https://www.lasemaineduson.be/nl/event/hoarses/" target="_blank">${t('voorbij_klank_2026')}</a>
-    <span class="past-date">2026</span>
+    <span>Paysages – Barokoncert, ensemble En Chemin</span>
+    <span class="past-date">26 juni 2026</span>
   </div>
-  <img src="Latebush_concert_profil.jpg"
-       alt="Son.Oor/De Week van de Klank - Hoarses"
-       style="width:100%;max-width:480px;height:240px;object-fit:cover;border-radius:var(--r);border:2px solid var(--border);box-shadow:var(--shadow);margin-bottom:0.3rem;">
-  <p class="photo-caption" style="text-align:left;margin-bottom:1rem;">${t('voorbij_klank_credit')}</p>
+  <img src="Paysages.jpg" alt="Paysages" style="width:100%;max-width:300px;height:auto;object-fit:contain;background:white;border-radius:var(--r);border:2px solid var(--border);box-shadow:var(--shadow);margin-bottom:1rem;cursor:zoom-in;" onclick="openPaysages()">
 
   <div class="past-item">
-    <a href="https://www.lasemaineduson.be/nl/event/rothko-chapel/" target="_blank">${t('voorbij_klank_2025')}</a>
-    <span class="past-date">2025</span>
+    <a href="https://www.lasemaineduson.be/nl/event/hoarses/" target="_blank">${t('voorbij_klank_2026')}</a>
+    <span class="past-date">2026</span>
   </div>
   <img src="Rothko_1.2.1.png"
        alt="Week van de Klank 2025 – Rothko Chapel"
