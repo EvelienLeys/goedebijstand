@@ -211,7 +211,7 @@ voorbij: ()=>`
   <p style="font-style:italic;color:var(--muted);margin-bottom:0.8rem;font-size:0.92rem;">${t('voorbij_muziek_intro')}</p>
 
   <div class="past-item">
-    <span>Paysages – Concert de musique baroque, ensemble En Chemin</span>
+    <span>Paysages – Barok Concert, ensemble En Chemin</span>
     <span class="past-date">26 juni 2026</span>
   </div>
   <img src="Paysages.jpg" alt="Paysages" style="width:100%;max-width:300px;height:auto;object-fit:contain;background:white;border-radius:var(--r);border:2px solid var(--border);box-shadow:var(--shadow);margin-bottom:1rem;cursor:zoom-in;" onclick="openPaysages()">
