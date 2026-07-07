@@ -80,7 +80,7 @@ geschiedenis: ()=>`
 <div class="photo-grid">
   <div>
     <img src="${IMG_INT}" alt="Interieur" style="margin-bottom:0;">
-    <p class="photo-caption" style="text-align:right;margin-top:0.3rem;margin-bottom:0;font-size:0.78rem;font-style:italic;color:var(--gold);">Dominique Provost – Art in Flanders</p>
+    <p class="photo-caption" style="text-align:right;margin-top:0.3rem;margin-bottom:0;font-size:0.78rem;font-style:italic;color:var(--gold);">Jean-Paul Remy – Art in Flanders</p>
   </div>
   <div>
     <img src="${IMG_ALT}" alt="Altaar" style="margin-bottom:0;">
