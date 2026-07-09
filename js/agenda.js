@@ -228,6 +228,9 @@ function agendaHTML() {
             ev.tk === 'ev_lgbtq' ? '✝' :
             ev.tk === 'ev_gitaar' ? '🎵' :
             ev.tk === 'ev_concert_juni' ? '🎵' :
+            ev.tk === 'ev_operette_1' ? '🎵' :
+            ev.tk === 'ev_operette_2' ? '🎵' :
+            ev.tk === 'ev_operette_3' ? '🎵' :
             ev.tk === 'ev_drempel' ? '✝👪' :
             ev.tk === 'ev_pinkster' ? '✝' :
             ev.tk === 'ev_pinksterwake' ? '✝ <img src="paulusgemeenschappen_logo_tekening.png" style="height:1.1em;vertical-align:middle;display:inline-block;">' :
