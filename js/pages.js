@@ -94,7 +94,7 @@ geschiedenis: ()=>`
   </div>
   <div>
     <img src="${IMG_ALT}" alt="Altaar" style="margin-bottom:0;">
-    <p class="photo-caption" style="text-align:right;margin-top:0.3rem;margin-bottom:0;font-size:0.78rem;font-style:italic;color:var(--gold);">Dominique Provost – Art in Flanders</p>
+    <p class="photo-caption" style="text-align:right;margin-top:0.3rem;margin-bottom:0;font-size:0.78rem;font-style:italic;color:var(--gold);">Dominique Provost – Art in Flanders (copyright Okv) </p>
   </div>
 </div>
   <p>${t('gesch_arch')}</p>
@@ -297,7 +297,7 @@ huren: ()=>`
 <section class="section">
   <h2 class="section-title">${t('huren_title')}</h2>
   <img src="${IMG_INT}" class="church-photo" style="height:260px;margin-bottom:0.2rem;" alt="Interieur">
-  <p style="font-size:0.72rem;font-style:italic;color:var(--gold);margin-bottom:1rem;">Dominique Provost - Art in Flanders</p>
+  <p style="font-size:0.72rem;font-style:italic;color:var(--gold);margin-bottom:1rem;">Dominique Provost - Art in Flanders (copyright Okv)</p>
   <p style="margin-bottom:1.4rem;">${t('huren_intro')}</p>
 
   <div class="huren-grid">
@@ -476,7 +476,7 @@ function sidebarHTML() {
   <div class="sidebar-box">
   <h3>${t('sb_masters')}</h3>
   <img src="${IMG_ALT}" alt="Altaar" style="width:100%;height:110px;object-fit:cover;border-radius:2px;border:1px solid var(--border);margin:0.5rem 0 0.2rem;">
-  <p style="font-size:0.72rem;font-style:italic;color:var(--gold);margin-bottom:0.5rem;">Dominique Provost - Art in Flanders</p>
+  <p style="font-size:0.72rem;font-style:italic;color:var(--gold);margin-bottom:0.5rem;">Dominique Provost - Art in Flanders (copyright Okv)</p>
   <p><a href="https://www.flemishmastersinsitu.com/nl/locaties/onze-lieve-vrouw-van-goede-bijstandkerk-brussel" target="_blank">${t('sb_masters_link')}</a></p>
 </div>
 `;
