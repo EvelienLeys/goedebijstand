@@ -75,9 +75,9 @@ const FIXED = [
   { datum:'2026-06-19', tijd:'18:00', type:'concert', tk:'ev_gitaar' },
   { datum:'2026-06-19', tijd:'20:00', type:'nacht', tk:'ev_night' },
   { datum:'2026-06-26', tijd:'19:00', type:'concert', tk:'ev_concert_juni', extra:'<a href="https://www.visit.brussels/en/visitors/event-details.Ensemble-baroque-En-chemin.5700023640" target="_blank">ensemble En Chemin</a>', gratis:true, onclick:'openPaysages()' },
-  { datum:'2026-07-11', tijd:'14:00', type:'concert', tk:'ev_operette_1' },
-  { datum:'2026-07-11', tijd:'15:30', type:'concert', tk:'ev_operette_2' },
-  { datum:'2026-07-11', tijd:'17:00', type:'concert', tk:'ev_operette_3' },
+  { datum:'2026-07-11', tijd:'14:00', type:'concert', tk:'ev_operette_1', onclick:'openOperette()' },
+  { datum:'2026-07-11', tijd:'15:30', type:'concert', tk:'ev_operette_2', onclick:'openOperette()' },
+  { datum:'2026-07-11', tijd:'17:00', type:'concert', tk:'ev_operette_3', onclick:'openOperette()' },
   { datum:'2026-08-15', tijd:'11:00', type:'viering', tk:'ev_olvhemelvaart' },
 ];
 
