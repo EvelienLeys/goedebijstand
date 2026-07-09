@@ -245,6 +245,16 @@ voorbij: ()=>`
   <p class="photo-caption" style="text-align:left;margin-bottom:1rem;">${t('voorbij_klank_credit')}</p>
 
   <div class="ornament">✦ ✦ ✦</div>
+  <p class="subsection">Vlaanderen Feest</p>
+
+  <div class="past-item" style="margin-bottom:1rem;">
+    <a href="https://www.bruzz.be/videoreeks/maandag-11-juli-2022/video-brussels-operette-theater-brengt-vlaamse-componisten-naar" target="_blank">
+      ▶ Bekijk het filmpje op Bruzz
+    </a>
+    <span class="past-date">2022</span>
+  </div>
+  <p class="photo-caption" style="text-align:left;">Vlaanderen Feest 2022 — Brussels Operettetheater · Bruzz</p>
+  </div>
 
   <p class="subsection">${t('voorbij_opnames_title')}</p>
   <p style="font-style:italic;color:var(--muted);margin-bottom:0.8rem;font-size:0.92rem;">${t('voorbij_opnames_intro')}</p>
