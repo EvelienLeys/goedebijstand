@@ -245,6 +245,7 @@ voorbij: ()=>`
   <p class="photo-caption" style="text-align:left;margin-bottom:1rem;">${t('voorbij_klank_credit')}</p>
 
   <div class="past-item" style="margin-bottom:1rem;">
+   <p class="subsection">Vlaanderen Feest</p>
     <a href="https://www.bruzz.be/videoreeks/maandag-11-juli-2022/video-brussels-operette-theater-brengt-vlaamse-componisten-naar" target="_blank">
       ▶ Bekijk het filmpje op Bruzz
     </a>
@@ -254,7 +255,7 @@ voorbij: ()=>`
   </div>
 
   <div class="ornament">✦ ✦ ✦</div>
-  <p class="subsection">Vlaanderen Feest</p>
+
 
   <p class="subsection">${t('voorbij_opnames_title')}</p>
   <p style="font-style:italic;color:var(--muted);margin-bottom:0.8rem;font-size:0.92rem;">${t('voorbij_opnames_intro')}</p>
