@@ -244,8 +244,8 @@ voorbij: ()=>`
        style="width:100%;max-width:480px;height:240px;object-fit:cover;border-radius:var(--r);border:2px solid var(--border);box-shadow:var(--shadow);margin-bottom:0.3rem;">
   <p class="photo-caption" style="text-align:left;margin-bottom:1rem;">${t('voorbij_klank_credit')}</p>
 
+ <p class="subsection">Vlaanderen Feest</p>
   <div class="past-item" style="margin-bottom:1rem;">
-   <p class="subsection">Vlaanderen Feest</p>
     <a href="https://www.bruzz.be/videoreeks/maandag-11-juli-2022/video-brussels-operette-theater-brengt-vlaamse-componisten-naar" target="_blank">
       ▶ Bekijk het filmpje op Bruzz
     </a>
