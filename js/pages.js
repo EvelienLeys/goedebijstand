@@ -15,7 +15,7 @@ welkom: ()=>`
   <div style="background:var(--parchment);border:1px solid var(--border);border-left:5px solid var(--gold);border-radius:var(--r);padding:1.4rem 1.6rem;margin:1.4rem 0 1.8rem;">
   <h2 class="section-title" style="font-size:1.3rem;margin-bottom:1.2rem;">📰 Nieuws</h2>
   <div style="background:white;border-radius:var(--r);box-shadow:var(--shadow);padding:1.2rem;display:flex;flex-direction:column;gap:0.8rem;">
-    <img src="Vlaanderen_Feest_2026.png" alt="Vlaanderen Feest" style="width:100%;max-height:80px;object-fit:contain;object-position:left;">
+    <img src="Vlaanderen Feest 2026.png" alt="Vlaanderen Feest" style="width:100%;max-height:80px;object-fit:contain;object-position:left;">
     <p style="font-size:0.85rem;color:var(--stone);line-height:1.6;">
       <strong>Zaterdag 11 juli 2026</strong> — Drie gratis Jong Talent-concerten in de Goede Bijstandskerk:<br>
       <strong>14:00, 15:30 en 17:00 uur</strong> (telkens ±30 min)<br>
