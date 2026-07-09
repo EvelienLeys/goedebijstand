@@ -245,6 +245,9 @@ function sluitTaize() { _sluitOverlay('taize-overlay'); }
 function openLGBTQ()  { _makeOverlay('lgbtq-overlay', 'lgbtq.jpg', 'sluitLGBTQ'); }
 function sluitLGBTQ() { _sluitOverlay('lgbtq-overlay'); }
 
+function openOperette()  { _makeOverlay('operette-overlay', 'Promo_Operettetheater_2026.jpg', 'sluitOperette'); }
+function sluitOperette() { _sluitOverlay('operette-overlay'); }
+
 /* ─── GROND TAAL SYNC ─── */
 function syncGrondLang(iframe) {
   try {
@@ -274,7 +277,9 @@ Object.assign(window, {
   openTaize,
   sluitTaize,
   openLGBTQ,
-  sluitLGBTQ
+  sluitLGBTQ,
+  openOperette,
+  sluitOperette
 });
 
 /* ─── HELPENDE HANDEN FORMULIER ─── */
