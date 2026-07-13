@@ -15,7 +15,7 @@ welkom: ()=>`
  <div style="background:var(--parchment);border:1px solid var(--border);border-left:5px solid var(--gold);border-radius:var(--r);padding:1.4rem 1.6rem;margin:1.4rem 0 1.8rem;">
   <h2 class="section-title" style="font-size:1.3rem;margin-bottom:1.2rem;">📰 Nieuws</h2>
   <p style="color:var(--muted);font-style:italic;font-size:0.9rem;margin:0;">Momenteel geen actueel nieuws.</p>
-</div>>
+</div>
 
   <div class="card-grid">
     <div class="card" onclick="go('agenda')">
