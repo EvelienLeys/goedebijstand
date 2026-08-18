@@ -70,7 +70,9 @@ agenda: ()=>`
 <section class="section">
   <h2 class="section-title">${t('ag_title')}</h2>
   <p style="font-style:italic;color:var(--muted);margin-bottom:1.2rem;font-size:0.93rem;">${t('ag_intro')}</p>
-  ${agendaHTML()}
+  <div style="max-width:620px;margin:0 auto;">
+    ${agendaHTML()}
+  </div>
 </section>`,
 
 geschiedenis: ()=>`
