@@ -68,6 +68,8 @@ nl: {
   ev_operette_2: 'Vlaanderen Feest – Concert Brussels OperetteTheater – Jong Talent (15:30–16:00)',
   ev_operette_3: 'Vlaanderen Feest – Concert Brussels OperetteTheater – Jong Talent (17:00–17:30)',
   ev_olvhemelvaart:"Onze-Lieve-Vrouw Hemelvaart",
+  ev_evensong: '<a href="https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/evensong-gedachtenis-gino-mattheeuws" target="_blank">Evensong – gedachtenis Gino Mattheeuws</a>',
+  ev_koesterkoffie: 'Koesterkoffie – Pastorie Goede Bijstand (13:30–16:30) · <a href="https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/troost-bij-de-thee-koester-bij-de-koffie" target="_blank">meer info</a>',
   gesch_title:"Geschiedenis van het gebouw",
   gesch_intro:"De Onze-Lieve-Vrouw van Goede Bijstandskerk is een van de markantste barokke kerkgebouwen in het hart van Brussel.",
   tl1_year:"1664",
