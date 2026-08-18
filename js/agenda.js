@@ -81,8 +81,8 @@ const FIXED = [
   { datum:'2026-08-15', tijd:'11:00', type:'viering', tk:'ev_olvhemelvaart' },
   { datum:'2026-09-12', tijd:'19:00', type:'viering', tk:'ev_evensong' },
   { datum:'2026-09-13', tijd:'13:30', type:'cleanup', tk:'ev_koesterkoffie' },
+  { datum:'2026-09-17', tijd:'00:00', type:'filmopname', tk:'ev_filmopname' },
   { datum:'2026-09-18', tijd:'00:00', type:'filmopname', tk:'ev_filmopname' },
-  { datum:'2026-09-19', tijd:'00:00', type:'filmopname', tk:'ev_filmopname' },
   { datum:'2026-09-19', tijd:'11:00', type:'huwelijk', tk:'ev_huwelijk_leys_carlier' },
 ];
 
