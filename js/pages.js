@@ -12,9 +12,18 @@ welkom: ()=>`
        alt="Interieur Goede Bijstand"
        onclick="openFoto()">
 
- <div style="background:var(--parchment);border:1px solid var(--border);border-left:5px solid var(--gold);border-radius:var(--r);padding:1.4rem 1.6rem;margin:1.4rem 0 1.8rem;">
+<div style="background:var(--parchment);border:1px solid var(--border);border-left:5px solid var(--gold);border-radius:var(--r);padding:1.4rem 1.6rem;margin:1.4rem 0 1.8rem;">
   <h2 class="section-title" style="font-size:1.3rem;margin-bottom:1.2rem;">📰 Nieuws</h2>
-  <p style="color:var(--muted);font-style:italic;font-size:0.9rem;margin:0;">Momenteel geen actueel nieuws.</p>
+
+  <div style="background:white;border-radius:var(--r);box-shadow:var(--shadow);padding:1.2rem;display:flex;flex-direction:column;gap:0.8rem;margin-bottom:1.2rem;">
+    <img src="Evensong.png" alt="Evensong – gedachtenis Gino Mattheeuws" style="width:100%;border-radius:var(--r);border:1px solid var(--border);cursor:zoom-in;" onclick="openEvensong()">
+  </div>
+
+  <div style="background:white;border-radius:var(--r);box-shadow:var(--shadow);padding:1.2rem;display:flex;flex-direction:column;gap:0.8rem;">
+    <p style="font-size:0.85rem;color:var(--stone);line-height:1.6;">☕ <strong>Koesterkoffie</strong></p>
+    <a href="koesterkoffie.pdf" target="_blank" class="btn btn-outline" style="align-self:flex-start;">📄 Bekijk de uitnodiging</a>
+  </div>
+
 </div>
 
   <div class="card-grid">
