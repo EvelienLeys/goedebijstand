@@ -19,10 +19,9 @@ welkom: ()=>`
     <img src="Evensong.png" alt="Evensong – gedachtenis Gino Mattheeuws" style="width:100%;border-radius:var(--r);border:1px solid var(--border);cursor:zoom-in;" onclick="openEvensong()">
   </div>
 
-    <div style="background:white;border-radius:var(--r);box-shadow:var(--shadow);padding:1.2rem;display:flex;flex-direction:column;gap:0.8rem;">
+      <div style="background:white;border-radius:var(--r);box-shadow:var(--shadow);padding:1.2rem;display:flex;flex-direction:column;gap:0.8rem;">
     <p style="font-size:0.85rem;color:var(--stone);line-height:1.6;">☕ <strong>Koesterkoffie</strong></p>
-    <iframe src="koesterkoffie.pdf" style="width:100%;height:500px;border:1px solid var(--border);border-radius:var(--r);" title="Koesterkoffie"></iframe>
-    <a href="koesterkoffie.pdf" target="_blank" style="font-size:0.82rem;color:var(--gold-dk);">📄 Openen als PDF</a>
+    <img src="koesterkoffie.png" alt="Koesterkoffie – uitnodiging" style="width:100%;border-radius:var(--r);">
   </div>
 
 </div>
