@@ -91,6 +91,7 @@ const ZONDAG_UITZONDERINGEN = {
   '2026-07-26': 'viering',
   '2026-08-09': 'woord',
   '2026-08-23': 'viering',
+  '2026-08-30': 'woord',
   
 };
 
