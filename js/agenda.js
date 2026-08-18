@@ -86,6 +86,7 @@ const FIXED = [
   { datum:'2026-09-17', tijd:'00:00', type:'filmopname', tk:'ev_filmopname' },
   { datum:'2026-09-18', tijd:'00:00', type:'filmopname', tk:'ev_filmopname' },
   { datum:'2026-09-19', tijd:'11:00', type:'huwelijk', tk:'ev_huwelijk_leys_carlier' },
+  { datum:'2026-10-04', tijd:'17:00', type:'concert', tk:'ev_artea' },
 ];
 
 const ZONDAG_UITZONDERINGEN = {
