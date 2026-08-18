@@ -79,6 +79,8 @@ const FIXED = [
   { datum:'2026-07-11', tijd:'15:30', type:'concert', tk:'ev_operette_2', onclick:'openOperette()' },
   { datum:'2026-07-11', tijd:'17:00', type:'concert', tk:'ev_operette_3', onclick:'openOperette()' },
   { datum:'2026-08-15', tijd:'11:00', type:'viering', tk:'ev_olvhemelvaart' },
+  { datum:'2026-08-23', tijd:'14:00', type:'repetitie', tk:'ev_koorrepetitie' },
+  { datum:'2026-08-30', tijd:'14:00', type:'repetitie', tk:'ev_koorrepetitie' },
   { datum:'2026-09-12', tijd:'19:00', type:'viering', tk:'ev_evensong' },
   { datum:'2026-09-13', tijd:'13:30', type:'cleanup', tk:'ev_koesterkoffie' },
   { datum:'2026-09-17', tijd:'00:00', type:'filmopname', tk:'ev_filmopname' },
@@ -237,6 +239,7 @@ function agendaHTML() {
             ev.tk === 'ev_operette_1' ? '🎵' :
             ev.tk === 'ev_operette_2' ? '🎵' :
             ev.tk === 'ev_operette_3' ? '🎵' :
+            ev.type === 'repetitie' ? '🎶' :
             ev.tk === 'ev_drempel' ? '✝👪' :
             ev.tk === 'ev_pinkster' ? '✝' :
             ev.type === 'huwelijk' ? '✝' :
