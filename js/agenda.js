@@ -238,9 +238,9 @@ function agendaHTML() {
             ev.tk === 'ev_pinkster' ? '✝' :
             ev.tk === 'ev_pinksterwake' ? '✝ <img src="paulusgemeenschappen_logo_tekening.png" style="height:1.1em;vertical-align:middle;display:inline-block;">' :
             ev.tk === 'ev_evensong' ? '✝' :
-            ev.tk === 'ev_koesterkoffie' ? '☕' :
+            ev.tk === 'ev_koesterkoffie' ? '<img src="paulusgemeenschappen_logo_tekening.png" style="height:1.1em;vertical-align:middle;display:inline-block;"> ☕' :
             ev.type === 'viering' ? '✝' :
-            ev.type === 'cleanup' ? `<img src="paulusgemeenschappen_logo_tekening.png" style="height:1.1em;vertical-align:middle;display:inline-block;">` :
+            ev.type === 'cleanup' ? `<img src="paulusgemeenschappen_logo_tekening.png" style="height:1.1em;vertical-align:middle;display:inline-block;"> ✝` :
             ev.tekst?.includes(t('ev_sun_eucharistie')) ? '✝' :
             ev.tekst?.includes(t('ev_sun_woord')) ? '✝' :
             '◆'
