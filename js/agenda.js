@@ -79,6 +79,8 @@ const FIXED = [
   { datum:'2026-07-11', tijd:'15:30', type:'concert', tk:'ev_operette_2', onclick:'openOperette()' },
   { datum:'2026-07-11', tijd:'17:00', type:'concert', tk:'ev_operette_3', onclick:'openOperette()' },
   { datum:'2026-08-15', tijd:'11:00', type:'viering', tk:'ev_olvhemelvaart' },
+  { datum:'2026-09-12', tijd:'19:00', type:'viering', tk:'ev_evensong' },
+  { datum:'2026-09-13', tijd:'13:30', type:'cleanup', tk:'ev_koesterkoffie' },
 ];
 
 const ZONDAG_UITZONDERINGEN = {
@@ -234,6 +236,8 @@ function agendaHTML() {
             ev.tk === 'ev_drempel' ? '✝👪' :
             ev.tk === 'ev_pinkster' ? '✝' :
             ev.tk === 'ev_pinksterwake' ? '✝ <img src="paulusgemeenschappen_logo_tekening.png" style="height:1.1em;vertical-align:middle;display:inline-block;">' :
+            ev.tk === 'ev_evensong' ? '✝' :
+            ev.tk === 'ev_koesterkoffie' ? '☕' :
             ev.type === 'viering' ? '✝' :
             ev.type === 'cleanup' ? `<img src="paulusgemeenschappen_logo_tekening.png" style="height:1.1em;vertical-align:middle;display:inline-block;">` :
             ev.tekst?.includes(t('ev_sun_eucharistie')) ? '✝' :
