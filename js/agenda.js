@@ -124,7 +124,7 @@ function genNight() {
   const end=new Date(now); end.setDate(now.getDate()+42);
   const uitsluitingen = ['2026-06-26', '2026-06-19'];
   for (let d=new Date(now);d<=end;d.setDate(d.getDate()+1)) {
-    if (d.getDay()===5 && d.getMonth()>=4 && d.getMonth()<=7 && !uitsluitingen.includes(dkey(d)))
+    if (d.getDay()===5 && d.getMonth()>=4 && d.getMonth()<=8 && !uitsluitingen.includes(dkey(d)))
       res.push({datum:dkey(d),tijd:'18:00',type:'nacht',tk:'ev_night'});
   }
   return res;
