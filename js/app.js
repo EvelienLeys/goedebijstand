@@ -254,6 +254,9 @@ function sluitEvensong() { _sluitOverlay('evensong-overlay'); }
 function openArtea()  { _makeOverlay('artea-overlay', 'Artea_2026.png', 'sluitArtea'); }
 function sluitArtea() { _sluitOverlay('artea-overlay'); }
 
+function openExhibition()  { _makeOverlay('exhibition-overlay', 'exhibition_2026.jpg', 'sluitExhibition'); }
+function sluitExhibition() { _sluitOverlay('exhibition-overlay'); }
+
 /* ─── GROND TAAL SYNC ─── */
 function syncGrondLang(iframe) {
   try {
