@@ -24,6 +24,16 @@ welkom: ()=>`
     <img src="koesterkoffie.png" alt="Koesterkoffie – uitnodiging" style="width:100%;border-radius:var(--r);">
   </div>
 
+    <div style="background:white;border-radius:var(--r);box-shadow:var(--shadow);padding:1.2rem;display:flex;flex-direction:column;gap:0.8rem;margin-top:1.2rem;">
+    <img src="Artea_2026.png" alt="Concert Artea – Indigo" style="width:100%;border-radius:var(--r);cursor:zoom-in;" onclick="openArtea()">
+    <p style="font-size:0.85rem;color:var(--stone);line-height:1.6;">
+      <strong>Zondag 4 oktober 2026 om 17u</strong> — Concert Artea – Indigo<br>
+      OLV van Goede Bijstandskerk, 1000 Brussel<br>
+      <em>15€ (gratis voor -16 jaar)</em><br>
+      <a href="https://www.ticketkantoor.nl/shop/IndigoArt" target="_blank" style="font-weight:600;color:var(--gold-dk);">Tickets →</a>
+    </p>
+  </div>
+
 </div>
 
   <div class="card-grid">
