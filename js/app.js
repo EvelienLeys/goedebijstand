@@ -287,7 +287,9 @@ Object.assign(window, {
   openOperette,
   sluitOperette,
   openEvensong,
-  sluitEvensong
+  sluitEvensong,
+  openArtea,
+  sluitArtea
 });
 
 /* ─── HELPENDE HANDEN FORMULIER ─── */
