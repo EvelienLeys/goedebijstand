@@ -251,6 +251,9 @@ function sluitOperette() { _sluitOverlay('operette-overlay'); }
 function openEvensong()  { _makeOverlay('evensong-overlay', 'Evensong.png', 'sluitEvensong'); }
 function sluitEvensong() { _sluitOverlay('evensong-overlay'); }
 
+function openArtea()  { _makeOverlay('artea-overlay', 'Artea_2026.png', 'sluitArtea'); }
+function sluitArtea() { _sluitOverlay('artea-overlay'); }
+
 /* ─── GROND TAAL SYNC ─── */
 function syncGrondLang(iframe) {
   try {
