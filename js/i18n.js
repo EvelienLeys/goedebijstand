@@ -241,7 +241,7 @@ fr: {
   ev_olvhemelvaart:"Notre-Dame de l'Assomption",
   ev_koorrepetitie:"<a href='https://ravekoorbxl.hotglue.me/?home-mobile' target='_blank' rel='noopener'>Répétition Rave Koor</a> (– 16h) - l'église reste ouverte",
   ev_huwelijk_leys_carlier: "Mariage d'Evelien Leys et Bram Carlier",
-  ev_artea: ev_artea: 'Concert <a href="#" onclick="openArtea();return false;" style="cursor:zoom-in;">Artea – Indigo</a> · <a href="https://www.ticketkantoor.nl/shop/IndigoArt" target="_blank" style="font-size:0.78rem;">Tickets →</a>',
+  ev_artea: 'Concert <a href="#" onclick="openArtea();return false;" style="cursor:zoom-in;">Artea – Indigo</a> · <a href="https://www.ticketkantoor.nl/shop/IndigoArt" target="_blank" style="font-size:0.78rem;">Tickets →</a>',
   gesch_title:"Histoire du bâtiment",
   gesch_intro:"L'église Notre-Dame du Bon Secours est l'un des édifices baroques les plus remarquables au cœur de Bruxelles.",
   tl1_year:"1664",
