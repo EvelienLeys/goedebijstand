@@ -34,6 +34,18 @@ welkom: ()=>`
     </p>
   </div>
 
+    <div style="background:white;border-radius:var(--r);box-shadow:var(--shadow);padding:1.2rem;display:flex;flex-direction:column;gap:0.8rem;margin-top:1.2rem;">
+    <img src="exhibition_2026.jpg" alt="Art Exhibition – Sue Ball – Consider the Birds" 
+         style="width:100%;max-width:220px;height:auto;border-radius:var(--r);cursor:zoom-in;border:1px solid var(--border);" 
+         onclick="openExhibition()">
+    <p style="font-size:0.85rem;color:var(--stone);line-height:1.6;">
+      <strong>Art Exhibition – Sue Ball – Consider the Birds</strong><br>
+      17 oktober – 28 november 2026<br>
+      OLV van Goede Bijstandskerk, Kolenmarkt 91, 1000 Brussel<br>
+      <a href="mailto:info@316.be" style="color:var(--gold-dk);">info@316.be</a>
+    </p>
+  </div>
+
 </div>
 
   <div class="card-grid">
