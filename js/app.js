@@ -292,7 +292,9 @@ Object.assign(window, {
   openEvensong,
   sluitEvensong,
   openArtea,
-  sluitArtea
+  sluitArtea,
+  openExhibition,
+  sluitExhibition
 });
 
 /* ─── HELPENDE HANDEN FORMULIER ─── */
