@@ -15,8 +15,10 @@ welkom: ()=>`
 <div style="background:var(--parchment);border:1px solid var(--border);border-left:5px solid var(--gold);border-radius:var(--r);padding:1.4rem 1.6rem;margin:1.4rem auto 1.8rem;max-width:600px;">
   <h2 class="section-title" style="font-size:1.3rem;margin-bottom:1.2rem;">📰 Nieuws</h2>
 
-  <div style="background:white;border-radius:var(--r);box-shadow:var(--shadow);padding:1.2rem;display:flex;flex-direction:column;gap:0.8rem;margin-bottom:1.2rem;">
-    <img src="Evensong.png" alt="Evensong – gedachtenis Gino Mattheeuws" style="width:100%;border-radius:var(--r);border:1px solid var(--border);cursor:zoom-in;" onclick="openEvensong()">
+    <div style="background:white;border-radius:var(--r);box-shadow:var(--shadow);padding:1.2rem;display:flex;flex-direction:column;gap:0.8rem;margin-bottom:1.2rem;">
+    <a href="https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/evensong-gedachtenis-gino-mattheeuws" target="_blank">
+      <img src="EvensongOLV.png" alt="Evensong – gedachtenis Gino Mattheeuws" style="width:100%;border-radius:var(--r);border:1px solid var(--border);">
+    </a>
   </div>
 
       <div style="background:white;border-radius:var(--r);box-shadow:var(--shadow);padding:1.2rem;display:flex;flex-direction:column;gap:0.8rem;">
