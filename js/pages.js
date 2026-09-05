@@ -178,6 +178,13 @@ samenwerking: ()=>`
          text-decoration:none;display:inline-block;">
   ${t('p_sacramenten')} ↗
 </a>
+<a href="https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/data-catechese-parelvissers-2026-2027" target="_blank"
+  style="font-family:var(--font-ui);font-size:0.72rem;font-weight:600;letter-spacing:0.08em;
+         padding:0.35rem 0.9rem;border-radius:var(--r);cursor:pointer;transition:all var(--t);
+         background:var(--cream);border:1px solid var(--border);color:var(--stone-mid);
+         text-decoration:none;display:inline-block;">
+  Kindercatechese ↗
+</a>
     </div>
 
     <div id="tab-kerkfabriek" style="display:none;margin-top:0.8rem;padding:0.9rem 1.1rem;background:var(--parchment);border-radius:var(--r);border:1px solid var(--border);font-size:0.9rem;color:var(--stone);">
