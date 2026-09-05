@@ -171,7 +171,7 @@ samenwerking: ()=>`
   id="btn-bijstandnight">
   🌙 Bijstand by Night
 </button>
-<a href="https://www.paulusgemeenschappen.be/nl/vieringen-sacramenten#vormsel" target="_blank"
+<a href="https://www.paulusgemeenschappen.be/nl/vieringen-sacramenten#ziekenzalving" target="_blank"
   style="font-family:var(--font-ui);font-size:0.72rem;font-weight:600;letter-spacing:0.08em;
          padding:0.35rem 0.9rem;border-radius:var(--r);cursor:pointer;transition:all var(--t);
          background:var(--cream);border:1px solid var(--border);color:var(--stone-mid);
