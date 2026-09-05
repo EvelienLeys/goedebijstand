@@ -21,9 +21,10 @@ welkom: ()=>`
     </a>
   </div>
 
-      <div style="background:white;border-radius:var(--r);box-shadow:var(--shadow);padding:1.2rem;display:flex;flex-direction:column;gap:0.8rem;">
-    <p style="font-size:0.85rem;color:var(--stone);line-height:1.6;">☕ <strong><a href="https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/troost-bij-de-thee-koester-bij-de-koffie" target="_blank">Koesterkoffie</a></strong></p>
-    <img src="koesterkoffie.png" alt="Koesterkoffie – uitnodiging" style="width:100%;border-radius:var(--r);">
+        <div style="background:white;border-radius:var(--r);box-shadow:var(--shadow);padding:1.2rem;display:flex;flex-direction:column;gap:0.8rem;">
+    <a href="https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/troost-bij-de-thee-koester-bij-de-koffie" target="_blank">
+      <img src="koesterkoffieOLV.png" alt="Koesterkoffie – uitnodiging" style="width:100%;border-radius:var(--r);border:1px solid var(--border);">
+    </a>
   </div>
 
     <div style="background:white;border-radius:var(--r);box-shadow:var(--shadow);padding:1.2rem;display:flex;flex-direction:column;gap:0.8rem;margin-top:1.2rem;">
