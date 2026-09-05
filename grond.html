@@ -281,38 +281,6 @@ footer a:hover { color: #E8F1FF; }
   <div class="map-caption" id="txt-map-caption">Klik op een punt om de naam van de locatie te zien — zoom met het scrollwiel of de knoppen links</div>
 </section>
 
-<!-- SCHELP FORM PANEL (shown only in schelp layer) -->
-<div class="schelp-panel" id="schelp-panel" style="display:none!important;">
-  <div class="schelp-form-wrap">
-    <div class="schelp-form-title" id="schelp-form-title">📍 Pin uw schelp op de kaart</div>
-    <div class="schelp-form-intro" id="schelp-form-intro">Hebt u een schelp meegenomen uit de Bijstandskerk als geschenk? Laat zien waar ze terechtgekomen is.</div>
-    <div class="schelp-form-row">
-      <div class="schelp-field">
-        <label class="schelp-label" for="sf-city"><span id="lbl-city">Stad of land</span> <span class="schelp-req">*</span></label>
-        <input id="sf-city" type="text" class="schelp-input" placeholder="bijv. Tokyo, Japan" autocomplete="off">
-      </div>
-      <div class="schelp-field">
-        <label class="schelp-label" for="sf-name" id="lbl-name">Uw naam (optioneel)</label>
-        <input id="sf-name" type="text" class="schelp-input" placeholder="bijv. Marie">
-      </div>
-    </div>
-    <div class="schelp-field" style="margin-top:10px;">
-      <label class="schelp-label" for="sf-msg" id="lbl-msg">Berichtje (optioneel)</label>
-      <textarea id="sf-msg" class="schelp-input schelp-textarea" rows="2" placeholder="bijv. Cadeau voor mijn zus"></textarea>
-    </div>
-    <div style="display:flex;align-items:center;flex-wrap:wrap;">
-      <button class="btn-schelp" id="sf-submit" onclick="schelpSubmit()">🐚 <span id="btn-pin-label">Zet pin op de kaart</span></button>
-      <span class="schelp-status" id="sf-status"></span>
-    </div>
-  </div>
-</div>
-
-<!-- SCHELP LIST -->
-<div class="schelp-list-wrap" id="schelp-list-wrap" style="display:none!important;">
-  <div class="schelp-list-title" id="schelp-list-title">Alle schelpen</div>
-  <ul class="schelp-list" id="schelp-list"></ul>
-</div>
-
 <!-- ARTICLE -->
 <section id="verhaal" class="article-section">
   <div class="article-inner">
@@ -854,9 +822,6 @@ document.querySelectorAll('.lang-btn').forEach(btn => {
     applyLanguage(btn.dataset.lang);
   });
 });
-
-// Load shell pins from shared storage
-loadSchelpPins();
 
  // Ontvang taalwijziging van de kerksite (parent)
 window.addEventListener('message', function(e) {
