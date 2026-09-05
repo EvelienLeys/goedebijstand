@@ -623,8 +623,8 @@ const STORAGE_KEY = 'schelpen-pins';
 
 async function loadSchelpPins() {
   try {
-    const res = await window.storage.get(STORAGE_KEY, true);
-    schelpPins = res ? JSON.parse(res.value) : [];
+    const stored = localStorage.getItem(STORAGE_KEY);
+schelpPins = stored ? JSON.parse(stored) : [];
   } catch(e) { schelpPins = []; }
   renderSchelpMarkers();
   renderSchelpList();
@@ -703,7 +703,7 @@ window.schelpSubmit = async function() {
   const dateStr = now.toLocaleDateString('nl-BE', { day:'numeric', month:'long', year:'numeric' });
   const pin = { id:Date.now(), city:displayName||city, name:nameEl.value.trim(), msg:msgEl.value.trim(), lat, lng, date:dateStr };
   try {
-    await window.storage.set(STORAGE_KEY, JSON.stringify([...schelpPins, pin]), true);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify([...schelpPins, pin]));
     schelpPins.push(pin);
   } catch(e) { statusEl.textContent = tx.errSave; btnEl.disabled = false; return; }
   cityEl.value = ''; nameEl.value = ''; msgEl.value = '';
