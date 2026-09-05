@@ -15,40 +15,41 @@ welkom: ()=>`
 <div style="background:var(--parchment);border:1px solid var(--border);border-left:5px solid var(--gold);border-radius:var(--r);padding:1.4rem 1.6rem;margin:1.4rem auto 1.8rem;max-width:600px;">
   <h2 class="section-title" style="font-size:1.3rem;margin-bottom:1.2rem;">📰 Nieuws</h2>
 
-    <div style="background:white;border-radius:var(--r);box-shadow:var(--shadow);padding:1.2rem;display:flex;flex-direction:column;gap:0.8rem;margin-bottom:1.2rem;">
-    <a href="https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/evensong-gedachtenis-gino-mattheeuws" target="_blank">
-      <img src="EvensongOLV.png" alt="Evensong – gedachtenis Gino Mattheeuws" style="width:100%;border-radius:var(--r);border:1px solid var(--border);">
-    </a>
-  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.2rem;">
 
-        <div style="background:white;border-radius:var(--r);box-shadow:var(--shadow);padding:1.2rem;display:flex;flex-direction:column;gap:0.8rem;">
-    <a href="https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/troost-bij-de-thee-koester-bij-de-koffie" target="_blank">
-      <img src="koesterkoffieOLV.png" alt="Koesterkoffie – uitnodiging" style="width:100%;border-radius:var(--r);border:1px solid var(--border);">
-    </a>
-  </div>
+    <div style="background:white;border-radius:var(--r);box-shadow:var(--shadow);padding:1.2rem;display:flex;flex-direction:column;gap:0.8rem;">
+      <a href="https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/evensong-gedachtenis-gino-mattheeuws" target="_blank">
+        <img src="EvensongOLV.png" alt="Evensong – gedachtenis Gino Mattheeuws" style="width:100%;border-radius:var(--r);border:1px solid var(--border);">
+      </a>
+    </div>
 
-    <div style="background:white;border-radius:var(--r);box-shadow:var(--shadow);padding:1.2rem;display:flex;flex-direction:column;gap:0.8rem;margin-top:1.2rem;">
-    <img src="Artea_2026.png" alt="Concert Artea – Indigo" style="width:100%;border-radius:var(--r);cursor:zoom-in;" onclick="openArtea()">
-    <p style="font-size:0.85rem;color:var(--stone);line-height:1.6;">
-      <strong>Zondag 4 oktober 2026 om 17u</strong> — Concert Artea – Indigo<br>
-      OLV van Goede Bijstandskerk, 1000 Brussel<br>
-      <em>15€ (gratis voor -16 jaar)</em><br>
-      <a href="https://www.ticketkantoor.nl/shop/IndigoArt" target="_blank" style="font-weight:600;color:var(--gold-dk);">Tickets →</a>
-    </p>
-  </div>
+    <div style="background:white;border-radius:var(--r);box-shadow:var(--shadow);padding:1.2rem;display:flex;flex-direction:column;gap:0.8rem;">
+      <a href="https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/troost-bij-de-thee-koester-bij-de-koffie" target="_blank">
+        <img src="koesterkoffieOLV.png" alt="Koesterkoffie – uitnodiging" style="width:100%;border-radius:var(--r);border:1px solid var(--border);">
+      </a>
+    </div>
 
-    <div style="background:white;border-radius:var(--r);box-shadow:var(--shadow);padding:1.2rem;display:flex;flex-direction:column;gap:0.8rem;margin-top:1.2rem;">
-    <img src="exhibition_2026.jpg" alt="Art Exhibition – Sue Ball – Consider the Birds" 
-         style="width:100%;max-width:220px;height:auto;border-radius:var(--r);cursor:zoom-in;border:1px solid var(--border);" 
-         onclick="openExhibition()">
-    <p style="font-size:0.85rem;color:var(--stone);line-height:1.6;">
-      <strong>Art Exhibition – Sue Ball – Consider the Birds</strong><br>
-      17 oktober – 28 november 2026<br>
-      OLV van Goede Bijstandskerk, Kolenmarkt 91, 1000 Brussel<br>
-      <a href="mailto:info@316.be" style="color:var(--gold-dk);">info@316.be</a>
-    </p>
-  </div>
+    <div style="background:white;border-radius:var(--r);box-shadow:var(--shadow);padding:1.2rem;display:flex;flex-direction:column;gap:0.8rem;">
+      <img src="Artea_2026.png" alt="Concert Artea – Indigo" style="width:100%;border-radius:var(--r);cursor:zoom-in;" onclick="openArtea()">
+      <p style="font-size:0.85rem;color:var(--stone);line-height:1.6;">
+        <strong>Zondag 4 oktober 2026 om 17u</strong><br>
+        OLV van Goede Bijstandskerk, 1000 Brussel<br>
+        <em>15€ (gratis voor -16 jaar)</em><br>
+        <a href="https://www.ticketkantoor.nl/shop/IndigoArt" target="_blank" style="font-weight:600;color:var(--gold-dk);">Tickets →</a>
+      </p>
+    </div>
 
+    <div style="background:white;border-radius:var(--r);box-shadow:var(--shadow);padding:1.2rem;display:flex;flex-direction:column;gap:0.8rem;">
+      <img src="exhibition_2026.jpg" alt="Art Exhibition – Sue Ball – Consider the Birds" style="width:100%;max-width:220px;height:auto;border-radius:var(--r);cursor:zoom-in;border:1px solid var(--border);" onclick="openExhibition()">
+      <p style="font-size:0.85rem;color:var(--stone);line-height:1.6;">
+        <strong>Art Exhibition – Sue Ball – Consider the Birds</strong><br>
+        17 oktober – 28 november 2026<br>
+        OLV van Goede Bijstandskerk, Kolenmarkt 91, 1000 Brussel<br>
+        <a href="mailto:info@316.be" style="color:var(--gold-dk);">info@316.be</a>
+      </p>
+    </div>
+
+  </div>
 </div>
 
   <div class="card-grid">
