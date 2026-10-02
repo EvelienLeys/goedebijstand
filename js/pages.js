@@ -16,14 +16,12 @@ welkom: ()=>`
 <div style="background:var(--parchment);border:1px solid var(--border);border-left:5px solid var(--gold);border-radius:var(--r);padding:1.4rem 1.6rem;margin:1.4rem auto 1.8rem;max-width:600px;">
   <h2 class="section-title" style="font-size:1.3rem;margin-bottom:1.2rem;">📰 In de kijker</h2>
 
-  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.2rem;">
-
-        <div style="background:white;border-radius:var(--r);box-shadow:var(--shadow);padding:1.2rem;display:flex;flex-direction:column;gap:0.8rem;">
+  <div style="display:flex;justify-content:center;">
+    <div style="background:white;border-radius:var(--r);box-shadow:var(--shadow);padding:1.2rem;max-width:420px;width:100%;">
       <a href="https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/start-en-gedachtenisviering-pastor-gino-mattheeuws" target="_blank">
         <img src="GinoMattheeuws.png" alt="Start- en gedachtenisviering pastor Gino Mattheeuws" style="width:100%;border-radius:var(--r);border:1px solid var(--border);">
       </a>
     </div>
-
   </div>
 </div>
 
