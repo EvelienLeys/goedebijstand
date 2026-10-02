@@ -18,12 +18,6 @@ welkom: ()=>`
 
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.2rem;">
 
-    <div style="background:white;border-radius:var(--r);box-shadow:var(--shadow);padding:1.2rem;display:flex;flex-direction:column;gap:0.8rem;">
-      <a href="https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/evensong-gedachtenis-gino-mattheeuws" target="_blank">
-        <img src="EvensongOLV.png" alt="Evensong – gedachtenis Gino Mattheeuws" style="width:100%;border-radius:var(--r);border:1px solid var(--border);">
-      </a>
-    </div>
-
         <div style="background:white;border-radius:var(--r);box-shadow:var(--shadow);padding:1.2rem;display:flex;flex-direction:column;gap:0.8rem;">
       <a href="https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/start-en-gedachtenisviering-pastor-gino-mattheeuws" target="_blank">
         <img src="GinoMattheeuws.png" alt="Start- en gedachtenisviering pastor Gino Mattheeuws" style="width:100%;border-radius:var(--r);border:1px solid var(--border);">
