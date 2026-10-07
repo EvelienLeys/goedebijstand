@@ -85,7 +85,7 @@ const FIXED = [
   { datum:'2026-09-13', tijd:'13:30', type:'cleanup', tk:'ev_koesterkoffie' },
   { datum:'2026-09-19', tijd:'11:00', type:'huwelijk', tk:'ev_huwelijk_leys_carlier' },
   { datum:'2026-10-04', tijd:'17:00', type:'concert', tk:'ev_artea' },
-  { datum:'2026-11-15', tijd:'11:00', type:'viering', tk:'ev_15nov' },
+  { datum:'2026-11-15', tijd:'10:00', type:'cleanup', tk:'ev_15nov' },
 ];
 
 const ZONDAG_UITZONDERINGEN = {
