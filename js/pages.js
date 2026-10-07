@@ -237,6 +237,12 @@ voorbij: ()=>`
   <p class="subsection">${t('voorbij_muziek_title')}</p>
   <p style="font-style:italic;color:var(--muted);margin-bottom:0.8rem;font-size:0.92rem;">${t('voorbij_muziek_intro')}</p>
 
+   <div class="past-item">
+    <span>Concert Artea – Indigo</span>
+    <span class="past-date">4 oktober 2026</span>
+  </div>
+  <img src="Artea_2026.png" alt="Concert Artea – Indigo" style="width:100%;max-width:300px;height:auto;object-fit:contain;background:white;border-radius:var(--r);border:2px solid var(--border);box-shadow:var(--shadow);margin-bottom:1rem;cursor:zoom-in;" onclick="openArtea()">
+
   <div class="past-item">
     <span>Paysages – Barok Concert, ensemble En Chemin</span>
     <span class="past-date">26 juni 2026</span>
@@ -260,12 +266,6 @@ voorbij: ()=>`
        alt="Week van de Klank 2025 – Rothko Chapel"
        style="width:100%;max-width:480px;height:240px;object-fit:cover;border-radius:var(--r);border:2px solid var(--border);box-shadow:var(--shadow);margin-bottom:0.3rem;">
   <p class="photo-caption" style="text-align:left;margin-bottom:1rem;">${t('voorbij_klank_credit')}</p>
-
-   <div class="past-item">
-    <span>Concert Artea – Indigo</span>
-    <span class="past-date">4 oktober 2026</span>
-  </div>
-  <img src="Artea_2026.png" alt="Concert Artea – Indigo" style="width:100%;max-width:300px;height:auto;object-fit:contain;background:white;border-radius:var(--r);border:2px solid var(--border);box-shadow:var(--shadow);margin-bottom:1rem;cursor:zoom-in;" onclick="openArtea()">
 
  <p class="subsection">Vlaanderen Feest</p>
   <div class="past-item" style="margin-bottom:1rem;">
