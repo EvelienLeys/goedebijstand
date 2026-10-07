@@ -28,7 +28,7 @@ welkom: ()=>`
 
 <!--
 <div style="background:var(--parchment);border:1px solid var(--border);border-left:5px solid var(--gold);border-radius:var(--r);padding:1.4rem 1.6rem;margin:1.4rem auto 1.8rem;max-width:600px;">
-  <h2 class="section-title" style="font-size:1.3rem;margin-bottom:1.2rem;">🎟 Evenementen</h2>
+    <h2 class="section-title" style="font-size:1.3rem;margin-bottom:1.2rem;">🎟 ${t('welkom_events_title')}</h2>
 
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.2rem;">   
   </div>
