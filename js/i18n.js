@@ -249,7 +249,6 @@ fr: {
   ev_huwelijk_leys_carlier: "Mariage d'Evelien Leys et Bram Carlier",
   ev_artea: 'Concert <a href="#" onclick="openArtea();return false;" style="cursor:zoom-in;">Artea – Indigo</a> · <a href="https://www.ticketkantoor.nl/shop/IndigoArt" target="_blank" style="font-size:0.78rem;">Billets →</a>',
   ev_allerheiligen: "Célébration de la Toussaint",
-  ev_allerheiligen: "Célébration de la Toussaint",
   ev_15nov: "Pas de célébration (en raison de la messe télévisée à Evere : tout le monde est bienvenu - <a href='https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/tv-mis-sint-jozef-evere' target='_blank' rel='noopener'>plus d'infos</a>)",
   gesch_title:"Histoire du bâtiment",
   gesch_intro:"L'église Notre-Dame du Bon Secours est l'un des édifices baroques les plus remarquables au cœur de Bruxelles.",
