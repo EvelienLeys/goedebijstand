@@ -20,6 +20,8 @@ nl: {
   welkom_card_huren:"De kerk als locatie voor uw concert, opname of evenement.",
   welkom_card_steunen:"Help ons dit unieke erfgoed te bewaren.",
   welkom_card_contact:"Adres, openingsuren en hoe ons bereiken.",
+  welkom_kijker_title: "In de kijker",
+  welkom_events_title: "Evenementen",
   
   nav_agenda:"Agenda",
   nav_gesch:"Geschiedenis",
@@ -198,6 +200,8 @@ fr: {
   welkom_card_huren:"L'église comme lieu pour votre concert, enregistrement ou événement.",
   welkom_card_steunen:"Aidez-nous à préserver ce patrimoine unique.",
   welkom_card_contact:"Adresse, heures d'ouverture et comment nous contacter.",
+  welkom_kijker_title: "À la une",
+  welkom_events_title: "Événements",
   
   nav_agenda:"Agenda",
   nav_gesch:"Histoire",
@@ -346,6 +350,8 @@ en: {
   welkom_card_huren:"The church as a venue for your concert, recording or event.",
   welkom_card_steunen:"Help us preserve this unique heritage.",
   welkom_card_contact:"Address, opening hours and how to reach us.",
+  welkom_kijker_title: "In the spotlight",
+  welkom_events_title: "Events",
     
   nav_agenda:"Agenda",
   nav_gesch:"History",
@@ -498,6 +504,8 @@ de: {
   welkom_card_huren:"Die Kirche als Veranstaltungsort für Ihr Konzert, Ihre Aufnahme oder Ihr Event.",
   welkom_card_steunen:"Helfen Sie uns, dieses einzigartige Erbe zu bewahren.",
   welkom_card_contact:"Adresse, Öffnungszeiten und Kontaktmöglichkeiten.",
+  welkom_kijker_title: "Im Blickpunkt",
+  welkom_events_title: "Veranstaltungen",
   
   nav_agenda:"Programm",
   nav_gesch:"Geschichte",
@@ -645,6 +653,8 @@ it: {
   welkom_card_huren:"La chiesa come luogo per il vostro concerto, registrazione o evento.",
   welkom_card_steunen:"Aiutateci a preservare questo patrimonio unico.",
   welkom_card_contact:"Indirizzo, orari di apertura e come contattarci.",
+  welkom_kijker_title: "In primo piano",
+  welkom_events_title: "Eventi",
 
   nav_agenda:"Agenda",
   nav_gesch:"Storia",
@@ -798,6 +808,8 @@ es: {
   welkom_card_huren:"La iglesia como lugar para su concierto, grabación o evento.",
   welkom_card_steunen:"Ayúdenos a preservar este patrimonio único.",
   welkom_card_contact:"Dirección, horarios y cómo contactarnos.",
+  welkom_kijker_title: "Destacado",
+  welkom_events_title: "Eventos",
   
   nav_agenda:"Agenda",
   nav_gesch:"Historia",
@@ -945,6 +957,8 @@ ru: {
   welkom_card_huren:"Церковь как место для вашего концерта, записи или мероприятия.",
   welkom_card_steunen:"Помогите нам сохранить это уникальное наследие.",
   welkom_card_contact:"Адрес, часы работы и контактная информация.",
+  welkom_kijker_title: "В центре внимания",
+  welkom_events_title: "Мероприятия",
 
   nav_agenda:"Расписание",
   nav_gesch:"История",
@@ -1099,6 +1113,8 @@ ar: {
   welkom_card_huren:"الكنيسة كمكان لحفلتكم أو تسجيلكم أو فعاليتكم.",
   welkom_card_steunen:"ساعدونا في الحفاظ على هذا الإرث الفريد.",
   welkom_card_contact:"العنوان وساعات الفتح وكيفية التواصل معنا.",
+  welkom_kijker_title: "تحت الأضواء",
+  welkom_events_title: "الفعاليات",
   
   nav_agenda:"جدول الأنشطة",
   nav_gesch:"التاريخ",
