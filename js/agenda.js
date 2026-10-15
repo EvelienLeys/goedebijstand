@@ -138,11 +138,12 @@ function genLGBTQ() {
   for (let m = 0; m < 24; m++) {
     const yr = start.getFullYear() + Math.floor((start.getMonth() + m) / 12);
     const mn = (start.getMonth() + m) % 12;
-    let cnt = 0;
+        let cnt = 0;
+    const doel = (mn === 11) ? 2 : 4; // december: tweede zaterdag, anders vierde
     for (let d = 1; d <= 31; d++) {
       const dt = new Date(yr, mn, d);
       if (dt.getMonth() !== mn) break;
-      if (dt.getDay() === 6 && ++cnt === 4) {
+      if (dt.getDay() === 6 && ++cnt === doel) {
         if (dt >= now && dt <= end && dt >= start)
           res.push({ datum: dkey(dt), tijd: '19:30', type: 'viering', tk: 'ev_lgbtq' });
         break;
