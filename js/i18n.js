@@ -989,7 +989,7 @@ ru: {
   ag_leg_drempel:"Детское богослужение",
   ev_sun_eucharistie:"Евхаристическое богослужение",
   ev_sun_woord:"Литургия Слова с причастием",
-  ev_kerk_gesloten: 'Церковь закрыта',:"Литургия Слова с причастием",
+  ev_kerk_gesloten: 'Церковь закрыта',
   ev_voorganger:"Служащий",
   ev_muzikanten:"Музыканты",
   ev_taize:"<a href='#' onclick='openTaize();return false;' target='_blank' rel='noopener'>Молитва в духе Тэзе</a>",
