@@ -988,7 +988,7 @@ ru: {
   ag_leg_filmopname: "Съёмки",
   ag_leg_drempel:"Детское богослужение",
   ev_sun_eucharistie:"Евхаристическое богослужение",
-  ev_sun_woord:" ",
+  ev_sun_woord:"Литургия Слова с причастием",
   ev_kerk_gesloten: 'Церковь закрыта',:"Литургия Слова с причастием",
   ev_voorganger:"Служащий",
   ev_muzikanten:"Музыканты",
