@@ -85,6 +85,7 @@ const FIXED = [
   { datum:'2026-09-13', tijd:'13:30', type:'cleanup', tk:'ev_koesterkoffie' },
   { datum:'2026-09-19', tijd:'11:00', type:'huwelijk', tk:'ev_huwelijk_leys_carlier' },
   { datum:'2026-10-04', tijd:'17:00', type:'concert', tk:'ev_artea' },
+  { datum:'2026-10-24', tijd:'00:00', type:'gesloten', tk:'ev_kerk_gesloten' },
   { datum:'2026-11-01', tijd:'11:00', type:'viering', tk:'ev_allerheiligen' },
   { datum:'2026-11-15', tijd:'10:00', type:'cleanup', tk:'ev_15nov' },
 ];
@@ -144,7 +145,7 @@ function genLGBTQ() {
       const dt = new Date(yr, mn, d);
       if (dt.getMonth() !== mn) break;
       if (dt.getDay() === 6 && ++cnt === doel) {
-        if (dt >= now && dt <= end && dt >= start)
+        if (dt >= now && dt <= end && dt >= start && dkey(dt) !== '2026-10-24')
           res.push({ datum: dkey(dt), tijd: '19:30', type: 'viering', tk: 'ev_lgbtq' });
         break;
       }
