@@ -77,6 +77,7 @@ nl: {
   ev_evensong: '<a href="https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/evensong-gedachtenis-gino-mattheeuws" target="_blank">Evensong – gedachtenis Gino Mattheeuws</a>',
   ev_koesterkoffie: '<a href="https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/troost-bij-de-thee-koester-bij-de-koffie" target="_blank">Koesterkoffie</a> – Pastorie Goede Bijstand (–16:30u)',
   ev_allerheiligen: "Allerheiligenviering",
+  ev_uitvaart_vanhemelryck: "Uitvaartmis Christiaan Vanhemelryck",
   ev_15nov: "Geen viering (wegens tv-mis in Evere: iedereen welkom - <a href='https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/tv-mis-sint-jozef-evere' target='_blank' rel='noopener'>meer info</a>)",
   gesch_title:"Geschiedenis van het gebouw",
   gesch_intro:"De Onze-Lieve-Vrouw van Goede Bijstandskerk is een van de markantste barokke kerkgebouwen in het hart van Brussel.",
