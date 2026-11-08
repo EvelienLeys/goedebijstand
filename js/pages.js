@@ -22,7 +22,7 @@ welkom: ()=>`
       <p style="margin:.8rem 0 0;font-size:.95rem;line-height:1.5;">
         <strong>Christiaan Vanhemelryck</strong><br>
         Jette 24/12/1943 – Brussel 4/11/2026<br>
-        Uitvaartmis: donderdag 12 november om 10.30 uur in onze kerk (onthaal vanaf 10.10 uur)
+        Uitvaartmis: donderdag 12 november om 10.30 uur
       </p>
     </div>
   </div>
