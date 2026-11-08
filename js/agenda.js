@@ -87,6 +87,7 @@ const FIXED = [
   { datum:'2026-10-04', tijd:'17:00', type:'concert', tk:'ev_artea' },
   { datum:'2026-10-24', tijd:'00:00', type:'gesloten', tk:'ev_kerk_gesloten' },
   { datum:'2026-11-01', tijd:'11:00', type:'viering', tk:'ev_allerheiligen' },
+  { datum:'2026-11-12', tijd:'10:30', type:'viering', tk:'ev_uitvaart_vanhemelryck' },
   { datum:'2026-11-15', tijd:'10:00', type:'cleanup', tk:'ev_15nov' },
 ];
 
