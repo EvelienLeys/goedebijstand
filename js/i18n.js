@@ -203,6 +203,7 @@ fr: {
   welkom_card_steunen:"Aidez-nous à préserver ce patrimoine unique.",
   welkom_card_contact:"Adresse, heures d'ouverture et comment nous contacter.",
   welkom_kijker_title: "À la une",
+  welkom_rouw_title: "Avis de décès",
   welkom_events_title: "Événements",
   
   nav_agenda:"Agenda",
@@ -354,6 +355,7 @@ en: {
   welkom_card_steunen:"Help us preserve this unique heritage.",
   welkom_card_contact:"Address, opening hours and how to reach us.",
   welkom_kijker_title: "In the spotlight",
+  welkom_rouw_title: "Obituary",
   welkom_events_title: "Events",
     
   nav_agenda:"Agenda",
@@ -510,6 +512,7 @@ de: {
   welkom_card_steunen:"Helfen Sie uns, dieses einzigartige Erbe zu bewahren.",
   welkom_card_contact:"Adresse, Öffnungszeiten und Kontaktmöglichkeiten.",
   welkom_kijker_title: "Im Blickpunkt",
+  welkom_rouw_title: "Todesanzeige",
   welkom_events_title: "Veranstaltungen",
   
   nav_agenda:"Programm",
@@ -661,6 +664,7 @@ it: {
   welkom_card_steunen:"Aiutateci a preservare questo patrimonio unico.",
   welkom_card_contact:"Indirizzo, orari di apertura e come contattarci.",
   welkom_kijker_title: "In primo piano",
+  welkom_rouw_title: "Necrologio",
   welkom_events_title: "Eventi",
 
   nav_agenda:"Agenda",
@@ -818,6 +822,7 @@ es: {
   welkom_card_steunen:"Ayúdenos a preservar este patrimonio único.",
   welkom_card_contact:"Dirección, horarios y cómo contactarnos.",
   welkom_kijker_title: "Destacado",
+  welkom_rouw_title: "Esquela",
   welkom_events_title: "Eventos",
   
   nav_agenda:"Agenda",
@@ -969,6 +974,7 @@ ru: {
   welkom_card_steunen:"Помогите нам сохранить это уникальное наследие.",
   welkom_card_contact:"Адрес, часы работы и контактная информация.",
   welkom_kijker_title: "В центре внимания",
+  welkom_rouw_title: "Некролог",
   welkom_events_title: "Мероприятия",
 
   nav_agenda:"Расписание",
@@ -1127,6 +1133,7 @@ ar: {
   welkom_card_steunen:"ساعدونا في الحفاظ على هذا الإرث الفريد.",
   welkom_card_contact:"العنوان وساعات الفتح وكيفية التواصل معنا.",
   welkom_kijker_title: "تحت الأضواء",
+  welkom_rouw_title: "نعي",
   welkom_events_title: "الفعاليات",
   
   nav_agenda:"جدول الأنشطة",
