@@ -12,6 +12,21 @@ welkom: ()=>`
        alt="Interieur Goede Bijstand"
        onclick="openFoto()">
 
+<div style="background:var(--parchment);border:1px solid var(--border);border-left:5px solid var(--gold);border-radius:var(--r);padding:1.4rem 1.6rem;margin:1.4rem auto 1.8rem;max-width:600px;">
+  <h2 class="section-title" style="font-size:1.3rem;margin-bottom:1.2rem;">🕯 ${t('welkom_rouw_title')}</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.2rem;">
+    <div style="background:#fff;border-radius:var(--r);box-shadow:var(--shadow);padding:1.2rem;text-align:center;">
+      <a href="Rouwbericht_Vanhemelryck.png" target="_blank" rel="noopener">
+        <img src="Rouwbericht_Vanhemelryck.png" alt="Rouwbericht Christiaan Vanhemelryck" style="width:100%;height:auto;border-radius:6px;">
+      </a>
+      <p style="margin:.8rem 0 0;font-size:.95rem;line-height:1.5;">
+        <strong>Christiaan Vanhemelryck</strong><br>
+        Jette 24/12/1943 – Brussel 4/11/2026<br>
+        Uitvaartmis: donderdag 12 november om 10.30 uur in onze kerk (onthaal vanaf 10.10 uur)
+      </p>
+    </div>
+  </div>
+</div>
 
 <div style="background:var(--parchment);border:1px solid var(--border);border-left:5px solid var(--gold);border-radius:var(--r);padding:1.4rem 1.6rem;margin:1.4rem auto 1.8rem;max-width:600px;">
     <h2 class="section-title" style="font-size:1.3rem;margin-bottom:1.2rem;">📰 ${t('welkom_kijker_title')}</h2>
