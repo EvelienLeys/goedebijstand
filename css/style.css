@@ -477,3 +477,15 @@ body.rtl .translation-notice {
   .handen-form-box { padding: 1.1rem 1rem; }
 }
 body.rtl .handen-form-box { border-top: 3px solid var(--gold); border-left: none; }
+
+@media (min-width: 900px) {
+  .exh-card {
+    flex-direction: row !important;
+    align-items: center;
+    gap: 1.2rem !important;
+  }
+  .exh-card img {
+    flex: 0 0 220px;
+    width: 220px;
+  }
+}
