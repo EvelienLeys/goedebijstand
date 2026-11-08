@@ -20,6 +20,7 @@ nl: {
   welkom_card_huren:"De kerk als locatie voor uw concert, opname of evenement.",
   welkom_card_steunen:"Help ons dit unieke erfgoed te bewaren.",
   welkom_card_contact:"Adres, openingsuren en hoe ons bereiken.",
+  welkom_rouw_title: "Rouwbericht",
   welkom_kijker_title: "In de kijker",
   welkom_events_title: "Evenementen",
   
