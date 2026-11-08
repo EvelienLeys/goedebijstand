@@ -19,11 +19,6 @@ welkom: ()=>`
       <a href="Rouwbericht_Vanhemelryck.png" target="_blank" rel="noopener">
         <img src="Rouwbericht_Vanhemelryck.png" alt="Rouwbericht Christiaan Vanhemelryck" style="width:100%;height:auto;border-radius:6px;">
       </a>
-      <p style="margin:.8rem 0 0;font-size:.95rem;line-height:1.5;">
-        <strong>Christiaan Vanhemelryck</strong><br>
-        Jette 24/12/1943 – Brussel 4/11/2026<br>
-        Uitvaartmis: donderdag 12 november om 10.30 uur
-      </p>
     </div>
   </div>
 </div>
