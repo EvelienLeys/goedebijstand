@@ -13,20 +13,9 @@ welkom: ()=>`
        onclick="openFoto()">
 
 <div style="background:var(--parchment);border:1px solid var(--border);border-left:5px solid var(--gold);border-radius:var(--r);padding:1.4rem 1.6rem;margin:1.4rem auto 1.8rem;max-width:820px;">
-  <h2 class="section-title" style="font-size:1.3rem;margin-bottom:1.2rem;">🕯 ${t('welkom_rouw_title')}</h2>
-<div style="display:block;">
-    <div style="background:#fff;border-radius:var(--r);box-shadow:var(--shadow);padding:1.2rem;text-align:center;">
-      <a href="Rouwbericht_Vanhemelryck.png" target="_blank" rel="noopener">
-        <img src="Rouwbericht_Vanhemelryck.png" alt="Rouwbericht Christiaan Vanhemelryck" style="width:100%;height:auto;border-radius:6px;">
-      </a>
-    </div>
-  </div>
-</div>
-
-<div style="background:var(--parchment);border:1px solid var(--border);border-left:5px solid var(--gold);border-radius:var(--r);padding:1.4rem 1.6rem;margin:1.4rem auto 1.8rem;max-width:820px;">
     <h2 class="section-title" style="font-size:1.3rem;margin-bottom:1.2rem;">📰 ${t('welkom_kijker_title')}</h2>
 
-<div class="exh-card" style="background:white;border-radius:var(--r);box-shadow:var(--shadow);padding:1.2rem;display:flex;flex-direction:column;gap:0.8rem;">
+    <div class="exh-card" style="background:white;border-radius:var(--r);box-shadow:var(--shadow);padding:1.2rem;display:flex;flex-direction:column;gap:0.8rem;">
       <img src="exhibition_2026.jpg" alt="Art Exhibition – Sue Ball – Consider the Birds" style="width:100%;max-width:220px;height:auto;border-radius:var(--r);cursor:zoom-in;border:1px solid var(--border);" onclick="openExhibition()">
       <p style="font-size:0.85rem;color:var(--stone);line-height:1.6;">
         <strong>Art Exhibition – Sue Ball – Consider the Birds</strong><br>
@@ -35,15 +24,18 @@ welkom: ()=>`
         <a href="mailto:info@316.be" style="color:var(--gold-dk);">info@316.be</a>
       </p>
     </div>
+</div>
 
-<!--
-<div style="background:var(--parchment);border:1px solid var(--border);border-left:5px solid var(--gold);border-radius:var(--r);padding:1.4rem 1.6rem;margin:1.4rem auto 1.8rem;max-width:600px;">
-    <h2 class="section-title" style="font-size:1.3rem;margin-bottom:1.2rem;">🎟 ${t('welkom_events_title')}</h2>
-
-  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.2rem;">   
+<div style="background:var(--parchment);border:1px solid var(--border);border-left:5px solid var(--gold);border-radius:var(--r);padding:1.4rem 1.6rem;margin:1.4rem auto 1.8rem;max-width:820px;">
+  <h2 class="section-title" style="font-size:1.3rem;margin-bottom:1.2rem;">🕯 ${t('welkom_rouw_title')}</h2>
+  <div style="display:block;">
+    <div style="background:#fff;border-radius:var(--r);box-shadow:var(--shadow);padding:1.2rem;text-align:center;">
+      <a href="Rouwbericht_Vanhemelryck.png" target="_blank" rel="noopener">
+        <img src="Rouwbericht_Vanhemelryck.png" alt="Rouwbericht Christiaan Vanhemelryck" style="width:100%;height:auto;border-radius:6px;">
+      </a>
+    </div>
   </div>
 </div>
---> 
 
   <div class="card-grid">
     <div class="card" onclick="go('agenda')">
