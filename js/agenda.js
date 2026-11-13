@@ -264,7 +264,7 @@ function agendaHTML() {
             : ev.tk === 'ev_lgbtq'
             ? `<a href="#" onclick="openLGBTQ();return false;" style="cursor:zoom-in;">${ev.tekst}</a>`
             : ev.tk === 'ev_taize'
-            ? `<a href="#" onclick="openTaize();return false;" style="cursor:zoom-in;">${ev.tekst}</a>`
+            ? `<a href="https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/gebed-de-geest-van-taize-0" target="_blank" rel="noopener">${ev.tekst}</a>`
             : ev.tekst}${ev.gratis
             ? `<span style="margin-left:0.5rem;font-size:0.75rem;font-weight:600;color:var(--gold-dk);">(gratis)</span>`
             : ''}${ev.voorganger
