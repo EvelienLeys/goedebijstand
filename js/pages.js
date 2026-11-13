@@ -34,7 +34,7 @@ welkom: ()=>`
     <p class="gb-date">Zondag 15 november 2026</p>
     <h1>Geen viering<br>deze zondag</h1>
     <div class="gb-rule"></div>
-    <p class="gb-text">In Onze-Lieve-Vrouw van Goede Bijstand is er op 15 november geen zondagsviering. De kerk is wel open van 10.30 uur tot 17 uur.</p>
+    <p class="gb-text">In Onze-Lieve-Vrouw van Goede Bijstand is er op 15 november geen eucharistieviering. De kerk is wel open van 10.30 uur tot 17 uur.</p>
   </div>
   <div class="gb-evere">
     <a href="https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/tv-mis-sint-jozef-evere" target="_blank" rel="noopener" aria-label="Meer info over de TV-mis in de Sint-Jozefkerk in Evere">
