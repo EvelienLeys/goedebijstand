@@ -32,7 +32,7 @@ welkom: ()=>`
 <section class="gb-banner" aria-label="Mededeling zondag 15 november">
   <div>
     <p class="gb-date">Zondag 15 november 2026</p>
-    <h1>Geen viering<br>deze zondag</h1>
+    <h1>Geen eucaristieviering<br>deze zondag</h1>
     <div class="gb-rule"></div>
     <p class="gb-text">In Onze-Lieve-Vrouw van Goede Bijstand is er op 15 november geen eucharistieviering. De kerk is wel open vanaf 10.30 uur.</p>
   </div>
