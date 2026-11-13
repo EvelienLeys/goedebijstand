@@ -109,7 +109,7 @@ nl: {
   p_taize:"Taizé",
   p_taize_desc:"Elke derde zaterdag van de maand: een gebedsavond in de geest van Taizé, open voor iedereen. Zie <a href='#' onclick='go(\"agenda\");return false;'>Agenda</a> voor alle info. Contact: bep.saintandre@gmail.com ",
   p_lgbtq:"Gemeenschap LGBTQ+",
-  p_lgbtq_desc:"De kerk verwelkomt de LGBTQ+-gemeenschap en streeft naar een open en inclusieve ruimte voor iedereen. Elke vierde zaterdag van de maand (in december: tweede zaterdag): een oeucumenische dienst van en voor de LGBTQ-gemeenschap. Zie <a href='#' onclick='go(\"agenda\");return false;'>Agenda</a> voor alle info. <a href='https://ccl-be.net/' target='_blank' rel='noopener'>ccl-be.net →</a>",
+  p_lgbtq_desc:"De kerk verwelkomt de LGBTQ+-gemeenschap en streeft naar een open en inclusieve ruimte voor iedereen. Elke vierde zaterdag van de maand (in december: tweede zaterdag): een oecumenische dienst van en voor de LGBTQ-gemeenschap. Zie <a href='#' onclick='go(\"agenda\");return false;'>Agenda</a> voor alle info. <a href='https://ccl-be.net/' target='_blank' rel='noopener'>ccl-be.net →</a>",
   p_klank:"Week van de Klank",
   p_klank_desc:"Jaarlijks muzikaal festival dat de kerk als akoestische parel inzet voor hedendaagse en klassieke muziekproducties.",
   p_klank_link:"lasemaineduson.be →",
