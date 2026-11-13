@@ -15,18 +15,18 @@ welkom: ()=>`
        <!-- BANNER 15 NOVEMBER: na zondag verwijderen -->
        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Inter:wght@400;600&display=swap">
 <style>
-  .gb-banner{box-sizing:border-box;width:100%;max-width:1200px;margin:0 auto;padding:56px 72px 40px;min-height:600px;
-    display:flex;flex-direction:column;justify-content:space-between;gap:40px;
+ .gb-banner{box-sizing:border-box;width:100%;max-width:820px;margin:1.4rem auto 1.8rem;padding:28px 32px 22px;
+    display:flex;flex-direction:column;justify-content:space-between;gap:20px;
     background:linear-gradient(135deg,#16354b 0%,#1d4a63 60%,#235870 100%);color:#f6efe0;font-family:'Inter',system-ui,sans-serif}
   .gb-banner a{color:#f0d58c;font-weight:600}
   .gb-banner a:hover{color:#fff}
-  .gb-date{font-size:18px;letter-spacing:3px;text-transform:uppercase;color:#f0d58c;font-weight:600;margin:0 0 22px}
-  .gb-banner h1{margin:0 0 22px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;font-size:clamp(48px,8.7vw,104px);line-height:.98;color:#fbf6ea}
-  .gb-rule{width:96px;height:3px;background:#d9b866;margin-bottom:22px}
-  .gb-text{margin:0;font-size:24px;line-height:1.45;color:#e8e1cf;max-width:560px}
-  .gb-evere{display:flex;align-items:center;gap:18px;border-top:1px solid rgba(217,184,102,.5);padding-top:20px;max-width:760px;font-size:18px;line-height:1.45;color:#e8e1cf}
+  .gb-date{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:#f0d58c;font-weight:600;margin:0 0 10px}
+  .gb-banner h1{margin:0 0 12px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;font-size:clamp(30px,5vw,48px);line-height:1.05;color:#fbf6ea}
+  .gb-rule{width:64px;height:2px;background:#d9b866;margin-bottom:12px}
+.gb-text{margin:0;font-size:16px;line-height:1.5;color:#e8e1cf;max-width:560px}
+.gb-evere{display:flex;align-items:center;gap:14px;border-top:1px solid rgba(217,184,102,.5);padding-top:14px;max-width:760px;font-size:15px;line-height:1.45;color:#e8e1cf}
   .gb-evere img{display:block;flex:none;width:84px;height:60px;object-fit:cover;border:1px solid #d9b866;border-radius:3px}
-  @media (max-width:640px){.gb-banner{padding:36px 24px 28px}.gb-text{font-size:20px}}
+  @media (max-width:640px){.gb-banner{padding:22px 18px 18px}.gb-text{font-size:15px}}
 </style>
 
 <section class="gb-banner" aria-label="Mededeling zondag 15 november">
